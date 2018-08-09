@@ -1,0 +1,1839 @@
+# r2 rdb project file
+# flags
+fs *
+f str.RICH4_ICON 1 0x004630b4 
+fs strings
+f str.wglf 5 0x004a5607 
+f str.fjq 6 0x004a5671 
+f str.ykf 6 0x004a5683 
+f str.d 5 0x004a56d4 
+f str.8_C 5 0x004a570c 
+f str.H4 5 0x004a5713 
+f str.0__DI_9 11 0x004a572c 
+f str.F11_09__I 11 0x004a574c 
+f str.F.9 7 0x004a5771 
+f str.T__.117 8 0x004a5790 
+f str. 5 0x004a57b0 
+f str.729_EM 8 0x004a57cd 
+f str.E 7 0x004a57ed 
+f str.7 5 0x004a580e 
+f str.K 5 0x004a582e 
+fs symbols
+f entry0 5 0x0045709c 
+fs sections
+f section.AUTO 394240 0x00401000 
+f section_end.AUTO 0 0x00462000 
+f section..idata 3584 0x00462000 
+f section_end..idata 0 0x00463000 
+f section.DGROUP 158720 0x00463000 
+f section_end.DGROUP 0 0x0048a000 
+f section..bss 64512 0x0048a000 
+f section_end..bss 0 0x0049a000 
+f section..reloc 41984 0x0049a000 
+f section_end..reloc 0 0x004a5000 
+f section..rsrc 2560 0x004a5000 
+f section_end..rsrc 0 0x004a6000 
+fs relocs
+f reloc.GDI32.dll_CreateFontA 4 0x000624ce 
+f reloc.GDI32.dll_CreatePen 4 0x000624dc 
+f reloc.GDI32.dll_CreateSolidBrush 4 0x000624e8 
+f reloc.GDI32.dll_DeleteObject 4 0x000624fc 
+f reloc.GDI32.dll_Ellipse 4 0x0006250c 
+f reloc.GDI32.dll_FloodFill 4 0x00062516 
+f reloc.GDI32.dll_GetStockObject 4 0x00062522 
+f reloc.GDI32.dll_LineTo 4 0x00062534 
+f reloc.GDI32.dll_MoveToEx 4 0x0006253e 
+f reloc.GDI32.dll_Pie 4 0x0006254a 
+f reloc.GDI32.dll_SelectObject 4 0x00062550 
+f reloc.GDI32.dll_SetBkMode 4 0x00062560 
+f reloc.GDI32.dll_SetTextCharacterExtra 4 0x0006256c 
+f reloc.GDI32.dll_SetTextColor 4 0x00062584 
+f reloc.GDI32.dll_TextOutA 4 0x00062594 
+f reloc.USER32.dll_BeginPaint 4 0x000625a0 
+f reloc.USER32.dll_CharUpperBuffA 4 0x000625ae 
+f reloc.USER32.dll_CreateWindowExA 4 0x000625c0 
+f reloc.USER32.dll_DefWindowProcA 4 0x000625d2 
+f reloc.USER32.dll_DestroyWindow 4 0x000625e4 
+f reloc.USER32.dll_DispatchMessageA 4 0x000625f4 
+f reloc.USER32.dll_DrawTextA 4 0x00062608 
+f reloc.USER32.dll_EndPaint 4 0x00062614 
+f reloc.USER32.dll_GetCursorPos 4 0x00062620 
+f reloc.USER32.dll_GetSystemMetrics 4 0x00062630 
+f reloc.USER32.dll_IntersectRect 4 0x00062644 
+f reloc.USER32.dll_InvalidateRect 4 0x00062654 
+f reloc.USER32.dll_KillTimer 4 0x00062666 
+f reloc.USER32.dll_LoadCursorA 4 0x00062672 
+f reloc.USER32.dll_LoadIconA 4 0x00062680 
+f reloc.USER32.dll_MessageBoxA 4 0x0006268c 
+f reloc.USER32.dll_PeekMessageA 4 0x0006269a 
+f reloc.USER32.dll_PostMessageA 4 0x000626aa 
+f reloc.USER32.dll_PostQuitMessage 4 0x000626ba 
+f reloc.USER32.dll_RegisterClassA 4 0x000626cc 
+f reloc.USER32.dll_SetCursorPos 4 0x000626de 
+f reloc.USER32.dll_SetFocus 4 0x000626ee 
+f reloc.USER32.dll_SetTimer 4 0x000626fa 
+f reloc.USER32.dll_SetWindowsHookExA 4 0x00062706 
+f reloc.USER32.dll_ShowCursor 4 0x0006271a 
+f reloc.USER32.dll_ShowWindow 4 0x00062728 
+f reloc.USER32.dll_TranslateMessage 4 0x00062736 
+f reloc.USER32.dll_UnhookWindowsHookEx 4 0x0006274a 
+f reloc.USER32.dll_UpdateWindow 4 0x00062760 
+f reloc.USER32.dll_ValidateRect 4 0x00062770 
+f reloc.KERNEL32.dll_CloseHandle 4 0x00062780 
+f reloc.KERNEL32.dll_CreateEventA 4 0x0006278e 
+f reloc.KERNEL32.dll_CreateFileA 4 0x0006279e 
+f reloc.KERNEL32.dll_CreateThread 4 0x000627ac 
+f reloc.KERNEL32.dll_DeleteCriticalSection 4 0x000627bc 
+f reloc.KERNEL32.dll_DeleteFileA 4 0x000627d4 
+f reloc.KERNEL32.dll_EnterCriticalSection 4 0x000627e2 
+f reloc.KERNEL32.dll_ExitProcess 4 0x000627fa 
+f reloc.KERNEL32.dll_ExitThread 4 0x00062808 
+f reloc.KERNEL32.dll_FlushFileBuffers 4 0x00062816 
+f reloc.KERNEL32.dll_GetACP 4 0x0006282a 
+f reloc.KERNEL32.dll_GetCPInfo 4 0x00062834 
+f reloc.KERNEL32.dll_GetCommandLineA 4 0x00062840 
+f reloc.KERNEL32.dll_GetCommandLineW 4 0x00062852 
+f reloc.KERNEL32.dll_GetConsoleMode 4 0x00062864 
+f reloc.KERNEL32.dll_GetCurrentDirectoryA 4 0x00062876 
+f reloc.KERNEL32.dll_GetCurrentProcessId 4 0x0006288e 
+f reloc.KERNEL32.dll_GetCurrentThreadId 4 0x000628a4 
+f reloc.KERNEL32.dll_GetCurrentThread 4 0x000628ba 
+f reloc.KERNEL32.dll_GetDriveTypeA 4 0x000628ce 
+f reloc.KERNEL32.dll_GetEnvironmentStrings 4 0x000628de 
+f reloc.KERNEL32.dll_GetFileAttributesA 4 0x000628f6 
+f reloc.KERNEL32.dll_GetFileSize 4 0x0006290c 
+f reloc.KERNEL32.dll_GetFileType 4 0x0006291a 
+f reloc.KERNEL32.dll_GetFullPathNameA 4 0x00062928 
+f reloc.KERNEL32.dll_GetLastError 4 0x0006293c 
+f reloc.KERNEL32.dll_GetLocalTime 4 0x0006294c 
+f reloc.KERNEL32.dll_GetModuleFileNameA 4 0x0006295c 
+f reloc.KERNEL32.dll_GetModuleFileNameW 4 0x00062972 
+f reloc.KERNEL32.dll_GetModuleHandleA 4 0x00062988 
+f reloc.KERNEL32.dll_GetOEMCP 4 0x0006299c 
+f reloc.KERNEL32.dll_GetProcAddress 4 0x000629a8 
+f reloc.KERNEL32.dll_GetStdHandle 4 0x000629ba 
+f reloc.KERNEL32.dll_GetTickCount 4 0x000629ca 
+f reloc.KERNEL32.dll_GetVersion 4 0x000629da 
+f reloc.KERNEL32.dll_InitializeCriticalSection 4 0x000629e8 
+f reloc.KERNEL32.dll_LeaveCriticalSection 4 0x00062a04 
+f reloc.KERNEL32.dll_LoadLibraryA 4 0x00062a1c 
+f reloc.KERNEL32.dll_MoveFileA 4 0x00062a2c 
+f reloc.KERNEL32.dll_MultiByteToWideChar 4 0x00062a38 
+f reloc.KERNEL32.dll_ReadConsoleInputA 4 0x00062a4e 
+f reloc.KERNEL32.dll_ReadFile 4 0x00062a62 
+f reloc.KERNEL32.dll_SetConsoleCtrlHandler 4 0x00062a6e 
+f reloc.KERNEL32.dll_SetConsoleMode 4 0x00062a86 
+f reloc.KERNEL32.dll_SetEnvironmentVariableA 4 0x00062a98 
+f reloc.KERNEL32.dll_SetEnvironmentVariableW 4 0x00062ab2 
+f reloc.KERNEL32.dll_SetEvent 4 0x00062acc 
+f reloc.KERNEL32.dll_SetFilePointer 4 0x00062ad8 
+f reloc.KERNEL32.dll_SetLastError 4 0x00062aea 
+f reloc.KERNEL32.dll_SetStdHandle 4 0x00062afa 
+f reloc.KERNEL32.dll_SetUnhandledExceptionFilter 4 0x00062b0a 
+f reloc.KERNEL32.dll_TlsAlloc 4 0x00062b28 
+f reloc.KERNEL32.dll_TlsFree 4 0x00062b34 
+f reloc.KERNEL32.dll_TlsGetValue 4 0x00062b3e 
+f reloc.KERNEL32.dll_TlsSetValue 4 0x00062b4c 
+f reloc.KERNEL32.dll_UnhandledExceptionFilter 4 0x00062b5a 
+f reloc.KERNEL32.dll_VirtualAlloc 4 0x00062b76 
+f reloc.KERNEL32.dll_VirtualFree 4 0x00062b86 
+f reloc.KERNEL32.dll_VirtualQuery 4 0x00062b94 
+f reloc.KERNEL32.dll_WaitForSingleObject 4 0x00062ba4 
+f reloc.KERNEL32.dll_WideCharToMultiByte 4 0x00062bba 
+f reloc.KERNEL32.dll_WriteConsoleA 4 0x00062bd0 
+f reloc.KERNEL32.dll_WriteFile 4 0x00062be0 
+f reloc.WINMM.dll_auxGetDevCapsA 4 0x00062bec 
+f reloc.WINMM.dll_auxGetNumDevs 4 0x00062bfe 
+f reloc.WINMM.dll_auxGetVolume 4 0x00062c0e 
+f reloc.WINMM.dll_auxSetVolume 4 0x00062c1e 
+f reloc.WINMM.dll_mciGetDeviceIDA 4 0x00062c2e 
+f reloc.WINMM.dll_mciSendStringA 4 0x00062c40 
+f reloc.WINMM.dll_midiOutGetDevCapsA 4 0x00062c52 
+f reloc.WINMM.dll_midiOutGetVolume 4 0x00062c68 
+f reloc.WINMM.dll_midiOutSetVolume 4 0x00062c7c 
+f reloc.WINMM.dll_timeGetTime 4 0x00062c90 
+f reloc.WINMM.dll_timeKillEvent 4 0x00062c9e 
+f reloc.WINMM.dll_timeSetEvent 4 0x00062cae 
+f reloc.DSOUND.dll_DirectSoundCreate 4 0x00062cbe 
+f reloc.DDRAW.dll_DirectDrawCreate 4 0x00062cd2 
+fs imports
+f sym.imp.GDI32.dll_CreateFontA 0 0x0046228c 
+f sym.imp.GDI32.dll_CreatePen 0 0x00462290 
+f sym.imp.GDI32.dll_CreateSolidBrush 0 0x00462294 
+f sym.imp.GDI32.dll_DeleteObject 0 0x00462298 
+f sym.imp.GDI32.dll_Ellipse 0 0x0046229c 
+f sym.imp.GDI32.dll_FloodFill 0 0x004622a0 
+f sym.imp.GDI32.dll_GetStockObject 0 0x004622a4 
+f sym.imp.GDI32.dll_LineTo 0 0x004622a8 
+f sym.imp.GDI32.dll_MoveToEx 0 0x004622ac 
+f sym.imp.GDI32.dll_Pie 0 0x004622b0 
+f sym.imp.GDI32.dll_SelectObject 0 0x004622b4 
+f sym.imp.GDI32.dll_SetBkMode 0 0x004622b8 
+f sym.imp.GDI32.dll_SetTextCharacterExtra 0 0x004622bc 
+f sym.imp.GDI32.dll_SetTextColor 0 0x004622c0 
+f sym.imp.GDI32.dll_TextOutA 0 0x004622c4 
+f sym.imp.USER32.dll_BeginPaint 0 0x004622cc 
+f sym.imp.USER32.dll_CharUpperBuffA 0 0x004622d0 
+f sym.imp.USER32.dll_CreateWindowExA 0 0x004622d4 
+f sym.imp.USER32.dll_DefWindowProcA 0 0x004622d8 
+f sym.imp.USER32.dll_DestroyWindow 0 0x004622dc 
+f sym.imp.USER32.dll_DispatchMessageA 0 0x004622e0 
+f sym.imp.USER32.dll_DrawTextA 0 0x004622e4 
+f sym.imp.USER32.dll_EndPaint 0 0x004622e8 
+f sym.imp.USER32.dll_GetCursorPos 0 0x004622ec 
+f sym.imp.USER32.dll_GetSystemMetrics 0 0x004622f0 
+f sym.imp.USER32.dll_IntersectRect 0 0x004622f4 
+f sym.imp.USER32.dll_InvalidateRect 0 0x004622f8 
+f sym.imp.USER32.dll_KillTimer 0 0x004622fc 
+f sym.imp.USER32.dll_LoadCursorA 0 0x00462300 
+f sym.imp.USER32.dll_LoadIconA 0 0x00462304 
+f sym.imp.USER32.dll_MessageBoxA 0 0x00462308 
+f sym.imp.USER32.dll_PeekMessageA 0 0x0046230c 
+f sym.imp.USER32.dll_PostMessageA 0 0x00462310 
+f sym.imp.USER32.dll_PostQuitMessage 0 0x00462314 
+f sym.imp.USER32.dll_RegisterClassA 0 0x00462318 
+f sym.imp.USER32.dll_SetCursorPos 0 0x0046231c 
+f sym.imp.USER32.dll_SetFocus 0 0x00462320 
+f sym.imp.USER32.dll_SetTimer 0 0x00462324 
+f sym.imp.USER32.dll_SetWindowsHookExA 0 0x00462328 
+f sym.imp.USER32.dll_ShowCursor 0 0x0046232c 
+f sym.imp.USER32.dll_ShowWindow 0 0x00462330 
+f sym.imp.USER32.dll_TranslateMessage 0 0x00462334 
+f sym.imp.USER32.dll_UnhookWindowsHookEx 0 0x00462338 
+f sym.imp.USER32.dll_UpdateWindow 0 0x0046233c 
+f sym.imp.USER32.dll_ValidateRect 0 0x00462340 
+f sym.imp.KERNEL32.dll_CloseHandle 0 0x00462348 
+f sym.imp.KERNEL32.dll_CreateEventA 0 0x0046234c 
+f sym.imp.KERNEL32.dll_CreateFileA 0 0x00462350 
+f sym.imp.KERNEL32.dll_CreateThread 0 0x00462354 
+f sym.imp.KERNEL32.dll_DeleteCriticalSection 0 0x00462358 
+f sym.imp.KERNEL32.dll_DeleteFileA 0 0x0046235c 
+f sym.imp.KERNEL32.dll_EnterCriticalSection 0 0x00462360 
+f sym.imp.KERNEL32.dll_ExitProcess 0 0x00462364 
+f sym.imp.KERNEL32.dll_ExitThread 0 0x00462368 
+f sym.imp.KERNEL32.dll_FlushFileBuffers 0 0x0046236c 
+f sym.imp.KERNEL32.dll_GetACP 0 0x00462370 
+f sym.imp.KERNEL32.dll_GetCPInfo 0 0x00462374 
+f sym.imp.KERNEL32.dll_GetCommandLineA 0 0x00462378 
+f sym.imp.KERNEL32.dll_GetCommandLineW 0 0x0046237c 
+f sym.imp.KERNEL32.dll_GetConsoleMode 0 0x00462380 
+f sym.imp.KERNEL32.dll_GetCurrentDirectoryA 0 0x00462384 
+f sym.imp.KERNEL32.dll_GetCurrentProcessId 0 0x00462388 
+f sym.imp.KERNEL32.dll_GetCurrentThreadId 0 0x0046238c 
+f sym.imp.KERNEL32.dll_GetCurrentThread 0 0x00462390 
+f sym.imp.KERNEL32.dll_GetDriveTypeA 0 0x00462394 
+f sym.imp.KERNEL32.dll_GetEnvironmentStrings 0 0x00462398 
+f sym.imp.KERNEL32.dll_GetFileAttributesA 0 0x0046239c 
+f sym.imp.KERNEL32.dll_GetFileSize 0 0x004623a0 
+f sym.imp.KERNEL32.dll_GetFileType 0 0x004623a4 
+f sym.imp.KERNEL32.dll_GetFullPathNameA 0 0x004623a8 
+f sym.imp.KERNEL32.dll_GetLastError 0 0x004623ac 
+f sym.imp.KERNEL32.dll_GetLocalTime 0 0x004623b0 
+f sym.imp.KERNEL32.dll_GetModuleFileNameA 0 0x004623b4 
+f sym.imp.KERNEL32.dll_GetModuleFileNameW 0 0x004623b8 
+f sym.imp.KERNEL32.dll_GetModuleHandleA 0 0x004623bc 
+f sym.imp.KERNEL32.dll_GetOEMCP 0 0x004623c0 
+f sym.imp.KERNEL32.dll_GetProcAddress 0 0x004623c4 
+f sym.imp.KERNEL32.dll_GetStdHandle 0 0x004623c8 
+f sym.imp.KERNEL32.dll_GetTickCount 0 0x004623cc 
+f sym.imp.KERNEL32.dll_GetVersion 0 0x004623d0 
+f sym.imp.KERNEL32.dll_InitializeCriticalSection 0 0x004623d4 
+f sym.imp.KERNEL32.dll_LeaveCriticalSection 0 0x004623d8 
+f sym.imp.KERNEL32.dll_LoadLibraryA 0 0x004623dc 
+f sym.imp.KERNEL32.dll_MoveFileA 0 0x004623e0 
+f sym.imp.KERNEL32.dll_MultiByteToWideChar 0 0x004623e4 
+f sym.imp.KERNEL32.dll_ReadConsoleInputA 0 0x004623e8 
+f sym.imp.KERNEL32.dll_ReadFile 0 0x004623ec 
+f sym.imp.KERNEL32.dll_SetConsoleCtrlHandler 0 0x004623f0 
+f sym.imp.KERNEL32.dll_SetConsoleMode 0 0x004623f4 
+f sym.imp.KERNEL32.dll_SetEnvironmentVariableA 0 0x004623f8 
+f sym.imp.KERNEL32.dll_SetEnvironmentVariableW 0 0x004623fc 
+f sym.imp.KERNEL32.dll_SetEvent 0 0x00462400 
+f sym.imp.KERNEL32.dll_SetFilePointer 0 0x00462404 
+f sym.imp.KERNEL32.dll_SetLastError 0 0x00462408 
+f sym.imp.KERNEL32.dll_SetStdHandle 0 0x0046240c 
+f sym.imp.KERNEL32.dll_SetUnhandledExceptionFilter 0 0x00462410 
+f sym.imp.KERNEL32.dll_TlsAlloc 0 0x00462414 
+f sym.imp.KERNEL32.dll_TlsFree 0 0x00462418 
+f sym.imp.KERNEL32.dll_TlsGetValue 0 0x0046241c 
+f sym.imp.KERNEL32.dll_TlsSetValue 0 0x00462420 
+f sym.imp.KERNEL32.dll_UnhandledExceptionFilter 0 0x00462424 
+f sym.imp.KERNEL32.dll_VirtualAlloc 0 0x00462428 
+f sym.imp.KERNEL32.dll_VirtualFree 0 0x0046242c 
+f sym.imp.KERNEL32.dll_VirtualQuery 0 0x00462430 
+f sym.imp.KERNEL32.dll_WaitForSingleObject 0 0x00462434 
+f sym.imp.KERNEL32.dll_WideCharToMultiByte 0 0x00462438 
+f sym.imp.KERNEL32.dll_WriteConsoleA 0 0x0046243c 
+f sym.imp.KERNEL32.dll_WriteFile 0 0x00462440 
+f sym.imp.WINMM.dll_auxGetDevCapsA 0 0x00462448 
+f sym.imp.WINMM.dll_auxGetNumDevs 0 0x0046244c 
+f sym.imp.WINMM.dll_auxGetVolume 0 0x00462450 
+f sym.imp.WINMM.dll_auxSetVolume 0 0x00462454 
+f sym.imp.WINMM.dll_mciGetDeviceIDA 0 0x00462458 
+f sym.imp.WINMM.dll_mciSendStringA 0 0x0046245c 
+f sym.imp.WINMM.dll_midiOutGetDevCapsA 0 0x00462460 
+f sym.imp.WINMM.dll_midiOutGetVolume 0 0x00462464 
+f sym.imp.WINMM.dll_midiOutSetVolume 0 0x00462468 
+f sym.imp.WINMM.dll_timeKillEvent 0 0x00462470 
+f sym.imp.WINMM.dll_timeSetEvent 0 0x00462474 
+f sym.imp.DSOUND.dll_DirectSoundCreate 0 0x0046247c 
+f sym.imp.DDRAW.dll_DirectDrawCreate 0 0x00462484 
+fs resources
+f resource.0 2216 0x004a50b8 
+f resource.1 20 0x004a5960 
+fs *
+f oeax 1 0x00000000 
+fs *
+f eax 1 0x00000000 
+fs *
+f ebx 1 0x00000000 
+fs *
+f ecx 1 0x00000000 
+fs *
+f edx 1 0x00000000 
+fs *
+f esi 1 0x00000000 
+fs *
+f edi 1 0x00000000 
+fs *
+f esp 1 0x00178000 
+fs *
+f ebp 1 0x00178000 
+fs *
+f eip 176 0x00458ced 
+fs *
+f eflags 1 0x00000000 
+fs functions
+f fcn.00419703 12 0x00419703 
+f fcn.0041906a 101 0x0041906a 
+f fcn.004196f1 18 0x004196f1 
+f fcn.00402460 65 0x00402460 
+f fcn.0041d546 19 0x0041d546 
+f fcn.00417d65 193 0x00417d65 
+f fcn.0044eb39 247 0x0044eb39 
+f FreeInitThreadData 14 0x00456e11 
+f unload_mkf 61 0x00450404 
+f fcn.00404165 215 0x00404165 
+f fcn.00451e7e 93 0x00451e7e 
+f fcn.0040a9bd 26 0x0040a9bd 
+f fcn.00424492 112 0x00424492 
+f write_cfg 72 0x00411f80 
+f fopen 23 0x004573bf 
+f fcn.00457366 89 0x00457366 
+f fclose 61 0x004578c5 
+f fcn.00457902 38 0x00457902 
+f memcpy_movsd 41 0x00456de8 
+f direct_sound_init 467 0x00453b55 
+f sub.DSOUND.dll_DirectSoundCreate_21c 6 0x0046121c 
+f memset 32 0x00456f60 
+f DirectDrawCreate 6 0x00461222 
+f fcn.00456f50 16 0x00456f50 
+f fcn.00456f23 10 0x00456f23 
+f fcn.0044f935 126 0x0044f935 
+f sub.USER32.dll_ShowCursor_fa 184 0x004020fa 
+f allocate_some_struct 61 0x00451a5a 
+f malloc 14 0x00456f80 
+f fcn.004021f8 88 0x004021f8 
+f sub.WINMM.dll_timeKillEvent_1b2 70 0x004021b2 
+f sub.USER32.dll_KillTimer_228 207 0x00419228 
+f fcn.0045174a 19 0x0045174a 
+f sub.USER32.dll_PostMessageA_966 27 0x00401966 
+f sub.WINMM.dll_mciSendStringA_d2c 101 0x00454d2c 
+f sub.USER32.dll_MessageBoxA_5d6 575 0x004015d6 
+f play_avi 211 0x00451677 
+f sprintf 37 0x00457110 
+f fcn.00458db5 39 0x00458db5 
+f fcn.004029fd 200 0x004029fd 
+f fcn.004562a5 39 0x004562a5 
+f sub.WINMM.dll_mciSendStringA_acb 42 0x00454acb 
+f fcn.00401543 147 0x00401543 
+f fcn.004190cf 345 0x004190cf 
+f sub.USER32.dll_PostMessageA_981 81 0x00401981 
+f fcn.0040d7c4 1371 0x0040d7c4 
+f fcn.0040fad6 39 0x0040fad6 
+f fcn.004542e9 27 0x004542e9 
+f fcn.00447285 16 0x00447285 
+f fcn.004542ce 27 0x004542ce 
+f fcn.004540d8 124 0x004540d8 
+f fcn.00454fb4 45 0x00454fb4 
+f fcn.00451b36 104 0x00451b36 
+f fcn.00456280 37 0x00456280 
+f fcn.00401f5e 58 0x00401f5e 
+f fcn.004563f5 35 0x004563f5 
+f fcn.00456418 37 0x00456418 
+f fcn.0045643d 44 0x0045643d 
+f fcn.0045753a 406 0x0045753a 
+f fcn.00458de7 14 0x00458de7 
+f fcn.004574de 68 0x004574de 
+f fcn.00457522 24 0x00457522 
+f fcn.00457d61 53 0x00457d61 
+f fcn.00457d10 81 0x00457d10 
+f fcn.004552e7 80 0x004552e7 
+f fcn.004553da 36 0x004553da 
+f fcn.004561be 81 0x004561be 
+f fcn.004551f0 29 0x004551f0 
+f fcn.00456180 62 0x00456180 
+f sub.USER32.dll_InvalidateRect_82c 1246 0x0040482c 
+f fcn.00404d0a 120 0x00404d0a 
+f fcn.004552b7 48 0x004552b7 
+f fcn.00456f2d 35 0x00456f2d 
+f fcn.00457dbc 29 0x00457dbc 
+f fcn.00445a4d 85 0x00445a4d 
+f fcn.0040e033 282 0x0040e033 
+f fcn.00407a8c 70 0x00407a8c 
+f fcn.004553fe 68 0x004553fe 
+f fcn.0040c03b 33 0x0040c03b 
+f fcn.00407a2c 96 0x00407a2c 
+f fcn.004564c1 37 0x004564c1 
+f fcn.004555c5 38 0x004555c5 
+f fcn.0045825d 25 0x0045825d 
+f fcn.00458276 11 0x00458276 
+f fcn.00440aac 252 0x00440aac 
+f fcn.0040cc1a 60 0x0040cc1a 
+f fcn.00456469 44 0x00456469 
+f fcn.0040ea62 56 0x0040ea62 
+f fcn.0040e2a2 138 0x0040e2a2 
+f fcn.00440706 520 0x00440706 
+f fcn.00441e77 87 0x00441e77 
+f fcn.00441343 106 0x00441343 
+f fcn.0040b0cd 67 0x0040b0cd 
+f fcn.004521cb 37 0x004521cb 
+f sub.WINMM.dll_mciGetDeviceIDA_97b 84 0x0045497b 
+f sub.KERNEL32.dll_GetLocalTime_331 50 0x00458331 
+f fcn.00411aa3 61 0x00411aa3 
+f fcn.00411ae0 102 0x00411ae0 
+f fcn.00411b46 13 0x00411b46 
+f fcn.004562cc 46 0x004562cc 
+f fcn.00413a4a 1022 0x00413a4a 
+f fcn.0041417e 1021 0x0041417e 
+f fcn.004123ba 29 0x004123ba 
+f fcn.004146ee 77 0x004146ee 
+f fcn.004024a9 23 0x004024a9 
+f fcn.0041473b 78 0x0041473b 
+f fcn.00450cda 19 0x00450cda 
+f sub.USER32.dll_IntersectRect_4cd 104 0x004174cd 
+f fcn.004521aa 33 0x004521aa 
+f fcn.0040a9d7 56 0x0040a9d7 
+f fcn.0040d293 33 0x0040d293 
+f fcn.0045577c 37 0x0045577c 
+f fcn.00417c67 207 0x00417c67 
+f fcn.004221c0 643 0x004221c0 
+f fcn.00440ba8 260 0x00440ba8 
+f fcn.0041d709 203 0x0041d709 
+f fcn.004413ad 63 0x004413ad 
+f fcn.0044f4ed 122 0x0044f4ed 
+f fcn.0044090e 414 0x0044090e 
+f fcn.00446ae8 19 0x00446ae8 
+f fcn.004154dc 288 0x004154dc 
+f fcn.004155fc 630 0x004155fc 
+f fcn.00441f73 354 0x00441f73 
+f fcn.0040fafd 187 0x0040fafd 
+f fcn.00436a5a 176 0x00436a5a 
+f fcn.00433bd8 72 0x00433bd8 
+f fcn.0043695e 234 0x0043695e 
+f fcn.0040d6be 129 0x0040d6be 
+f fcn.0041d89e 451 0x0041d89e 
+f fcn.0041e8e6 252 0x0041e8e6 
+f fcn.004295ea 167 0x004295ea 
+f fcn.00423b3b 413 0x00423b3b 
+f fcn.004247d5 89 0x004247d5 
+f fcn.00424620 165 0x00424620 
+f fcn.00445aa2 56 0x00445aa2 
+f fcn.0042483e 388 0x0042483e 
+f fcn.00429691 48 0x00429691 
+f fcn.0045844e 10 0x0045844e 
+f fcn.00458462 43 0x00458462 
+f fcn.00458458 10 0x00458458 
+f fcn.004297f7 1390 0x004297f7 
+f fcn.0044ec30 134 0x0044ec30 
+f fcn.0044ef3b 6 0x0044ef3b 
+f fcn.0042d145 109 0x0042d145 
+f fcn.0042d1b2 133 0x0042d1b2 
+f fcn.0042d237 59 0x0042d237 
+f fcn.0042d272 39 0x0042d272 
+f fcn.00456495 44 0x00456495 
+f fcn.0042f6c3 292 0x0042f6c3 
+f fcn.00441210 82 0x00441210 
+f fcn.00444bb2 147 0x00444bb2 
+f fcn.00432511 142 0x00432511 
+f fcn.00431842 1079 0x00431842 
+f fcn.00431caa 2151 0x00431caa 
+f fcn.0045218f 27 0x0045218f 
+f fcn.00433d6e 438 0x00433d6e 
+f sub.USER32.dll_InvalidateRect_c20 334 0x00433c20 
+f fcn.00436edb 29 0x00436edb 
+f fcn.004024a1 8 0x004024a1 
+f fcn.0041e6f2 12 0x0041e6f2 
+f fcn.0041e69e 84 0x0041e69e 
+f fcn.00444691 217 0x00444691 
+f fcn.00420eee 12 0x00420eee 
+f fcn.00448544 1338 0x00448544 
+f fcn.00420e9a 84 0x00420e9a 
+f fcn.0040d73f 34 0x0040d73f 
+f fcn.00454493 38 0x00454493 
+f fcn.0045441a 121 0x0045441a 
+f fcn.004564e6 44 0x004564e6 
+f fcn.00456356 46 0x00456356 
+f fcn.00456328 46 0x00456328 
+f fcn.00451801 388 0x00451801 
+f strncmp 34 0x00458599 
+f fcn.0045520d 49 0x0045520d 
+f fcn.004556e8 41 0x004556e8 
+f fcn.00455711 104 0x00455711 
+f fcn.00454304 75 0x00454304 
+f fcn.00454395 47 0x00454395 
+f fcn.0045434f 70 0x0045434f 
+f fcn.00452b36 147 0x00452b36 
+f sub.WINMM.dll_mciSendStringA_f46 21 0x00454f46 
+f sub.WINMM.dll_mciSendStringA_efa 76 0x00454efa 
+f sub.WINMM.dll_mciSendStringA_af5 37 0x00454af5 
+f fcn.00458c90 19 0x00458c90 
+f fcn.00458cea 3 0x00458cea 
+f fcn.00458e22 18 0x00458e22 
+f fcn.00458e56 42 0x00458e56 
+f fcn.004591c6 51 0x004591c6 
+f fcn.004573d6 117 0x004573d6 
+f sub.KERNEL32.dll_GetCurrentProcessId_718 8 0x00459718 
+f fcn.00457928 16 0x00457928 
+f fcn.004599ad 14 0x004599ad 
+f sub.KERNEL32.dll_GetLastError_242 23 0x0045c242 
+f fcn.00460bde 178 0x00460bde 
+f fcn.00459cfc 177 0x00459cfc 
+f fcn.00459dad 26 0x00459dad 
+f fcn.0045bfdd 11 0x0045bfdd 
+f fcn.00459f7f 44 0x00459f7f 
+f AllocInitThreadData 61 0x0045a23d 
+f lib_calloc 37 0x0045c62e 
+f InitThreadData 42 0x0045c8d7 
+f fcn.0045a53f 75 0x0045a53f 
+f sub.KERNEL32.dll_GetVersion_58a 165 0x0045a58a 
+f fcn.0045a62f 55 0x0045a62f 
+f sub.KERNEL32.dll_ExitProcess_5ef 618 0x004585ef 
+f sub.KERNEL32.dll_SetUnhandledExceptionFilter_b58 76 0x0045ab58 
+f fcn.0045aba4 34 0x0045aba4 
+f fcn.00458ca3 71 0x00458ca3 
+f sub.KERNEL32.dll_GetModuleHandleA_859 23 0x00458859 
+f fcn.0045ada0 15 0x0045ada0 
+f fcn.0045aded 32 0x0045aded 
+f fcn.0045ae21 1 0x0045ae21 
+f fcn.0045ae23 44 0x0045ae23 
+f fcn.0045bd69 59 0x0045bd69 
+f fcn.0045bda4 98 0x0045bda4 
+f sub.KERNEL32.dll_CreateEventA_12 37 0x0045a012 
+f sub.KERNEL32.dll_GetLastError_e8f 17 0x0045be8f 
+f fcn.0045bef6 43 0x0045bef6 
+f fcn.0045bea0 86 0x0045bea0 
+f fcn.00459628 47 0x00459628 
+f fcn.0045c02b 38 0x0045c02b 
+f sub.KERNEL32.dll_GetFileAttributesA_51 46 0x0045c051 
+f fcn.0045c07f 10 0x0045c07f 
+f sub.KERNEL32.dll_MoveFileA_93 33 0x0045c093 
+f fcn.0045c25a 39 0x0045c25a 
+f fcn.00459bd3 47 0x00459bd3 
+f fcn.0045c281 51 0x0045c281 
+f realloc 21 0x0045c585 
+f frealloc 148 0x0045c59a 
+f fcn.0045e64e 15 0x0045e64e 
+f fcn.0045e829 74 0x0045e829 
+f ErrorExit 46 0x0045c690 
+f fcn.0045e873 23 0x0045e873 
+f AccessSemaphore 104 0x0045a0b3 
+f NTGetCriticalSection 79 0x0045a038 
+f ReleaseSemaphore 39 0x0045a11b 
+f sub.KERNEL32.dll_DeleteCriticalSection_87 44 0x0045a087 
+f sub.KERNEL32.dll_TlsGetValue_324 84 0x0045a324 
+f sub.KERNEL32.dll_TlsFree_382 30 0x0045a382 
+f sub.KERNEL32.dll_LoadLibraryA_6cf 54 0x0045a6cf 
+f fcn.0045ca9a 11 0x0045ca9a 
+f fcn.0045caa5 3 0x0045caa5 
+f fcn.0045cc59 63 0x0045cc59 
+f fcn.0045abc6 16 0x0045abc6 
+f sub.KERNEL32.dll_VirtualFree_cbd 95 0x0045acbd 
+f checkStack 44 0x0045adc1 
+f sub.KERNEL32.dll_WideCharToMultiByte_e30 55 0x0045ce30 
+f fcn.0045b554 27 0x0045b554 
+f fcn.0045b56f 67 0x0045b56f 
+f fcn.0045ce67 157 0x0045ce67 
+f fcn.0045ec77 142 0x0045ec77 
+f fcn.0045cf75 79 0x0045cf75 
+f fcn.0045d016 18 0x0045d016 
+f fcn.0045be20 29 0x0045be20 
+f fcn.00458e14 14 0x00458e14 
+f fcn.0045e479 2938 0x0045e479 
+f fcn.00458e00 4 0x00458e00 
+f fcn.0046000a 11 0x0046000a 
+f fcn.0045e8ca 15 0x0045e8ca 
+f c_malloc 14 0x0045c906 
+f fcn.0045ea7b 83 0x0045ea7b 
+f sub.KERNEL32.dll_SetConsoleCtrlHandler_bef 42 0x0045cbef 
+f KillCtrlHandler 53 0x0045cc19 
+f terminate 19 0x0045ea68 
+f fcn.0045ca8f 11 0x0045ca8f 
+f fcn.0045ed05 60 0x0045ed05 
+f fcn.0045ed41 124 0x0045ed41 
+f fcn.0045fee1 57 0x0045fee1 
+f fcn.0045ff1a 44 0x0045ff1a 
+f fcn.0045edbd 46 0x0045edbd 
+f fcn.0045edf1 32 0x0045edf1 
+f fcn.0045d2c1 77 0x0045d2c1 
+f fcn.00458df5 11 0x00458df5 
+f fcn.0045eec4 78 0x0045eec4 
+f fcn.0045f654 76 0x0045f654 
+f fcn.0045f5cf 19 0x0045f5cf 
+f fcn.0045f01c 279 0x0045f01c 
+f fcn.0045fa9e 5 0x0045fa9e 
+f fcn.0045f5e2 19 0x0045f5e2 
+f fcn.0045e8c3 7 0x0045e8c3 
+f InitMultipleThread 288 0x0045a3a0 
+f fcn.0045faa3 84 0x0045faa3 
+f fcn.004600ac 122 0x004600ac 
+f fcn.004604f4 82 0x004604f4 
+f fcn.00460546 60 0x00460546 
+f fcn.004605fd 30 0x004605fd 
+f fcn.004606bb 35 0x004606bb 
+f sub.KERNEL32.dll_SetEnvironmentVariableW_6de 229 0x004606de 
+f fcn.004608e2 23 0x004608e2 
+f fcn.004608f9 30 0x004608f9 
+f fcn.00460917 69 0x00460917 
+f fcn.0046095c 67 0x0046095c 
+f fcn.0046099f 57 0x0046099f 
+fs *
+f case.0x4172fb.0 1 0x00417302 
+fs *
+f case.0x4172fb.1 1 0x00417353 
+fs *
+f case.0x4172fb.2 1 0x00417401 
+fs *
+f case.0x4172fb.3 1 0x00417302 
+fs *
+f switch.0x004172fb 1 0x004172fb 
+fs *
+f case.default.0x4174a3 1 0x004174a3 
+fs *
+f case.0x417d98.0 1 0x00417d9f 
+fs *
+f case.0x417d98.1 1 0x00417dad 
+fs *
+f case.0x417d98.2 1 0x00417db6 
+fs *
+f case.0x417d98.3 1 0x00417dbd 
+fs *
+f case.0x417d98.4 1 0x00417dcb 
+fs *
+f case.0x417d98.5 1 0x00417dd2 
+fs *
+f case.0x417d98.6 1 0x00417dd9 
+fs *
+f case.0x417d98.7 1 0x00417de0 
+fs *
+f case.0x417d98.8 1 0x00417de7 
+fs *
+f case.0x417d98.9 1 0x00417dee 
+fs *
+f case.0x417d98.10 1 0x00417df5 
+fs *
+f switch.0x00417d98 1 0x00417d98 
+fs *
+f case.default.0x417dff 1 0x00417dff 
+fs *
+f case.0x44ff1a.0 1 0x0044ff21 
+fs *
+f case.0x44ff1a.1 1 0x0044ff2a 
+fs *
+f case.0x44ff1a.2 1 0x0044ff2a 
+fs *
+f case.0x44ff1a.3 1 0x0044ff2a 
+fs *
+f case.0x44ff1a.4 1 0x0044ff35 
+fs *
+f case.0x44ff1a.5 1 0x0044ff42 
+fs *
+f case.0x44ff1a.6 1 0x0044ff4b 
+fs *
+f switch.0x0044ff1a 1 0x0044ff1a 
+fs *
+f case.default.0x44ff5d 1 0x0044ff5d 
+fs *
+f case.0x4162cd.0 1 0x004162d4 
+fs *
+f case.0x4162cd.1 1 0x00416355 
+fs *
+f case.0x4162cd.2 1 0x0041646c 
+fs *
+f case.0x4162cd.3 1 0x004165e1 
+fs *
+f switch.0x004162cd 1 0x004162cd 
+fs *
+f case.default.0x416064 1 0x00416064 
+fs *
+f case.0x40d801.0 1 0x0040d808 
+fs *
+f case.0x40d801.1 1 0x0040d8d3 
+fs *
+f case.0x40d801.2 1 0x0040d975 
+fs *
+f case.0x40d801.3 1 0x0040da4b 
+fs *
+f switch.0x0040d801 1 0x0040d801 
+fs *
+f case.default.0x40d88e 1 0x0040d88e 
+fs *
+f case.0x41b800.0 1 0x0041b807 
+fs *
+f case.0x41b800.1 1 0x0041b807 
+fs *
+f case.0x41b800.2 1 0x0041b807 
+fs *
+f case.0x41b800.3 1 0x0041b807 
+fs *
+f case.0x41b800.4 1 0x0041b807 
+fs *
+f case.0x41b800.5 1 0x0041b807 
+fs *
+f case.0x41b800.6 1 0x0041b807 
+fs *
+f case.0x41b800.7 1 0x0041b807 
+fs *
+f case.0x41b800.8 1 0x0041b807 
+fs *
+f case.0x41b800.9 1 0x0041b807 
+fs *
+f case.0x41b800.10 1 0x0041b837 
+fs *
+f case.0x41b800.11 1 0x0041b807 
+fs *
+f case.0x41b800.12 1 0x0041b8f9 
+fs *
+f case.0x41b800.13 1 0x0041bb0c 
+fs *
+f case.0x41b800.14 1 0x0041c164 
+fs *
+f case.0x41b800.15 1 0x0041bceb 
+fs *
+f case.0x41b800.16 1 0x0041be5f 
+fs *
+f case.0x41b800.17 1 0x0041bfd2 
+fs *
+f switch.0x0041b800 1 0x0041b800 
+fs *
+f case.default.0x41c164 1 0x0041c164 
+fs *
+f case.0x409412.0 1 0x00409419 
+fs *
+f case.0x409412.1 1 0x00409426 
+fs *
+f case.0x409412.2 1 0x00409434 
+fs *
+f case.0x409412.3 1 0x00409442 
+fs *
+f case.0x409412.4 1 0x00409449 
+fs *
+f switch.0x00409412 1 0x00409412 
+fs *
+f case.default.0x40948e 1 0x0040948e 
+fs *
+f case.0x418d81.0 1 0x00418d88 
+fs *
+f case.0x418d81.1 1 0x00418d99 
+fs *
+f case.0x418d81.2 1 0x00418dc6 
+fs *
+f case.0x418d81.3 1 0x00418e7a 
+fs *
+f case.0x418d81.4 1 0x00418e7a 
+fs *
+f case.0x418d81.5 1 0x00418dc6 
+fs *
+f switch.0x00418d81 1 0x00418d81 
+fs *
+f case.default.0x418e7a 1 0x00418e7a 
+fs *
+f case.0x4048c4.0 1 0x004048cb 
+fs *
+f case.0x4048c4.1 1 0x00404950 
+fs *
+f case.0x4048c4.2 1 0x004049ec 
+fs *
+f case.0x4048c4.3 1 0x00404a71 
+fs *
+f case.0x4048c4.4 1 0x00404af6 
+fs *
+f case.0x4048c4.5 1 0x00404b7a 
+fs *
+f switch.0x004048c4 1 0x004048c4 
+fs *
+f case.default.0x404c37 1 0x00404c37 
+fs *
+f case.0x40e046.0 1 0x0040e04d 
+fs *
+f case.0x40e046.1 1 0x0040e059 
+fs *
+f case.0x40e046.2 1 0x0040e065 
+fs *
+f case.0x40e046.3 1 0x0040e071 
+fs *
+f switch.0x0040e046 1 0x0040e046 
+fs *
+f case.default.0x40e07d 1 0x0040e07d 
+fs *
+f case.0x40ec0d.0 1 0x0040ec14 
+fs *
+f case.0x40ec0d.1 1 0x0040ecf1 
+fs *
+f case.0x40ec0d.2 1 0x0040ed8f 
+fs *
+f case.0x40ec0d.3 1 0x0040ee50 
+fs *
+f case.0x40ec0d.4 1 0x0040ef1b 
+fs *
+f case.0x40ec0d.5 1 0x0040efe4 
+fs *
+f case.0x40ec0d.6 1 0x0040f083 
+fs *
+f case.0x40ec0d.7 1 0x0040f155 
+fs *
+f case.0x40ec0d.8 1 0x0040f205 
+fs *
+f case.0x40ec0d.9 1 0x0040f258 
+fs *
+f case.0x40ec0d.10 1 0x0040ece6 
+fs *
+f case.0x40ec0d.11 1 0x0040f2a0 
+fs *
+f case.0x40ec0d.12 1 0x0040ece6 
+fs *
+f case.0x40ec0d.13 1 0x0040ece6 
+fs *
+f case.0x40ec0d.14 1 0x0040f2eb 
+fs *
+f switch.0x0040ec0d 1 0x0040ec0d 
+fs *
+f case.default.0x40ece6 1 0x0040ece6 
+fs *
+f case.0x43c05d.0 1 0x0043c064 
+fs *
+f case.0x43c05d.1 1 0x0043c08d 
+fs *
+f case.0x43c05d.2 1 0x0043c08d 
+fs *
+f case.0x43c05d.3 1 0x0043c07a 
+fs *
+f case.0x43c05d.4 1 0x0043c08d 
+fs *
+f switch.0x0043c05d 1 0x0043c05d 
+fs *
+f case.default.0x43c0cb 1 0x0043c0cb 
+fs *
+f case.0x44082a.0 1 0x00440830 
+fs *
+f case.0x44082a.1 1 0x0044083e 
+fs *
+f case.0x44082a.2 1 0x00440873 
+fs *
+f case.0x44082a.3 1 0x00440873 
+fs *
+f case.0x44082a.4 1 0x0044084c 
+fs *
+f case.0x44082a.5 1 0x0044085a 
+fs *
+f switch.0x0044082a 1 0x0044082a 
+fs *
+f case.default.0x440873 1 0x00440873 
+fs *
+f case.0x43f338.0 1 0x0043f33f 
+fs *
+f case.0x43f338.1 1 0x0043f351 
+fs *
+f case.0x43f338.2 1 0x0043f45d 
+fs *
+f case.0x43f338.3 1 0x0043f55f 
+fs *
+f case.0x43f338.4 1 0x0043f57f 
+fs *
+f case.0x43f338.5 1 0x0043f59f 
+fs *
+f case.0x43f338.6 1 0x0043f5bd 
+fs *
+f case.0x43f338.7 1 0x0043f5dd 
+fs *
+f case.0x43f338.8 1 0x0043f6fa 
+fs *
+f switch.0x0043f338 1 0x0043f338 
+fs *
+f case.default.0x43f709 1 0x0043f709 
+fs *
+f case.0x41387f.0 1 0x00413886 
+fs *
+f case.0x41387f.1 1 0x00413a2b 
+fs *
+f case.0x41387f.2 1 0x00413934 
+fs *
+f case.0x41387f.3 1 0x00413964 
+fs *
+f case.0x41387f.4 1 0x00413986 
+fs *
+f switch.0x0041387f 1 0x0041387f 
+fs *
+f case.default.0x413a2b 1 0x00413a2b 
+fs *
+f case.0x41259c.0 1 0x004125a3 
+fs *
+f case.0x41259c.1 1 0x004125e0 
+fs *
+f case.0x41259c.2 1 0x00412651 
+fs *
+f case.0x41259c.3 1 0x00412851 
+fs *
+f case.0x41259c.4 1 0x00412a08 
+fs *
+f case.0x41259c.5 1 0x00412aac 
+fs *
+f case.0x41259c.6 1 0x00412b45 
+fs *
+f switch.0x0041259c 1 0x0041259c 
+fs *
+f case.default.0x412b9c 1 0x00412b9c 
+fs *
+f case.0x4179bf.0 1 0x004179c6 
+fs *
+f case.0x4179bf.1 1 0x00417a24 
+fs *
+f case.0x4179bf.2 1 0x00417a24 
+fs *
+f case.0x4179bf.3 1 0x004179df 
+fs *
+f case.0x4179bf.4 1 0x00417a86 
+fs *
+f switch.0x004179bf 1 0x004179bf 
+fs *
+f case.default.0x417bfe 1 0x00417bfe 
+fs *
+f case.0x417631.0 1 0x00417637 
+fs *
+f case.0x417631.1 1 0x0041766f 
+fs *
+f case.0x417631.2 1 0x0041769f 
+fs *
+f case.0x417631.3 1 0x004176cd 
+fs *
+f switch.0x00417631 1 0x00417631 
+fs *
+f case.default.0x4176fe 1 0x004176fe 
+fs *
+f case.0x4198b2.0 1 0x004198b9 
+fs *
+f case.0x4198b2.1 1 0x0041b3d0 
+fs *
+f case.0x4198b2.2 1 0x0041b11e 
+fs *
+f case.0x4198b2.3 1 0x0041b128 
+fs *
+f case.0x4198b2.4 1 0x0041b132 
+fs *
+f case.0x4198b2.5 1 0x0041b13c 
+fs *
+f case.0x4198b2.6 1 0x0041b146 
+fs *
+f case.0x4198b2.7 1 0x0041b15e 
+fs *
+f case.0x4198b2.8 1 0x0041b16c 
+fs *
+f case.0x4198b2.9 1 0x0041b17a 
+fs *
+f case.0x4198b2.10 1 0x0041b184 
+fs *
+f case.0x4198b2.11 1 0x0041b21e 
+fs *
+f case.0x4198b2.12 1 0x0041b2a3 
+fs *
+f case.0x4198b2.13 1 0x0041b302 
+fs *
+f case.0x4198b2.14 1 0x0041b396 
+fs *
+f case.0x4198b2.15 1 0x0041b3b9 
+fs *
+f case.0x4198b2.16 1 0x0041b3cb 
+fs *
+f switch.0x004198b2 1 0x004198b2 
+fs *
+f case.default.0x41b3d0 1 0x0041b3d0 
+fs *
+f case.0x41d73a.0 1 0x0041d741 
+fs *
+f case.0x41d73a.1 1 0x0041d758 
+fs *
+f case.0x41d73a.2 1 0x0041d79e 
+fs *
+f case.0x41d73a.3 1 0x0041d79e 
+fs *
+f case.0x41d73a.4 1 0x0041d76f 
+fs *
+f case.0x41d73a.5 1 0x0041d788 
+fs *
+f switch.0x0041d73a 1 0x0041d73a 
+fs *
+f case.default.0x41d79e 1 0x0041d79e 
+fs *
+f case.0x43f87c.0 1 0x0043f883 
+fs *
+f case.0x43f87c.1 1 0x0043f892 
+fs *
+f case.0x43f87c.2 1 0x0043f9ab 
+fs *
+f case.0x43f87c.3 1 0x0043fa23 
+fs *
+f case.0x43f87c.4 1 0x0043fa19 
+fs *
+f switch.0x0043f87c 1 0x0043f87c 
+fs *
+f case.default.0x43fa23 1 0x0043fa23 
+fs *
+f case.0x436a94.0 1 0x00436a9b 
+fs *
+f case.0x436a94.1 1 0x00436adf 
+fs *
+f case.0x436a94.2 1 0x00436af5 
+fs *
+f case.0x436a94.3 1 0x00436b01 
+fs *
+f switch.0x00436a94 1 0x00436a94 
+fs *
+f case.default.0x436b06 1 0x00436b06 
+fs *
+f case.0x423b54.0 1 0x00423b5b 
+fs *
+f case.0x423b54.1 1 0x00423bd1 
+fs *
+f case.0x423b54.2 1 0x00423c0a 
+fs *
+f case.0x423b54.3 1 0x00423c48 
+fs *
+f case.0x423b54.4 1 0x00423c90 
+fs *
+f switch.0x00423b54 1 0x00423b54 
+fs *
+f case.default.0x423cd1 1 0x00423cd1 
+fs *
+f case.0x4226d8.0 1 0x004226df 
+fs *
+f case.0x4226d8.1 1 0x00422a15 
+fs *
+f case.0x4226d8.2 1 0x00422ba6 
+fs *
+f case.0x4226d8.3 1 0x00422d51 
+fs *
+f case.0x4226d8.4 1 0x00422ebd 
+fs *
+f switch.0x004226d8 1 0x004226d8 
+fs *
+f case.default.0x423011 1 0x00423011 
+fs *
+f case.0x424c5c.0 1 0x00424c62 
+fs *
+f case.0x424c5c.1 1 0x00424f5f 
+fs *
+f case.0x424c5c.2 1 0x004250fe 
+fs *
+f case.0x424c5c.3 1 0x004252a0 
+fs *
+f case.0x424c5c.4 1 0x0042540c 
+fs *
+f switch.0x00424c5c 1 0x00424c5c 
+fs *
+f case.default.0x425563 1 0x00425563 
+fs *
+f case.0x425655.0 1 0x0042565c 
+fs *
+f case.0x425655.1 1 0x0042577d 
+fs *
+f case.0x425655.2 1 0x004257d2 
+fs *
+f case.0x425655.3 1 0x00425841 
+fs *
+f switch.0x00425655 1 0x00425655 
+fs *
+f case.default.0x4258b4 1 0x004258b4 
+fs *
+f case.0x42498c.0 1 0x0042485e 
+fs *
+f case.0x42498c.1 1 0x00424897 
+fs *
+f case.0x42498c.2 1 0x00424934 
+fs *
+f case.0x42498c.3 1 0x00424993 
+fs *
+f switch.0x0042498c 1 0x0042498c 
+fs *
+f case.default.0x4249ad 1 0x004249ad 
+fs *
+f case.0x4299a8.0 1 0x004299af 
+fs *
+f case.0x4299a8.1 1 0x004299af 
+fs *
+f case.0x4299a8.2 1 0x004299bf 
+fs *
+f case.0x4299a8.3 1 0x004299bf 
+fs *
+f case.0x4299a8.4 1 0x004299cf 
+fs *
+f switch.0x004299a8 1 0x004299a8 
+fs *
+f case.default.0x4299e7 1 0x004299e7 
+fs *
+f case.0x429b80.0 1 0x004298b9 
+fs *
+f case.0x429b80.1 1 0x004298cc 
+fs *
+f case.0x429b80.2 1 0x004298f8 
+fs *
+f case.0x429b80.3 1 0x00429908 
+fs *
+f case.0x429b80.4 1 0x00429934 
+fs *
+f switch.0x00429b80 1 0x00429b80 
+fs *
+f case.default.0x42994c 1 0x0042994c 
+fs *
+f case.0x431860.0 1 0x00431867 
+fs *
+f case.0x431860.1 1 0x004318b7 
+fs *
+f case.0x431860.2 1 0x00431969 
+fs *
+f case.0x431860.3 1 0x00431a23 
+fs *
+f case.0x431860.4 1 0x00431a7d 
+fs *
+f case.0x431860.5 1 0x00431ad2 
+fs *
+f case.0x431860.6 1 0x00431b2c 
+fs *
+f case.0x431860.7 1 0x00431b61 
+fs *
+f case.0x431860.8 1 0x00431b99 
+fs *
+f case.0x431860.9 1 0x00431bcf 
+fs *
+f case.0x431860.10 1 0x00431c02 
+fs *
+f case.0x431860.11 1 0x00431c31 
+fs *
+f switch.0x00431860 1 0x00431860 
+fs *
+f case.default.0x431c62 1 0x00431c62 
+fs *
+f case.0x4320d6.0 1 0x00431cd6 
+fs *
+f case.0x4320d6.1 1 0x00431d65 
+fs *
+f case.0x4320d6.2 1 0x00431dcc 
+fs *
+f case.0x4320d6.3 1 0x00431e75 
+fs *
+f case.0x4320d6.4 1 0x00431eef 
+fs *
+f case.0x4320d6.5 1 0x00431f67 
+fs *
+f case.0x4320d6.6 1 0x004320dd 
+fs *
+f case.0x4320d6.7 1 0x00432160 
+fs *
+f case.0x4320d6.8 1 0x004321f0 
+fs *
+f case.0x4320d6.9 1 0x00432259 
+fs *
+f case.0x4320d6.10 1 0x00432384 
+fs *
+f case.0x4320d6.11 1 0x0043242b 
+fs *
+f switch.0x004320d6 1 0x004320d6 
+fs *
+f case.default.0x4320aa 1 0x004320aa 
+fs *
+f case.0x45182b.0 1 0x0045197d 
+fs *
+f case.0x45182b.1 1 0x00451832 
+fs *
+f case.0x45182b.2 1 0x00451883 
+fs *
+f case.0x45182b.3 1 0x00451907 
+fs *
+f switch.0x0045182b 1 0x0045182b 
+fs *
+f case.default.0x45197d 1 0x0045197d 
+fs *
+f case.0x401de8.0 1 0x00401c8c 
+fs *
+f case.0x401de8.1 1 0x00401def 
+fs *
+f case.0x401de8.2 1 0x00401e25 
+fs *
+f case.0x401de8.3 1 0x00401e2f 
+fs *
+f case.0x401cb8.0 1 0x00401cc8 
+fs *
+f case.0x401cb8.1 1 0x00401d08 
+fs *
+f case.0x401cb8.2 1 0x00401d2b 
+fs *
+f case.0x401cb8.3 1 0x00401d18 
+fs *
+f case.0x401cb8.4 1 0x00401cbf 
+fs *
+f switch.0x00401cb8 1 0x00401cb8 
+fs *
+f case.default.0x401d2b 1 0x00401d2b 
+fs *
+f switch.0x00401de8 1 0x00401de8 
+fs *
+f case.default.0x401e03 1 0x00401e03 
+fs *
+f case.0x45d544.0 1 0x0045d54c 
+fs *
+f case.0x45d544.1 1 0x0045d58b 
+fs *
+f case.0x45d544.2 1 0x0045d55d 
+fs *
+f case.0x45d544.3 1 0x0045d57b 
+fs *
+f case.0x45d544.4 1 0x0045d54c 
+fs *
+f switch.0x0045d544 1 0x0045d544 
+fs *
+f case.default.0x45d6be 1 0x0045d6be 
+fs *
+f case.0x45dd29.0 1 0x0045dd31 
+fs *
+f case.0x45dd29.1 1 0x0045dd41 
+fs *
+f case.0x45dd29.2 1 0x0045dd4c 
+fs *
+f case.0x45dd29.3 1 0x0045dd57 
+fs *
+f switch.0x0045dd29 1 0x0045dd29 
+fs *
+f case.default.0x45dd65 1 0x0045dd65 
+fs functions
+f fcn.00417191 828 0x00417191 
+f sub.USER32.dll_DefWindowProcA_e26 3606 0x00417e26 
+f sub.USER32.dll_GetCursorPos_35d 259 0x0040235d 
+f sub.USER32.dll_GetCursorPos_250 269 0x00402250 
+f fcn.0040dd1f 479 0x0040dd1f 
+f fcn.00415d31 542 0x00415d31 
+f load_mkf 262 0x004502fe 
+f sub.KERNEL32.dll_SetFilePointer_441 276 0x00450441 
+f create_some_font 197 0x0044f9d8 
+f draw_some_text 1449 0x0044fabc 
+f sub.USER32.dll_PostMessageA_8e7 127 0x004018e7 
+f fcn.00456e1f 260 0x00456e1f 
+f fcn.00411b53 828 0x00411b53 
+f fcn.0041e345 857 0x0041e345 
+f process_checkpoint 1009 0x00403d74 
+f fcn.00451a97 695 0x00451a97 
+f sub.WINMM.dll_timeGetTime_85e 91 0x0045285e 
+f fcn.00451edb 177 0x00451edb 
+f fcn.00415e70 232 0x00415e70 
+f fcn.00447d97 755 0x00447d97 
+f fcn.00441baa 616 0x00441baa 
+f fcn.004284be 2033 0x004284be 
+f fcn.0042b58f 1288 0x0042b58f 
+f fcn.0040defe 107 0x0040defe 
+f fcn.00453a32 291 0x00453a32 
+f fcn.00457135 287 0x00457135 
+f fcn.004590b9 184 0x004590b9 
+f fcn.00457254 274 0x00457254 
+f fwrite 566 0x00457ada 
+f fcn.004579e8 242 0x004579e8 
+f fcn.00459171 55 0x00459171 
+f fcn.00415f69 1935 0x00415f69 
+f fcn.00454edc 30 0x00454edc 
+f drive_check__junk 484 0x0045011a 
+f fcn.004541e3 93 0x004541e3 
+f fcn.00458ae0 49 0x00458ae0 
+f fcn.0045175d 145 0x0045175d 
+f fcn.00454176 109 0x00454176 
+f config_rich4 241 0x00411e8f 
+f fmalloc 270 0x00456f8e 
+f sub.WINMM.dll_mciSendStringA_5ba 821 0x004545ba 
+f sub.WINMM.dll_timeGetTime_3c4 86 0x004543c4 
+f sub.WINMM.dll_mciSendStringA_8ef 140 0x004548ef 
+f fcn.004080f5 402 0x004080f5 
+f sub.GDI32.dll_DeleteObject_9b3 37 0x0044f9b3 
+f fcn.00454240 142 0x00454240 
+f fcn.00453d28 167 0x00453d28 
+f sub.WINMM.dll_mciSendStringA_d91 331 0x00454d91 
+f sub.USER32.dll_UnhookWindowsHookEx_815 210 0x00401815 
+f fcn.0045ae76 825 0x0045ae76 
+f fcn.00455c52 466 0x00455c52 
+f sub.WINMM.dll_mciSendStringA_9cf 252 0x004549cf 
+f fcn.00406de7 2010 0x00406de7 
+f fcn.00407ad2 1571 0x00407ad2 
+f fcn.004291d6 767 0x004291d6 
+f fcn.00415872 1179 0x00415872 
+f fcn.004192f7 635 0x004192f7 
+f fcn.00418ebd 429 0x00418ebd 
+f fcn.00418e7f 62 0x00418e7f 
+f fcn.0041b42d 5154 0x0041b42d 
+f fcn.0040c05c 1840 0x0040c05c 
+f fcn.00416e6d 788 0x00416e6d 
+f fcn.00419572 383 0x00419572 
+f fcn.00453f6c 364 0x00453f6c 
+f fcn.0040df69 113 0x0040df69 
+f fcn.00454fe1 75 0x00454fe1 
+f fcn.0040b066 103 0x0040b066 
+f fcn.00450ced 535 0x00450ced 
+f fcn.0040ab4a 305 0x0040ab4a 
+f fcn.00450f04 1355 0x00450f04 
+f fcn.0040829d 6022 0x0040829d 
+f sub.USER32.dll_SetCursorPos_c55 554 0x00418c55 
+f fcn.004019d2 11 0x004019d2 
+f fcn.004075c1 641 0x004075c1 
+f fcn.00455b3a 280 0x00455b3a 
+f fcn.00401e59 261 0x00401e59 
+f fcn.00455e24 437 0x00455e24 
+f fcn.004591f9 293 0x004591f9 
+f sub.KERNEL32.dll_SetFilePointer_31e 139 0x0045931e 
+f sub.KERNEL32.dll_SetFilePointer_3a9 98 0x004593a9 
+f fread 501 0x004576d0 
+f fcn.0045620f 113 0x0045620f 
+f scan_checkpoints 676 0x00403396 
+f save_checkpoint 965 0x00402fd1 
+f load_checkpoint 1292 0x00402ac5 
+f fcn.00457d96 37 0x00457d96 
+f sub.USER32.dll_InvalidateRect_23c 712 0x0040423c 
+f sub.USER32.dll_InvalidateRect_504 782 0x00404504 
+f fcn.0045663e 306 0x0045663e 
+f fcn.00404d82 140 0x00404d82 
+f sub.USER32.dll_GetCursorPos_4c0 166 0x004024c0 
+f fcn.00448b81 97 0x00448b81 
+f fcn.0044baea 97 0x0044baea 
+f fcn.0044ef41 751 0x0044ef41 
+f sub.WINMM.dll_timeGetTime_44f 288 0x0045144f 
+f fcn.0040aa6c 222 0x0040aa6c 
+f fcn.0040ead7 2218 0x0040ead7 
+f fcn.0042915a 124 0x0042915a 
+f fcn.0040b93b 1624 0x0040b93b 
+f fcn.00428caf 82 0x00428caf 
+f fcn.0040a4e1 800 0x0040a4e1 
+f fcn.0040b8d8 99 0x0040b8d8 
+f fcn.0040aa0f 93 0x0040aa0f 
+f fcn.004557a1 457 0x004557a1 
+f fcn.00456c33 347 0x00456c33 
+f fcn.00457e6c 1009 0x00457e6c 
+f fcn.00456770 338 0x00456770 
+f fcn.00456a1c 290 0x00456a1c 
+f fcn.00409b18 6187 0x00409b18 
+f fcn.00409de7 274 0x00409de7 
+f fcn.00456384 113 0x00456384 
+f fcn.0040dffa 41 0x0040dffa 
+f fcn.0040a45c 133 0x0040a45c 
+f fcn.0040cd07 128 0x0040cd07 
+f fcn.0043ec3f 559 0x0043ec3f 
+f fcn.0040e14d 341 0x0040e14d 
+f fcn.004582bc 64 0x004582bc 
+f fcn.0041d476 208 0x0041d476 
+f fcn.0040fc00 87 0x0040fc00 
+f fcn.0044808a 1210 0x0044808a 
+f fcn.00452946 56 0x00452946 
+f fcn.00440cac 366 0x00440cac 
+f fcn.0040cc56 177 0x0040cc56 
+f fcn.0043d593 556 0x0043d593 
+f fcn.00407842 439 0x00407842 
+f fcn.00428e23 162 0x00428e23 
+f fcn.00445b3f 213 0x00445b3f 
+f fcn.00441f21 82 0x00441f21 
+f fcn.0043bde5 2838 0x0043bde5 
+f sub.WINMM.dll_mciSendStringA_bcc 352 0x00454bcc 
+f fcn.0040d761 80 0x0040d761 
+f fcn.0044f2c2 146 0x0044f2c2 
+f fcn.0044ba63 135 0x0044ba63 
+f fcn.0040bf93 168 0x0040bf93 
+f sub.WINMM.dll_timeGetTime_8b9 141 0x004528b9 
+f fcn.00452808 86 0x00452808 
+f fcn.00409a23 245 0x00409a23 
+f fcn.0040e32c 829 0x0040e32c 
+f sub.WINMM.dll_timeGetTime_23e 1396 0x0043f23e 
+f fcn.0041d2c6 302 0x0041d2c6 
+f fcn.0041d3f4 63 0x0041d3f4 
+f fcn.0044f354 217 0x0044f354 
+f fcn.00441e12 101 0x00441e12 
+f fcn.0044f230 146 0x0044f230 
+f fcn.00441262 45 0x00441262 
+f fcn.00441ece 83 0x00441ece 
+f fcn.0040b110 273 0x0040b110 
+f sub.WINMM.dll_mciSendStringA_f5b 88 0x00454f5b 
+f fcn.0040fc57 242 0x0040fc57 
+f fcn.004520a6 113 0x004520a6 
+f fcn.004582fc 53 0x004582fc 
+f fcn.0040fd49 514 0x0040fd49 
+f fcn.0040ff4b 525 0x0040ff4b 
+f sub.USER32.dll_InvalidateRect_158 496 0x00410158 
+f fcn.00451b9e 432 0x00451b9e 
+f fcn.00451d4e 304 0x00451d4e 
+f fcn.0040cd87 1292 0x0040cd87 
+f fcn.0040dfda 32 0x0040dfda 
+f fcn.004339d9 421 0x004339d9 
+f fcn.0041211c 363 0x0041211c 
+f fcn.00412287 307 0x00412287 
+f fcn.004568c2 346 0x004568c2 
+f fcn.004123d7 210 0x004123d7 
+f fcn.00413f07 631 0x00413f07 
+f sub.USER32.dll_GetCursorPos_248 2050 0x00413248 
+f fcn.0041461b 211 0x0041461b 
+f fcn.004124c8 2727 0x004124c8 
+f fcn.00414789 207 0x00414789 
+f fcn.00412f6f 706 0x00412f6f 
+f fcn.00412014 264 0x00412014 
+f fcn.00452793 117 0x00452793 
+f fcn.004239b9 278 0x004239b9 
+f fcn.00451f8c 147 0x00451f8c 
+f fcn.004523d5 111 0x004523d5 
+f fcn.004521f0 485 0x004521f0 
+f fcn.0041970f 53 0x0041970f 
+f fcn.00419744 164 0x00419744 
+f fcn.004169bc 1201 0x004169bc 
+f fcn.00417559 1806 0x00417559 
+f fcn.004166f8 708 0x004166f8 
+f fcn.0040c912 776 0x0040c912 
+f fcn.0042bf03 2204 0x0042bf03 
+f fcn.0042c79f 2384 0x0042c79f 
+f fcn.00436b0a 560 0x00436b0a 
+f fcn.0040b221 290 0x0040b221 
+f fcn.0041982d 7095 0x0041982d 
+f fcn.0040f381 1341 0x0040f381 
+f fcn.00448a7e 243 0x00448a7e 
+f sub.KERNEL32.dll_GetTickCount_f67 578 0x0041cf67 
+f fcn.0041c84f 1816 0x0041c84f 
+f fcn.00458370 172 0x00458370 
+f fcn.0040fa61 117 0x0040fa61 
+f fcn.0044f627 197 0x0044f627 
+f fcn.0040f8be 419 0x0040f8be 
+f fcn.0041d559 408 0x0041d559 
+f fcn.00456c0a 41 0x00456c0a 
+f fcn.00451985 213 0x00451985 
+f fcn.0044f567 192 0x0044f567 
+f fcn.00444a60 338 0x00444a60 
+f fcn.0044476a 758 0x0044476a 
+f fcn.0040fbb8 72 0x0040fbb8 
+f fcn.0040d2d3 73 0x0040d2d3 
+f fcn.0044f42d 192 0x0044f42d 
+f fcn.0041d7d4 101 0x0041d7d4 
+f sub.WINMM.dll_timeGetTime_7c6 798 0x0043f7c6 
+f fcn.0040d5a5 281 0x0040d5a5 
+f fcn.0040b455 163 0x0040b455 
+f fcn.0040af12 340 0x0040af12 
+f fcn.0040d375 368 0x0040d375 
+f fcn.0041d1a9 285 0x0041d1a9 
+f fcn.0044101d 487 0x0044101d 
+f fcn.0044b6df 439 0x0044b6df 
+f fcn.0044db81 542 0x0044db81 
+f fcn.0043d304 655 0x0043d304 
+f fcn.0043e9a4 667 0x0043e9a4 
+f fcn.00415215 999 0x00415215 
+f fcn.004315cc 326 0x004315cc 
+f fcn.004379c9 604 0x004379c9 
+f fcn.00436668 758 0x00436668 
+f fcn.0042e931 2523 0x0042e931 
+f fcn.0043380a 463 0x0043380a 
+f fcn.00445ada 101 0x00445ada 
+f fcn.004412e4 95 0x004412e4 
+f fcn.0040d4e5 192 0x0040d4e5 
+f fcn.0043d7bf 208 0x0043d7bf 
+f fcn.0043ee6e 208 0x0043ee6e 
+f fcn.00452117 120 0x00452117 
+f fcn.00423acf 85 0x00423acf 
+f fcn.00428475 73 0x00428475 
+f fcn.00452444 847 0x00452444 
+f fcn.0042ba97 1081 0x0042ba97 
+f fcn.00431712 256 0x00431712 
+f fcn.00439bfa 787 0x00439bfa 
+f fcn.00453544 314 0x00453544 
+f fcn.0041d839 101 0x0041d839 
+f fcn.00428d2a 249 0x00428d2a 
+f fcn.0041d433 67 0x0041d433 
+f sub.USER32.dll_InvalidateRect_a61 304 0x0041da61 
+f sub.USER32.dll_InvalidateRect_b91 489 0x0041db91 
+f fcn.0041f400 681 0x0041f400 
+f fcn.00444d1a 256 0x00444d1a 
+f fcn.00428d01 41 0x00428d01 
+f fcn.00428ec5 379 0x00428ec5 
+f fcn.0040b343 274 0x0040b343 
+f fcn.00409ef9 5194 0x00409ef9 
+f fcn.0040d31c 89 0x0040d31c 
+f fcn.0040a0b1 4754 0x0040a0b1 
+f fcn.004216ab 108 0x004216ab 
+f fcn.0040d2b4 31 0x0040d2b4 
+f fcn.00422443 331 0x00422443 
+f fcn.00423070 2377 0x00423070 
+f sub.USER32.dll_InvalidateRect_5a3 2765 0x004225a3 
+f fcn.00424502 286 0x00424502 
+f fcn.004294d5 277 0x004294d5 
+f fcn.004246c5 272 0x004246c5 
+f sub.USER32.dll_InvalidateRect_aea 2783 0x00424aea 
+f fcn.004255da 743 0x004255da 
+f sub.USER32.dll_InvalidateRect_9c2 273 0x004249c2 
+f fcn.0045841c 26 0x0045841c 
+f fcn.004296c1 268 0x004296c1 
+f fcn.00429040 282 0x00429040 
+f fcn.0042d299 209 0x0042d299 
+f sub.WINMM.dll_timeGetTime_cb6 354 0x0044ecb6 
+f sub.WINMM.dll_timeGetTime_e18 291 0x0044ee18 
+f fcn.00441b0a 160 0x00441b0a 
+f fcn.00447c6e 297 0x00447c6e 
+f fcn.0042f417 684 0x0042f417 
+f fcn.0042f32c 235 0x0042f32c 
+f fcn.00455fd9 423 0x00455fd9 
+f fcn.0040c78c 390 0x0040c78c 
+f fcn.0045201f 135 0x0045201f 
+f fcn.00433f24 610 0x00433f24 
+f fcn.00434186 752 0x00434186 
+f fcn.00433b7e 90 0x00433b7e 
+f fcn.004584db 87 0x004584db 
+f sub.USER32.dll_InvalidateRect_d3a 417 0x00436d3a 
+f fcn.00437d1a 228 0x00437d1a 
+f fcn.00437dfe 54 0x00437dfe 
+f sub.USER32.dll_InvalidateRect_c25 245 0x00437c25 
+f sub.USER32.dll_InvalidateRect_155 392 0x0043a155 
+f fcn.00439f0d 584 0x00439f0d 
+f fcn.0043c8fb 432 0x0043c8fb 
+f fcn.0043d88f 378 0x0043d88f 
+f fcn.0043ef3e 489 0x0043ef3e 
+f fcn.0043f127 243 0x0043f127 
+f fcn.0044128f 85 0x0044128f 
+f sub.WINMM.dll_timeGetTime_669 1017 0x0040e669 
+f sub.WINMM.dll_timeGetTime_4f8 992 0x0040b4f8 
+f fcn.0044192a 480 0x0044192a 
+f fcn.00440e1a 515 0x00440e1a 
+f fcn.0040ac7b 663 0x0040ac7b 
+f fcn.00448be2 744 0x00448be2 
+f sub.WINMM.dll_timeGetTime_4f6 193 0x004544f6 
+f fcn.0044b896 461 0x0044b896 
+f fcn.0044cc53 3000 0x0044cc53 
+f fcn.0044bb4b 715 0x0044bb4b 
+f fcn.0044dfb4 1068 0x0044dfb4 
+f fcn.0044dd9f 533 0x0044dd9f 
+f fcn.004544b9 61 0x004544b9 
+f fcn.00453dcf 413 0x00453dcf 
+f sub.GDI32.dll_TextOutA_7c7 103 0x0044f7c7 
+f fcn.0044f70c 187 0x0044f70c 
+f fcn.00458532 103 0x00458532 
+f fcn.00455040 140 0x00455040 
+f fcn.00450069 177 0x00450069 
+f fcn.00456dbb 45 0x00456dbb 
+f fcn.00450555 69 0x00450555 
+f fcn.004506c7 461 0x004506c7 
+f fcn.0045096a 307 0x0045096a 
+f fcn.00450b3a 251 0x00450b3a 
+f fcn.00450c79 97 0x00450c79 
+f fcn.0045059a 301 0x0045059a 
+f fcn.00450894 214 0x00450894 
+f fcn.00450a9d 157 0x00450a9d 
+f fcn.00450c35 68 0x00450c35 
+f fcn.00456b3e 103 0x00456b3e 
+f fcn.00456ba5 101 0x00456ba5 
+f fcn.004554fc 100 0x004554fc 
+f memcpy_word_aligned 45 0x00456d8e 
+f fcn.00456512 300 0x00456512 
+f sub.USER32.dll_InvalidateRect_97e 440 0x0045297e 
+f sub.WINMM.dll_mciSendStringA_b1a 178 0x00454b1a 
+f fcn.004585bc 5 0x004585bc 
+f fcn.004551bb 52 0x004551bb 
+f fcn.0045511b 160 0x0045511b 
+f fcn.004550cc 61 0x004550cc 
+f fcn.00455109 18 0x00455109 
+f fcn.0045596a 464 0x0045596a 
+f fcn.004589b0 302 0x004589b0 
+f fcn.00458900 173 0x00458900 
+f fcn.0045acab 206 0x0045acab 
+f sub.KERNEL32.dll_VirtualAlloc_bf7 153 0x00458bf7 
+f sub.KERNEL32.dll_CreateFileA_e80 569 0x00458e80 
+f sub.KERNEL32.dll_GetFileType_f21 93 0x0045bf21 
+f fcn.0045940b 145 0x0045940b 
+f sub.KERNEL32.dll_ReadFile_49c 191 0x0045949c 
+f fcn.00459657 193 0x00459657 
+f fcn.0045983a 206 0x0045983a 
+f sub.KERNEL32.dll_CloseHandle_908 165 0x00459908 
+f fcn.00457938 176 0x00457938 
+f fcn.0045be3d 82 0x0045be3d 
+f sub.KERNEL32.dll_SetFilePointer_9bb 240 0x004599bb 
+f fcn.00459aab 279 0x00459aab 
+f fcn.00457e46 38 0x00457e46 
+f fcn.00457ddc 106 0x00457ddc 
+f fcn.00459c51 144 0x00459c51 
+f fcn.004609d8 518 0x004609d8 
+f fcn.004584b3 21 0x004584b3 
+f fcn.0045bfe8 67 0x0045bfe8 
+f fcn.00459e49 133 0x00459e49 
+f init_stack_limits 105 0x0045a666 
+f sub.KERNEL32.dll_GetStdHandle_fab 103 0x00459fab 
+f fcn.0045c9de 23 0x0045c9de 
+f fcn.0045abd6 84 0x0045abd6 
+f fcn.0045ac2a 97 0x0045ac2a 
+f memset_dword_aligned 108 0x00458b17 
+f fcn.00458b83 116 0x00458b83 
+f sub.KERNEL32.dll_ExitProcess_e4f 38 0x0045ae4f 
+f fcn.00459e08 65 0x00459e08 
+f fcn.00459dc7 65 0x00459dc7 
+f sub.KERNEL32.dll_FlushFileBuffers_f7e 95 0x0045bf7e 
+f sub.KERNEL32.dll_GetConsoleMode_137 137 0x0045d137 
+f sub.KERNEL32.dll_WriteConsoleA_1c0 102 0x0045d1c0 
+f fcn.0045c0b4 91 0x0045c0b4 
+f sub.KERNEL32.dll_GetFullPathNameA_10f 162 0x0045c10f 
+f sub.KERNEL32.dll_GetCurrentDirectoryA_1b1 145 0x0045c1b1 
+f fcn.0045c2b4 254 0x0045c2b4 
+f fcn.0045e672 439 0x0045e672 
+f sub.KERNEL32.dll_ExitProcess_653 61 0x0045c653 
+f GetThreadData 55 0x0045c6be 
+f ReallocThreadData 213 0x0045c6f5 
+f AddThreadData 108 0x0045c7ca 
+f fcn.0045c836 82 0x0045c836 
+f fcn.0045c901 5 0x0045c901 
+f sub.KERNEL32.dll_CreateFileA_a1e 113 0x0045ca1e 
+f fcn.0045a705 83 0x0045a705 
+f fcn.0045caf4 36 0x0045caf4 
+f fcn.0045caa8 76 0x0045caa8 
+f fcn.0045ad1c 50 0x0045ad1c 
+f fcn.0045c888 33 0x0045c888 
+f fcn.0045b1af 348 0x0045b1af 
+f fcn.0045b61e 1507 0x0045b61e 
+f fcn.0045b5b2 108 0x0045b5b2 
+f fcn.0045b30b 101 0x0045b30b 
+f fcn.0045b471 227 0x0045b471 
+f fcn.0045b370 38 0x0045b370 
+f fcn.0045b396 124 0x0045b396 
+f fcn.0045bc01 32 0x0045bc01 
+f fcn.0045b412 95 0x0045b412 
+f fcn.0045bccb 96 0x0045bccb 
+f fcn.0045d226 145 0x0045d226 
+f fcn.0045d30e 84 0x0045d30e 
+f fcn.0045d4b6 1694 0x0045d4b6 
+f fcn.0045e029 140 0x0045e029 
+f fcn.0045e0b6 3901 0x0045e0b6 
+f fcn.0045e2bc 3383 0x0045e2bc 
+f fcn.0045e616 56 0x0045e616 
+f NTAddThread 89 0x0045a2cb 
+f fcn.0045e924 318 0x0045e924 
+f fcn.0045cb18 36 0x0045cb18 
+f raise 130 0x0045cd2a 
+f fcn.0045cbb9 54 0x0045cbb9 
+f sub.KERNEL32.dll_GetACP_ace 339 0x0045eace 
+f fcn.0045c9f5 41 0x0045c9f5 
+f sub.KERNEL32.dll_ReadConsoleInputA_28 271 0x0045d028 
+f fcn.0045ff46 101 0x0045ff46 
+f fcn.0045ffab 92 0x0045ffab 
+f fcn.0045ee11 179 0x0045ee11 
+f fcn.0045d362 2034 0x0045d362 
+f fcn.0045d3ba 1946 0x0045d3ba 
+f fcn.0045d44e 81 0x0045d44e 
+f fcn.0045d7c5 69 0x0045d7c5 
+f fcn.0045d955 511 0x0045d955 
+f fcn.0045db66 769 0x0045db66 
+f fcn.0045ef12 98 0x0045ef12 
+f fcn.0045de67 450 0x0045de67 
+f fcn.0045f8f7 49 0x0045f8f7 
+f fcn.0045f928 346 0x0045f928 
+f dup2 177 0x00459ece 
+f putenv 387 0x0045faf7 
+f fcn.0045ef74 65 0x0045ef74 
+f sub.KERNEL32.dll_TlsAlloc_27a 81 0x0045a27a 
+f fcn.00460015 111 0x00460015 
+f fcn.00460084 40 0x00460084 
+f fcn.0045fc7a 368 0x0045fc7a 
+f sub.KERNEL32.dll_MultiByteToWideChar_61b 160 0x0046061b 
+f fcn.0046028e 358 0x0046028e 
+f fcn.0045fdea 247 0x0045fdea 
+f sub.USER32.dll_CharUpperBuffA_582 123 0x00460582 
+f fcn.00460821 193 0x00460821 
+f fcn.004607c3 94 0x004607c3 
+f fcn.004603f4 256 0x004603f4 
+f fcn.00460c90 518 0x00460c90 
+f fcn.0045c8a9 46 0x0045c8a9 
+fs *
+f fcn.004 1 0x00401b9c 
+fs functions
+f fcn.004585d2 0 0x004585d2 
+fs searches
+f hit0_0 6 0x004630d8 
+fs functions
+f fcn.004585cd 6 0x004585cd 
+fs searches
+f hit5_0 4 0x004660a0 
+f hit5_1 3 0x0046618e 
+fs *
+f save_file_name 1 0x004630d8 
+fs searches
+f hit6_0 6 0x004660a0 
+f hit7_0 4 0x00462c54 
+f hit7_1 4 0x00462c6a 
+f hit7_2 4 0x00462c7e 
+f hit8_0 3 0x00463043 
+f hit8_1 3 0x00463050 
+f hit8_2 3 0x0046305a 
+f hit8_3 3 0x00463065 
+f hit8_4 3 0x0046609b 
+fs functions
+f fcn.004588b0 70 0x004588b0 
+fs *
+f main 701 0x00401b9c 
+fs *
+f memset_dword 49 0x00458ae0 
+fs *
+f str.Rich4 1 0x004630bf 
+fs searches
+f hit9_0 3 0x0046318c 
+f hit9_1 3 0x004631c4 
+f hit9_2 3 0x004631cf 
+f hit9_3 3 0x004637d4 
+f hit9_4 3 0x004660cc 
+f hit9_5 3 0x004660d8 
+fs *
+f str.data_mkf 1 0x0046303e 
+fs searches
+f hit10_0 2 0x0042c9c2 
+f hit10_1 2 0x004630e3 
+f hit10_2 2 0x00463764 
+f hit10_3 2 0x004660c4 
+f hit11_0 8 0x004660c7 
+f hit11_1 8 0x004660d3 
+f hit12_0 11 0x004660d0 
+fs *
+f hInstance 1 0x0048a064 
+fs *
+f windowHandle 1 0x0048a0d4 
+fs *
+f lplpDirectDraw 1 0x0048a0d8 
+fs *
+f str.err_ddraw_init 1 0x0046300a 
+fs *
+f surface_desc 1 0x0048a068 
+fs *
+f lplpSurface 1 0x0048a0dc 
+fs *
+f lplpSurface2 1 0x0048a0e0 
+fs *
+f lplpSurface3 1 0x004762cc 
+fs searches
+f hit13_0 9 0x004630c5 
+f hit14_0 3 0x004630cb 
+f hit14_1 3 0x004631a0 
+f hit14_2 3 0x004631ab 
+f hit14_3 3 0x004631b3 
+f hit14_4 3 0x004631bc 
+f hit14_5 3 0x004637aa 
+f hit14_6 3 0x004637b7 
+f hit14_7 3 0x004637c1 
+f hit14_8 3 0x004637cb 
+f hit14_9 3 0x004637e1 
+f hit14_10 3 0x004660f8 
+fs functions
+f fcn.0045a1fd 64 0x0045a1fd 
+fs *
+f str.StackOverflow 1 0x004894b4 
+fs *
+f str.jump_mkf 1 0x00463187 
+fs *
+f str.help_mkf 1 0x00466096 
+fs searches
+f hit2_0 7 0x0046c792 
+f hit2_1 7 0x0046c7ce 
+f hit2_2 7 0x0046c810 
+f hit2_3 7 0x0046c849 
+f hit2_4 7 0x0046c88f 
+fs *
+f str.wb 1 0x004630e6 
+fs functions
+f fcn.004039c2 946 0x004039c2 
+f fcn.004039af 19 0x004039af 
+f fcn.0045c914 202 0x0045c914 
+fs *
+f ThreadDataSize 1 0x004894b0 
+fs *
+f TlsIndex 1 0x00488f48 
+fs functions
+f free 14 0x00456e11 
+f begin_thread_helper 176 0x0045f738 
+f CBeginThread 231 0x0045f7e8 
+fs *
+f str.stop_cdtrack 1 0x00466509 
+fs *
+f str.status_mid_pos 1 0x004664f5 
+fs searches
+f hit4_0 3 0x004662d7 
+f hit4_1 3 0x004662e2 
+f hit4_2 3 0x004662ed 
+f hit4_3 3 0x004662f8 
+f hit4_4 3 0x00466303 
+f hit4_5 3 0x0046630e 
+f hit4_6 3 0x00466319 
+f hit4_7 3 0x00466324 
+f hit4_8 3 0x00466328 
+f hit4_9 3 0x0046632f 
+f hit4_10 3 0x00466333 
+f hit4_11 3 0x0046633a 
+f hit4_12 3 0x0046633e 
+f hit4_13 3 0x00466345 
+f hit4_14 3 0x00466349 
+f hit4_15 3 0x00466350 
+f hit4_16 3 0x00466354 
+f hit4_17 3 0x0046635b 
+f hit4_18 3 0x0046635f 
+f hit4_19 3 0x00466366 
+f hit4_20 3 0x0046636a 
+f hit4_21 3 0x00466371 
+f hit4_22 3 0x00466375 
+f hit4_23 3 0x0046637c 
+f hit4_24 3 0x00466380 
+f hit4_25 3 0x00466387 
+f hit4_26 3 0x0046638b 
+f hit4_27 3 0x00466392 
+f hit4_28 3 0x00466396 
+f hit4_29 3 0x0046639d 
+f hit4_30 3 0x004663a1 
+f hit4_31 3 0x004663a8 
+f hit4_32 3 0x004663ac 
+f hit4_33 3 0x004663b3 
+f hit4_34 3 0x004663b7 
+f hit4_35 3 0x004663c0 
+f hit4_36 3 0x004663c4 
+f hit4_37 3 0x004663cd 
+f hit4_38 3 0x004663d1 
+f hit4_39 3 0x004663d8 
+f hit4_40 3 0x004663dc 
+f hit4_41 3 0x004663e3 
+fs *
+f mkf_data 1 0x0048a0e4 
+fs *
+f mkf_speaking 1 0x0048a054 
+fs *
+f mkf_panel 1 0x0048a05c 
+fs *
+f mkf_effect 1 0x0048a058 
+fs *
+f str.over_avi 1 0x004631b7 
+fs *
+f str.end_avi 1 0x004631af 
+fs *
+f str.thanks_avi 1 0x004631a4 
+fs functions
+f fcn.004019dd 410 0x004019dd 
+fs *
+f str.play_cdtrack_not 1 0x0046307f 
+fs *
+f str.pause_vfw 1 0x00463093 
+fs *
+f str.pause_mid 1 0x0046309d 
+fs *
+f str.stop_cd 1 0x004630a7 
+fs *
+f str.ERROR 1 0x00463004 
+fs functions
+f fcn.00401010 1331 0x00401010 
+f fmalloc 270 0x00456f8e 
+f AllocInitThreadData 61 0x0045a23d 
+f NTAddThread 89 0x0045a2cb 
+f init_stack_limits 105 0x0045a666 
+f frealloc 148 0x0045c59a 
+f AddThreadData 108 0x0045c7ca 
+f InitThreadData 42 0x0045c8d7 
+f terminate 19 0x0045ea68 
+f CBeginThread 231 0x0045f7e8 
