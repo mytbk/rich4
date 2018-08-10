@@ -1,0 +1,28 @@
+file: RICH4.CFG
+
+auto save: offset 5, 01 enabled
+game speed: offset 1, 00,01,02
+animation: offset 0, 01 enabled
+music: offset 3, 00~04
+sound effect: offset 2, 00-04
+view: offset 4, 00 calendar, 01 small map, 02 combined view
+year: offset 10-11, big endian, e.g. year=[10]*256+[11]
+month: offset 8
+day: offset 9
+
+hot keys:
+RICH4.CFG uses two bytes to represent one key.
+The first byte is the mod key: 0x11 Ctrl
+The second byte is the key: use virtual key code
+A-Z: same as ascii (0x41-0x5a)
+<: 0xbc (VK_OEM_COMMA, '<' + 0x80)
+>: 0xbe (VK_OEM_PERIOD, '>' + 0x80)
+PGUP: 0x21 (VK_PRIOR)
+PGDN: 0x22 (VK_NEXT)
+ENTER, ESC, TAB: 0x0d, 0x1b, 0x09 (same as ASCII)
+ARROW LEFT, UP, RIGHT, DOWN: 0x25-0x28 (VK_{LEFT,UP,RIGHT,DOWN})
+
+offset 0x10: 游标{上移,右移,下移,左移} 确定 取消 切换选项 切换视窗组
+offset 0x20: YES NO 前进 选择骰子数 股市 交易 卡片 道具 
+offset 0x30: 查询 地图 地图向左旋转 地图向右旋转 托管 系统 SAVE LOAD
+offset 0x40: 辅助说明 向上换页 向下换页 结束
