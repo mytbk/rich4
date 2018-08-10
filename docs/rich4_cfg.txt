@@ -1,19 +1,19 @@
 file: RICH4.CFG
 
-auto save: offset 5, 01 enabled
-game speed: offset 1, 00,01,02
-animation: offset 0, 01 enabled
-music: offset 3, 00~04
-sound effect: offset 2, 00-04
-view: offset 4, 00 calendar, 01 small map, 02 combined view
-year: offset 10-11, big endian, e.g. year=[10]*256+[11]
-month: offset 8
-day: offset 9
+game speed: offset 0, 00,01,02
+animation: offset 1, 01 enabled
+music: offset 2, 00~04
+sound effect: offset 3, 00-04
+auto save: offset 4, 01 enabled
+view: offset 5, 00 calendar, 01 small map, 02 combined view
+day: offset 8
+month: offset 9
+year: offset 10-11, little endian
 
 hot keys:
 RICH4.CFG uses two bytes to represent one key.
-The first byte is the mod key: 0x11 Ctrl
-The second byte is the key: use virtual key code
+The first byte is the key: use virtual key code
+The second byte is the mod key: 0x11 Ctrl
 A-Z: same as ascii (0x41-0x5a)
 <: 0xbc (VK_OEM_COMMA, '<' + 0x80)
 >: 0xbe (VK_OEM_PERIOD, '>' + 0x80)
