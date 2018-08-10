@@ -4,7 +4,7 @@
 HFONT gFont; // 0x4762d0
 int gFontHeight; // 0x4762d4
 uint32_t gfa[4]; // 0x4762d8, 0x4762dc, 0x4762e0, 0x4762e4
-const char tfname[] = "\xb2\xd3\xa9\xfa\xc5\xe9"; // 0x4660a0, typeface name
+const char tfname[] = "\xb2\xd3\xa9\xfa\xc5\xe9"; // 0x4660a0, typeface name, BIG5:细明体
 
 static inline uint32_t swapbytes3(uint32_t x)
 {
