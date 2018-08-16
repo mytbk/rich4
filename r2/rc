@@ -276,7 +276,9 @@ f sym.imp.WINMM.dll_midiOutGetVolume 0 0x00462464
 f sym.imp.WINMM.dll_midiOutSetVolume 0 0x00462468 
 f sym.imp.WINMM.dll_timeKillEvent 0 0x00462470 
 f sym.imp.WINMM.dll_timeSetEvent 0 0x00462474 
-f sym.imp.DSOUND.dll_DirectSoundCreate 0 0x0046247c 
+fs *
+f sym.imp.DSOUND.dll_DirectSoundCreate 1 0x004015d6 
+fs imports
 f sym.imp.DDRAW.dll_DirectDrawCreate 0 0x00462484 
 fs resources
 f resource.0 2216 0x004a50b8 
@@ -399,7 +401,7 @@ f fcn.00441343 106 0x00441343
 f fcn.0040b0cd 67 0x0040b0cd 
 f fcn.004521cb 37 0x004521cb 
 f sub.WINMM.dll_mciGetDeviceIDA_97b 84 0x0045497b 
-f sub.KERNEL32.dll_GetLocalTime_331 50 0x00458331 
+f get_local_time 50 0x00458331 
 f fcn.00411aa3 61 0x00411aa3 
 f fcn.00411ae0 102 0x00411ae0 
 f fcn.00411b46 13 0x00411b46 
@@ -508,7 +510,6 @@ f InitThreadData 42 0x0045c8d7
 f fcn.0045a53f 75 0x0045a53f 
 f sub.KERNEL32.dll_GetVersion_58a 165 0x0045a58a 
 f fcn.0045a62f 55 0x0045a62f 
-f sub.KERNEL32.dll_ExitProcess_5ef 618 0x004585ef 
 f sub.KERNEL32.dll_SetUnhandledExceptionFilter_b58 76 0x0045ab58 
 f fcn.0045aba4 34 0x0045aba4 
 f fcn.00458ca3 71 0x00458ca3 
@@ -1221,7 +1222,7 @@ f sub.USER32.dll_GetCursorPos_250 269 0x00402250
 f fcn.0040dd1f 479 0x0040dd1f 
 f fcn.00415d31 542 0x00415d31 
 f load_mkf 262 0x004502fe 
-f sub.KERNEL32.dll_SetFilePointer_441 276 0x00450441 
+f read_mkf 276 0x00450441 
 f create_some_font 197 0x0044f9d8 
 f draw_some_text 1449 0x0044fabc 
 f sub.USER32.dll_PostMessageA_8e7 127 0x004018e7 
@@ -1536,9 +1537,8 @@ f memcpy_word_aligned 45 0x00456d8e
 f fcn.00456512 300 0x00456512 
 f sub.USER32.dll_InvalidateRect_97e 440 0x0045297e 
 f sub.WINMM.dll_mciSendStringA_b1a 178 0x00454b1a 
-f fcn.004585bc 5 0x004585bc 
+f stricmp 5 0x004585bc 
 f fcn.004551bb 52 0x004551bb 
-f fcn.0045511b 160 0x0045511b 
 f fcn.004550cc 61 0x004550cc 
 f fcn.00455109 18 0x00455109 
 f fcn.0045596a 464 0x0045596a 
@@ -1573,7 +1573,7 @@ f memset_dword_aligned 108 0x00458b17
 f fcn.00458b83 116 0x00458b83 
 f sub.KERNEL32.dll_ExitProcess_e4f 38 0x0045ae4f 
 f fcn.00459e08 65 0x00459e08 
-f fcn.00459dc7 65 0x00459dc7 
+f do_stricmp 65 0x00459dc7 
 f sub.KERNEL32.dll_FlushFileBuffers_f7e 95 0x0045bf7e 
 f sub.KERNEL32.dll_GetConsoleMode_137 137 0x0045d137 
 f sub.KERNEL32.dll_WriteConsoleA_1c0 102 0x0045d1c0 
@@ -1666,7 +1666,7 @@ f hit6_0 6 0x004660a0
 f hit7_0 4 0x00462c54 
 f hit7_1 4 0x00462c6a 
 f hit7_2 4 0x00462c7e 
-f hit8_0 3 0x00463043 
+f hit8_0 17 0x0046c71d 
 f hit8_1 3 0x00463050 
 f hit8_2 3 0x0046305a 
 f hit8_3 3 0x00463065 
@@ -1679,10 +1679,11 @@ fs *
 f memset_dword 49 0x00458ae0 
 fs *
 f str.Rich4 1 0x004630bf 
+fs search
+f hit9_0 4 0x004630d8 
+f hit9_1 4 0x004636dd 
+f hit9_2 4 0x00465e04 
 fs searches
-f hit9_0 3 0x0046318c 
-f hit9_1 3 0x004631c4 
-f hit9_2 3 0x004631cf 
 f hit9_3 3 0x004637d4 
 f hit9_4 3 0x004660cc 
 f hit9_5 3 0x004660d8 
@@ -1827,13 +1828,43 @@ f str.stop_cd 1 0x004630a7
 fs *
 f str.ERROR 1 0x00463004 
 fs functions
-f fcn.00401010 1331 0x00401010 
+f KbdProc 1331 0x00401010 
+f fcn.0045a758 534 0x0045a758 
+fs *
+f rich4_cfg_game 1 0x00497158 
+fs *
+f rich4_cfg_hotkeys 1 0x00497168 
+fs *
+f default_hotkeys 1 0x0047edc2 
+fs *
+f rich4_cfg.day 1 0x00497160 
+fs *
+f leaf_call_45511b 160 0x0045511b 
+fs *
+f some_unknown_handler 618 0x004585ef 
+fs *
+f str.SAVE 1 0x004630d8 
+fs *
+f sym.imp. 1 0x004015d6 
+fs *
+f str.status_mid_mode 1 0x00466596 
+fs *
+f str.playing 1 0x004665a6 
+fs *
 f fmalloc 270 0x00456f8e 
+fs *
 f AllocInitThreadData 61 0x0045a23d 
+fs *
 f NTAddThread 89 0x0045a2cb 
+fs *
 f init_stack_limits 105 0x0045a666 
+fs *
 f frealloc 148 0x0045c59a 
+fs *
 f AddThreadData 108 0x0045c7ca 
+fs *
 f InitThreadData 42 0x0045c8d7 
+fs *
 f terminate 19 0x0045ea68 
+fs *
 f CBeginThread 231 0x0045f7e8 
