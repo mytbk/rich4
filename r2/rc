@@ -276,9 +276,6 @@ f sym.imp.WINMM.dll_midiOutGetVolume 0 0x00462464
 f sym.imp.WINMM.dll_midiOutSetVolume 0 0x00462468 
 f sym.imp.WINMM.dll_timeKillEvent 0 0x00462470 
 f sym.imp.WINMM.dll_timeSetEvent 0 0x00462474 
-fs *
-f sym.imp.DSOUND.dll_DirectSoundCreate 1 0x004015d6 
-fs imports
 f sym.imp.DDRAW.dll_DirectDrawCreate 0 0x00462484 
 fs resources
 f resource.0 2216 0x004a50b8 
@@ -341,7 +338,6 @@ f sub.USER32.dll_KillTimer_228 207 0x00419228
 f fcn.0045174a 19 0x0045174a 
 f sub.USER32.dll_PostMessageA_966 27 0x00401966 
 f sub.WINMM.dll_mciSendStringA_d2c 101 0x00454d2c 
-f sub.USER32.dll_MessageBoxA_5d6 575 0x004015d6 
 f play_avi 211 0x00451677 
 f sprintf 37 0x00457110 
 f fcn.00458db5 39 0x00458db5 
@@ -1216,7 +1212,7 @@ fs *
 f case.default.0x45dd65 1 0x0045dd65 
 fs functions
 f fcn.00417191 828 0x00417191 
-f sub.USER32.dll_DefWindowProcA_e26 3606 0x00417e26 
+f player_info_property_list 3606 0x00417e26 
 f sub.USER32.dll_GetCursorPos_35d 259 0x0040235d 
 f sub.USER32.dll_GetCursorPos_250 269 0x00402250 
 f fcn.0040dd1f 479 0x0040dd1f 
@@ -1228,7 +1224,7 @@ f draw_some_text 1449 0x0044fabc
 f sub.USER32.dll_PostMessageA_8e7 127 0x004018e7 
 f fcn.00456e1f 260 0x00456e1f 
 f fcn.00411b53 828 0x00411b53 
-f fcn.0041e345 857 0x0041e345 
+f hosted_ai_ui 857 0x0041e345 
 f process_checkpoint 1009 0x00403d74 
 f fcn.00451a97 695 0x00451a97 
 f sub.WINMM.dll_timeGetTime_85e 91 0x0045285e 
@@ -1236,8 +1232,8 @@ f fcn.00451edb 177 0x00451edb
 f fcn.00415e70 232 0x00415e70 
 f fcn.00447d97 755 0x00447d97 
 f fcn.00441baa 616 0x00441baa 
-f fcn.004284be 2033 0x004284be 
-f fcn.0042b58f 1288 0x0042b58f 
+f player_info_stock_ui 2033 0x004284be 
+f stock_ui 1288 0x0042b58f 
 f fcn.0040defe 107 0x0040defe 
 f fcn.00453a32 291 0x00453a32 
 f fcn.00457135 287 0x00457135 
@@ -1267,7 +1263,7 @@ f sub.USER32.dll_UnhookWindowsHookEx_815 210 0x00401815
 f fcn.0045ae76 825 0x0045ae76 
 f fcn.00455c52 466 0x00455c52 
 f sub.WINMM.dll_mciSendStringA_9cf 252 0x004549cf 
-f fcn.00406de7 2010 0x00406de7 
+f init_new_game 2010 0x00406de7 
 f fcn.00407ad2 1571 0x00407ad2 
 f fcn.004291d6 767 0x004291d6 
 f fcn.00415872 1179 0x00415872 
@@ -1302,7 +1298,7 @@ f save_checkpoint 965 0x00402fd1
 f load_checkpoint 1292 0x00402ac5 
 f fcn.00457d96 37 0x00457d96 
 f sub.USER32.dll_InvalidateRect_23c 712 0x0040423c 
-f sub.USER32.dll_InvalidateRect_504 782 0x00404504 
+f game_property_ui 782 0x00404504 
 f fcn.0045663e 306 0x0045663e 
 f fcn.00404d82 140 0x00404d82 
 f sub.USER32.dll_GetCursorPos_4c0 166 0x004024c0 
@@ -1395,12 +1391,12 @@ f fcn.00419744 164 0x00419744
 f fcn.004169bc 1201 0x004169bc 
 f fcn.00417559 1806 0x00417559 
 f fcn.004166f8 708 0x004166f8 
-f fcn.0040c912 776 0x0040c912 
+f walkable_test 776 0x0040c912 
 f fcn.0042bf03 2204 0x0042bf03 
 f fcn.0042c79f 2384 0x0042c79f 
 f fcn.00436b0a 560 0x00436b0a 
 f fcn.0040b221 290 0x0040b221 
-f fcn.0041982d 7095 0x0041982d 
+f game_process 7095 0x0041982d 
 f fcn.0040f381 1341 0x0040f381 
 f fcn.00448a7e 243 0x00448a7e 
 f sub.KERNEL32.dll_GetTickCount_f67 578 0x0041cf67 
@@ -1426,7 +1422,7 @@ f fcn.0040af12 340 0x0040af12
 f fcn.0040d375 368 0x0040d375 
 f fcn.0041d1a9 285 0x0041d1a9 
 f fcn.0044101d 487 0x0044101d 
-f fcn.0044b6df 439 0x0044b6df 
+f news_events 439 0x0044b6df 
 f fcn.0044db81 542 0x0044db81 
 f fcn.0043d304 655 0x0043d304 
 f fcn.0043e9a4 667 0x0043e9a4 
@@ -1445,7 +1441,7 @@ f fcn.00452117 120 0x00452117
 f fcn.00423acf 85 0x00423acf 
 f fcn.00428475 73 0x00428475 
 f fcn.00452444 847 0x00452444 
-f fcn.0042ba97 1081 0x0042ba97 
+f monthly_stock_ui 1081 0x0042ba97 
 f fcn.00431712 256 0x00431712 
 f fcn.00439bfa 787 0x00439bfa 
 f fcn.00453544 314 0x00453544 
@@ -1456,7 +1452,7 @@ f sub.USER32.dll_InvalidateRect_a61 304 0x0041da61
 f sub.USER32.dll_InvalidateRect_b91 489 0x0041db91 
 f fcn.0041f400 681 0x0041f400 
 f fcn.00444d1a 256 0x00444d1a 
-f fcn.00428d01 41 0x00428d01 
+f stock_resting 41 0x00428d01 
 f fcn.00428ec5 379 0x00428ec5 
 f fcn.0040b343 274 0x0040b343 
 f fcn.00409ef9 5194 0x00409ef9 
@@ -1689,14 +1685,16 @@ f hit9_4 3 0x004660cc
 f hit9_5 3 0x004660d8 
 fs *
 f str.data_mkf 1 0x0046303e 
+fs search
+f hit10_0 4 0x00475e8c 
 fs searches
-f hit10_0 2 0x0042c9c2 
 f hit10_1 2 0x004630e3 
 f hit10_2 2 0x00463764 
 f hit10_3 2 0x004660c4 
-f hit11_0 8 0x004660c7 
-f hit11_1 8 0x004660d3 
-f hit12_0 11 0x004660d0 
+fs search
+f hit11_0 3 0x00464c62 
+f hit11_1 3 0x00464c6e 
+f hit12_0 4 0x00465578 
 fs *
 f hInstance 1 0x0048a064 
 fs *
@@ -1845,11 +1843,288 @@ f some_unknown_handler 618 0x004585ef
 fs *
 f str.SAVE 1 0x004630d8 
 fs *
-f sym.imp. 1 0x004015d6 
-fs *
 f str.status_mid_mode 1 0x00466596 
 fs *
 f str.playing 1 0x004665a6 
+fs functions
+f fcn.0042b2ec 255 0x0042b2ec 
+fs *
+f str.stock_name 1 0x004640ba 
+fs *
+f str.deal_price 1 0x004640c3 
+fs *
+f str.sold_price 1 0x00463f43 
+fs *
+f str.market_price 1 0x00463f3c 
+fs *
+f str.stock_amount 1 0x00463f23 
+fs *
+f str.total_market_price 1 0x00463943 
+fs *
+f str.type 1 0x00463f35 
+fs *
+f str.amount 1 0x00463f4a 
+fs *
+f str.player_count 1 0x00463138 
+fs *
+f str.total_money 1 0x00463141 
+fs *
+f str.walk_method 1 0x0046314a 
+fs *
+f str.area 1 0x00463e49 
+fs *
+f str.unlimited_time 1 0x00463e1f 
+fs *
+f str.characteristics 1 0x00463cdf 
+fs *
+f str.money_use_ratio 1 0x00463ce6 
+fs *
+f str.company 1 0x0046417a 
+fs *
+f str.month_profit 1 0x00464103 
+fs *
+f str.stock_bonus 1 0x0046417f 
+fs *
+f str.chained_store 1 0x0046390c 
+fs *
+f str.cash 1 0x00463920 
+fs *
+f str.savings 1 0x00463927 
+fs *
+f str.total_properties 1 0x0046392e 
+fs *
+f str.land 1 0x00463935 
+fs *
+f str.facility 1 0x0046393c 
+fs *
+f str.cost 1 0x0046394a 
+fs *
+f str.right_of_mgmt 1 0x00463951 
+fs *
+f str.points 1 0x00463958 
+fs *
+f str.loans 1 0x0046395f 
+fs *
+f str.insurance_time 1 0x00463966 
+fs *
+f str.reserved_stock 1 0x004640f1 
+fs *
+f str.stock_hold_ratio 1 0x0046415f 
+fs *
+f str.stock_trend_half_year 1 0x0046414c 
+fs *
+f str.history_lowest 1 0x00464143 
+fs *
+f str.history_highest 1 0x0046413a 
+fs *
+f str.sum_profit 1 0x004640fa 
+fs *
+f str.average_profit 1 0x0046410c 
+fs *
+f str.boss 1 0x00464115 
+fs *
+f str.rest_today 1 0x004640e8 
+fs *
+f str.stock_rest_10d 1 0x00465770 
+fs *
+f stock_rest_days 1 0x004990dc 
+fs functions
+f fcn.0044b0a0 49 0x0044b0a0 
+fs *
+f event_calls_table 1 0x00475e24 
+fs functions
+f criminals_released 123 0x00448eca 
+fs *
+f str.criminals_released 1 0x00465424 
+fs functions
+f criminals_stay_longer 193 0x00448f45 
+fs *
+f str.criminals_stay_longer 1 0x0046543a 
+fs functions
+f patients_leave_hospital 123 0x00449006 
+f patients_stay_longer 188 0x00449081 
+f aliens_attack_the_earth 355 0x0044913d 
+f alien_destroy_one_building 576 0x004492a0 
+f land_price_rise 597 0x004494e0 
+f public_land_action 382 0x00449735 
+f praise_biggest_land_owner 471 0x004498b3 
+f donate_poorest_land_owner 274 0x00449a8a 
+f praise_biggest_stock_owner 224 0x00449b9c 
+f pay_cash_tax 362 0x00449c7c 
+f pay_land_tax 579 0x00449de6 
+f pay_stock_tax 503 0x0044a029 
+f fcn.0044a220 563 0x0044a220 
+f house_explode 387 0x0044a453 
+f stop_due_to_rain 129 0x0044a5d6 
+fs *
+f str.patients_leave_hospital 1 0x00465454 
+fs *
+f str.patients_stay_longer 1 0x0046546c 
+fs *
+f str.aliens_attack_the_earth 1 0x00465488 
+fs *
+f str.public_land_action 1 0x004654e4 
+fs *
+f str.land_price_rise 1 0x004654bd 
+fs *
+f str.alien_destroy_one_building 1 0x0046549c 
+fs *
+f str.praise_biggest_land_owner 1 0x00465501 
+fs *
+f str.donate_poorest_land_owner 1 0x00465528 
+fs *
+f price_index 1 0x004990e8 
+fs *
+f str.praise_biggest_stock_owner 1 0x0046554f 
+fs *
+f str.pay_cash_tax 1 0x00465578 
+fs *
+f str.pay_land_tax 1 0x004655ac 
+fs *
+f str.pay_stock_tax 1 0x004655d4 
+fs search
+f hit11_2 3 0x00464c7c 
+f hit11_3 3 0x00464c8a 
+f hit11_4 3 0x00464c94 
+f hit11_5 3 0x00464c9e 
+f hit11_6 3 0x00464caa 
+f hit11_7 3 0x00464cb6 
+f hit11_8 3 0x00464cc2 
+f hit11_9 3 0x00464cce 
+f hit11_10 3 0x00464cdc 
+f hit11_11 3 0x00464ce8 
+f hit11_12 3 0x00464cf4 
+f hit11_13 3 0x00464d00 
+f hit11_14 3 0x00464d0e 
+f hit11_15 3 0x00464d1c 
+f hit11_16 3 0x00464d26 
+f hit11_17 3 0x00464d30 
+f hit11_18 3 0x00464d3c 
+f hit11_19 3 0x00464d48 
+f hit11_20 3 0x00464e21 
+f hit11_21 3 0x00464e39 
+f hit11_22 3 0x00464e66 
+f hit11_23 3 0x00464ed7 
+f hit11_24 3 0x00464ef1 
+f hit11_25 3 0x00464f0d 
+f hit11_26 3 0x00464f27 
+f hit11_27 3 0x00464f41 
+f hit11_28 3 0x00464f5b 
+f hit11_29 3 0x00464f77 
+f hit11_30 3 0x00464f93 
+f hit11_31 3 0x00464fab 
+f hit11_32 3 0x00464fc3 
+f hit11_33 3 0x00464fdd 
+f hit11_34 3 0x00464ff7 
+f hit11_35 3 0x00465038 
+f hit11_36 3 0x00465063 
+f hit11_37 3 0x0046507d 
+f hit11_38 3 0x00465098 
+f hit11_39 3 0x004650b4 
+f hit11_40 3 0x004650d7 
+f hit11_41 3 0x004650fa 
+f hit11_42 3 0x0046511d 
+f hit11_43 3 0x00465170 
+f hit11_44 3 0x00465197 
+f hit11_45 3 0x004651a5 
+f hit11_46 3 0x004651ca 
+f hit11_47 3 0x00465424 
+f hit11_48 3 0x0046543a 
+f hit11_49 3 0x00465454 
+f hit11_50 3 0x0046546c 
+f hit11_51 3 0x00465488 
+f hit11_52 3 0x0046549c 
+f hit11_53 3 0x004654bd 
+f hit11_54 3 0x004654e4 
+f hit11_55 3 0x00465501 
+f hit11_56 3 0x00465528 
+f hit11_57 3 0x0046554f 
+f hit11_58 3 0x00465578 
+f hit11_59 3 0x004655ac 
+f hit11_60 3 0x004655d4 
+f hit11_61 3 0x004655fc 
+f hit11_62 3 0x00465624 
+f hit11_63 3 0x00465645 
+f hit11_64 3 0x00465662 
+f hit11_65 3 0x0046567f 
+f hit11_66 3 0x00465697 
+f hit11_67 3 0x004656af 
+f hit11_68 3 0x004656d0 
+f hit11_69 3 0x004656ef 
+f hit11_70 3 0x0046570b 
+f hit11_71 3 0x0046573c 
+f hit11_72 3 0x00465756 
+f hit11_73 3 0x00465770 
+f hit11_74 3 0x00465788 
+f hit11_75 3 0x004657a2 
+f hit11_76 3 0x004657ba 
+f hit11_77 3 0x004657db 
+f hit11_78 3 0x004657fb 
+f hit11_79 3 0x00465817 
+f hit11_80 3 0x00465833 
+f hit11_81 3 0x00465855 
+f hit11_82 3 0x00465874 
+f hit11_83 3 0x00465915 
+f hit11_84 3 0x0046592b 
+f hit11_85 3 0x00465941 
+f hit11_86 3 0x00465959 
+f hit11_87 3 0x0046597a 
+f hit11_88 3 0x004659a4 
+f hit11_89 3 0x004659d8 
+f hit11_90 3 0x004659ee 
+f hit11_91 3 0x00465a04 
+f hit11_92 3 0x00465a28 
+f hit11_93 3 0x00465a3e 
+f hit11_94 3 0x00465a50 
+f hit11_95 3 0x00465a66 
+f hit11_96 3 0x00465a7c 
+f hit11_97 3 0x00465a94 
+f hit12_1 4 0x004655ac 
+f hit12_2 4 0x004655d4 
+f hit12_3 4 0x004655fc 
+f hit12_4 4 0x00465624 
+f hit12_5 4 0x00465645 
+f hit12_6 4 0x00465662 
+f hit12_7 4 0x0046567f 
+f hit12_8 4 0x00465697 
+f hit12_9 4 0x004656af 
+fs *
+f str.a_house_explode 1 0x00465624 
+fs *
+f str.stop_due_to_rain 1 0x00465645 
+fs *
+f str.car_stop_due_to_traffic_jam 1 0x00465662 
+fs *
+f str.houses_collapse_due_to_earthquake 1 0x0046567f 
+fs *
+f str.land_loose_due_to_flood 1 0x00465697 
+fs *
+f str.typhoon_breaks_houses 1 0x004656af 
+fs functions
+f stop_due_to_traffic_jam 137 0x0044a657 
+f earthquake 574 0x0044a6e0 
+f flood 526 0x0044a91e 
+f typhoon 365 0x0044ab2c 
+fs *
+f str.confirm_land_upgrade 1 0x0046396d 
+fs *
+f str.please_pay1 1 0x004639b3 
+fs *
+f str.please_pay_alliance 1 0x0046399a 
+fs *
+f str.death_god 1 0x004639cc 
+fs *
+f str.get_something 1 0x00463aa8 
+fs *
+f str.staying_at_hotel 1 0x004631e0 
+fs *
+f str.disappearing 1 0x004631f5 
+fs *
+f str.winter_sleep 1 0x00463234 
+fs *
+f str.staying_in_hospital 1 0x0046321f 
+fs *
+f initialize 575 0x004015d6 
 fs *
 f fmalloc 270 0x00456f8e 
 fs *
@@ -1868,3 +2143,5 @@ fs *
 f terminate 19 0x0045ea68 
 fs *
 f CBeginThread 231 0x0045f7e8 
+fs *
+f str.in_prison 1 0x0046320a 
