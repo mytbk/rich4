@@ -384,7 +384,7 @@ f fcn.0040c03b 33 0x0040c03b
 f fcn.00407a2c 96 0x00407a2c 
 f fcn.004564c1 37 0x004564c1 
 f fcn.004555c5 38 0x004555c5 
-f fcn.0045825d 25 0x0045825d 
+f strlen 25 0x0045825d 
 f fcn.00458276 11 0x00458276 
 f fcn.00440aac 252 0x00440aac 
 f fcn.0040cc1a 60 0x0040cc1a 
@@ -1226,7 +1226,7 @@ f fcn.00456e1f 260 0x00456e1f
 f fcn.00411b53 828 0x00411b53 
 f hosted_ai_ui 857 0x0041e345 
 f process_checkpoint 1009 0x00403d74 
-f fcn.00451a97 695 0x00451a97 
+f fcn_00451a97 695 0x00451a97 
 f sub.WINMM.dll_timeGetTime_85e 91 0x0045285e 
 f fcn.00451edb 177 0x00451edb 
 f fcn.00415e70 232 0x00415e70 
@@ -1331,7 +1331,7 @@ f fcn.004582bc 64 0x004582bc
 f fcn.0041d476 208 0x0041d476 
 f fcn.0040fc00 87 0x0040fc00 
 f fcn.0044808a 1210 0x0044808a 
-f fcn.00452946 56 0x00452946 
+f strcpy_without_spaces 56 0x00452946 
 f fcn.00440cac 366 0x00440cac 
 f fcn.0040cc56 177 0x0040cc56 
 f fcn.0043d593 556 0x0043d593 
@@ -1351,7 +1351,7 @@ f fcn.00409a23 245 0x00409a23
 f fcn.0040e32c 829 0x0040e32c 
 f sub.WINMM.dll_timeGetTime_23e 1396 0x0043f23e 
 f fcn.0041d2c6 302 0x0041d2c6 
-f fcn.0041d3f4 63 0x0041d3f4 
+f add_money_to_player 63 0x0041d3f4 
 f fcn.0044f354 217 0x0044f354 
 f fcn.00441e12 101 0x00441e12 
 f fcn.0044f230 146 0x0044f230 
@@ -1529,7 +1529,7 @@ f fcn.00450c35 68 0x00450c35
 f fcn.00456b3e 103 0x00456b3e 
 f fcn.00456ba5 101 0x00456ba5 
 f fcn.004554fc 100 0x004554fc 
-f memcpy_word_aligned 45 0x00456d8e 
+f mem_copy_words 45 0x00456d8e 
 f fcn.00456512 300 0x00456512 
 f sub.USER32.dll_InvalidateRect_97e 440 0x0045297e 
 f sub.WINMM.dll_mciSendStringA_b1a 178 0x00454b1a 
@@ -1929,7 +1929,7 @@ f str.stock_rest_10d 1 0x00465770
 fs *
 f stock_rest_days 1 0x004990dc 
 fs functions
-f fcn.0044b0a0 49 0x0044b0a0 
+f stock_rest_10_days 49 0x0044b0a0 
 fs *
 f event_calls_table 1 0x00475e24 
 fs functions
@@ -1946,7 +1946,7 @@ f patients_stay_longer 188 0x00449081
 f aliens_attack_the_earth 355 0x0044913d 
 f alien_destroy_one_building 576 0x004492a0 
 f land_price_rise 597 0x004494e0 
-f public_land_action 382 0x00449735 
+f public_land_auction 382 0x00449735 
 f praise_biggest_land_owner 471 0x004498b3 
 f donate_poorest_land_owner 274 0x00449a8a 
 f praise_biggest_stock_owner 224 0x00449b9c 
@@ -2126,6 +2126,48 @@ f str.staying_in_hospital 1 0x0046321f
 fs *
 f initialize 575 0x004015d6 
 fs *
+f str.in_prison 1 0x0046320a 
+fs functions
+f bank_add_interest 303 0x0044aedb 
+f bank_stop_make_loans 82 0x0044ae89 
+f tornado 496 0x0044ac99 
+fs *
+f str.tornado_destroy_a_house 1 0x004656d0 
+fs *
+f str.bank_stop_make_loans 1 0x004656ef 
+fs *
+f str.bank_add_interest 1 0x0046570b 
+fs *
+f str.get_some_money 1 0x00465727 
+fs functions
+f stock_falls 75 0x0044b00a 
+f stock_rises 75 0x0044b055 
+f some_stock_rest_10_days 210 0x0044b0d1 
+fs *
+f str.stock_falls 1 0x0046573c 
+fs *
+f str.some_stock_rest_10d 1 0x00465788 
+fs functions
+f some_stock_restores 184 0x0044b1a3 
+f holder_go_to_prison 281 0x0044b25b 
+f factory_gets_fined 165 0x0044b374 
+f company_gains 143 0x0044b419 
+fs *
+f str.some_stock_restores 1 0x004657a2 
+fs *
+f str.holder_goto_prison_5d 1 0x004657ba 
+fs *
+f str.factory_gets_fined 1 0x004657db 
+fs *
+f str.company_gains 1 0x004657fb 
+fs functions
+f company_loss 151 0x0044b4a8 
+f company_gets_fined_10000 62 0x0044b53f 
+f factory_gets_fined_5000 120 0x0044b57d 
+f company_profit_doubles 234 0x0044b5f5 
+fs *
+f str._d_days 1 0x00463902 
+fs *
 f fmalloc 270 0x00456f8e 
 fs *
 f AllocInitThreadData 61 0x0045a23d 
@@ -2143,5 +2185,44 @@ fs *
 f terminate 19 0x0045ea68 
 fs *
 f CBeginThread 231 0x0045f7e8 
+fs functions
+f fmalloc 270 0x00456f8e 
+f AllocInitThreadData 61 0x0045a23d 
+f NTAddThread 89 0x0045a2cb 
+f init_stack_limits 105 0x0045a666 
+f frealloc 148 0x0045c59a 
+f AddThreadData 108 0x0045c7ca 
+f InitThreadData 42 0x0045c8d7 
+f terminate 19 0x0045ea68 
+f CBeginThread 231 0x0045f7e8 
+f break_down_a_house 411 0x0044be16 
 fs *
-f str.in_prison 1 0x0046320a 
+f str.break_down_a_house 1 0x00465915 
+fs functions
+f fmalloc 270 0x00456f8e 
+f AllocInitThreadData 61 0x0045a23d 
+f NTAddThread 89 0x0045a2cb 
+f init_stack_limits 105 0x0045a666 
+f frealloc 148 0x0045c59a 
+f AddThreadData 108 0x0045c7ca 
+f InitThreadData 42 0x0045c8d7 
+f terminate 19 0x0045ea68 
+f CBeginThread 231 0x0045f7e8 
+f remove_a_land 311 0x0044bfb1 
+fs *
+f str.remove_a_land 1 0x0046592b 
+fs functions
+f fmalloc 270 0x00456f8e 
+f AllocInitThreadData 61 0x0045a23d 
+f NTAddThread 89 0x0045a2cb 
+f init_stack_limits 105 0x0045a666 
+f frealloc 148 0x0045c59a 
+f AddThreadData 108 0x0045c7ca 
+f InitThreadData 42 0x0045c8d7 
+f terminate 19 0x0045ea68 
+f CBeginThread 231 0x0045f7e8 
+f fake_loan 321 0x0044c0e8 
+fs *
+f str.fake_loan 1 0x00465941 
+fs *
+f fortune_call_table 1 0x00475ef0 
