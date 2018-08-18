@@ -1,0 +1,23 @@
+特殊地点
+========
+
+新闻
+----
+
+- events_calls_table (0x475e24): 保存所有新闻的回调函数
+- 函数 news_events (0x44b6df)
+
+命运
+----
+
+- fortune_call_table (0x475ef0): 保存所有命运的回调函数
+- fortune_events (0x44db81)
+
+魔法屋
+------
+
+魔法屋共有12个功能。相关数据结构和函数：
+
+- magic_house_functions (0x475724): 每项16字节，开头4字节为该功能的 BIG5 字符串
+- 函数 magic_house (0x43380a): 魔法屋入口
+- 函数 magic_house_actions (0x431caa)

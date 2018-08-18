@@ -7,16 +7,16 @@
 0x496b60, 8
 0x496b68, 0x68*4=0x1a0: player info for 4 players
   the first player:
-  0x496b68, 4: pointer to player name
+  0x496b68, 4: pointer to player name /* 0x00 */
   0x496b6c, 4
   0x496b70, 2
   0x496b72, 2
   0x496b74, 2
   0x496b76, 2
-  0x496b78, 1
-  0x496b79, 1
-  0x496b7a, 1
-  0x496b7b, 1
+  0x496b78, 1 /* 0x10 */
+  0x496b79, 1: 0: on foot, 1: moto, 2: car
+  0x496b7a, 1: number of dices
+  0x496b7b, 1: character (see characters.txt)
   0x496b7c, 1
   0x496b7d, 1 (bank related)
   0x496b7e, 1
@@ -25,27 +25,27 @@
   0x496b81, 1
   0x496b82, 1
   0x496b83, 1
-  0x496b84, 4 (money, in bank or cash?)
-  0x496b88, 4 (money, in bank or cash?)
-  0x496b8c, 4 (bank related)
-  0x496b90, 4
+  0x496b84, 4: cash
+  0x496b88, 4: money, in bank (+ special financing) /* 0x20 */
+  0x496b8c, 4: loan
+  0x496b90, 4: special financing
   0x496b94, 4
-  0x496b98, 2
-  0x496b9a, 1
-  0x496b9b, 1
+  0x496b98, 2: points (uint16_t) /* 0x30 */
+  0x496b9a, 1: days in hotel (lowest 7 bits, same as the next fields)
+  0x496b9b, 1: days disappearing (MSB: about to appear again)
   0x496b9c, 1: days in prison (what does the MSB mean?)
   0x496b9d, 1: days in hospital (what does the MSB mean?)
-  0x496b9e, 1
-  0x496b9f, 1
-  0x496ba0, 1
-  0x496ba1, 1
+  0x496b9e, 1: days in winter sleep
+  0x496b9f, 1: days dream walking
+  0x496ba0, 1: days stopping /* 0x38 */
+  0x496ba1, 1: days tortoise walking
   0x496ba2, 1: (not used?)
-  0x496ba3, 1
+  0x496ba3, 1: number of days rejected by bank
   0x496ba4, 1: number of days bank stop making loans
   0x496ba5, 1
-  0x496ba6, 1
-  0x496ba7, 1
-  0x496ba8, 1
+  0x496ba6, 1: days of assurance (uint8_t)
+  0x496ba7, 1: god information (cannot find what the bits mean yet)
+  0x496ba8, 1 /* 0x40 */
   0x496ba9, 1
   0x496baa, 1
   0x496bab, 1: not used
@@ -85,7 +85,7 @@
 0x499108, 4
 0x49910c, 4
 0x499110, 4
-0x499114, 4: number of players?
+0x499114, 4: number of players, including bankrupt players
 0x499118, 4
 0x49911c, 4
 
