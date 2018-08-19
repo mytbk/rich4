@@ -360,7 +360,7 @@ f fcn.00401f5e 58 0x00401f5e
 f fcn.004563f5 35 0x004563f5 
 f fcn.00456418 37 0x00456418 
 f fcn.0045643d 44 0x0045643d 
-f fcn.0045753a 406 0x0045753a 
+f fseek 406 0x0045753a 
 f fcn.00458de7 14 0x00458de7 
 f fcn.004574de 68 0x004574de 
 f fcn.00457522 24 0x00457522 
@@ -455,7 +455,7 @@ f fcn.00441210 82 0x00441210
 f fcn.00444bb2 147 0x00444bb2 
 f fcn.00432511 142 0x00432511 
 f fcn.00431842 1079 0x00431842 
-f fcn.00431caa 2151 0x00431caa 
+f magic_house_actions 2151 0x00431caa 
 f fcn.0045218f 27 0x0045218f 
 f fcn.00433d6e 438 0x00433d6e 
 f sub.USER32.dll_InvalidateRect_c20 334 0x00433c20 
@@ -1289,7 +1289,7 @@ f fcn.00455b3a 280 0x00455b3a
 f fcn.00401e59 261 0x00401e59 
 f fcn.00455e24 437 0x00455e24 
 f fcn.004591f9 293 0x004591f9 
-f sub.KERNEL32.dll_SetFilePointer_31e 139 0x0045931e 
+f lseek 139 0x0045931e 
 f sub.KERNEL32.dll_SetFilePointer_3a9 98 0x004593a9 
 f fread 501 0x004576d0 
 f fcn.0045620f 113 0x0045620f 
@@ -1423,7 +1423,7 @@ f fcn.0040d375 368 0x0040d375
 f fcn.0041d1a9 285 0x0041d1a9 
 f fcn.0044101d 487 0x0044101d 
 f news_events 439 0x0044b6df 
-f fcn.0044db81 542 0x0044db81 
+f fortune_events 542 0x0044db81 
 f fcn.0043d304 655 0x0043d304 
 f fcn.0043e9a4 667 0x0043e9a4 
 f fcn.00415215 999 0x00415215 
@@ -1431,7 +1431,7 @@ f fcn.004315cc 326 0x004315cc
 f fcn.004379c9 604 0x004379c9 
 f fcn.00436668 758 0x00436668 
 f fcn.0042e931 2523 0x0042e931 
-f fcn.0043380a 463 0x0043380a 
+f magic_house 463 0x0043380a 
 f fcn.00445ada 101 0x00445ada 
 f fcn.004412e4 95 0x004412e4 
 f fcn.0040d4e5 192 0x0040d4e5 
@@ -1505,7 +1505,7 @@ f fcn.0040ac7b 663 0x0040ac7b
 f fcn.00448be2 744 0x00448be2 
 f sub.WINMM.dll_timeGetTime_4f6 193 0x004544f6 
 f fcn.0044b896 461 0x0044b896 
-f fcn.0044cc53 3000 0x0044cc53 
+f drowned_to_hospital 3000 0x0044cc53 
 f fcn.0044bb4b 715 0x0044bb4b 
 f fcn.0044dfb4 1068 0x0044dfb4 
 f fcn.0044dd9f 533 0x0044dd9f 
@@ -1711,8 +1711,9 @@ fs *
 f lplpSurface2 1 0x0048a0e0 
 fs *
 f lplpSurface3 1 0x004762cc 
+fs search
+f hit13_0 3 0x00475784 
 fs searches
-f hit13_0 9 0x004630c5 
 f hit14_0 3 0x004630cb 
 f hit14_1 3 0x004631a0 
 f hit14_2 3 0x004631ab 
@@ -2167,62 +2168,157 @@ f factory_gets_fined_5000 120 0x0044b57d
 f company_profit_doubles 234 0x0044b5f5 
 fs *
 f str._d_days 1 0x00463902 
-fs *
-f fmalloc 270 0x00456f8e 
-fs *
-f AllocInitThreadData 61 0x0045a23d 
-fs *
-f NTAddThread 89 0x0045a2cb 
-fs *
-f init_stack_limits 105 0x0045a666 
-fs *
-f frealloc 148 0x0045c59a 
-fs *
-f AddThreadData 108 0x0045c7ca 
-fs *
-f InitThreadData 42 0x0045c8d7 
-fs *
-f terminate 19 0x0045ea68 
-fs *
-f CBeginThread 231 0x0045f7e8 
 fs functions
-f fmalloc 270 0x00456f8e 
-f AllocInitThreadData 61 0x0045a23d 
-f NTAddThread 89 0x0045a2cb 
-f init_stack_limits 105 0x0045a666 
-f frealloc 148 0x0045c59a 
-f AddThreadData 108 0x0045c7ca 
-f InitThreadData 42 0x0045c8d7 
-f terminate 19 0x0045ea68 
-f CBeginThread 231 0x0045f7e8 
 f break_down_a_house 411 0x0044be16 
 fs *
 f str.break_down_a_house 1 0x00465915 
 fs functions
-f fmalloc 270 0x00456f8e 
-f AllocInitThreadData 61 0x0045a23d 
-f NTAddThread 89 0x0045a2cb 
-f init_stack_limits 105 0x0045a666 
-f frealloc 148 0x0045c59a 
-f AddThreadData 108 0x0045c7ca 
-f InitThreadData 42 0x0045c8d7 
-f terminate 19 0x0045ea68 
-f CBeginThread 231 0x0045f7e8 
 f remove_a_land 311 0x0044bfb1 
 fs *
 f str.remove_a_land 1 0x0046592b 
 fs functions
-f fmalloc 270 0x00456f8e 
-f AllocInitThreadData 61 0x0045a23d 
-f NTAddThread 89 0x0045a2cb 
-f init_stack_limits 105 0x0045a666 
-f frealloc 148 0x0045c59a 
-f AddThreadData 108 0x0045c7ca 
-f InitThreadData 42 0x0045c8d7 
-f terminate 19 0x0045ea68 
-f CBeginThread 231 0x0045f7e8 
 f fake_loan 321 0x0044c0e8 
 fs *
 f str.fake_loan 1 0x00465941 
 fs *
 f fortune_call_table 1 0x00475ef0 
+fs functions
+f kidnapped_by_alien 3310 0x0044c6ed 
+f travel_abroad 277 0x0044c5d8 
+f get_one_card_from_each_player 545 0x0044c3b7 
+f invade_bank_computer 245 0x0044c2c2 
+f bank_reject_a_month 153 0x0044c229 
+fs *
+f str.bank_reject_you_for_a_month 1 0x00465959 
+fs *
+f str.invade_bank_computer 1 0x0046597a 
+fs *
+f str.get_card_from_each_player 1 0x004659a4 
+fs *
+f str.travel_abroad 1 0x004659d8 
+fs *
+f str.kidnapped_by_alien 1 0x004659ee 
+fs functions
+f lose_stock 304 0x0044c7ef 
+f sell_all_the_stock 295 0x0044c91f 
+f moto_stolen 269 0x0044ca46 
+f car_destroyed 256 0x0044cb53 
+fs *
+f str.lose_stock 1 0x00465a04 
+fs *
+f str.sell_all_the_stock 1 0x00465a28 
+fs *
+f str.moto_stolen 1 0x00465a3e 
+fs *
+f str.car_destroyed 1 0x00465a50 
+fs *
+f str.drowned_to_hospital 1 0x00465a66 
+fs functions
+f fall_off_moto 2719 0x0044cd6c 
+fs *
+f str.fall_off_moto 1 0x00465a7c 
+fs functions
+f fined_when_crossing_road 2674 0x0044cd99 
+fs *
+f str.fined_when_crossing_road 1 0x00465a94 
+fs functions
+f fcn.0044cf1e 2481 0x0044cf1e 
+fs *
+f str.fined_on_moto 1 0x00465aae 
+fs functions
+f fcn.0044d06d 2146 0x0044d06d 
+fs *
+f str.car_overspeed_fined 1 0x00465acd 
+fs functions
+f invite_others_meal 2041 0x0044d0d6 
+fs *
+f str.invite_others_meal 1 0x00465ae3 
+fs functions
+f fined_for_throwing_trash 1834 0x0044d1a5 
+fs *
+f str.fined_for_throwing_trash 1 0x00465b00 
+fs functions
+f fined_for_your_dog 1775 0x0044d1e0 
+fs *
+f str.fined_for_your_dog 1 0x00465b16 
+fs *
+f pick_money_on_road 279 0x0044d224 
+fs functions
+f loc.0044d3bf 0 0x0044d3bf 
+f loc.0044d3d1 0 0x0044d3d1 
+fs *
+f str.pick_money_on_road 1 0x00465b5d 
+fs functions
+f fcn.0044d3db 67 0x0044d3db 
+fs *
+f lose_wallet 1201 0x0044d41e 
+fs *
+f str.lose_wallet 1 0x00465b87 
+fs functions
+f get_heritage 65 0x0044d4a6 
+fs *
+f str.get_heritage 1 0x00465b9d 
+fs functions
+f scammed_money 1000 0x0044d4e7 
+fs *
+f str.scammed_money 1 0x00465bb3 
+fs *
+f win_lottery 67 0x0044d52b 
+fs *
+f str.win_lottery 1 0x00465bd9 
+fs *
+f str.sell_all_cards 1 0x00464794 
+fs *
+f str.go_to_prison_3d 1 0x004647ae 
+fs *
+f str.stop_one_day 1 0x004647bb 
+fs *
+f str.store_all_money 1 0x004647ca 
+fs *
+f str.build_up_house 1 0x004647d7 
+fs *
+f str.get_a_card 1 0x004647e4 
+fs *
+f str.turn_around 1 0x004647ef 
+fs *
+f str.sell_all_tools 1 0x004647f6 
+fs *
+f str.break_down_house 1 0x00464803 
+fs *
+f str.go_to_hospital_3d 1 0x00464810 
+fs *
+f str.put_the_land_to_auction 1 0x0046481d 
+fs *
+f magic_house_functions 1 0x00475724 
+fs *
+f timeGetTime 1 0x0046246c 
+fs *
+f str.pick_three_fortune 1 0x004647a1 
+fs *
+f OSHandles 1 0x00489474 
+fs *
+f pick_money_on_road 160 0x0044d33b 
+fs *
+f lose_wallet 1133 0x0044d462 
+fs *
+f win_lottery 67 0x0044d56e 
+fs *
+f fmalloc 270 0x00456f8e 
+fs *
+f lseek 139 0x0045931e 
+fs *
+f AllocInitThreadData 61 0x0045a23d 
+fs *
+f NTAddThread 89 0x0045a2cb 
+fs *
+f init_stack_limits 105 0x0045a666 
+fs *
+f frealloc 148 0x0045c59a 
+fs *
+f AddThreadData 108 0x0045c7ca 
+fs *
+f InitThreadData 42 0x0045c8d7 
+fs *
+f terminate 19 0x0045ea68 
+fs *
+f CBeginThread 231 0x0045f7e8 
