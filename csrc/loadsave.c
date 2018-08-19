@@ -11,7 +11,7 @@ int load_checkpoint(int n)
 	ebp = timeGetTime(); /* esi = 0 */
 	fcn_004080f5();
 
-	fcn_0045753a(fp, 4, 0);
+	fseek(fp, 4, SEEK_SET);
 	fread(&global_rich4_cfg.day, 4, 1, fp); // read day,month,year
 	fread(0x4991b8, 2, 1, fp);
 	fread(0x4991b6, 2, 1, fp);
