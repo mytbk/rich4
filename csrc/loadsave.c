@@ -1,3 +1,18 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include "global.h"
+
+void fcn_00401543()
+{
+	char *ebx = read_mkf(mkf_data, 0x259, NULL, NULL);
+	(*pddrawsf2)->Lock(pddrawsf2, NULL, &sfdesc1, 1, NULL);
+	memcpy(*(uint32_t*)0x48a08c, ebx, 0x96000);
+	(*pddrawsf2)->Unlock(pddrawsf2, NULL);
+	(*pddrawsf1)->BltFast(pddrawsf1, g_rect.left, g_rect.top,
+			pddrawsf2, &g_rect, 16);
+	free(ebx);
+}
+
 int load_checkpoint(int n)
 {
 	char filename[16];
