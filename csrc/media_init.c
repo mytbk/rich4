@@ -1,3 +1,5 @@
+#include "global.h"
+
 IDirectDraw *pddraw; // 0x0048a0d8
 
 DDSURFACEDESC sfdesc1; // 0x0048a068

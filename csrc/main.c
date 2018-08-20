@@ -1,8 +1,8 @@
 #include <windows.h>
 
 HINSTANCE ghInstance; // 48a064
-gwindowHandle; // 48a0d4
-uint32_t dw_46cadc;
+HWND gwindowHandle; // 48a0d4
+RECT g_rect;
 
 Surface **sf1;
 
@@ -113,7 +113,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
   }
   ShowWindow(gwindowHandle, SW_SHOW);
   UpdateWindow(gwindowHandle);
-  play_avi("START.AVI", &dw_46cadc, 1);
+  play_avi("START.AVI", &g_rect, 1);
  case_401de8_0:
   w_4991b6 = 0;
   w_4991b8 = 0;
