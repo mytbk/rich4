@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include "global.h"
 
+char *dw_47493c;
+char *dw_474945;
+char *dw_474949;
+char *dw_47494d;
+char *dw_48ae60;
+char *dw_48ae64[16];
+char *dw_48aea8;
+char *dw_48bad0;
+char *dw_48badc;
+char *dw_496930[20];
+
 void fcn_00401543()
 {
 	char *ebx = read_mkf(mkf_data, 0x259, NULL, NULL);
@@ -11,6 +22,203 @@ void fcn_00401543()
 	(*pddrawsf1)->BltFast(pddrawsf1, g_rect.left, g_rect.top,
 			pddrawsf2, &g_rect, 16);
 	free(ebx);
+}
+
+void fcn_00407ad2()
+{
+	fcn_004080f5();
+	ebx = edi = load_mkf("MAP.MKF");
+	eax = (w_4991b6*4+w_4991b8)*2;
+	dw_474945 = read_mkf(ebx, eax, NULL, NULL);
+	eax = (w_4991b6*4+w_4991b8)+16;
+	dw_48badc = read_mkf(ebx, eax, NULL, NULL);
+	eax = w_4991b6*4+w_4991b8+16;
+	dw_48bad0 = read_mkf(ebx, eax, NULL, NULL);
+	memcpy(0x48b6b4, dw_474945 + 0x10, 512);
+	dw_48bac4 = *(int*)dw_474945 + 0x210;
+	dw_48bacc = *(int*)dw_474945 + 10896; /* 0x2a90 = 10896 */
+	dw_474949 = read_mkf(ebx, 24, NULL, NULL);
+	dw_47494d = read_mkf(ebx, 26, NULL, NULL);
+
+	if (dw_47493c == 0) {
+		esi = eax = load_mkf("MAPDAT.MKF");
+		if (eax != -1) {
+			eax = w_4991b6*4+w_4991b8;
+			dw_47493c = read_mkf(esi, eax, NULL, NULL);
+			unload_mkf(esi);
+		} else {
+			eax = (w_4991b6*4+w_4991b8)*2+1;
+			dw_47493c = read_mkf(ebx, eax, NULL, NULL);
+		}
+		/* 0x407c3f */
+		int *eax = dw_47493c;
+		dw_498e9c = eax[0];
+		dw_498e80 = &eax[eax[1]];
+		dw_498e98 = eax[2];
+		dw_498e84 = &eax[eax[3]];
+		dw_498e8c = eax[4];
+		dw_498e88 = &eax[eax[5]];
+		dw_498e90 = eax[6];
+		dw_498e7c = &eax[eax[7]];
+		dw_499074 = eax[8];
+		dw_498e78 = &eax[eax[9]];
+		edx = dw_499074 * 4;
+		ebx = edx;
+		edx *= 8;
+		edx -= ebx;
+		ebx = dw_498e78;
+		edx += ebx;
+		edx += 0x1c;
+		edx -= eax;
+		dw_498e94 = edx;
+		ebx = 0;
+label_407cd1:
+		while (dw_499114 > ebx) {
+			esi = ebx * 10008;
+			eax = 0x48cb80 + esi;
+			memset(eax, 0, 0x2718);
+			*(int*)(0x48f294 + esi) = malloc(dw_498e94);
+			memset(0x48f294 + esi, 0, dw_498e94);
+			ebx++;
+		}
+		/* 407d3a */
+		memset(0x496d08, 0, 0x450);
+		ebx = 0;
+label_407d50:
+		eax = ebx * 3;
+		dl = *(char*)(0x47ed3c + ebx);
+		*(char*)(0x496d08 + eax * 8) = dl;
+		ebx ++;
+		if (ebx < 0x2e)
+			goto label_407d50;
+
+label_407d6f:
+		ebx = 1;
+		fcn_0040e033(ebx, fcn_0040aa6c(0), 0, 0);
+		ebx += 2;
+		if (ebx <= 11)
+			goto label_407d6f;
+
+		fcn_0040e033(13, fcn_0040aa6c(0), 0, 0);
+		fcn_0040e033(14, fcn_0040aa6c(0), 0, 0);
+
+		for (ebx = 1; ebx < dw_498e90; ebx++) {
+			esi = ebx * 0x34;
+			eax = dw_498e7c;
+			esi += eax;
+			edx = *(char*)(esi + 25);
+			eax = edx * 9;
+			eax = *(int16_t*)(0x496988 + eax*4);
+			edx = 0x2710 - eax;
+			*(int*)(esi + 0x30) = edx;
+		}
+		fcn_0042915a();
+		dw_499088 = 0;
+	}
+	/* 0x407e0b */
+	for (ebx = 0; ebx < 5; ebx++) {
+		eax = *(int16_t*)0x4991b6; /* sign ext */
+		eax *= 4;
+		edx = *(int16_t*)0x4991b8; /* sign ext */
+		esi = edx + eax;
+		eax = esi * 5 + ebx + 0x27;
+		*(int*)(0x48ae4c + ebx*4) = read_mkf(edi, eax, NULL, NULL);
+	}
+	edx = *(int16_t*)0x4991b8; /* sign ext */
+	eax = *(int16_t*)0x4991b6; /* sign ext */
+	edx += 0x4f;
+	eax = eax * 4 + edx;
+	dw_48ae60 = read_mkf(edi, eax, NULL, NULL);
+	if (*(int16_t*)0x4991b6 == 0) {
+		for (ebx = 0; ebx < 17; ebx++) {
+			dw_48ae64[ebx] = read_mkf(edi, ebx+0x57, NULL, NULL);
+		}
+	} else {
+		edx = *(int16_t*)0x4991b8;
+		eax = edx*17;
+		esi = eax + 0x68;
+		for (ebx = 0; ebx < 17; ebx++) {
+			dw_48ae64[ebx] = read_mkf(edi, esi + ebx, NULL, NULL);
+		}
+	}
+	for (ebx = 1; ebx <= dw_498e90; ebx++) {
+		eax = ebx * 0x34;
+		edx = dw_498e7c;
+		eax = *(uint16_t*)(edx + eax + 0x20);
+		if (eax == 0)
+			continue;
+		esi = eax * 4;
+		ebp = *(int32_t*)(0x48ae4c + esi);
+		if (ebp != 0)
+			continue;
+		eax += 0x26;
+		*(int32_t*)(0x48ae4c+esi) = read_mkf(edi, eax, NULL, NULL);
+	}
+	for (ebx = 1; ebx <= dw_499074; ebx++) {
+		edx = eax * 28;
+		eax = dw_498e78;
+		eax = *(uint16_t*)(edx + eax + 0x1a);
+		if (eax == 0)
+			continue;
+		esi = eax * 4;
+		edx = *(int32_t*)(0x48ae4c + esi);
+		if (edx != 0)
+			continue;
+		eax += 0x26;
+		*(int32_t*)(0x48ae4c+esi) = read_mkf(edi, eax, NULL, NULL);
+	}
+	dw_48aea8 = read_mkf(edi, 0x19, 0, 0);
+	memset(0x498ea0, 0, 0x1d4);
+	for (ebx = 0; ebx < 9; ebx++) {
+		if (ebx >= dw_499114) {
+			if (ebx < 4)
+				continue;
+			fcn_0040b93b(ebx);
+			continue;
+		}
+		esi = ebx * 0x68;
+		eax = *(char*)(0x496b7b+esi) + 0x1b;
+		edx = read_mkf(edi, eax, NULL, NULL);
+		eax = ebx * 0x34;
+		*(int32_t*)(0x498eb0+eax) = edx;
+		if (*(char*)(0x496b7d+esi) == 0
+				&& *(char*)(0x496bcc+esi) == 0) {
+			eax = *(int32_t*)(0x498eb0+eax);
+			edx = *(int16_t*)(eax + 0xe); /* sign ext */
+			eax += 0xc;
+			fcn_004553fe(eax, 0, 0, *(int16_t*)eax, edx);
+		}
+		if (ebx >= dw_499114) {
+			if (edx < 4)
+				continue;
+			fcn_0040b93b(ebx);
+		}
+	}
+	unload_mkf(edi);
+	edi = dw_498e9c;
+	for (ebx = 1; ebx <= edi; ebx++) {
+		eax = ebx * 5;
+		edx = dw_498e80;
+		if (*(int16_t*)(edx + eax * 8 + 0x20) == 0x1f41)
+			*(int16_t*)0x48bae2 = (int16_t)ebx;
+		edx = ebx * 40;
+		eax = dw_498e80;
+		if (*(int16_t*)(edx + eax + 0x20) == 0x1f42)
+			*(int16_t*)0x48bae0 = (int16_t)ebx;
+	}
+	fcn_00428caf();
+	dw_48bad8 = read_mkf(mkf_data, 0x205, NULL, NULL);
+	dw_48bad4 = read_mkf(mkf_data, 0x207, NULL, NULL);
+	for (ebx = 0; ebx < 20; ebx++) {
+		eax = ebx + 0x18c;
+		dw_496930[ebx] = read_mkf(mkf_data, eax, NULL, NULL);
+	}
+	fcn_00454176(0x48234a);
+	fcn_0040a4e1(0);
+}
+
+void fcn_004080f5()
+{
 }
 
 int load_checkpoint(int n)
