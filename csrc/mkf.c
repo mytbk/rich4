@@ -33,6 +33,18 @@ uint32_t load_mkf(const char *fn)
 	return i;
 }
 
+void unload_mkf(int mkf_idx)
+{
+	struct mkf *m = &mkf_stdata[mkf_idx];
+	if (m->handle == NULL) {
+		return;
+	}
+	CloseHandle(m->handle);
+	free(m->data);
+	m->handle = NULL;
+	m->data = NULL;
+}
+
 char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize) //0x00450441
 {
 	uint32_t data[4];
