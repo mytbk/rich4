@@ -326,7 +326,7 @@ f direct_sound_init 467 0x00453b55
 f sub.DSOUND.dll_DirectSoundCreate_21c 6 0x0046121c 
 f memset 32 0x00456f60 
 f DirectDrawCreate 6 0x00461222 
-f fcn.00456f50 16 0x00456f50 
+f srand 16 0x00456f50 
 f fcn.00456f23 10 0x00456f23 
 f fcn.0044f935 126 0x0044f935 
 f sub.USER32.dll_ShowCursor_fa 184 0x004020fa 
@@ -374,7 +374,7 @@ f fcn.00456180 62 0x00456180
 f sub.USER32.dll_InvalidateRect_82c 1246 0x0040482c 
 f fcn.00404d0a 120 0x00404d0a 
 f fcn.004552b7 48 0x004552b7 
-f fcn.00456f2d 35 0x00456f2d 
+f rand 35 0x00456f2d 
 f fcn.00457dbc 29 0x00457dbc 
 f fcn.00445a4d 85 0x00445a4d 
 f fcn.0040e033 282 0x0040e033 
@@ -385,7 +385,7 @@ f fcn.00407a2c 96 0x00407a2c
 f fcn.004564c1 37 0x004564c1 
 f fcn.004555c5 38 0x004555c5 
 f strlen 25 0x0045825d 
-f fcn.00458276 11 0x00458276 
+f abs 11 0x00458276 
 f fcn.00440aac 252 0x00440aac 
 f fcn.0040cc1a 60 0x0040cc1a 
 f fcn.00456469 44 0x00456469 
@@ -1401,7 +1401,7 @@ f fcn.0040f381 1341 0x0040f381
 f fcn.00448a7e 243 0x00448a7e 
 f sub.KERNEL32.dll_GetTickCount_f67 578 0x0041cf67 
 f fcn.0041c84f 1816 0x0041c84f 
-f fcn.00458370 172 0x00458370 
+f strcmp 172 0x00458370 
 f fcn.0040fa61 117 0x0040fa61 
 f fcn.0044f627 197 0x0044f627 
 f fcn.0040f8be 419 0x0040f8be 
@@ -2296,6 +2296,12 @@ fs *
 f str.pick_three_fortune 1 0x004647a1 
 fs *
 f OSHandles 1 0x00489474 
+fs *
+f str.mapdat_mkf 1 0x004631c8 
+fs *
+f str.map_mkf 1 0x004631c0 
+fs *
+f mkf_stdata 1 0x004762f4 
 fs *
 f pick_money_on_road 160 0x0044d33b 
 fs *
