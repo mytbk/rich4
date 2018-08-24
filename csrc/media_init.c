@@ -17,7 +17,7 @@ void direct_sound_init(int a0)
 {
 }
 
-bool MessageBoxA_5d6()
+bool initialize()
 {
 	direct_sound_init(0);
 	HRESULT res = DirectDrawCreate(NULL, &pddraw, NULL);

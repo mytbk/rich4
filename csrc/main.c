@@ -107,7 +107,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
   int height = GetSystemMetrics(1);
   int width = GetSystemMetrics(0);
   gwindowHandle = CreateWindowExA(0, "Rich4", "Rich4", WS_POPUP, 0, 0, width, height, NULL, NULL, ghInstance, NULL);
-  int ret = sub_MessageBoxA_5d6();
+  int ret = initialize();
   if (ret == 0) {
     return 0;
   }
