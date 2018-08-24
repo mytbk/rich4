@@ -44,7 +44,7 @@ bool MessageBoxA_5d6()
 	sfdesc1.dwWidth = 640;
 	sfdesc1.dwHeight = 480;
 	(*pddraw)->CreateSurface(pddraw, &sfdesc1, &pddrawsf2, NULL);
-	fcn_00456f50(GetTicketCount());
+	srand(GetTicketCount());
 	fcn_0044f935();
 	fcn_0045175d();
 	mkf_data = load_mkf("data.mkf");
