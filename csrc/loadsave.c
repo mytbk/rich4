@@ -24,6 +24,65 @@ void fcn_00401543()
 	free(ebx);
 }
 
+void fcn_0040e033(int a1, int a2, a3, a4)
+{
+	switch (a1 - 0xf) {
+		case 0:
+			ebx = 14;
+			ecx = 16;
+			break;
+		case 1:
+			ebx = 16;
+			ecx = 26;
+			break;
+		case 2:
+			ebx = 26;
+			ecx = 36;
+			break;
+		case 3:
+			ebx = 36;
+			ecx = 46;
+			break;
+		default:
+			ebx = a1 - 1;
+			ecx = a1;
+	}
+label_40e082:
+	if (ebx >= ecx) {
+		return ebx + 1;
+	}
+	eax = ebx * 24;
+	edx = ebx + 1;
+	if (*(int16_t*)(0x496d0a+eax) != 0) {
+		ebx = edx;
+		goto label_40e082;
+	}
+	*(int16_t*)(0x496d0a + eax) = a2;
+	*(int8_t*)(0x496d0c + eax) = a3;
+	*(int8_t*)(0x496d0d + eax) = a4;
+	if (a4 != 0 && a1 == 0xf) {
+		fcn_0040ead7(ecx - 1, 0, edx);
+	}
+	if (a2 == 0) {
+		return ebx + 1;
+	}
+	for (edx = 0; edx < 4; edx++) {
+		eax = dw_498e80 + a2 * 40;
+		ecx = edx;
+		eax = *(int16_t*)(eax + ecx * 2 + 0x18);
+		if (eax != 0)
+			break;
+	}
+	edx = fcn_00407a8c(eax, a2);
+	eax = ebx * 3;
+	*(char*)(0x496d09+eax*8) = edx;
+	eax = a2 * 40 + dw_498e80;
+	edx = ebx + 1;
+	edx <<= 16;
+	*(int32_t*)(eax + 0x24) |= edx;
+	return ebx + 1;
+}
+
 void fcn_00407ad2()
 {
 	fcn_004080f5();
@@ -71,33 +130,26 @@ void fcn_00407ad2()
 		edx += 0x1c;
 		edx -= eax;
 		dw_498e94 = edx;
-		ebx = 0;
-label_407cd1:
-		while (dw_499114 > ebx) {
+
+		for (ebx = 0; ebx < dw_499114; ebx++) {
 			esi = ebx * 10008;
 			eax = 0x48cb80 + esi;
 			memset(eax, 0, 0x2718);
 			*(int*)(0x48f294 + esi) = malloc(dw_498e94);
 			memset(0x48f294 + esi, 0, dw_498e94);
-			ebx++;
 		}
 		/* 407d3a */
 		memset(0x496d08, 0, 0x450);
-		ebx = 0;
-label_407d50:
-		eax = ebx * 3;
-		dl = *(char*)(0x47ed3c + ebx);
-		*(char*)(0x496d08 + eax * 8) = dl;
-		ebx ++;
-		if (ebx < 0x2e)
-			goto label_407d50;
 
-label_407d6f:
-		ebx = 1;
-		fcn_0040e033(ebx, fcn_0040aa6c(0), 0, 0);
-		ebx += 2;
-		if (ebx <= 11)
-			goto label_407d6f;
+		for (ebx = 0; ebx < 0x2e; ebx++) {
+			eax = ebx * 3;
+			dl = *(char*)(0x47ed3c + ebx);
+			*(char*)(0x496d08 + eax * 8) = dl;
+		}
+
+		for (ebx = 1; ebx <= 11; ebx += 2) {
+			fcn_0040e033(ebx, fcn_0040aa6c(0), 0, 0);
+		}
 
 		fcn_0040e033(13, fcn_0040aa6c(0), 0, 0);
 		fcn_0040e033(14, fcn_0040aa6c(0), 0, 0);
@@ -354,7 +406,7 @@ int load_checkpoint(int n)
 	fcn_00407ad2();
 	eax = (*(int*)0x49910c) * 0x34;
 	*(char*)(0x498ea0 + eax) |= 0x80;
-	fcn_00456f50(GetTickCount());
+	srand(GetTickCount());
 
 	while (timeGetTime()-ebp < 1000)
 		;
