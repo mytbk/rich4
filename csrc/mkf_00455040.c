@@ -1,3 +1,6 @@
+#include <stdint.h>
+#include <string.h>
+
 /* code used by read_mkf function */
 
 const uint8_t table_00483430[256] = {
@@ -546,17 +549,24 @@ L1:
 	ecx = old_ecx + eax;
 	if (dx == 0)
 		return;
-	ebp = ecx;
+	ebp = ecx; /* backup ecx */
 	ebx -= 0xfd;
-	/* push esi */
+	old_esi = esi; /* push esi */
 	esi = edi - 1 - edx;
 	ecx -= ebx;
-	memcpy(edi, esi, ecx);
-	/* pop esi */
+	memcpy(edi, esi, ecx); /* using rep movsb */
+	edi += ecx; /* by movsb */
+	esi = old_esi; /* pop esi */
+	ecx = ebp; /* restore ecx */
 	goto L1;
 }
 
 /* unknown ABI */
+/*
+argument: esi, ecx
+changes ebx, ecx
+doesn't change edi
+*/
 int16_t fcn_004551bb()
 {
 	ebx = 0x500;
@@ -567,7 +577,7 @@ L1:
 
 	if (bx >= 0x502)
 		goto L2;
-	bool cf = bittest(*(int32_t*)esi, ecx); /* bt dword [esi], ecx */
+	bool cf = bittest(esi, ecx); /* bt dword [esi], ecx */
 	ecx++;
 	if (!cf)
 		goto L1;
@@ -582,6 +592,7 @@ L2:
 }
 
 /* unknown ABI */
+/* argument: ebx, changes eax, ebx, ecx, edi */
 void fcn_00455109()
 {
 	if (*(int16_t*)0x484cbc == 0x8000) {
@@ -593,6 +604,7 @@ void fcn_00455109()
 }
 
 /* unknown ABI */
+/* argument: ebx, changes eax,edi,ecx,ebx */
 void fcn_0045511b()
 {
 	bx = *(int16_t*)(ebx + 0x4856c4);
@@ -612,7 +624,7 @@ L1:
 	*(int16_t*)(ebx + 0x4847bc) = ax;
 	ax = *(int16_t*)(ebx + 0x484cc0);
 	cx = *(int16_t*)(edi + 0x484cc0);
-	*(int16_t*)(ecx + 0x4851c2) = bx;
+	*(int16_t*)(ecx + 0x4851c2) = bx; /* note that ecx can be big */
 	if (cx < 0x502)
 		*(int16_t*)(ecx + 0x4851c4) = bx;
 	swap(ax, cx);
@@ -630,6 +642,7 @@ L2:
 }
 
 /* unknown ABI */
+/* no argument, changes ebx, ecx, edx, ebp */
 void fcn_004550cc()
 {
 	edx = 0x141;
@@ -637,7 +650,7 @@ void fcn_004550cc()
 	ebp = 0;
 	do {
 		cx = *(int16_t*)(ebp + 0x4856c4); /* 0x4856c4 + 0x141 * 2 = 0x485946 */
-		if (*(int16_t*)(ecx + 0x4847bc) != 0) {
+		if (*(int16_t*)(ecx + 0x4847bc) & 1) {
 			ebx = ebp;
 			fcn_0045511b();
 		}
