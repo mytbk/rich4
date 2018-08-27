@@ -5,6 +5,7 @@ IDirectDraw *pddraw; // 0x0048a0d8
 DDSURFACEDESC sfdesc1; // 0x0048a068
 IDirectDrawSurface *pddrawsf1; // 0x0048a0dc
 IDirectDrawSurface *pddrawsf2; // 0x0048a0e0
+IDirectDrawSurface *pddrawsf3; // 0x004762cc
 
 int mkf_data; // 0x48a0e4
 int mkf_speaking; // 0x48a054
@@ -15,6 +16,41 @@ HHOOK ghook; // 0x48a050
 
 void direct_sound_init(int a0)
 {
+}
+
+void fcn_0044f935()
+{
+	sfdesc1.dwFlags = 7;
+	sfdesc1.ddsCaps = 0x840;
+	sfdesc1.dwWidth = 0x200;
+	sfdesc1.dwHeight = 200;
+
+	(*pddraw)->CreateSurface(pddraw, &sfdesc1, &pddrawsf3, NULL);
+	(*pddrawsf3)->Lock(pddrawsf3, NULL, &sfdesc1, 1, NULL);
+	memcpy(*(uint32_t*)0x48a08c, 0, 0x32000);
+	(*pddrawsf3)->Unlock(pddrawsf3, NULL);
+}
+
+void fcn_0045175d()
+{
+	DDPIXELFORMAT fmt;
+	fmt.dwSize = 0x20;
+	(*pddrawsf1)->GetPixelFormat(pddrawsf1, &fmt);
+	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0x7c00
+			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x03e0)
+		dw_47637c = 0;
+
+	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0xf800
+			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x07e0)
+		dw_47637c = 1;
+
+	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0x001f
+			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x07e0)
+		dw_47637c = 2;
+
+	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0x0f00
+			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x00f0)
+		dw_47637c = 3;
 }
 
 bool initialize()
