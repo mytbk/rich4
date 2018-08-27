@@ -22,6 +22,89 @@ WAVEFORMATEX wav_format; // 0x48cb3c
 int dw_48cae4, dw_47e750, dw_47e754;
 int *array_48cae8[16];
 
+struct riff_chunk
+{
+	char sig[4];
+	uint32_t cksize;
+	char buffer[0]; /* buffer size = cksize, so that
+					   the size of this chunk is cksize + 8 */
+};
+
+/* the RIFF header */
+struct riff_header
+{
+	char sig[4]; /* "RIFF" */
+	uint32_t filesz; /* filesz = whole RIFF file size - 8B (sig & filesz) */
+	char filefmt[4]; /* e.g. AVI, WAVE */
+	/* the following is the first chunk */
+	struct riff_chunk chunk1;
+};
+
+LPDIRECTSOUNDBUFFER* fcn_00453dcf(void *a1)
+{
+	struct riff_header *wvbuf = (struct riff_header*)a1;
+	struct riff_chunk *aubuf;
+
+	if (pdsound == NULL || a1 == NULL)
+		return NULL;
+
+	char *sig = wvbuf->sig;
+	if (sig[0] != 'R' || sig[1] != 'I' || sig[2] != 'F' || sig[3] != 'F')
+		return NULL;
+
+	memcpy(&wav_format, &wvbuf->chunk1.buffer, 16);
+	wav_format.cbSize = 0;
+
+	uint32_t data_offset = wvbuf->chunk1.cksize + 20; /* offset of the second chunk */
+
+	while (1) {
+		aubuf = a1 + data_offset;
+		sig = aubuf->sig;
+		if (sig[0] == 'd' && sig[1] == 'a' && sig[2] == 't' && sig[3] == 'a') {
+			break;
+		}
+		data_offset += aubuf->cksize + 8; /* go to the next chunk */
+	}
+
+	uint32_t bufbytes = aubuf->cksize;
+	soundbuf_desc.dwSize = 20;
+	soundbuf_desc.dwFlags = 0xe2;
+	soundbuf_desc.dwBufferBytes = bufbytes;
+	soundbuf_desc.dwReserved = 0;
+	soundbuf_desc.lpwfxFormat = &wav_format;
+
+	LPDIRECTSOUNDBUFFER *local_buf; /* esp */
+	DWORD pvAudioPtr[2]; /* esp+4, esp+8 */
+	DWORD dwAudioBytes[2]; /* esp+c, esp+0x10 */
+
+	if ((*pdsound)->CreateSoundBuffer(pdsound, &soundbuf_desc, &local_buf, NULL) != 0)
+		return 0;
+
+	/*     STDMETHOD(Lock)(THIS_ DWORD dwOffset, DWORD dwBytes, LPVOID *ppvAudioPtr1, LPDWORD pdwAudioBytes1, LPVOID *ppvAudioPtr2, LPDWORD pdwAudioBytes2, DWORD dwFlags) PURE;
+	*/
+	int res = (*local_buf)->Lock(local_buf, 0, bufbytes,
+			&pvAudioPtr[0], &dwAudioBytes[0],
+			&pvAudioPtr[1], &dwAudioBytes[1], 0);
+	if (res == 0x88780096) {
+		(*local_buf)->Restore(local_buf);
+		res = (*local_buf)->Lock(local_buf, 0, bufbytes,
+				&pvAudioPtr[0], &dwAudioBytes[0],
+				&pvAudioPtr[1], &dwAudioBytes[1], 0);
+	}
+
+	if (res != 0)
+		return 0;
+
+	memcpy(pvAudioPtr[0], aubuf->buffer, dwAudioBytes[0]);
+	if (bufbytes != dwAudioBytes[0]) {
+		memcpy(pvAudioPtr[1], aubuf->buffer + dwAudioBytes[0], dwAudioBytes[1]);
+	}
+
+	/*     STDMETHOD(Unlock)(THIS_ LPVOID pvAudioPtr1, DWORD dwAudioBytes1, LPVOID pvAudioPtr2, DWORD dwAudioPtr2) PURE; */
+	(*local_buf)->Unlock(local_buf, &pvAudioPtr[0], dwAudioBytes[0], &pvAudioPtr[1], dwAudioBytes[1]);
+	return local_buf;
+}
+
 void fcn_004541e3()
 {
 	if (pdsound == NULL)
