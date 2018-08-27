@@ -14,8 +14,93 @@ int mkf_effect; // 0x48a058
 
 HHOOK ghook; // 0x48a050
 
+LPDIRECTSOUND pdsound; // 0x47e748
+char bool_47e76c;
+DSBUFFERDESC soundbuf_desc; // 0x48cb28
+LPDIRECTSOUNDBUFFER *pdsoundbuf; // 0x47e74c
+WAVEFORMATEX wav_format; // 0x48cb3c
+int dw_48cae4, dw_47e750, dw_47e754;
+int *array_48cae8[16];
+
+void fcn_004541e3()
+{
+	if (pdsound == NULL)
+		return;
+
+	for (int i = 0; i < 16; i++) {
+		int *ptr = array_48cae8[i];
+		if (ptr == NULL)
+			continue;
+
+		while (1) {
+			int t = *ptr;
+			if (t == -1)
+				break;
+
+			data = read_mkf(mkf_effect, t, NULL, NULL);
+			ptr[1] = fcn_00453dcf(data);
+			free(data);
+			ptr += 2;
+		}
+	}
+}
+
 void direct_sound_init(int a0)
 {
+	if (pdsound == NULL && bool_47e76c == 0) {
+		if (DirectSoundCreate(NULL, &pdsound, NULL) != 0) {
+			MessageBoxA(NULL, "DirectSound Initial Error or SoundCard Not Found!", "WARNING", 0x10);
+			pdsound = NULL;
+			bool_47e76c = 1;
+			return 0;
+		}
+		if ((*pdsound)->SetCooperativeLevel(pdsound, gwindowHandle, 3) != 0) {
+			MessageBoxA(NULL, "DirectSound SetCooperativeLevel Error!", "ERROR", 0x10);
+			(*pdsound)->Release(pdsound);
+			pdsound = NULL;
+			bool_47e76c = 1;
+			return 0;
+		}
+		soundbuf_desc.dwSize = 20;
+		soundbuf_desc.dwFlags = 1;
+		soundbuf_desc.dwBufferBytes = 0;
+		soundbuf_desc.dwReserved = 0;
+		soundbuf_desc.lpwfxFormat = NULL;
+
+		if ((*pdsound)->CreateSoundBuffer(pdsound, &soundbuf_desc, &pdsoundbuf, NULL) != 0) {
+			MessageBoxA(NULL, "DirectSound CreateSoundPrimaryBuffer Error!", "ERROR", 0x10);
+			(*pdsound)->Release(pdsound);
+			pdsound = NULL;
+			bool_47e76c = 1;
+			return 0;
+		}
+		/* 0x00453c5a */
+		wav_format.wFormatTag = 1;
+		wav_format.nChannels = 1;
+		wav_format.nSamplesPerSec = 22050;
+		wav_format.nAvgBytesPerSec = 22050;
+		wav_format.nBlockAlign = 1;
+		wav_format.wBitsPerSample = 8;
+		wav_format.cbSize = 0;
+
+		if ((*pdsoundbuf)->SetFormat(pdsoundbuf, &wav_format) != 0) {
+			MessageBoxA(NULL, "DirectSound SetFormat Error!", "ERROR", 0x10);
+			(*pdsound)->Release(pdsound);
+			pdsound = NULL;
+			(*pdsoundbuf)->Release(pdsoundbuf);
+			pdsoundbuf = NULL;
+			bool_47e76c = 1;
+			return 0;
+		}
+	}
+
+	if (a0 != 0) {
+		fcn_004541e3();
+	} else {
+		memset(array_48cae8, 0, sizeof(array_48cae8));
+	}
+	dw_48cae4 = dw_47e750 = dw_47e754 = 0;
+	return 1;
 }
 
 void fcn_0044f935()
