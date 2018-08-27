@@ -1,3 +1,41 @@
+void fcn_00451801_no_unroll(int16_t *a, int nbytes)
+{
+	int nw = nbytes >> 1;
+	int eax = dw_47637c;
+
+	switch (eax) {
+		case 1:
+			for (int i = 0; i < nw; i++) {
+				uint16_t t = a[i];
+				uint16_t t2 = t * 2;
+				t &= 0x001f; /* t[0:4] */
+				t2 &= 0xffc0; /* t2[6:15] = t[5:14] */
+				a[i] = t | t2; /* t[0:4],0,t[5:14] */
+			}
+			return;
+		case 2:
+			for (int i = 0; i < nw; i++) {
+				uint16_t t = a[i];
+				uint16_t v1 = (t & 0x7c00) >> 10; /* v1[0:4] = t[10:14] */
+				uint16_t v2 = (t & 0x03e0) << 1; /* v2[6:10] = t[5:9] */
+				uint16_t v3 = (t & 0x001f) << 11; /* v3[11:15] = t[0:4] */
+				a[i] = v1 | v2 | v3; /* t[10:14],0,t[5:9],t[0:4] */
+			}
+			return;
+		case 3:
+			for (int i = 0; i < nw; i++) {
+				uint16_t t = a[i];
+				uint16_t v1 = (t & 0x7800) >> 3; /* v1[8:11] = t[11:14] */
+				uint16_t v2 = (t & 0x03c0) >> 2; /* v2[4:7] = t[6:9] */
+				uint16_t v3 = (t & 0x001e) >> 1; /* v3[0:3] = t[1:4] */
+				a[i] = v1 | v2 | v3; /* t[1:4],t[6:9],t[11:14] */
+			}
+			return;
+		default:
+			return;
+	}
+}
+
 void fcn_00451801(int16_t *a1, int nbytes)
 {
 	int t; /* esp + 8 */
@@ -79,20 +117,22 @@ struct spr_smp
 	struct {
 		int v1;
 		int v2, v3; /* unused? */
-	} t[];
+	} t[0];
 };
 
 void fcn_00450069(char *s)
 {
-	if (strcmp(s, "SPR") == 0) {
-		int *t = (int*)s;
-		esi = t[5];
-		t[5] = s + 0x200 + t[2];
-		for (eax = 1; eax < t[1]; eax++) {
-			ebp = *(int*)(s + eax * 12 + 20);
-			esi += *(int*)(s + (eax - 1) * 12 + 20);
-			*(int*)(s + eax * 12 + 20) = esi;
-			esi = ebp;
+	struct spr_smp sst = (struct spr_smp*)s;
+
+	if (strcmp(sst->sig, "SPR") == 0) {
+		int oldv = sst->t[0].v1;
+		sst->t[0].v1 = (int32_t)s + sst->t2 + 0x200;
+
+		for (int i = 1; i < sst->t1; i++) {
+			int t = sst->t[i].v1;
+			/* sum of old and new values of sst->t[i-1] */
+			sst->t[i].v1 = oldv + sst->t[i-1].v1;
+			oldv = t;
 		}
 	}
 
