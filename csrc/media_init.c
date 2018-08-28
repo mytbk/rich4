@@ -1,18 +1,18 @@
 #include "global.h"
 #include "data_struct.h"
 
-IDirectDraw *pddraw; // 0x0048a0d8
-
 DDSURFACEDESC sfdesc1; // 0x0048a068
 DDSURFACEDESC sfdesc2; // 0x0048a0f8
+
+IDirectDraw *pddraw; // 0x0048a0d8
 IDirectDrawSurface *pddrawsf1; // 0x0048a0dc
 IDirectDrawSurface *pddrawsf2; // 0x0048a0e0
 IDirectDrawSurface *pddrawsf3; // 0x004762cc
 
 int mkf_data; // 0x48a0e4
 int mkf_speaking; // 0x48a054
-int mkf_panel; // 0x48a05c
 int mkf_effect; // 0x48a058
+int mkf_panel; // 0x48a05c
 
 HHOOK ghook; // 0x48a050
 
@@ -24,7 +24,86 @@ WAVEFORMATEX wav_format; // 0x48cb3c
 int dw_48cae4, dw_47e750, dw_47e754;
 int *array_48cae8[16];
 
+int32_t dw_48a164, dw_48a168;
 MMRESULT gTimerEvent; // 0x48a16c
+
+struct st st_46cb14 = {640, 480, 0, 0, NULL}; // 0x46cb14, 12 bytes
+uint8_t speed_tab[3] = {6, 4, 2}; // 0x64cb20
+uint32_t dw_46cb23 = 0;
+
+void fcn_00456280(struct st *s, int a1, int a2, int a3)
+{
+	fcn_00455b3a((uint32_t)s->f0, (uint32_t)s->f2, s->f8, a1, a2, a3);
+}
+
+void fcn_00401f5e()
+{
+	if (dw_48a168 == -1)
+		return;
+
+	fcn_00456280(&st_46cb14, dw_48a0e8, dw_48a0ec, dw_48a0f0);
+	dw_48a168 = -1;
+}
+
+void CALLBACK *timeProc(
+		UINT      uTimerID,
+		UINT      uMsg,
+		DWORD_PTR dwUser,
+		DWORD_PTR dw1,
+		DWORD_PTR dw2)
+{
+	POINT p;
+	ebx = 0;
+	if (b_46cb01 == 0)
+		return;
+
+	dw_46cb23++;
+	if (dw_46cb23 >= speed_tab[global_rich4_cfg.game_speed]) {
+		dw_46cb23 = 0;
+		b_46cafa = 1;
+	}
+	if ((b_48a179 & 1) == 0)
+		return;
+	if (b_48a17a != 0)
+		return;
+	if (b_46caf9 != 0)
+		return;
+	b_48a17a = 1;
+	if (w_48a170 > 1) {
+		w_48a176++;
+		edx = w_48a176; /* sign extend */
+		eax = w_48a174; /* sign extend */
+		if (edx >= eax) {
+			w_48a176 = 0;
+			w_48a172++;
+			eax = w_48a172; /* sign extend */
+			edx = w_48a170; /* sign extend */
+			if (eax == edx) {
+				w_48a172 = 0;
+			}
+			ebx = 1;
+		}
+	}
+	GetCursorPos(&p);
+	if (p.x == dw_48a168 && p.y == dw_48a164 && ebx == 0) {
+		b_48a17a = 0;
+		return;
+	}
+	if ((b_48a179 & 2) == 0) {
+		IDirectDraw_WaitForVerticalBlank(pddraw, 1, NULL);
+	}
+	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc2, 1, NULL);
+	st_46cb14.f8 = dw_48a11c;
+	fcn_00401f5e();
+	fcn_00401e59(p.x, p.y);
+	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
+	b_48a17a = 0;
+}
+
+LRESULT CALLBACK KbdProc(
+		int nCode,
+		WPARAM wParam,
+		LPARAM lParam);
 
 struct riff_chunk
 {

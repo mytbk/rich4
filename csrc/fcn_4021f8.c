@@ -48,7 +48,7 @@ void GetCursorPos_35d(int * a1)
 	}
 	b_48a17a = 1;
 	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc2, 1, 0);
-	dw_46cb1c = dw_48a11c;
+	st_46cb14.f8 = dw_48a11c;
 	fcn_00401f5e();
 	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
 	b_48a17a = 0;
@@ -95,7 +95,7 @@ void GetCursorPos_250(int * a1)
 	}
 	b_48a17a = 1;
 	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc2, 1, 0);
-	dw_46cb1c = dw_48a11c;
+	st_46cb14.f8 = dw_48a11c;
 	fcn_00401e59(p.x, p.y);
 	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
 	b_48a17a = 0;
