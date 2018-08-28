@@ -323,13 +323,13 @@ f fclose 61 0x004578c5
 f fcn.00457902 38 0x00457902 
 f memcpy_movsd 41 0x00456de8 
 f direct_sound_init 467 0x00453b55 
-f sub.DSOUND.dll_DirectSoundCreate_21c 6 0x0046121c 
+f DirectSoundCreate 6 0x0046121c 
 f memset 32 0x00456f60 
 f DirectDrawCreate 6 0x00461222 
 f srand 16 0x00456f50 
 f fcn.00456f23 10 0x00456f23 
 f fcn.0044f935 126 0x0044f935 
-f sub.USER32.dll_ShowCursor_fa 184 0x004020fa 
+f init_data_and_timer 184 0x004020fa 
 f allocate_some_struct 61 0x00451a5a 
 f malloc 14 0x00456f80 
 f fcn.004021f8 88 0x004021f8 
@@ -396,7 +396,7 @@ f fcn.00441e77 87 0x00441e77
 f fcn.00441343 106 0x00441343 
 f fcn.0040b0cd 67 0x0040b0cd 
 f fcn.004521cb 37 0x004521cb 
-f sub.WINMM.dll_mciGetDeviceIDA_97b 84 0x0045497b 
+f set_volume 84 0x0045497b 
 f get_local_time 50 0x00458331 
 f fcn.00411aa3 61 0x00411aa3 
 f fcn.00411ae0 102 0x00411ae0 
@@ -1248,7 +1248,7 @@ f drive_check__junk 484 0x0045011a
 f fcn.004541e3 93 0x004541e3 
 f fcn.00458ae0 49 0x00458ae0 
 f fcn.0045175d 145 0x0045175d 
-f fcn.00454176 109 0x00454176 
+f load_sound_from_mkf 109 0x00454176 
 f config_rich4 241 0x00411e8f 
 f fmalloc 270 0x00456f8e 
 f sub.WINMM.dll_mciSendStringA_5ba 821 0x004545ba 
@@ -1510,7 +1510,7 @@ f fcn.0044bb4b 715 0x0044bb4b
 f fcn.0044dfb4 1068 0x0044dfb4 
 f fcn.0044dd9f 533 0x0044dd9f 
 f fcn.004544b9 61 0x004544b9 
-f fcn.00453dcf 413 0x00453dcf 
+f dsound_load_wav 413 0x00453dcf 
 f sub.GDI32.dll_TextOutA_7c7 103 0x0044f7c7 
 f fcn.0044f70c 187 0x0044f70c 
 f fcn.00458532 103 0x00458532 
@@ -1713,8 +1713,8 @@ fs *
 f lplpSurface3 1 0x004762cc 
 fs search
 f hit13_0 3 0x00475784 
+f hit14_0 3 0x0045510c 
 fs searches
-f hit14_0 3 0x004630cb 
 f hit14_1 3 0x004631a0 
 f hit14_2 3 0x004631ab 
 f hit14_3 3 0x004631b3 
@@ -2302,6 +2302,16 @@ fs *
 f str.map_mkf 1 0x004631c0 
 fs *
 f mkf_stdata 1 0x004762f4 
+fs functions
+f fcn.0045a1bd 7 0x0045a1bd 
+fs *
+f str.SPR 1 0x004660a8 
+fs *
+f str.SMP 1 0x004660ac 
+fs *
+f pdsound 4 0x0047e748 
+fs *
+f str.open_cdaudio 1 0x004663e7 
 fs *
 f pick_money_on_road 160 0x0044d33b 
 fs *
@@ -2328,3 +2338,20 @@ fs *
 f terminate 19 0x0045ea68 
 fs *
 f CBeginThread 231 0x0045f7e8 
+fs functions
+f pick_money_on_road 160 0x0044d33b 
+f lose_wallet 1133 0x0044d462 
+f win_lottery 67 0x0044d56e 
+f fmalloc 270 0x00456f8e 
+f lseek 139 0x0045931e 
+f AllocInitThreadData 61 0x0045a23d 
+f NTAddThread 89 0x0045a2cb 
+f init_stack_limits 105 0x0045a666 
+f frealloc 148 0x0045c59a 
+f AddThreadData 108 0x0045c7ca 
+f InitThreadData 42 0x0045c8d7 
+f terminate 19 0x0045ea68 
+f CBeginThread 231 0x0045f7e8 
+f timeProc 354 0x00401f98 
+fs *
+f gTimerEvent 1 0x0048a16c 
