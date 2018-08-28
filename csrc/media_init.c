@@ -40,7 +40,7 @@ struct riff_header
 	struct riff_chunk chunk1;
 };
 
-LPDIRECTSOUNDBUFFER* fcn_00453dcf(void *a1)
+LPDIRECTSOUNDBUFFER* dsound_load_wav(void *a1)
 {
 	struct riff_header *wvbuf = (struct riff_header*)a1;
 	struct riff_chunk *aubuf;
@@ -121,7 +121,7 @@ void fcn_004541e3()
 				break;
 
 			data = read_mkf(mkf_effect, t, NULL, NULL);
-			ptr[1] = fcn_00453dcf(data);
+			ptr[1] = dsound_load_wav(data);
 			free(data);
 			ptr += 2;
 		}
@@ -221,6 +221,27 @@ void fcn_0045175d()
 		dw_47637c = 3;
 }
 
+void load_sound_from_mkf(int32_t *a1)
+{
+	int32_t *t = a1;
+	if (pdsound == NULL)
+		return;
+
+	while (t[0] != -1) {
+		char *data = read_mkf(mkf_effect, t[0], NULL, NULL);
+		t[1] = dsound_load_wav(data);
+		free(data);
+		t += 2;
+	}
+
+	for (int i = 0; i < 16; i++) {
+		if (array_48cae8[i] != NULL)
+			continue;
+		array_48cae8[i] = a1;
+		break;
+	}
+}
+
 bool initialize()
 {
 	direct_sound_init(0);
@@ -255,11 +276,11 @@ bool initialize()
 	mkf_speaking = load_mkf("speaking.mkf");
 	mkf_panel = load_mkf("panel.mkf");
 	mkf_effect = load_mkf("effect.mkf");
-	fcn_00454176(0x48231a);
+	load_sound_from_mkf(0x48231a);
 	config_rich4();
-	ghook = SetWindowsHookExA(WH_KEYBOARD, fcn_401010, ghInstance, 0);
-	ShowCursor_fa();
-	mciSendStringA_5ba();
+	ghook = SetWindowsHookExA(WH_KEYBOARD, KbdProc /* @ 0x401010 */, ghInstance, 0);
+	ShowCursor_fa(); /* 0x4020fa */
+	mciSendStringA_5ba(); /* 0x4545ba */
 	fcn_004021f8(0x29, 1, 0);
 	b_46caf8 = 0;
 	b_46caf9 = 0;
