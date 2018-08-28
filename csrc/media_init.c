@@ -1,8 +1,10 @@
 #include "global.h"
+#include "data_struct.h"
 
 IDirectDraw *pddraw; // 0x0048a0d8
 
 DDSURFACEDESC sfdesc1; // 0x0048a068
+DDSURFACEDESC sfdesc2; // 0x0048a0f8
 IDirectDrawSurface *pddrawsf1; // 0x0048a0dc
 IDirectDrawSurface *pddrawsf2; // 0x0048a0e0
 IDirectDrawSurface *pddrawsf3; // 0x004762cc
@@ -21,6 +23,8 @@ LPDIRECTSOUNDBUFFER *pdsoundbuf; // 0x47e74c
 WAVEFORMATEX wav_format; // 0x48cb3c
 int dw_48cae4, dw_47e750, dw_47e754;
 int *array_48cae8[16];
+
+MMRESULT gTimerEvent; // 0x48a16c
 
 struct riff_chunk
 {
@@ -242,6 +246,25 @@ void load_sound_from_mkf(int32_t *a1)
 	}
 }
 
+void init_data_and_timer()
+{
+	if (dw_46cb10 != 0)
+		return;
+
+	/* edx = 0 */
+	dw_46cb10 = read_mkf(mkf_data, 0, NULL, NULL);
+	dw_48a0e8 = allocate_some_struct(32, 32, 0, 0);
+	b_48a179 = b_48a17a = b_48a178 = 0;
+	dw_48a168 = -1;
+	ShowCursor(0);
+	sfdesc2.dwSize = 0x6c;
+	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc2, 1, 0);
+	w_46cb14 = sfdesc2.DUMMYUNIONNAME1.lPitch >> 1;
+	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
+	gTimerEvent = timeSetEvent(20 /* uDelay */, 5 /* uResolution */, timeProc /* TODO @ 0x401f98 */,
+			0 /* dwUser */, 1 /* fuEvent */);
+}
+
 bool initialize()
 {
 	direct_sound_init(0);
@@ -278,8 +301,8 @@ bool initialize()
 	mkf_effect = load_mkf("effect.mkf");
 	load_sound_from_mkf(0x48231a);
 	config_rich4();
-	ghook = SetWindowsHookExA(WH_KEYBOARD, KbdProc /* @ 0x401010 */, ghInstance, 0);
-	ShowCursor_fa(); /* 0x4020fa */
+	ghook = SetWindowsHookExA(WH_KEYBOARD, KbdProc /* TODO @ 0x401010 */, ghInstance, 0);
+	init_data_and_timer();
 	mciSendStringA_5ba(); /* 0x4545ba */
 	fcn_004021f8(0x29, 1, 0);
 	b_46caf8 = 0;
