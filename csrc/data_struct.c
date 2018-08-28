@@ -1,19 +1,21 @@
-struct st
-{
-	int16_t f0;
-	int16_t f2;
-	int16_t f4;
-	int16_t f6;
-	int16_t * f8;
-	int16_t data[0];
-};
-
 static inline mem_copy_words(void *dst, void *src, size_t n)
 {
 	memcpy(dst, src, n*2);
 }
 
-int fcn_00451a97(struct st *a1, struct st *a2, int a3, int a4, int a5, int a6)
+struct st * allocate_some_struct(int a1, int a2, int a3, int a4)
+{
+	struct st * newst = (struct st *)malloc(a1 * a2 * 2 + 12);
+	newst->f0 = a1;
+	newst->f2 = a2;
+	newst->f4 = a3;
+	newst->f6 = a4;
+	newst->f8 = newst->data;
+}
+
+/* this function looks buggy and can crash the game */
+
+struct st * fcn_00451a97(struct st *a1, struct st *a2, int a3, int a4, int a5, int a6)
 {
 	if (a2 == NULL) {
 		a2 = malloc(a5 * a6 * 2 + 12);
