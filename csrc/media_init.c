@@ -205,7 +205,7 @@ LRESULT CALLBACK kbdProc(
 	}
 
 	if (wParam == VK_CONTROL) {
-		modded_key = VK_CONTROL << 16;
+		modded_key = VK_CONTROL << 8;
 	} else {
 		modded_key |= wParam;
 	}
@@ -376,7 +376,7 @@ L401306:
 	}
 
 L401523:
-	if (modded_key != (VK_CONTROL << 16))
+	if (modded_key != (VK_CONTROL << 8))
 		modded_key = 0;
 	return 0;
 }
