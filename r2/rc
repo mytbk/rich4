@@ -2319,6 +2319,14 @@ f gTimerEvent 1 0x0048a16c
 fs *
 f str.set_cdtrack_time 1 0x0046640a 
 fs *
+f modded_key 1 0x0046cb07 
+fs *
+f rich4_characters 1248 0x0047e80c 
+fs *
+f nplayers 4 0x00499114 
+fs *
+f current_player 4 0x0049910c 
+fs *
 f pick_money_on_road 160 0x0044d33b 
 fs *
 f lose_wallet 1133 0x0044d462 
@@ -2345,4 +2353,34 @@ f terminate 19 0x0045ea68
 fs *
 f CBeginThread 231 0x0045f7e8 
 fs *
-f modded_key 1 0x0046cb07 
+f player.traffic_method 1 0x00496b79 
+fs *
+f player.ndices 1 0x00496b7a 
+fs *
+f player.character 1 0x00496b7b 
+fs *
+f player.cash 4 0x00496b84 
+fs *
+f player.money_in_bank 4 0x00496b88 
+fs *
+f player.loan 4 0x00496b8c 
+fs *
+f plyaer.special_finance 4 0x00496b90 
+fs *
+f player.points 2 0x00496b98 
+fs *
+f player.days_in_hotel 1 0x00496b9a 
+fs *
+f player.days_disappearing 1 0x00496b9b 
+fs *
+f player.days_in_prison 1 0x00496b9c 
+fs *
+f player.days_in_hospital 1 0x00496b9d 
+fs *
+f player.days_winter_sleep 1 0x00496b9e 
+fs *
+f player.days_sleep_walking 1 0x00496b9f 
+fs *
+f player.days_stopping 1 0x00496ba0 
+fs *
+f player.days_tortoise_walking 1 0x00496ba1 
