@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "global.h"
+#include "player_info.h"
 
 char *dw_47493c;
 char *dw_474945;
@@ -131,7 +132,7 @@ void fcn_00407ad2()
 		edx -= eax;
 		dw_498e94 = edx;
 
-		for (ebx = 0; ebx < dw_499114; ebx++) {
+		for (ebx = 0; ebx < nplayers; ebx++) {
 			esi = ebx * 10008;
 			eax = 0x48cb80 + esi;
 			memset(eax, 0, 0x2718);
@@ -222,25 +223,31 @@ void fcn_00407ad2()
 	dw_48aea8 = read_mkf(edi, 0x19, 0, 0);
 	memset(0x498ea0, 0, 0x1d4);
 	for (ebx = 0; ebx < 9; ebx++) {
-		if (ebx >= dw_499114) {
+		if (ebx >= nplayers) {
 			if (ebx < 4)
 				continue;
 			fcn_0040b93b(ebx);
 			continue;
 		}
+#if 0
 		esi = ebx * 0x68;
 		eax = *(char*)(0x496b7b+esi) + 0x1b;
+#endif
+		uint8_t eax = players[ebx].character + 0x1b;
 		edx = read_mkf(edi, eax, NULL, NULL);
 		eax = ebx * 0x34;
 		*(int32_t*)(0x498eb0+eax) = edx;
+#if 0
 		if (*(char*)(0x496b7d+esi) == 0
 				&& *(char*)(0x496bcc+esi) == 0) {
+#endif
+		if (players[ebx].f21 == 0 && player[ebx].f100 == 0) {
 			eax = *(int32_t*)(0x498eb0+eax);
 			edx = *(int16_t*)(eax + 0xe); /* sign ext */
 			eax += 0xc;
 			fcn_004553fe(eax, 0, 0, *(int16_t*)eax, edx);
 		}
-		if (ebx >= dw_499114) {
+		if (ebx >= nplayers) {
 			if (edx < 4)
 				continue;
 			fcn_0040b93b(ebx);
@@ -290,18 +297,13 @@ int load_checkpoint(int n)
 	fread(&global_rich4_cfg.day, 4, 1, fp); // read day,month,year
 	fread(0x4991b8, 2, 1, fp);
 	fread(0x4991b6, 2, 1, fp);
-	fread(0x499114, 4, 1, fp);
-	fread(0x496b68, 0x68, 4, fp);
+	fread(&nplayers, 4, 1, fp);
+	fread(players, sizeof(player_info), 4, fp);
 	fread(0x499104, 4, 1, fp);
 
-	int t = *(int*)0x499114;
-	for (int i = 0; i < t; i++) {
-		eax = i * 0x68;
-		edx = 0;
-		dl = *(char*)(0x496b7b+eax);
-		edx *= 0x68;
-		edx = *(int*)(0x47e80c+edx);
-		*(int*)(0x496b68+eax) = edx;
+	for (int i = 0; i < nplayers; i++) {
+		uint8_t j = players[i].character;
+		players[i].name_ptr = rich4_characters[j].name_ptr;
 	}
 
 	fread(0x498e28, 0x10, 5, fp);
@@ -388,7 +390,7 @@ int load_checkpoint(int n)
 	eax += edx;
 	*(int*)0x498e78 = eax;
 
-	for (int i = 0; i < *(int*)0x499114; i++) {
+	for (int i = 0; i < nplayers; i++) {
 		eax = i << 3;
 		eax += i; /* eax = i * 9 */
 		eax <<= 2; /* eax = i * 36 */

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "data_struct.h"
+#include "player_info.h"
 
 DDSURFACEDESC sfdesc1; // 0x0048a068
 DDSURFACEDESC sfdesc2; // 0x0048a0f8
@@ -180,11 +181,13 @@ LRESULT CALLBACK kbdProc(
 	if (wParam == k && R4_KEY_RELEASED(lParam)) {
 		if (b_46cafe != 0 && dw_46cad8 == 1) {
 			uint32_t ebx = 0;
-			for (size_t i = 0; i < dw_499114; i++) {
-				eax = i * 0x68;
-				if (*(int8_t*)(0x496b7d + eax) == 1) {
-					if (*(int32_t*)(0x496b9a + eax) == 0)
-						return 0;
+			for (size_t i = 0; i < nplayers; i++) {
+				if (players[i].f21 == 1 &&
+						players[i].days_in_hotel == 0 &&
+						players[i].days_disappearing == 0 &&
+						players[i].days_in_prison == 0 &&
+						players[i].days_in_hospital == 0) {
+					return 0;
 				}
 			}
 			if (ebx)
@@ -234,30 +237,25 @@ LRESULT CALLBACK kbdProc(
 	/* hotkey 0x49717e */
 	k = R4_KEY(global_rich4_cfg.hotkeys[11]);
 	if (modded_key == k) {
-		ecx = dw_49910c;
-		eax = dw_49910c * 0x68;
-		if (*(char*)(0x496ba0 + eax) == 0)
+		ecx = current_player;
+		if (players[current_player].days_stopping == 0)
 			goto L401523;
-		al = (*(char*)(0x496b79 + eax));
-		if (al < 1) goto L401306;
-		if (al > 1) {
-			if (al == 2) goto L4012e7;
+		uint8_t t = players[current_player].traffic_method;
+		if (t < 1) goto L401306;
+		if (t > 1) {
+			if (t == 2) goto L4012e7;
 			goto L401306;
 		}
-		edx = eax = ecx * 0x68;
-		*(char*)(0x496b7a + eax)++;
-		if (*(char*)(0x496b7a + edx) != 3)
+		players[current_player].ndices++;
+		if (players[current_player].ndices != 3)
 			goto L401306;
-		eax = dw_49910c * 0x68;
 		goto L4012ff;
 L4012e7:
-		edx = eax = ecx * 0x68;
-		*(char*)(0x496b7a + eax)++;
-		if (*(char*)(0x496b7a + edx) != 4)
+		players[current_player].ndices++;
+		if (players[current_player].ndices != 4)
 			goto L401306;
-		eax = ecx * 0x68;
 L4012ff:
-		*(char*)(0x496b7a + eax) = 1;
+		players[current_player].ndices = 1;
 L401306:
 		fcn_00417191(1);
 		goto L401523;
