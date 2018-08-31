@@ -100,10 +100,272 @@ void CALLBACK *timeProc(
 	b_48a17a = 0;
 }
 
-LRESULT CALLBACK KbdProc(
+LRESULT CALLBACK kbdProc(
 		int nCode,
 		WPARAM wParam,
-		LPARAM lParam);
+		LPARAM lParam)
+{
+	POINT p;
+	esi = wParam;
+	ebx = lParam;
+	if (b_46cb01 == 0) {
+		return 0;
+	}
+
+	GetCursorPos(&p);
+
+	/* hotkey 0x497168 */
+	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[0];
+	if (esi == eax && (ebx & 0x80000000) == 0) {
+		SetCursorPos(p.x, p.y - 10);
+		return 0;
+	}
+	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[1];
+	if (esi == eax && (ebx & 0x80000000) == 0) {
+		SetCursorPos(p.x + 10, p.y);
+		return 0;
+	}
+	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[2];
+	if (esi == eax && (ebx & 0x80000000) == 0) {
+		SetCursorPos(p.x, p.y + 10);
+		return 0;
+	}
+	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[3];
+	if (esi == eax && (ebx & 0x80000000) == 0) {
+		SetCursorPos(p.x - 10, p.y);
+		return 0;
+	}
+
+	/* hotkey 0x497170 */
+	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[4];
+	if (esi == eax) {
+		if ((ebx & 0x80000000) == 0) {
+			if (w_46cb09 != 0)
+				return 0;
+		}
+		if (w_46cb00 != 0)
+			return 0;
+		eax = (p.y << 16) + p.x;
+		if ((ebx & 0x80000000) != 0) {
+			PostMessageA(gwindowHandle, 0x202, 0, eax);
+			ebx = 0;
+			w_46cb09 = 0;
+			return 0;
+		}
+		PostMessageA(gwindowHandle, 0x201, 0, eax);
+		w_46cb09 = 1;
+		return 0;
+	}
+	/* hotkey 0x497172 */
+	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[5];
+	if (esi == eax && (ebx & 0x80000000) != 0) {
+		if (b_46cafe != 0 && dw_46cad8 == 1) {
+			edx = ebx = 0;
+			ebp = dw_499114;
+			while (edx < ebp) {
+				eax = edx * 0x68;
+				if (*(int8_t*)(0x496b7d + eax) == 1) {
+					if (*(int32_t*)(0x496b9a + eax) == 0)
+						return 0;
+				}
+				edx ++;
+			}
+			if (ebx)
+				return 0;
+			b_46caff = 1;
+			return 0;
+		}
+		PostMessageA(gwindowHandle, 0x205, 0, 0);
+		return 0;
+	}
+	if (b_46cafd == 0)
+		return 0;
+	if ((ebx & 0xc0000000) != 0) {
+		w_46cb07 = 0;
+		return 0;
+	}
+	if (esi == 0x11) {
+		w_46cb07 = 0x1100;
+	} else {
+		w_46cb07 |= si;
+	}
+	/* hotkey 0x497176 */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[7];
+	eax = (uint16_t)w_46cb07;
+	if (eax == edx) {
+		dh = b_49715d + 1;
+		b_49715d = dh;
+		if (dh == 3) {
+			bh = 0;
+			b_49715d = 0;
+		}
+		fcn_00419703();
+		fcn_0041906a(1);
+		fcn_004196f1();
+		return 0;
+	}
+	/* hotkey 0x49717c */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[10];
+	if (eax == edx) {
+		fcn_00402460(0);
+		fcn_00419703();
+		fcn_0041d546();
+		fcn_0040dd1f();
+		return 0;
+	}
+	/* hotkey 0x49717e */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[11];
+	if (eax == edx) {
+		ecx = dw_49910c;
+		eax = dw_49910c * 0x68;
+		if (*(char*)(0x496ba0 + eax) == 0)
+			goto L401523;
+		al = (*(char*)(0x496b79 + eax));
+		if (al < 1) goto L401306;
+		if (al > 1) {
+			if (al == 2) goto L4012e7;
+			goto L401306;
+		}
+		edx = eax = ecx * 0x68;
+		*(char*)(0x496b7a + eax)++;
+		if (*(char*)(0x496b7a + edx) != 3)
+			goto L401306;
+		eax = dw_49910c * 0x68;
+		goto L4012ff;
+L4012e7:
+		edx = eax = ecx * 0x68;
+		*(char*)(0x496b7a + eax)++;
+		if (*(char*)(0x496b7a + edx) != 4)
+			goto L401306;
+		eax = ecx * 0x68;
+L4012ff:
+		*(char*)(0x496b7a + eax) = 1;
+L401306:
+		fcn_00417191(1);
+		goto L401523;
+	}
+	/* hotkey 497180 */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[12];
+	if (eax == edx) {
+		fcn_00417d65(10);
+		goto L401523;
+	}
+	/* hotkey 497182 */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[13];
+	if (eax == edx) {
+		fcn_00417d65(9);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[14];
+	if (eax == edx) {
+		fcn_00417d65(8);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[15];
+	if (eax == edx) {
+		fcn_00417d65(7);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[16];
+	if (eax == edx) {
+		fcn_00417d65(6);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[17];
+	if (eax == edx) {
+		fcn_00417d65(5);
+		goto L401523;
+	}
+	/* hotkey 40718c */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[18];
+	if (eax == edx) {
+		dw_499088--;
+		ebp = dw_499088 & 7;
+		dw_499088 = ebp;
+		dw_474930 = -1;
+		dw_474934 = -1;
+		fcn_00415e70(1);
+		goto L401523;
+	}
+	/* hotkey 40718e */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[19];
+	if (eax == edx) {
+		dw_499088++;
+		ecx = dw_499088 & 7;
+		dw_499088 = ecx;
+		dw_474930 = -1;
+		dw_474934 = -1;
+		fcn_00415e70(1);
+		goto L401523;
+	}
+	/* hotkey 407190 */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[20];
+	if (eax == edx) {
+		fcn_00417d65(2);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[21];
+	if (eax == edx) {
+		fcn_00417d65(1);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[22];
+	if (eax == edx) {
+		fcn_00417d65(4);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[23];
+	if (eax == edx) {
+		fcn_00417d65(3);
+		goto L401523;
+	}
+	/* hotkey 497198 */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[24];
+	if (eax == edx) {
+		fcn_00417d65(0);
+		goto L401523;
+	}
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[27];
+	if (eax == edx) {
+		fcn_00402460(0);
+		fcn_00419703();
+		if (fcn_00453a32(0xdc, 0xf0) == 1) {
+			write_cfg();
+			dw_46caf9 = 1;
+			goto L401523;
+		}
+		fcn_004196f1();
+		fcn_00402460(1);
+		goto L401523;
+	}
+	if (b_49715d == 2)
+		goto L401523;
+
+	/* hotkey 49719a */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[25];
+	if (eax == edx) {
+		eax = dw_49910c;
+		*(char*)(0x48be24 + eax)--;
+		ch = *(char*)(0x48be24 + eax) & 3;
+		*(char*)(0x48be24 + eax) = ch;
+		fcn_00415f69(1);
+		goto L401523;
+	}
+	/* hotkey 49719c */
+	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[26];
+	if (eax == edx) {
+		eax = dw_49910c;
+		*(char*)(0x48be24 + eax)++;
+		ch = *(char*)(0x48be24 + eax) & 3;
+		*(char*)(0x48be24 + eax) = ch;
+		fcn_00415f69(1);
+	}
+
+L401523:
+	if (w_46cb07 != 0x1100)
+		w_46cb07 = 0;
+	return 0;
+}
 
 struct riff_chunk
 {
@@ -380,7 +642,7 @@ bool initialize()
 	mkf_effect = load_mkf("effect.mkf");
 	load_sound_from_mkf(0x48231a);
 	config_rich4();
-	ghook = SetWindowsHookExA(WH_KEYBOARD, KbdProc /* TODO @ 0x401010 */, ghInstance, 0);
+	ghook = SetWindowsHookExA(WH_KEYBOARD, kbdProc, ghInstance, 0);
 	init_data_and_timer();
 	mciSendStringA_5ba(); /* 0x4545ba */
 	fcn_004021f8(0x29, 1, 0);
