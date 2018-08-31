@@ -1,3 +1,9 @@
+void fcn_00419703()
+{
+	b_46cafd = 0;
+	fcn_00417191(0);
+}
+
 void fcn_00417d65(int v)
 {
 	int res;

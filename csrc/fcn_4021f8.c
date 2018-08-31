@@ -8,6 +8,21 @@ void fcn_004021f8(int a1, int a2, int a3)
 	GetCursorPos_250(0);
 }
 
+void fcn_00402460(int a1)
+{
+	if (a1 == 1) {
+		b_48a178 = (uint8_t)a1;
+		if ((b_48a179 & 1) != 0)
+			return;
+		GetCursorPos_250(0);
+		return;
+	}
+	if ((b_48a179 & 1) != 0) {
+		GetCursorPos_35d(0);
+	}
+	b_48a178 = (uint8_t)a1;
+}
+
 /* 0x0040235d */
 void GetCursorPos_35d(int * a1)
 {
