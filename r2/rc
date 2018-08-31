@@ -1827,7 +1827,7 @@ f str.stop_cd 1 0x004630a7
 fs *
 f str.ERROR 1 0x00463004 
 fs functions
-f KbdProc 1331 0x00401010 
+f kbdProc 1331 0x00401010 
 f fcn.0045a758 534 0x0045a758 
 fs *
 f rich4_cfg_game 1 0x00497158 
@@ -2312,46 +2312,37 @@ fs *
 f pdsound 4 0x0047e748 
 fs *
 f str.open_cdaudio 1 0x004663e7 
-fs *
-f pick_money_on_road 160 0x0044d33b 
-fs *
-f lose_wallet 1133 0x0044d462 
-fs *
-f win_lottery 67 0x0044d56e 
-fs *
-f fmalloc 270 0x00456f8e 
-fs *
-f lseek 139 0x0045931e 
-fs *
-f AllocInitThreadData 61 0x0045a23d 
-fs *
-f NTAddThread 89 0x0045a2cb 
-fs *
-f init_stack_limits 105 0x0045a666 
-fs *
-f frealloc 148 0x0045c59a 
-fs *
-f AddThreadData 108 0x0045c7ca 
-fs *
-f InitThreadData 42 0x0045c8d7 
-fs *
-f terminate 19 0x0045ea68 
-fs *
-f CBeginThread 231 0x0045f7e8 
 fs functions
-f pick_money_on_road 160 0x0044d33b 
-f lose_wallet 1133 0x0044d462 
-f win_lottery 67 0x0044d56e 
-f fmalloc 270 0x00456f8e 
-f lseek 139 0x0045931e 
-f AllocInitThreadData 61 0x0045a23d 
-f NTAddThread 89 0x0045a2cb 
-f init_stack_limits 105 0x0045a666 
-f frealloc 148 0x0045c59a 
-f AddThreadData 108 0x0045c7ca 
-f InitThreadData 42 0x0045c8d7 
-f terminate 19 0x0045ea68 
-f CBeginThread 231 0x0045f7e8 
 f timeProc 354 0x00401f98 
 fs *
 f gTimerEvent 1 0x0048a16c 
+fs *
+f str.set_cdtrack_time 1 0x0046640a 
+fs *
+f pick_money_on_road 160 0x0044d33b 
+fs *
+f lose_wallet 1133 0x0044d462 
+fs *
+f win_lottery 67 0x0044d56e 
+fs *
+f fmalloc 270 0x00456f8e 
+fs *
+f lseek 139 0x0045931e 
+fs *
+f AllocInitThreadData 61 0x0045a23d 
+fs *
+f NTAddThread 89 0x0045a2cb 
+fs *
+f init_stack_limits 105 0x0045a666 
+fs *
+f frealloc 148 0x0045c59a 
+fs *
+f AddThreadData 108 0x0045c7ca 
+fs *
+f InitThreadData 42 0x0045c8d7 
+fs *
+f terminate 19 0x0045ea68 
+fs *
+f CBeginThread 231 0x0045f7e8 
+fs *
+f modded_key 1 0x0046cb07 
