@@ -27,6 +27,7 @@ int *array_48cae8[16];
 int32_t dw_48a164, dw_48a168;
 MMRESULT gTimerEvent; // 0x48a16c
 
+uint16_t modded_key; // 0x46cb07
 struct st st_46cb14 = {640, 480, 0, 0, NULL}; // 0x46cb14, 12 bytes
 uint8_t speed_tab[3] = {6, 4, 2}; // 0x64cb20
 uint32_t dw_46cb23 = 0;
@@ -100,12 +101,27 @@ void CALLBACK *timeProc(
 	b_48a17a = 0;
 }
 
+/*
+ * wParam: virtual-key code
+ * lParam: Specifies the repeat count, scan code, extended-key flag,
+ * context code, previous key-state flag, and transition-state flag.
+ */
+
+#define R4_KEY(x) (*(uint16_t*)(&(x)))
+/* lParam bit 31: transition state, 0: being pressed, 1: released */
+#define R4_KEY_PRESSED(x) (((x) & (1<<31)) == 0)
+#define R4_KEY_RELEASED(x) (!R4_KEY_PRESSED(x))
+/* lParam bit 30: previous key state, 1: key is down before message is sent */
+#define R4_PREV_KEY_DOWN(x) (((x) & (1<<30)) == 1)
+
 LRESULT CALLBACK kbdProc(
 		int nCode,
 		WPARAM wParam,
 		LPARAM lParam)
 {
 	POINT p;
+	uint16_t k;
+
 	esi = wParam;
 	ebx = lParam;
 	if (b_46cb01 == 0) {
@@ -115,60 +131,61 @@ LRESULT CALLBACK kbdProc(
 	GetCursorPos(&p);
 
 	/* hotkey 0x497168 */
-	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[0];
-	if (esi == eax && (ebx & 0x80000000) == 0) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[0]);
+	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x, p.y - 10);
 		return 0;
 	}
-	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[1];
-	if (esi == eax && (ebx & 0x80000000) == 0) {
+
+	k = R4_KEY(global_rich4_cfg.hotkeys[1]);
+	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x + 10, p.y);
 		return 0;
 	}
-	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[2];
-	if (esi == eax && (ebx & 0x80000000) == 0) {
+
+	k = R4_KEY(global_rich4_cfg.hotkeys[2]);
+	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x, p.y + 10);
 		return 0;
 	}
-	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[3];
-	if (esi == eax && (ebx & 0x80000000) == 0) {
+
+	k = R4_KEY(global_rich4_cfg.hotkeys[3]);
+	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x - 10, p.y);
 		return 0;
 	}
 
 	/* hotkey 0x497170 */
-	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[4];
-	if (esi == eax) {
-		if ((ebx & 0x80000000) == 0) {
-			if (w_46cb09 != 0)
+	k = R4_KEY(global_rich4_cfg.hotkeys[4]);
+	if (wParam == k) {
+		if (R4_KEY_PRESSED(lParam) && w_46cb09 != 0) {
 				return 0;
 		}
 		if (w_46cb00 != 0)
 			return 0;
-		eax = (p.y << 16) + p.x;
-		if ((ebx & 0x80000000) != 0) {
-			PostMessageA(gwindowHandle, 0x202, 0, eax);
-			ebx = 0;
+
+		uint32_t pos = (p.y << 16) + p.x;
+		if (R4_KEY_RELEASED(lParam)) {
+			PostMessageA(gwindowHandle, 0x202, 0, pos);
 			w_46cb09 = 0;
 			return 0;
 		}
-		PostMessageA(gwindowHandle, 0x201, 0, eax);
+		PostMessageA(gwindowHandle, 0x201, 0, pos);
 		w_46cb09 = 1;
 		return 0;
 	}
+
 	/* hotkey 0x497172 */
-	eax = *(uint16_t*)&global_rich4_cfg.hotkeys[5];
-	if (esi == eax && (ebx & 0x80000000) != 0) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[5]);
+	if (wParam == k && R4_KEY_RELEASED(lParam)) {
 		if (b_46cafe != 0 && dw_46cad8 == 1) {
-			edx = ebx = 0;
-			ebp = dw_499114;
-			while (edx < ebp) {
-				eax = edx * 0x68;
+			uint32_t ebx = 0;
+			for (size_t i = 0; i < dw_499114; i++) {
+				eax = i * 0x68;
 				if (*(int8_t*)(0x496b7d + eax) == 1) {
 					if (*(int32_t*)(0x496b9a + eax) == 0)
 						return 0;
 				}
-				edx ++;
 			}
 			if (ebx)
 				return 0;
@@ -178,25 +195,26 @@ LRESULT CALLBACK kbdProc(
 		PostMessageA(gwindowHandle, 0x205, 0, 0);
 		return 0;
 	}
+
 	if (b_46cafd == 0)
 		return 0;
-	if ((ebx & 0xc0000000) != 0) {
-		w_46cb07 = 0;
+
+	if (R4_KEY_RELEASED(lParam) && R4_PREV_KEY_DOWN(lParam)) {
+		modded_key = 0;
 		return 0;
 	}
-	if (esi == 0x11) {
-		w_46cb07 = 0x1100;
+
+	if (wParam == VK_CONTROL) {
+		modded_key = VK_CONTROL << 16;
 	} else {
-		w_46cb07 |= si;
+		modded_key |= wParam;
 	}
+
 	/* hotkey 0x497176 */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[7];
-	eax = (uint16_t)w_46cb07;
-	if (eax == edx) {
-		dh = b_49715d + 1;
-		b_49715d = dh;
-		if (dh == 3) {
-			bh = 0;
+	k = R4_KEY(global_rich4_cfg.hotkeys[7]);
+	if (modded_key == k) {
+		b_49715d++;
+		if (b_49715d == 3) {
 			b_49715d = 0;
 		}
 		fcn_00419703();
@@ -205,8 +223,8 @@ LRESULT CALLBACK kbdProc(
 		return 0;
 	}
 	/* hotkey 0x49717c */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[10];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[10]);
+	if (modded_key == k) {
 		fcn_00402460(0);
 		fcn_00419703();
 		fcn_0041d546();
@@ -214,8 +232,8 @@ LRESULT CALLBACK kbdProc(
 		return 0;
 	}
 	/* hotkey 0x49717e */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[11];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[11]);
+	if (modded_key == k) {
 		ecx = dw_49910c;
 		eax = dw_49910c * 0x68;
 		if (*(char*)(0x496ba0 + eax) == 0)
@@ -245,88 +263,86 @@ L401306:
 		goto L401523;
 	}
 	/* hotkey 497180 */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[12];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[12]);
+	if (modded_key == k) {
 		fcn_00417d65(10);
 		goto L401523;
 	}
 	/* hotkey 497182 */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[13];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[13]);
+	if (modded_key == k) {
 		fcn_00417d65(9);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[14];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[14]);
+	if (modded_key == k) {
 		fcn_00417d65(8);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[15];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[15]);
+	if (modded_key == k) {
 		fcn_00417d65(7);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[16];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[16]);
+	if (modded_key == k) {
 		fcn_00417d65(6);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[17];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[17]);
+	if (modded_key == k) {
 		fcn_00417d65(5);
 		goto L401523;
 	}
 	/* hotkey 40718c */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[18];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[18]);
+	if (modded_key == k) {
 		dw_499088--;
-		ebp = dw_499088 & 7;
-		dw_499088 = ebp;
+		dw_499088 &= 7;
 		dw_474930 = -1;
 		dw_474934 = -1;
 		fcn_00415e70(1);
 		goto L401523;
 	}
 	/* hotkey 40718e */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[19];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[19]);
+	if (modded_key == k) {
 		dw_499088++;
-		ecx = dw_499088 & 7;
-		dw_499088 = ecx;
+		dw_499088 &= 7;
 		dw_474930 = -1;
 		dw_474934 = -1;
 		fcn_00415e70(1);
 		goto L401523;
 	}
 	/* hotkey 407190 */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[20];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[20]);
+	if (modded_key == k) {
 		fcn_00417d65(2);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[21];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[21]);
+	if (modded_key == k) {
 		fcn_00417d65(1);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[22];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[22]);
+	if (modded_key == k) {
 		fcn_00417d65(4);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[23];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[23]);
+	if (modded_key == k) {
 		fcn_00417d65(3);
 		goto L401523;
 	}
 	/* hotkey 497198 */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[24];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[24]);
+	if (modded_key == k) {
 		fcn_00417d65(0);
 		goto L401523;
 	}
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[27];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[27]);
+	if (modded_key == k) {
 		fcn_00402460(0);
 		fcn_00419703();
 		if (fcn_00453a32(0xdc, 0xf0) == 1) {
@@ -342,28 +358,26 @@ L401306:
 		goto L401523;
 
 	/* hotkey 49719a */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[25];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[25]);
+	if (modded_key == k) {
 		eax = dw_49910c;
 		*(char*)(0x48be24 + eax)--;
-		ch = *(char*)(0x48be24 + eax) & 3;
-		*(char*)(0x48be24 + eax) = ch;
+		*(char*)(0x48be24 + eax) &= 3;
 		fcn_00415f69(1);
 		goto L401523;
 	}
 	/* hotkey 49719c */
-	edx = *(uint16_t*)&global_rich4_cfg.hotkeys[26];
-	if (eax == edx) {
+	k = R4_KEY(global_rich4_cfg.hotkeys[26]);
+	if (modded_key == k) {
 		eax = dw_49910c;
 		*(char*)(0x48be24 + eax)++;
-		ch = *(char*)(0x48be24 + eax) & 3;
-		*(char*)(0x48be24 + eax) = ch;
+		*(char*)(0x48be24 + eax) &= 3;
 		fcn_00415f69(1);
 	}
 
 L401523:
-	if (w_46cb07 != 0x1100)
-		w_46cb07 = 0;
+	if (modded_key != (VK_CONTROL << 16))
+		modded_key = 0;
 	return 0;
 }
 
