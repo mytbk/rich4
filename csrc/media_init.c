@@ -132,32 +132,32 @@ LRESULT CALLBACK kbdProc(
 	GetCursorPos(&p);
 
 	/* hotkey 0x497168 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[0]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[0]); /* cursor up */
 	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x, p.y - 10);
 		return 0;
 	}
 
-	k = R4_KEY(global_rich4_cfg.hotkeys[1]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[1]); /* cursor right */
 	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x + 10, p.y);
 		return 0;
 	}
 
-	k = R4_KEY(global_rich4_cfg.hotkeys[2]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[2]); /* cursor down */
 	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x, p.y + 10);
 		return 0;
 	}
 
-	k = R4_KEY(global_rich4_cfg.hotkeys[3]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[3]); /* cursor left */
 	if (wParam == k && R4_KEY_PRESSED(lParam)) {
 		SetCursorPos(p.x - 10, p.y);
 		return 0;
 	}
 
 	/* hotkey 0x497170 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[4]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[4]); /* confirm */
 	if (wParam == k) {
 		if (R4_KEY_PRESSED(lParam) && w_46cb09 != 0) {
 				return 0;
@@ -177,7 +177,7 @@ LRESULT CALLBACK kbdProc(
 	}
 
 	/* hotkey 0x497172 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[5]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[5]); /* cancel */
 	if (wParam == k && R4_KEY_RELEASED(lParam)) {
 		if (b_46cafe != 0 && dw_46cad8 == 1) {
 			uint32_t ebx = 0;
@@ -214,7 +214,7 @@ LRESULT CALLBACK kbdProc(
 	}
 
 	/* hotkey 0x497176 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[7]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[7]); /* switch window group */
 	if (modded_key == k) {
 		b_49715d++;
 		if (b_49715d == 3) {
@@ -226,7 +226,7 @@ LRESULT CALLBACK kbdProc(
 		return 0;
 	}
 	/* hotkey 0x49717c */
-	k = R4_KEY(global_rich4_cfg.hotkeys[10]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[10]); /* move on */
 	if (modded_key == k) {
 		fcn_00402460(0);
 		fcn_00419703();
@@ -235,7 +235,7 @@ LRESULT CALLBACK kbdProc(
 		return 0;
 	}
 	/* hotkey 0x49717e */
-	k = R4_KEY(global_rich4_cfg.hotkeys[11]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[11]); /* select dice number */
 	if (modded_key == k) {
 		ecx = current_player;
 		if (players[current_player].days_stopping == 0)
@@ -261,39 +261,39 @@ L401306:
 		goto L401523;
 	}
 	/* hotkey 497180 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[12]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[12]); /* stock */
 	if (modded_key == k) {
 		fcn_00417d65(10);
 		goto L401523;
 	}
 	/* hotkey 497182 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[13]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[13]); /* trade */
 	if (modded_key == k) {
 		fcn_00417d65(9);
 		goto L401523;
 	}
-	k = R4_KEY(global_rich4_cfg.hotkeys[14]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[14]); /* card */
 	if (modded_key == k) {
 		fcn_00417d65(8);
 		goto L401523;
 	}
-	k = R4_KEY(global_rich4_cfg.hotkeys[15]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[15]); /* tool */
 	if (modded_key == k) {
 		fcn_00417d65(7);
 		goto L401523;
 	}
-	k = R4_KEY(global_rich4_cfg.hotkeys[16]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[16]); /* query */
 	if (modded_key == k) {
 		fcn_00417d65(6);
 		goto L401523;
 	}
-	k = R4_KEY(global_rich4_cfg.hotkeys[17]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[17]); /* map */
 	if (modded_key == k) {
 		fcn_00417d65(5);
 		goto L401523;
 	}
 	/* hotkey 40718c */
-	k = R4_KEY(global_rich4_cfg.hotkeys[18]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[18]); /* rotate left the map */
 	if (modded_key == k) {
 		dw_499088--;
 		dw_499088 &= 7;
@@ -303,7 +303,7 @@ L401306:
 		goto L401523;
 	}
 	/* hotkey 40718e */
-	k = R4_KEY(global_rich4_cfg.hotkeys[19]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[19]); /* rotate right the map */
 	if (modded_key == k) {
 		dw_499088++;
 		dw_499088 &= 7;
@@ -313,22 +313,22 @@ L401306:
 		goto L401523;
 	}
 	/* hotkey 407190 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[20]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[20]); /* hosted AI */
 	if (modded_key == k) {
 		fcn_00417d65(2);
 		goto L401523;
 	}
-	k = R4_KEY(global_rich4_cfg.hotkeys[21]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[21]); /* system */
 	if (modded_key == k) {
 		fcn_00417d65(1);
 		goto L401523;
 	}
-	k = R4_KEY(global_rich4_cfg.hotkeys[22]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[22]); /* save */
 	if (modded_key == k) {
 		fcn_00417d65(4);
 		goto L401523;
 	}
-	k = R4_KEY(global_rich4_cfg.hotkeys[23]);
+	k = R4_KEY(global_rich4_cfg.hotkeys[23]); /* load */
 	if (modded_key == k) {
 		fcn_00417d65(3);
 		goto L401523;
@@ -664,7 +664,8 @@ bool initialize()
 	mid_status[5] = 0;
 	memset(0x4990f0, 0, 4);
 	dw_474938 = malloc(387200);
-	dw_474930 = dw_474934 = dw_48a010 = dw_46cad8 = 0;
+	dw_474930 = dw_474934 = dw_46cad8 = 0;
+	windowCallbacks[0] = NULL;
 	b_47e771 = 0;
 	return 1;
 }
