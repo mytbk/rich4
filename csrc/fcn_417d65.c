@@ -36,10 +36,10 @@ void fcn_00417d65(int v)
 			fcn_00424492();
 			break;
 		case 7:
-			fcn_00447d97();
+			tools_ui();
 			break;
 		case 8:
-			fcn_00441baa();
+			cards_ui();
 			break;
 		case 9:
 			player_info_stock_ui();
