@@ -7,7 +7,7 @@ RECT g_rect;
 Surface **sf1;
 
 char mid_status[7]; // 0x46cb00
-uint32_t windowCallbacks[100]; // 48a010
+wProc windowCallbacks[100]; // 48a010
 
 LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -76,10 +76,10 @@ LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
   return 0;
  L4:
   ebx = dw_46cad8 << 2;
-  if (dw_48a010[ebx] == 0)
+  if (windowCallbacks[ebx] == 0)
     return DefWindowProcA(hWnd, message, wParam, lParam);
   edi = lParam;
-  return (dw_48a010[ebx](hWnd, message, wParam, lParam));
+  return (windowCallbacks[ebx](hWnd, message, wParam, lParam));
 }
 
 int WINAPI WinMain(HINSTANCE hInstance,
