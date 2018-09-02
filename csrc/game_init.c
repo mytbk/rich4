@@ -8,6 +8,39 @@ int winning_condition[6] = { 0, 100, 50, 10, 5, 3 }; // 0x46cc00
 int game_initial_fund; // 0x49908c
 int traffic_initial; // 0x46cb44
 
+const uint32_t ftable_485958[] = {
+  0x00455337U, 0x0045536cU, 0x0045536cU, 0x004553a1U, 0x00455442U,
+  0x00455480U, 0x00455480U, 0x004554beU, 0x004555ebU, 0x00455628U,
+  0x0045566eU, 0x004556abU
+}; /* TODO: analyze these functions */
+
+void fcn_004552b7(void * a1, void * a2, int a3, int a4)
+{
+	edi = a1;
+	esi = a2;
+	ecx = a3 >> 1;
+	ebx = 0x485d68 + (a4 << 5);
+	ftable_485958[dw_47637c](); /* function using esi, edi, ebx, ecx registers */
+}
+
+void fcn_00445a4d(int a1, int a2)
+{
+	int t = a1 * 15;
+
+	if (byte [a2 + t + 0x49915b] >= 9)
+		return;
+
+	if (a2 <= 8) {
+		bh = byte [a2 + 0x49731f];
+		if (bh == 0)
+			return;
+		cl = bh - 1;
+		byte [a2 + 0x49731f] = cl;
+	}
+
+	byte [a2 + t + 0x49915b]++;
+}
+
 int init_new_game(int a0)
 {
 	load_sound_from_mkf(0x46ccd0);
@@ -15,7 +48,7 @@ int init_new_game(int a0)
 	dw_48a358 = malloc(0x96000);
 	mkf_jump = load_mkf("JUMP.MKF");
 	read_mkf(mkf_jump, w_4991b6*4+w_4991b8 /* sign ext */, dw_48a358, NULL);
-	fcn.004552b7(dw_48a354, dw_48a358, 0x96000, -16);
+	fcn_004552b7(dw_48a354, dw_48a358, 0x96000, -16);
 	dw_48a3a4 = allocate_some_struct(440, 155, 0, 0);
 	dw_48a3a0 = allocate_some_struct(192, 461, 0, 0);
 	dw_48a3b8 = read_mkf(dw_48a3b0, 8, NULL, NULL);
@@ -70,7 +103,7 @@ int init_new_game(int a0)
 	eax = edx * 3;
 	edx = eax * 4;
 	eax = dw_48a3b8 + 12 + edx;
-	dw_48a390 = fcn_00451a97(eax, 0, 0x8a, 15, 41, 133);	
+	dw_48a390 = fcn_00451a97(eax, 0, 0x8a, 15, 41, 133); /* function in data_struct.c */
 
 	edx = w_4991b6; /* sign ext */
 	eax = edx * 20;
@@ -98,7 +131,7 @@ int init_new_game(int a0)
 
 	sub.WINMM.dll_mciSendStringA_9cf(0x8001); /* TODO: 0x4549cf */
 
-	int res = fcn_4018e7(0x404e44, a0);
+	int res = fcn_4018e7(0x404e44, a0); /* function in cards_ui.c */
 	*(int*)(esp + 4) = res;
 	unload_mkf(mkf_jump);
 
