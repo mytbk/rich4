@@ -16,7 +16,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 2,
 		.f24 = 60,
-		.f25 = 50,
+		.init_cash_ratio = 50,
 		.f26 = 30,
 	},
 	{
@@ -29,7 +29,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 1,
 		.f24 = 100,
-		.f25 = 40,
+		.init_cash_ratio = 40,
 		.f26 = 45,
 	},
 	{
@@ -42,7 +42,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 2,
 		.f24 = 0,
-		.f25 = 70,
+		.init_cash_ratio = 70,
 		.f26 = 0,
 	},
 	{
@@ -55,7 +55,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 2,
 		.f24 = 100,
-		.f25 = 60,
+		.init_cash_ratio = 60,
 		.f26 = 30,
 	},
 	{
@@ -68,7 +68,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 1,
 		.f24 = 50,
-		.f25 = 40,
+		.init_cash_ratio = 40,
 		.f26 = 25,
 	},
 	{
@@ -81,7 +81,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 1,
 		.f24 = 75,
-		.f25 = 70,
+		.init_cash_ratio = 70,
 		.f26 = 30,
 	},
 	{
@@ -94,7 +94,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 1,
 		.f24 = 100,
-		.f25 = 50,
+		.init_cash_ratio = 50,
 		.f26 = 20,
 	},
 	{
@@ -107,7 +107,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 0,
 		.f24 = 0,
-		.f25 = 40,
+		.init_cash_ratio = 40,
 		.f26 = 35,
 	},
 	{
@@ -120,7 +120,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 0,
 		.f24 = 0,
-		.f25 = 60,
+		.init_cash_ratio = 60,
 		.f26 = 20,
 	},
 	{
@@ -133,7 +133,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 0,
 		.f24 = 50,
-		.f25 = 50,
+		.init_cash_ratio = 50,
 		.f26 = 0,
 	},
 	{
@@ -146,7 +146,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 1,
 		.f24 = 30,
-		.f25 = 55,
+		.init_cash_ratio = 55,
 		.f26 = 15,
 	},
 	{
@@ -159,7 +159,7 @@ player_info rich4_players[12] = {
 		.f22 = 3,
 		.f23 = 2,
 		.f24 = 80,
-		.f25 = 80,
+		.init_cash_ratio = 80,
 		.f26 = 0,
 	}
 };

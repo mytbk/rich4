@@ -18,7 +18,7 @@ typedef struct
 	uint8_t f22;
 	uint8_t f23;
 	uint8_t f24;
-	uint8_t f25;
+	uint8_t init_cash_ratio;
 	uint8_t f26;
 	uint8_t f27;
 	int32_t cash;
@@ -53,7 +53,7 @@ typedef struct
 	uint16_t f72;
 	uint16_t f74;
 	uint32_t f76[6];
-	uint8_t f100;
+	uint8_t f100; /* 0x496bcc */
 	uint8_t f101;
 	uint8_t f102;
 	uint8_t f103;
