@@ -303,7 +303,7 @@ int load_checkpoint(int n)
 
 	for (int i = 0; i < nplayers; i++) {
 		uint8_t j = players[i].character;
-		players[i].name_ptr = rich4_characters[j].name_ptr;
+		players[i].name_ptr = rich4_players[j].name_ptr;
 	}
 
 	fread(0x498e28, 0x10, 5, fp);

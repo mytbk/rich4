@@ -60,13 +60,7 @@ typedef struct
 } player_info;
 
 extern player_info players[]; /* 0x496b68 */
+extern player_info rich4_players[]; /* 0x47e80c */
 
-typedef struct
-{
-	const char *name_ptr;
-	uint32_t unknown[25];
-} character_info;
-
-extern character_info rich4_characters[]; /* 0x47e80c */
 extern int nplayers; /* 0x499114 */
 extern int current_player; /* 0x49910c */
