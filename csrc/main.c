@@ -1,85 +1,75 @@
 #include <windows.h>
+#include "global.h"
 
 HINSTANCE ghInstance; // 48a064
 HWND gwindowHandle; // 48a0d4
 RECT g_rect;
-
-Surface **sf1;
 
 char mid_status[7]; // 0x46cb00
 wProc windowCallbacks[100]; // 48a010
 
 LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-  eax = message;
-  edx = wParam;
-  ebx = 0;
-  if (eax < 0x1c)
-    goto L1; // 401a02
-  if (eax <= 0x1c)
-    goto L2; // 401a10
-  if (eax == 0x3b9)
-    goto L3; // 401b08
-  goto L4; // 401b33
- L1:
-  if (eax == WM_DESTROY)
-    goto L5; // 041b24
-  goto L4;
- L2:
-  if (edx == 0)
-    goto L6; // 401a9f
-  if (dw_46cb0b == 0)
-    goto L7; // 401a87
-  if (sf1 == NULL)
-    goto L8; // 401a31
-  (*sf1)->_6c(*sf1);
- L8:
-  if (mid_status[2] != 0) {
-    mciSendStringA("resume vfw", 0, 0, 0);
-  }
-  if (mid_status[3] != 0) {
-    mciSendStringA("resume mid", 0, 0, 0);
-  }
-  if (mid_status[4] != 0) {
-    mciSendStringA("play cdtrack notify", 0, 0, gwindowHandle);
-  }
- L7:
-  SetFocus(hWnd);
-  mid_status[1] = 1;
-  return 0; // 401b6e
- L6:
-  dw_46cb0b = 1;
-  mid_status[1] = 0;
-  if (mid_status[2] != 0) {
-    mciSendStringA("pause vfw", 0,0,0);
-  }
-  if (mid_status[3] != 0) {
-    mciSendStringA("pause mid", 0, 0, 0);
-  }
-  if (mid_status[4] != 0) {
-    mciSendStringA("stop cdtrack", 0, 0, 0);
-  }
-  return 0;
- L3:
-  if (edx != 1)
-    return 0;
-  if (mid_status[2] == 0)
-    goto L15; // 401b1d
-  fcn_0045174a();
-  return 0;
- L15:
-  sub_mciSendStringA_d2c();
-  return 0;
- L5:
-  sub_UnhookWindowsHookEx_815();
-  PostQuitMessage(0);
-  return 0;
- L4:
-  ebx = dw_46cad8 << 2;
-  if (windowCallbacks[ebx] == 0)
-    return DefWindowProcA(hWnd, message, wParam, lParam);
-  edi = lParam;
-  return (windowCallbacks[ebx](hWnd, message, wParam, lParam));
+	if (message < 0x1c) {
+		if (message == WM_DESTROY) {
+			sub_UnhookWindowsHookEx_815();
+			PostQuitMessage(0);
+			return 0;
+		}
+		if (windowCallbacks[dw_46cad8] == NULL) {
+			return DefWindowProcA(hWnd, message, wParam, lParam);
+		} else {
+			return (windowCallbacks[dw_46cad8](hWnd, message, wParam, lParam));
+		}
+	}
+	if (message == WM_ACTIVATEAPP) {
+		if (wParam != 0) {
+			if (dw_46cb0b != 0) {
+				if (pddrawsf1 != NULL) {
+					IDirectDrawSurface_Restore(pddrawsf1);
+				}
+				if (mid_status[2] != 0) {
+					mciSendStringA("resume vfw", 0, 0, 0);
+				}
+				if (mid_status[3] != 0) {
+					mciSendStringA("resume mid", 0, 0, 0);
+				}
+				if (mid_status[4] != 0) {
+					mciSendStringA("play cdtrack notify", 0, 0, gwindowHandle);
+				}
+			}
+			SetFocus(hWnd);
+			mid_status[1] = 1;
+			return 0;
+		}
+		dw_46cb0b = 1;
+		mid_status[1] = 0;
+		if (mid_status[2] != 0) {
+			mciSendStringA("pause vfw", 0,0,0);
+		}
+		if (mid_status[3] != 0) {
+			mciSendStringA("pause mid", 0, 0, 0);
+		}
+		if (mid_status[4] != 0) {
+			mciSendStringA("stop cdtrack", 0, 0, 0);
+		}
+		return 0;
+	}
+	if (message == MM_MCINOTIFY) {
+		if (wParam != 1)
+			return 0;
+		if (mid_status[2] != 0) {
+			fcn_0045174a();
+			return 0;
+		}
+		sub_mciSendStringA_d2c();
+		return 0;
+	}
+	if (windowCallbacks[dw_46cad8] == NULL) {
+		return DefWindowProcA(hWnd, message, wParam, lParam);
+	} else {
+		return (windowCallbacks[dw_46cad8](hWnd, message, wParam, lParam));
+	}
 }
 
 int WINAPI WinMain(HINSTANCE hInstance,
