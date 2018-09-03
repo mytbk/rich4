@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <stdint.h>
 
 /* media_init.c */
 extern IDirectDraw *pddraw; // 0x0048a0d8
@@ -13,6 +14,8 @@ extern int mkf_panel; // 0x48a05c
 extern int mkf_effect; // 0x48a058
 
 extern HHOOK ghook; // 0x48a050
+
+extern uint32_t pixel_fmt;
 
 char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize);
 

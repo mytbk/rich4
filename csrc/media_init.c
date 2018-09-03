@@ -32,6 +32,7 @@ uint16_t modded_key; // 0x46cb07
 struct st st_46cb14 = {640, 480, 0, 0, NULL}; // 0x46cb14, 12 bytes
 uint8_t speed_tab[3] = {6, 4, 2}; // 0x64cb20
 uint32_t dw_46cb23 = 0;
+uint32_t pixel_fmt; // 0x47637c
 
 void fcn_00456280(struct st *s, int a1, int a2, int a3)
 {
@@ -563,19 +564,19 @@ void fcn_0045175d()
 	(*pddrawsf1)->GetPixelFormat(pddrawsf1, &fmt);
 	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0x7c00
 			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x03e0)
-		dw_47637c = 0;
+		pixel_fmt = 0;
 
 	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0xf800
 			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x07e0)
-		dw_47637c = 1;
+		pixel_fmt = 1;
 
 	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0x001f
 			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x07e0)
-		dw_47637c = 2;
+		pixel_fmt = 2;
 
 	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0x0f00
 			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x00f0)
-		dw_47637c = 3;
+		pixel_fmt = 3;
 }
 
 void load_sound_from_mkf(int32_t *a1)

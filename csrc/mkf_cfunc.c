@@ -1,9 +1,10 @@
+#include "global.h"
+
 void fcn_00451801_no_unroll(int16_t *a, int nbytes)
 {
 	int nw = nbytes >> 1;
-	int eax = dw_47637c;
 
-	switch (eax) {
+	switch (pixel_fmt) {
 		case 1:
 			for (int i = 0; i < nw; i++) {
 				uint16_t t = a[i];
@@ -36,6 +37,7 @@ void fcn_00451801_no_unroll(int16_t *a, int nbytes)
 	}
 }
 
+#if 0
 void fcn_00451801(int16_t *a1, int nbytes)
 {
 	int t; /* esp + 8 */
@@ -107,6 +109,7 @@ void fcn_00451801(int16_t *a1, int nbytes)
 			return;
 	}
 }
+#endif
 
 struct spr_smp
 {
