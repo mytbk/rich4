@@ -55,7 +55,6 @@ int init_new_game(int a0)
 			dw_46cb40 = i;
 			break;
 		}
-406f6b:
 		traffic_initial = dw_499118;
 		dw_46cb48 = dw_499110;
 		edi = dw_49911c;
