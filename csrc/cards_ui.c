@@ -42,12 +42,9 @@ int fcn_4018e7(wProc a1, int a2)
 
 LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x4416f0
 {
-	ebx = hWnd;
-	eax = message;
-	edx = lp;
-
 	PAINTSTRUCT ps; /* esp */
 	RECT rect; /* esp+8 */
+	RECT rect2; /* esp+0x40 */
 
 	if (message >= 0x202) {
 		if (message == WM_LBUTTONUP) {
@@ -91,20 +88,19 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 			if (ebx < 0x13 || ebx >= 0x1a3 || edx < 0x87 || edx >= 0x12f)
 				return 0;
 
-			eax = (edx-0x87) / 56;
-			esi = eax * 5;
-			eax = (ebx - 0x13) / 80;
-			ebx = esi + eax;
+			esi = ((edx - 0x87) / 56) * 5;
+			ebx = esi + (ebx - 0x13) / 80;
 			eax = current_player * 15;
 			if (byte [ebx + eax + 0x499120] == 0)
 				return 0;
 
-			eax = (ebx % 5) * 80;
-			[esp+0x40] = eax + 0x14;
-			[esp+0x48] = eax + 0x62;
-			[esp+0x44] = (ebx / 5) * 56 + 0x88;
-			[esp+0x4c] = (ebx / 5) * 56 + 0xbe;
-			fcn.00451b9e(esp+0x40);
+			int t1 = (ebx % 5) * 80;
+			int t2 = (ebx / 5) * 56;
+			rect2.left = t1 + 0x14;
+			rect2.right = t1 + 0x62;
+			rect2.top = t2 + 0x88;
+			rect2.bottom = t2 + 0xbe;
+			fcn.00451b9e(&rect2);
 
 			ebx += current_player * 15;
 			eax = byte [ebx + 0x499120];
