@@ -2,7 +2,7 @@
 #include <stddef.h>
 
 typedef void (*bit_f)(uint16_t*, uint16_t*, uint8_t*, size_t);
-extern uint32_t pixel_fmt;
+extern int pixel_fmt;
 
 void fcn_455337(uint16_t *edi, uint16_t *esi, uint8_t *ebx, size_t ecx)
 {

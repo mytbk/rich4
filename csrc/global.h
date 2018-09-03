@@ -15,7 +15,7 @@ extern int mkf_effect; // 0x48a058
 
 extern HHOOK ghook; // 0x48a050
 
-extern uint32_t pixel_fmt;
+extern int pixel_fmt;
 
 char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize);
 
