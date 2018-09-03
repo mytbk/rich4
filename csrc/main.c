@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <ddraw.h>
 #include "global.h"
 
 HINSTANCE ghInstance; // 48a064
@@ -118,7 +119,7 @@ L401cb3:
 			w_4991b6 = 1;
 			// fallthrough
 		case 0:
-			if (fcn_00406de7((int)b_46cafc)==0)
+			if (init_new_game((int)b_46cafc)==0)
 				goto case_401de8_0;
 			fcn_00401543();
 			fcn_00407ad2();
