@@ -1,6 +1,11 @@
 #include <stdint.h>
 #include <string.h>
 
+void fcn_00455109(size_t ebx);
+void fcn_004551bb(uint16_t *esi, uint32_t *ecx, uint16_t*);
+void fcn_0045511b(size_t ebx);
+void fcn_004550cc();
+
 /* code used by read_mkf function */
 
 const uint8_t table_00483430[256] = {
@@ -366,47 +371,54 @@ struct {
 
 void fcn_00455040(char *arg1, char *arg2)
 {
-	memcpy(0x4847bc, 0x483630, 4492);
+	uint16_t bx;
+	uint32_t eax, ecx;
+#if 0
+	memcpy(&gtables, 0x483630, 4492);
+#else
+	memcpy(gtables.tab1, table_483630, sizeof(table_483630));
+	memcpy(gtables.tab2, table_483b34, sizeof(table_483b34));
+	memcpy(gtables.tab3, table_484036, sizeof(table_484036));
+	memcpy(gtables.tab4, table_484538, sizeof(table_484538));
+#endif
 	ecx = 0; /* after a rep movsd */
-	edi = arg1;
-	esi = arg2;
-	edx = 0;
-L1:
-	fcn_004551bb(); /* this function changes bx, ecx for return value */
-	if (bh == 0) {
-		*edi = bl;
-		edi++;
-		goto L1;
+	char *edi = arg1;
+	char *esi = arg2;
+
+	while (1) {
+		fcn_004551bb(esi, &ecx, &bx); /* this function changes bx, ecx for return value */
+		if ((bx & 0xff00) == 0) {
+			*edi = bx & 0xff;
+			edi++;
+			continue;
+		}
+		eax = ecx;
+		uint32_t old_ecx = ecx;/* push ecx */
+		eax <<= 3;
+		ecx &= 7;
+		eax = *(int32_t*)(esi + eax);
+		eax >>= ecx;
+		size_t ebp = eax & 0xff;
+		uint8_t cl = table_00483530[ebp];
+		uint8_t dh = table_00483430[ebp];
+		eax >>= cl;
+		uint8_t dl = eax << 2;
+		uint16_t dx = (((uint16_t)dh << 8) | dl) >> 2;
+		cl += 6;
+		eax = cl;
+		/* pop ecx */
+		ecx = old_ecx + eax;
+		if (dx == 0xfff)
+			return;
+		old_ecx = ecx; /* backup ecx */
+		bx -= 0xfd;
+		char *old_esi = esi; /* push esi */
+		esi = edi - 1 - dx;
+		memcpy(edi, esi, bx); /* using rep movsb */
+		edi += bx; /* by movsb */
+		esi = old_esi; /* pop esi */
+		ecx = old_ecx; /* restore ecx */
 	}
-	eax = ecx;
-	old_ecx = ecx;/* push ecx */
-	eax <<= 3;
-	ecx &= 7;
-	eax = *(int32_t*)(esi + eax);
-	eax >>= cl;
-	ebp = eax & 0xff;
-	cl = table_00483530[ebp];
-	dh = table_00483430[ebp];
-	eax >>= cl;
-	dl = al;
-	dl <<= 2;
-	dx >>= 2;
-	cl += 6;
-	eax = ecx & 0xff;
-	/* pop ecx */
-	ecx = old_ecx + eax;
-	if (dx == 0)
-		return;
-	ebp = ecx; /* backup ecx */
-	ebx -= 0xfd;
-	old_esi = esi; /* push esi */
-	esi = edi - 1 - edx;
-	ecx -= ebx;
-	memcpy(edi, esi, ecx); /* using rep movsb */
-	edi += ecx; /* by movsb */
-	esi = old_esi; /* pop esi */
-	ecx = ebp; /* restore ecx */
-	goto L1;
 }
 
 /* unknown ABI */
@@ -415,107 +427,117 @@ argument: esi, ecx
 changes ebx, ecx
 doesn't change edi
 */
-int16_t fcn_004551bb(uint16_t *esi, uint32_t *ecx)
+void fcn_004551bb(uint16_t *esi, uint32_t *ecx, uint16_t *ret_bx)
 {
-	ebx = 0x500;
-L1:
-	/* 0x484cc0-0x4847bc = 0x504 */
-	/* initial value: [0x483630+0x504+0x500] = 0x4fc */
-	bx = gtables.tab2[ebx / 2];
+	uint16_t bx = 0x500;
 
-	if (bx >= 0x502)
-		goto L2;
+	while (1) {
+		/* 0x484cc0-0x4847bc = 0x504 */
+		/* initial value: [0x483630+0x504+0x500] = 0x4fc */
+		bx = gtables.tab2[bx / 2];
+
+		if (bx >= 0x502)
+			break;
 #if BT
-	bool cf = bittest(esi, ecx); /* bt dword [esi], ecx */
+		bool cf = bittest(esi, ecx); /* bt dword [esi], ecx */
 #else
-	uint16_t cf = esi[ecx / 16] & (1 << (ecx % 16));
+		uint32_t _ecx = *ecx;
+		uint16_t cf = esi[_ecx / 16] & (1 << (_ecx % 16));
 #endif
-	(*ecx)++;
-	if (!cf)
-		goto L1;
-	bx += 2;
-	goto L1;
-L2:
-	ebx -= 0x502;
+		(*ecx)++;
+		if (!cf)
+			continue;
+		bx += 2;
+	}
+
+	bx -= 0x502;
 	/* push ebx, ecx, edi */
-	fcn_00455109();
+	fcn_00455109(bx);
 	/* pop edi, ecx, ebx */
 	bx >>= 1;
+	*ret_bx = bx;
 }
 
 /* unknown ABI */
 /* argument: ebx, changes eax, ebx, ecx, edi */
-void fcn_00455109()
+void fcn_00455109(size_t ebx)
 {
 	if (gtables.tab1[640] == 0x8000) {
 		/* push ebx */
 		fcn_004550cc();
 		/* pop ebx */
 	}
-	fcn_0045511b();
+	fcn_0045511b(ebx);
 }
 
 /* unknown ABI */
 /* argument: ebx, changes eax,edi,ecx,ebx */
-void fcn_0045511b()
+void fcn_0045511b(size_t ebx)
 {
+	uint16_t ax, cx, tmp;
+	size_t edi;
 	/* actually the high 16 bits of ebx is 0 */
-	bx = gtables.tab4[ebx / 2];
-L1:
-	gtables.tab1[ebx / 2]++;
-	ax = gtables.tab1[ebx / 2];
-	if (ax > gtables.tab1[ebx / 2 + 1]) {
-		uint16_t *ptr = &gtables.tab1[ebx / 2 + 1];
-		ecx = 0x282;
-		ax--;
-		while (ecx-- && *ptr == ax)
-			ptr ++;
+	ebx = gtables.tab4[ebx / 2];
+	do {
+		gtables.tab1[ebx / 2]++;
+		ax = gtables.tab1[ebx / 2];
+		if (ax > gtables.tab1[ebx / 2 + 1]) {
+			uint16_t *ptr = &gtables.tab1[ebx / 2 + 1];
+			int ecx = 0x282;
+			ax--;
+			while (ecx-- && *ptr == ax)
+				ptr ++;
 
-		edi = (ptr - &gtables.tab1[2]) * sizeof(uint16_t);
+			edi = (ptr - &gtables.tab1[2]) * sizeof(uint16_t);
 
-		ax++;
+			ax++;
 
-		/* note that edi may equal to ebx,
-		   there's some trap to convert the swap to mov
-		   */
+			/* note that edi may equal to ebx,
+			   there's some trap to convert the swap to mov
+			   */
 #ifdef XCHG
-		swap(gtables.tab1[edi / 2], ax);
-		gtables.tab1[ebx / 2] = ax;
+			swap(gtables.tab1[edi / 2], ax);
+			gtables.tab1[ebx / 2] = ax;
 #else
-		if (edi != ebx) {
-			gtables.tab1[ebx / 2] = gtables.tab1[edi / 2];
-			gtables.tab1[edi / 2] = ax;
-		}
+			if (edi != ebx) {
+				gtables.tab1[ebx / 2] = gtables.tab1[edi / 2];
+				gtables.tab1[edi / 2] = ax;
+			}
 #endif
 
-		ax = gtables.tab2[ebx / 2];
-		cx = gtables.tab2[edi / 2];
+			ax = gtables.tab2[ebx / 2];
+			cx = gtables.tab2[edi / 2];
 
-		if (cx < 0x502) {
-			gtables.tab3[ecx / 2] = bx;
-			gtables.tab3[ecx / 2 + 1] = bx;
-		} else {
-			gtables.tab4[(ecx - 0x502) / 2] = bx;
+			if (cx < 0x502) {
+				gtables.tab3[ecx / 2] = ebx;
+				gtables.tab3[ecx / 2 + 1] = ebx;
+			} else {
+				gtables.tab4[(ecx - 0x502) / 2] = ebx;
+			}
+
+#if 0
+			swap(ax, cx);
+#else
+			tmp = ax;
+			ax = cx;
+			cx = tmp;
+#endif
+
+			if (cx < 0x502) {
+				gtables.tab3[ecx / 2] = edi;
+				gtables.tab3[ecx / 2 + 1] = edi;
+			} else {
+				gtables.tab4[(ecx - 0x502) / 2] = edi;
+			}
+
+			gtables.tab2[ebx / 2] = ax;
+			gtables.tab2[edi / 2] = cx;
+			ebx = edi;
 		}
 
-		swap(ax, cx);
+		ebx = gtables.tab3[ebx / 2];
+	} while (ebx != 0);
 
-		if (cx < 0x502) {
-			gtables.tab3[ecx / 2] = di;
-			gtables.tab3[ecx / 2 + 1] = di;
-		} else {
-			gtables.tab4[(ecx - 0x502) / 2] = di;
-		}
-
-		gtables.tab2[ebx / 2] = ax;
-		gtables.tab2[edi / 2] = cx;
-		bx = di;
-	}
-
-	bx = gtables.tab3[ebx / 2];
-
-	if (bx != 0)
-		goto L1;
 	return;
 }
 
@@ -523,23 +545,21 @@ L1:
 /* no argument, changes ebx, ecx, edx, ebp */
 void fcn_004550cc()
 {
-	edx = 0x141;
-	ecx = 0;
-	ebp = 0;
+	uint16_t cx;
+	size_t ebp = 0;
+	int edx = 0x141;
 	do {
-		cx = *(int16_t*)(ebp + 0x4856c4); /* 0x4856c4 + 0x141 * 2 = 0x485946 */
-		if (*(int16_t*)(ecx + 0x4847bc) & 1) {
-			ebx = ebp;
-			fcn_0045511b();
+		cx = gtables.tab4[ebp/2]; /* 0x4856c4 + 0x141 * 2 = 0x485946 */
+		/* assert((cx % 2) == 0) */
+		if (gtables.tab1[cx/2] & 1) {
+			fcn_0045511b(ebp);
 		}
 		ebp += 2;
 		edx--;
 	} while(edx);
-	ebx = 0;
-	do {
-		*(uint16_t*)(ebx + 0x4847bc) >>= 1;
-		ebx += 2;
-	} while (ebx < 0x502);
+	for (size_t i = 0; i < 0x502; i += 2) {
+		gtables.tab1[i/2] >>= 1;
+	}
 	return;
 }
 
