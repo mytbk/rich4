@@ -1,4 +1,8 @@
-static inline mem_copy_words(void *dst, void *src, size_t n)
+#include <stdlib.h>
+#include <string.h>
+#include "data_struct.h"
+
+static inline void mem_copy_words(void *dst, void *src, size_t n)
 {
 	memcpy(dst, src, n*2);
 }
