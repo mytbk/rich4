@@ -1,6 +1,13 @@
-#include "global.h"
+#include <string.h>
+#include <stdint.h>
 
+extern int pixel_fmt;
+
+#ifndef UNROLL
+void fcn_00451801(int16_t *a, int nbytes)
+#else
 void fcn_00451801_no_unroll(int16_t *a, int nbytes)
+#endif
 {
 	int nw = nbytes >> 1;
 
@@ -125,7 +132,7 @@ struct spr_smp
 
 void fcn_00450069(char *s)
 {
-	struct spr_smp sst = (struct spr_smp*)s;
+	struct spr_smp *sst = (struct spr_smp*)s;
 
 	if (strcmp(sst->sig, "SPR") == 0) {
 		int oldv = sst->t[0].v1;
@@ -139,20 +146,14 @@ void fcn_00450069(char *s)
 		}
 	}
 
-	if (strcmp(s, "SMP") == 0) {
-		int *t = (int*)s;
-		esi = t[5];
-		t[5] = s + t[2];
-		for (eax = 1; eax < t[1]; eax++) {
-			edx = eax *12;
-			ecx = s + edx;
-			ebp = *(int*)(ecx + 20);
-			edi = eax - 1;
-			edx = edi * 3;
-			edi = *(int*)(s + edx * 4 + 20);
-			esi += edi;
-			*(int*)(ecx + 0x14) = esi;
-			esi = ebp;
+	if (strcmp(sst->sig, "SMP") == 0) {
+		int oldv = sst->t[0].v1; // oldv@esi
+		sst->t[0].v1 = (int32_t)s + sst->t2;
+
+		for (int i = 1; i < sst->t1; i++) {
+			int t = sst->t[i].v1;
+			sst->t[i].v1 = oldv + sst->t[i-1].v1;
+			oldv = t;
 		}
 	}
 }
