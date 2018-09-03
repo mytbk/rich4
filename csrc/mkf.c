@@ -1,23 +1,33 @@
 #include <windows.h>
+#include <stdint.h>
+
+#define NULL_HND ((HANDLE)(-1))
+
+/* mkf_00455040.c */
+void fcn_00455040(char *arg1, char *arg2);
+
+/* mkf_cfunc.c */
+void fcn_00451801(int16_t *a, int nbytes);
+void fcn_00450069(char *s);
 
 struct mkf
 {
 	HANDLE handle;
 	char *data;
 };
-struct mkf mkf_stdata[16] = { {-1, NULL} }; // 0x4762f4
+struct mkf mkf_stdata[16] = { { NULL_HND, NULL } }; // 0x4762f4
 
-uint32_t load_mkf(const char *fn)
+int32_t load_mkf(const char *fn)
 {
 	int i;
 	int32_t x;
 	int sz;
 
-	if (mkf_stdata[0].handle == -1)
+	if (mkf_stdata[0].handle == NULL_HND)
 		memset(mkf_stdata, 0, sizeof(mkf_stdata));
 
 	HANDLE fhdl = CreateFileA(fn, 0x80000000, 0, 0, 3, 128, 0);
-	if (fhdl == -1)
+	if (fhdl == NULL_HND)
 		return -1;
 
 	for (i = 0; mkf_stdata[i].handle != 0; i++)
