@@ -553,7 +553,7 @@ void fcn_0044f935()
 
 	(*pddraw)->CreateSurface(pddraw, &sfdesc1, &pddrawsf3, NULL);
 	(*pddrawsf3)->Lock(pddrawsf3, NULL, &sfdesc1, 1, NULL);
-	memcpy(*(uint32_t*)0x48a08c, 0, 0x32000);
+	memcpy(sfdesc1.lpSurface, 0, 0x32000);
 	(*pddrawsf3)->Unlock(pddrawsf3, NULL);
 }
 
