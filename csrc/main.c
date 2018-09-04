@@ -159,7 +159,7 @@ start_msg_loop:
 		fcn_004192f7();
 	if (b_46cafa != 0)
 		fcn_0040d7c4();
-	eax = dw_49910c * 0x34;
+	eax = current_player * 0x34;
 	if (b_498ea2[eax] == 0) {
 		if (b_498ea0[eax] != 0x80) {
 			dl = b_498ea0[eax] & 0x7f;

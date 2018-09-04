@@ -334,7 +334,7 @@ int load_checkpoint(int n)
 	}
 
 	fread(0x4967e0, 0xc, 0x1c, fp);
-	fread(0x49910c, 4, 1, fp);
+	fread(&current_player, 4, 1, fp);
 	fread(0x499118, 4, 1, fp);
 	fread(0x499110, 4, 1, fp);
 	fread(0x49911c, 4, 1, fp);
@@ -406,7 +406,7 @@ int load_checkpoint(int n)
 		fread(*(int*)(0x48f294+esi), 1, *(int*)0x498e94, fp);
 	}
 	fcn_00407ad2();
-	eax = (*(int*)0x49910c) * 0x34;
+	eax = current_player * 0x34;
 	*(char*)(0x498ea0 + eax) |= 0x80;
 	srand(GetTickCount());
 

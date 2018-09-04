@@ -121,7 +121,7 @@ int init_new_game(int a0)
 
 	if (res == 1) {
 		nplayers = dw_46cb3c + 2;
-		dw_499104 = dw_49910c = 0;
+		dw_499104 = current_player = 0;
 		game_initial_fund = initial_fund[dw_46cb40];
 		memset(0x499120, 0, 60);
 		memset(0x49915c, 0, 60);

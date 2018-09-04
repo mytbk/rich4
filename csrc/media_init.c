@@ -359,7 +359,7 @@ L401306:
 	/* hotkey 49719a */
 	k = R4_KEY(global_rich4_cfg.hotkeys[25]);
 	if (modded_key == k) {
-		eax = dw_49910c;
+		eax = current_player;
 		*(char*)(0x48be24 + eax)--;
 		*(char*)(0x48be24 + eax) &= 3;
 		fcn_00415f69(1);
@@ -368,7 +368,7 @@ L401306:
 	/* hotkey 49719c */
 	k = R4_KEY(global_rich4_cfg.hotkeys[26]);
 	if (modded_key == k) {
-		eax = dw_49910c;
+		eax = current_player;
 		*(char*)(0x48be24 + eax)++;
 		*(char*)(0x48be24 + eax) &= 3;
 		fcn_00415f69(1);
