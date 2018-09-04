@@ -298,13 +298,13 @@ fs *
 f esp 1 0x00178000 
 fs *
 f ebp 1 0x00178000 
-fs *
+fs functions
 f eip 176 0x00458ced 
 fs *
 f eflags 1 0x00000000 
 fs functions
 f fcn.00419703 12 0x00419703 
-f fcn.0041906a 101 0x0041906a 
+f player_action_1 101 0x0041906a 
 f fcn.004196f1 18 0x004196f1 
 f fcn.00402460 65 0x00402460 
 f fcn.0041d546 19 0x0041d546 
@@ -409,7 +409,7 @@ f fcn.004146ee 77 0x004146ee
 f fcn.004024a9 23 0x004024a9 
 f fcn.0041473b 78 0x0041473b 
 f fcn.00450cda 19 0x00450cda 
-f sub.USER32.dll_IntersectRect_4cd 104 0x004174cd 
+f IntersectRect_4cd 104 0x004174cd 
 f fcn.004521aa 33 0x004521aa 
 f fcn.0040a9d7 56 0x0040a9d7 
 f fcn.0040d293 33 0x0040d293 
@@ -1211,10 +1211,10 @@ f switch.0x0045dd29 1 0x0045dd29
 fs *
 f case.default.0x45dd65 1 0x0045dd65 
 fs functions
-f fcn.00417191 828 0x00417191 
-f player_info_property_list 3606 0x00417e26 
-f sub.USER32.dll_GetCursorPos_35d 259 0x0040235d 
-f sub.USER32.dll_GetCursorPos_250 269 0x00402250 
+f fcn_417191 828 0x00417191 
+f some_game_loop_func 3606 0x00417e26 
+f GetCursorPos_35d 259 0x0040235d 
+f GetCursorPos_250 269 0x00402250 
 f fcn.0040dd1f 479 0x0040dd1f 
 f fcn.00415d31 542 0x00415d31 
 f load_mkf 262 0x004502fe 
@@ -1328,7 +1328,7 @@ f fcn.0040cd07 128 0x0040cd07
 f fcn.0043ec3f 559 0x0043ec3f 
 f fcn.0040e14d 341 0x0040e14d 
 f fcn.004582bc 64 0x004582bc 
-f fcn.0041d476 208 0x0041d476 
+f player_action_2 208 0x0041d476 
 f fcn.0040fc00 87 0x0040fc00 
 f fcn.0044808a 1210 0x0044808a 
 f strcpy_without_spaces 56 0x00452946 
@@ -1713,7 +1713,6 @@ fs *
 f lplpSurface3 1 0x004762cc 
 fs search
 f hit13_0 3 0x00475784 
-f hit14_0 3 0x0045510c 
 fs searches
 f hit14_1 3 0x004631a0 
 f hit14_2 3 0x004631ab 
@@ -1815,7 +1814,7 @@ f str.end_avi 1 0x004631af
 fs *
 f str.thanks_avi 1 0x004631a4 
 fs functions
-f fcn.004019dd 410 0x004019dd 
+f windowProc 410 0x004019dd 
 fs *
 f str.play_cdtrack_not 1 0x0046307f 
 fs *
@@ -2362,19 +2361,6 @@ fs *
 f windowCallbacks 1 0x0048a010 
 fs functions
 f fcn.004420d8 220 0x004420d8 
-f pick_money_on_road 160 0x0044d33b 
-f lose_wallet 1133 0x0044d462 
-f win_lottery 67 0x0044d56e 
-f fmalloc 270 0x00456f8e 
-f lseek 139 0x0045931e 
-f AllocInitThreadData 61 0x0045a23d 
-f NTAddThread 89 0x0045a2cb 
-f init_stack_limits 105 0x0045a666 
-f frealloc 148 0x0045c59a 
-f AddThreadData 108 0x0045c7ca 
-f InitThreadData 42 0x0045c8d7 
-f terminate 19 0x0045ea68 
-f CBeginThread 231 0x0045f7e8 
 fs *
 f mkf_jump 1 0x0048a3b0 
 fs *
@@ -2391,3 +2377,31 @@ fs *
 f float_10.0 1 0x00463194 
 fs *
 f player.init_cash_ratio 1 0x00496b81 
+fs functions
+f fcn.00455337 53 0x00455337 
+f fcn.0045536c 53 0x0045536c 
+f fcn.004553a1 57 0x004553a1 
+fs *
+f g_rect 1 0x0046cadc 
+fs *
+f pixel_fmt 4 0x0047637c 
+fs functions
+f fcn.004554be 62 0x004554be 
+f fcn.004416f0 570 0x004416f0 
+f pick_money_on_road 160 0x0044d33b 
+f lose_wallet 1133 0x0044d462 
+f win_lottery 67 0x0044d56e 
+f fmalloc 270 0x00456f8e 
+f lseek 139 0x0045931e 
+f AllocInitThreadData 61 0x0045a23d 
+f NTAddThread 89 0x0045a2cb 
+f init_stack_limits 105 0x0045a666 
+f frealloc 148 0x0045c59a 
+f AddThreadData 108 0x0045c7ca 
+f InitThreadData 42 0x0045c8d7 
+f terminate 19 0x0045ea68 
+f CBeginThread 231 0x0045f7e8 
+fs *
+f sfdesc1.lpSurface 1 0x0048a08c 
+fs *
+f sfdesc1.lPitch 1 0x0048a078 
