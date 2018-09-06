@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stddef.h>
 
+typedef uint32_t (*bit_f_u32)(uint32_t);
 typedef void (*bit_f)(uint16_t*, uint16_t*, uint8_t*, size_t);
 extern int pixel_fmt;
 
@@ -54,6 +55,19 @@ void fcn_4553a1(uint16_t *edi, uint16_t *esi, uint8_t *ebx, size_t ecx)
 	} while (--ecx);
 }
 
+uint32_t fcn_45525c(uint32_t eax)
+{
+	// return {16'b0,eax[23:19],eax[15:10],eax[7:3]}
+	uint32_t t1 = ((eax >> 19) & 0x1f) << 11;
+	uint32_t t2 = ((eax >> 10) & 0x3f) << 5;
+	uint32_t t3 = ((eax >> 3) & 0x1f);
+	return (t1 | t2 | t3);
+}
+
+const bit_f_u32 ftable_485948[4] = {
+	0x0045523eU, fcn_45525c, 0x0045527aU, 0x00455299U
+};
+
 const bit_f ftable_485958[] = {
 	fcn_455337, fcn_45536c, fcn_45536c, fcn_4553a1
 };
@@ -69,3 +83,7 @@ void fcn_004552b7(void * dst, void * src, size_t a3, int a4)
 	ftable_485958[pixel_fmt](dst, src, (uint8_t*)(0x485d68 + (a4 << 5)), a3 >> 1);
 }
 
+uint32_t fcn_4551f0(uint32_t a0)
+{
+	return ftable_485948[pixel_fmt](a0);
+}
