@@ -45,7 +45,7 @@ void drawStringY(HDC hdc, int nXStart, int nYStart, LPCSTR str)
 	}
 }
 
-void draw_some_text(a1, const char *str, a3, a4, int a5)
+void draw_some_text(a1, const char *str, int a3, int a4, int a5)
 {
 	DDSURFACEDESC desc; /* esp */
 	RECT fmt_dim1; /* esp + 0x6c */
@@ -77,63 +77,57 @@ void draw_some_text(a1, const char *str, a3, a4, int a5)
 		fmt_dim2.bottom = t1;
 	} else if (a5 == 4 || a5 == 7) {
 		eax = fmt_dim2.right / 2;
-		edx = 256 - eax;
-		fmt_dim2.left = edx;
+		fmt_dim2.left = 256 - eax;
 		eax += 256;
 		fmt_dim2.right = eax;
 	}
-	dh = b_4762d8;
-	if (dh != 1) {
+	uint8_t dh = gfa[0];
+	if ( (dh & 1) != 0 ) {
 		SetTextColor(hDC, dw_4762e4);
-		eax = 1;
 		fmt_dim1.left = 1;
 		fmt_dim1.top = 1;
 		if (a5 >= 4) {
 			if (a5 == 4 || a5 == 7) {
-				DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, 1);
+				DrawTextA(hDC, str, strlen(str), &fmt_dim1, 1);
 			} else {
-				DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, 0);
+				DrawTextA(hDC, str, strlen(str), &fmt_dim1, 0);
 			}
 		} else if (a5 != 3) {
-			DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, 0);
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, 0);
 		} else {
-			drawStringY(hDC, eax, eax, ebx);
+			drawStringY(hDC, 1, 1, str);
 		}
-		goto L44fe09;
+	} else if ( (dh & 4) != 0 ) {
+		SetTextColor(hDC, dw_4762e4);
+		if (a5 == 3) {
+			drawStringY(hDC, 1, 0, str);
+			drawStringY(hDC, 1, 2, str);
+			drawStringY(hDC, 0, 1, str);
+			drawStringY(hDC, 2, 1, str);
+		} else {
+			if (a5 == 4 || a5 == 7) {
+				esi = 1;
+			} else {
+				esi = 0;
+			}
+
+			fmt_dim1.left = 1;
+			fmt_dim1.top = 0;
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+
+			fmt_dim1.left = 1;
+			fmt_dim1.top = 2;
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+
+			fmt_dim1.left = 0;
+			fmt_dim1.top = 1;
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+
+			fmt_dim1.left = 2;
+			fmt_dim1.top = 1;
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+		}
 	}
-	if (dh == 4)
-		goto L44fe09;
-	SetTextColor(hDC, dw_4762e4);
-	if (a5 == 3) {
-		drawStringY(hDC, 1, 0, ebx);
-		drawStringY(hDC, 1, 2, ebx);
-		drawStringY(hDC, 0, 1, ebx);
-		drawStringY(hDC, 2, 1, ebx);
-		goto L44fe09;
-	}
-	if (a5 == 4 || a5 == 7) {
-		esi = 1;
-	} else {
-		esi = 0;
-	}
-
-	fmt_dim1.left = 1;
-	fmt_dim1.top = 0;
-	DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, esi);
-
-	fmt_dim1.left = 1;
-	fmt_dim1.top = 2;
-	DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, esi);
-
-	fmt_dim1.left = 0;
-	fmt_dim1.top = 1;
-	DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, esi);
-
-	fmt_dim1.left = 2;
-	fmt_dim1.top = 1;
-	DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, esi);
-
-L44fe09:
 
 	SetTextColor(hDC, dw_4762e0);
 	if ( ((uint8_t)gfa[0] & 4) != 0 ) {
@@ -147,14 +141,14 @@ L44fe09:
 	}
 	if (a5 >= 4) {
 		if (a5 == 4 || a5 == 7) {
-			DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, 1);
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, 1);
 		} else {
-			DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, 0);
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, 0);
 		}
 	} else if (a5 == 3) {
-		drawStringY(hDC, fmt_dim1.left, fmt_dim1.top, ebx);
+		drawStringY(hDC, fmt_dim1.left, fmt_dim1.top, str);
 	} else {
-		DrawTextA(hDC, ebx, strlen(ebx), &fmt_dim1, 0);
+		DrawTextA(hDC, str, strlen(str), &fmt_dim1, 0);
 	}
 
 	IDirectDrawSurface_ReleaseDC(pddrawsf3, hDC);
@@ -177,18 +171,15 @@ L44fe09:
 			a3 -= esi / 2;
 			/* fall through */
 		case 4:
-			eax = ebx / 2;
-			a4 -= eax;
+			a4 -= ebx / 2;
 			break;
 		case 5:
 			a3 -= esi;
-			eax = ebx / 2;
-			a4 -= eax;
+			a4 -= ebx / 2;
 			break;
 		case 6:
-			eax = esi / 2;
-			a3 = eax;
-			a4 = ebx;
+			a3 -= esi / 2;
+			a4 -= ebx;
 			break;
 		default:
 			break;
