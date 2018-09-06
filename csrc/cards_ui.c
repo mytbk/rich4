@@ -1,5 +1,6 @@
 #include "player_info.h"
 #include "global.h"
+#include "sound_struct.h"
 
 const char str_use[] = "\xa8\xcf\xa5\xce%s"; // 使用%s
 
@@ -39,6 +40,35 @@ int fcn_4018e7(wProc a1, int a2)
 	}
 }
 
+void Post_0402_Message(LPARAM lp)
+{
+	PostMessageA(gwindowHandle, 0x402, 0, lp);
+}
+
+sound_struct snd0 = {1, NULL}; // 0x00482322
+sound_struct snd1 = {3, NULL}; // 0x0048233a
+sound_struct snd2; // 0x0048cae0
+
+void fcn_4540d8(LPDIRECTSOUNDBUFFER sbuf, uint32_t a1, int a2)
+{
+	if (sbuf == NULL || dw_49715b == 0)
+		return;
+
+	IDirectSoundBuffer_SetCurrentPosition(sbuf, 0);
+	if (IDirectSoundBuffer_Play(sbuf, 0, 0, a2) == DSERR_BUFFERLOST) {
+		if (fcn.00453f6c(sbuf, a1) == 1) {
+			IDirectSoundBuffer_Play(sbuf, 0, 0, a2);
+		}
+	}
+	IDirectSoundBuffer_SetVolume(sbuf, dword [(uint8_t)b_49715b * 4 + 0x47e758]);
+	snd2.f0 = a1;
+	snd2.sbuf = sbuf;
+}
+
+void fcn_4542ce(sound_struct * a0, int a1)
+{
+	fcn_4540d8(a0->sbuf, a0->f0, a1);
+}
 
 LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x4416f0
 {
@@ -52,13 +82,13 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 				return 0;
 			fcn.00451d4e();
 			fcn.00402460(0);
-			sub.USER32.dll_PostMessageA_966(dword [0x48c544]);
+			Post_0402_Message(dword [0x48c544]);
 			return 0;
 		}
 		if (message >= 0x205) {
 			if (message == WM_RBUTTONUP) {
 				fcn.00402460(0);
-				sub.USER32.dll_PostMessageA_966(0);
+				Post_0402_Message(0);
 				return 0;
 			}
 			if (message == 0x401) {
@@ -105,7 +135,7 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 			ebx += current_player * 15;
 			eax = byte [ebx + 0x499120];
 			dword [0x48c544] = eax;
-			fcn.004542ce(0x482322, 0);
+			fcn_4542ce(&snd0, 0);
 			return 0;
 		}
 		return DefWindowProcA(hWnd, message, wp, lp);
@@ -145,7 +175,7 @@ void cards_ui()
 				fcn_00441f73(ebx, s);
 				esi = eax = call[0x475d5c+ebx*4];
 				if (eax) {
-					fcn.004542ce(0x48233a, eax);
+					fcn_4542ce(&snd1, eax);
 				}
 			}
 		} while (esi != 0);
