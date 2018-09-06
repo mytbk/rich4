@@ -1,6 +1,7 @@
 #include "global.h"
 #include "data_struct.h"
 #include "player_info.h"
+#include "sound_struct.h"
 
 DDSURFACEDESC sfdesc1; // 0x0048a068
 DDSURFACEDESC sfdesc2; // 0x0048a0f8
@@ -22,7 +23,7 @@ char bool_47e76c;
 DSBUFFERDESC soundbuf_desc; // 0x48cb28
 LPDIRECTSOUNDBUFFER *pdsoundbuf; // 0x47e74c
 WAVEFORMATEX wav_format; // 0x48cb3c
-int dw_48cae4, dw_47e750, dw_47e754;
+int dw_47e750, dw_47e754;
 int *array_48cae8[16];
 
 int32_t dw_48a164, dw_48a168;
@@ -431,21 +432,21 @@ LPDIRECTSOUNDBUFFER* dsound_load_wav(void *a1)
 	soundbuf_desc.dwReserved = 0;
 	soundbuf_desc.lpwfxFormat = &wav_format;
 
-	LPDIRECTSOUNDBUFFER *local_buf; /* esp */
+	LPDIRECTSOUNDBUFFER local_buf; /* esp */
 	DWORD pvAudioPtr[2]; /* esp+4, esp+8 */
 	DWORD dwAudioBytes[2]; /* esp+c, esp+0x10 */
 
-	if ((*pdsound)->CreateSoundBuffer(pdsound, &soundbuf_desc, &local_buf, NULL) != 0)
+	if (IDirectSound_CreateSoundBuffer(pdsound, &soundbuf_desc, &local_buf, NULL) != 0)
 		return 0;
 
 	/*     STDMETHOD(Lock)(THIS_ DWORD dwOffset, DWORD dwBytes, LPVOID *ppvAudioPtr1, LPDWORD pdwAudioBytes1, LPVOID *ppvAudioPtr2, LPDWORD pdwAudioBytes2, DWORD dwFlags) PURE;
 	*/
-	int res = (*local_buf)->Lock(local_buf, 0, bufbytes,
+	int res = IDirectSoundBuffer_Lock(local_buf, 0, bufbytes,
 			&pvAudioPtr[0], &dwAudioBytes[0],
 			&pvAudioPtr[1], &dwAudioBytes[1], 0);
-	if (res == 0x88780096) {
-		(*local_buf)->Restore(local_buf);
-		res = (*local_buf)->Lock(local_buf, 0, bufbytes,
+	if (res == DSERR_BUFFERLOST) {
+		IDirectSoundBuffer_Restore(local_buf);
+		res = IDirectSoundBuffer_Lock(local_buf, 0, bufbytes,
 				&pvAudioPtr[0], &dwAudioBytes[0],
 				&pvAudioPtr[1], &dwAudioBytes[1], 0);
 	}
@@ -459,7 +460,7 @@ LPDIRECTSOUNDBUFFER* dsound_load_wav(void *a1)
 	}
 
 	/*     STDMETHOD(Unlock)(THIS_ LPVOID pvAudioPtr1, DWORD dwAudioBytes1, LPVOID pvAudioPtr2, DWORD dwAudioPtr2) PURE; */
-	(*local_buf)->Unlock(local_buf, &pvAudioPtr[0], dwAudioBytes[0], &pvAudioPtr[1], dwAudioBytes[1]);
+	IDirectSoundBuffer_Unlock(local_buf, &pvAudioPtr[0], dwAudioBytes[0], &pvAudioPtr[1], dwAudioBytes[1]);
 	return local_buf;
 }
 
@@ -495,9 +496,9 @@ void direct_sound_init(int a0)
 			bool_47e76c = 1;
 			return 0;
 		}
-		if ((*pdsound)->SetCooperativeLevel(pdsound, gwindowHandle, 3) != 0) {
+		if (IDirectSound_SetCooperativeLevel(pdsound, gwindowHandle, 3) != 0) {
 			MessageBoxA(NULL, "DirectSound SetCooperativeLevel Error!", "ERROR", 0x10);
-			(*pdsound)->Release(pdsound);
+			IDirectSound_Release(pdsound);
 			pdsound = NULL;
 			bool_47e76c = 1;
 			return 0;
@@ -508,9 +509,9 @@ void direct_sound_init(int a0)
 		soundbuf_desc.dwReserved = 0;
 		soundbuf_desc.lpwfxFormat = NULL;
 
-		if ((*pdsound)->CreateSoundBuffer(pdsound, &soundbuf_desc, &pdsoundbuf, NULL) != 0) {
+		if (IDirectSound_CreateSoundBuffer(pdsound, &soundbuf_desc, &pdsoundbuf, NULL) != 0) {
 			MessageBoxA(NULL, "DirectSound CreateSoundPrimaryBuffer Error!", "ERROR", 0x10);
-			(*pdsound)->Release(pdsound);
+			IDirectSound_Release(pdsound);
 			pdsound = NULL;
 			bool_47e76c = 1;
 			return 0;
@@ -524,11 +525,11 @@ void direct_sound_init(int a0)
 		wav_format.wBitsPerSample = 8;
 		wav_format.cbSize = 0;
 
-		if ((*pdsoundbuf)->SetFormat(pdsoundbuf, &wav_format) != 0) {
+		if (IDirectSoundBuffer_SetFormat(pdsoundbuf, &wav_format) != 0) {
 			MessageBoxA(NULL, "DirectSound SetFormat Error!", "ERROR", 0x10);
-			(*pdsound)->Release(pdsound);
+			IDirectSound_Release(pdsound);
 			pdsound = NULL;
-			(*pdsoundbuf)->Release(pdsoundbuf);
+			IDirectSoundBuffer_Release(pdsoundbuf);
 			pdsoundbuf = NULL;
 			bool_47e76c = 1;
 			return 0;
@@ -540,7 +541,8 @@ void direct_sound_init(int a0)
 	} else {
 		memset(array_48cae8, 0, sizeof(array_48cae8));
 	}
-	dw_48cae4 = dw_47e750 = dw_47e754 = 0;
+	snd2.sbuf = NULL;
+	dw_47e750 = dw_47e754 = 0;
 	return 1;
 }
 
@@ -551,17 +553,17 @@ void fcn_0044f935()
 	sfdesc1.dwWidth = 0x200;
 	sfdesc1.dwHeight = 200;
 
-	(*pddraw)->CreateSurface(pddraw, &sfdesc1, &pddrawsf3, NULL);
-	(*pddrawsf3)->Lock(pddrawsf3, NULL, &sfdesc1, 1, NULL);
+	IDirectDraw_CreateSurface(pddraw, &sfdesc1, &pddrawsf3, NULL);
+	IDirectDrawSurface_Lock(pddrawsf3, NULL, &sfdesc1, 1, NULL);
 	memcpy(sfdesc1.lpSurface, 0, 0x32000);
-	(*pddrawsf3)->Unlock(pddrawsf3, NULL);
+	IDirectDrawSurface_Unlock(pddrawsf3, NULL);
 }
 
 void fcn_0045175d()
 {
 	DDPIXELFORMAT fmt;
 	fmt.dwSize = 0x20;
-	(*pddrawsf1)->GetPixelFormat(pddrawsf1, &fmt);
+	IDirectDrawSurface_GetPixelFormat(pddrawsf1, &fmt);
 	if (fmt.DUMMYUNIONNAME2.dwRBitMask == 0x7c00
 			&& fmt.DUMMYUNIONNAME3.dwGBitMask == 0x03e0)
 		pixel_fmt = 0;
@@ -627,25 +629,25 @@ bool initialize()
 		MessageBoxA(0, "DirectDraw Initial Error!", "ERROR", 16);
 		return 0;
 	}
-	(*pddraw)->SetCooperativeLevel(pddraw, gwindowHandle, 17);
-	if ((*pddraw)->SetDisplayMode(pddraw, 640, 480, 16) != 0) {
+	IDirectDraw_SetCooperativeLevel(pddraw, gwindowHandle, 0x11);
+	if (IDirectDraw_SetDisplayMode(pddraw, 640, 480, 16) != 0) {
 		MessageBoxA(0, "DirectDraw SetMode Error!", "ERROR", 16);
 		return 0;
 	}
 	sfdesc1.dwSize = 0x6c;
 	sfdesc1.dwFlags = 1;
 	sfdesc1.ddsCaps = 0x200;
-	(*pddraw)->CreateSurface(pddraw, &sfdesc1, &pddrawsf1, NULL);
+	IDirectDraw_CreateSurface(pddraw, &sfdesc1, &pddrawsf1, NULL);
 
-	(*pddrawsf1)->Restore(pddrawsf1);
-	(*pddrawsf1)->Lock(pddrawsf1, NULL, &sfdesc1, 1, NULL);
+	IDirectDrawSurface_Restore(pddrawsf1);
+	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc1, 1, NULL);
 	dw_48a060 = sfdesc1.DUMMYUNIONNAME1.dwLinearSize;
-	(*pddrawsf1)->Unlock(pddrawsf1, NULL);
+	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
 	sfdesc1.dwFlags = 7;
 	sfdesc1.ddsCaps = 0x840;
 	sfdesc1.dwWidth = 640;
 	sfdesc1.dwHeight = 480;
-	(*pddraw)->CreateSurface(pddraw, &sfdesc1, &pddrawsf2, NULL);
+	IDirectDraw_CreateSurface(pddraw, &sfdesc1, &pddrawsf2, NULL);
 	srand(GetTicketCount());
 	fcn_0044f935();
 	fcn_0045175d();
