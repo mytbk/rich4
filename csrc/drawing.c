@@ -142,7 +142,7 @@ void fcn_417191(int a0)
 
 	IDirectDrawSurface_Lock(pddrawsf1, 0, &sfdesc1, 1, 0);
 	st_46caec.f0 = sfdesc1.DUMMYUNIONNAME1.lPitch / 2;
-	dw_46caf4 = sfdesc1.lpSurface;
+	st_46caec.f8 = sfdesc1.lpSurface;
 
 	edx = dw_48bdd4 + ebx;
 	edx = edx * 12 + dw_48be04 + 12;
