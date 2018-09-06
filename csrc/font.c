@@ -26,3 +26,21 @@ HFONT create_some_font(int a0, uint32_t a1, uint32_t a2, uint32_t a3, uint32_t a
   gFont = CreateFontA(-a0, 0, 0, 0, weight, 0, 0, 0, 0x88 /* charset */, 0, 0, 0, 0, tfname);
   return gFont;
 }
+
+void drawStringY(HDC hdc, int nXStart, int nYStart, LPCSTR str)
+{
+	int h = gFontHeight + gfa[1];
+	if (((uint8_t)gfa[0] & 6) != 0)
+		h++;
+
+	while (*str) {
+		if ((str[0] & 0x80) != 0) {
+			TextOutA(hdc, nXStart, nYStart, str, 2);
+			str += 2;
+		} else {
+			TextOutA(hdc, nXStart, nYStart, str, 1);
+			str += 1;
+		}
+		nYStart += h;
+	}
+}
