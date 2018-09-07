@@ -61,3 +61,9 @@ void player_action_2(int a0, int a1, int a2)
 	}
 	fcn.004192f7();
 }
+
+void fcn_41d546()
+{
+	dw_48be18 = 0;
+	player_action_1(1);
+}
