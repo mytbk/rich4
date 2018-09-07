@@ -6,9 +6,9 @@ struct st st_46caec;
 
 void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct st *a4, int a5, int a6)
 {
-    int ret = 1;
-    a5 -= (int16_t)a4->f4;
-    a6 -= (int16_t)a4->f6;
+	int ret = 1;
+	a5 -= (int16_t)a4->f4;
+	a6 -= (int16_t)a4->f6;
 	int t1, t2, t3, t4;
 
 	if (a5 < a1 && a5 + (uint16_t)a4->f0 > 0 && a6 < a2 && a6 + (uint16_t)a4->f2 > 0) {
@@ -23,7 +23,7 @@ void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct st *a4, int a5, int a6)
 			a5 = 0;
 		} else {
 			int t = t3 + a5 - a1;
-			if (a5 > t) {
+			if (t > 0) {
 				t3 = a1 - a5;
 			}
 		}
@@ -34,7 +34,7 @@ void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct st *a4, int a5, int a6)
 			a6 = 0;
 		} else {
 			int t = t4 + a6 - a2;
-			if (a6 > t) {
+			if (t > 0) {
 				t4 = a2 - a6;
 			}
 		}
@@ -42,6 +42,7 @@ void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct st *a4, int a5, int a6)
 		uint16_t *edi = &a3[a6 * a1 + a5];
 		size_t r1 = (a4->f0 - t3);
 		size_t r2 = (a1 - t3);
+		ret = t4;
 
 		if (t3 != 0) {
 			do {
