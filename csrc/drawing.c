@@ -4,6 +4,58 @@
 
 struct st st_46caec;
 
+void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct st *a4, int a5, int a6)
+{
+    int ret = 1;
+    a5 -= (int16_t)a4->f4;
+    a6 -= (int16_t)a4->f6;
+	int t1, t2, t3, t4;
+
+	if (a5 < a1 && a5 + (uint16_t)a4->f0 > 0 && a6 < a2 && a6 + (uint16_t)a4->f2 > 0) {
+		t1 = 0;
+		t2 = 0;
+		t3 = (uint16_t)a4->f0;
+		t4 = (uint16_t)a4->f2;
+
+		if (a5 < 0) {
+			t1 -= a5;
+			t3 += a5;
+			a5 = 0;
+		} else {
+			int t = t3 + a5 - a1;
+			if (a5 > t) {
+				t3 = a1 - a5;
+			}
+		}
+
+		if (a6 < 0) {
+			t2 -= a6;
+			t4 += a6;
+			a6 = 0;
+		} else {
+			int t = t4 + a6 - a2;
+			if (a6 > t) {
+				t4 = a2 - a6;
+			}
+		}
+		uint16_t *esi = &a4->f8[a4->f0 * t2 + t1];
+		uint16_t *edi = &a3[a6 * a1 + a5];
+		size_t r1 = (a4->f0 - t3);
+		size_t r2 = (a1 - t3);
+
+		if (t3 != 0) {
+			do {
+				memcpy(edi, esi, sizeof(uint16_t) * t3);
+				esi += t3 + r1;
+				edi += t3 + r2;
+				t4--;
+			} while (t4 != 0);
+			ret = 0;
+		}
+	}
+	return ret;
+}
+
 int fcn_455c52(uint32_t a0, uint32_t a1, uint16_t *a2, struct st * a3, int a4, int a5, int a6)
 {
 	a4 -= (int16_t)a3->f4;
