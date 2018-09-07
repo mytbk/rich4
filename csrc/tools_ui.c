@@ -1,24 +1,63 @@
 #include "player_info.h"
 
+const char str_cross_sym[] = "\xa1\xd1%d"; // x%d
+
+char tab_48c548[16];
+uint8_t tool_amount[60]; // 0x49915c 4*15
+
+void fcn_447c6e(struct st *a1, struct st *a2, int player)
+{
+	char str[40];
+
+	memset(tab_48c548, 0, 16);
+	create_some_font(20, 0xffffff, 0x101010, 3, 0);
+
+	if (a1 == NULL) {
+		a1 = (struct st*)((void*)(a2) + 24);
+	} else {
+		fcn_00456280(a1, (struct st*)((void*)(a2) + 24), 0, 0);
+	}
+
+	int j = 0;
+	int t = 45;
+	int k = 0x21;
+
+	for (int i = 0; i < 13; i++) { /* 13 kinds of tools */
+		size_t idx = player * 15 + i;
+		if (tool_amount[idx] == 0)
+			continue;
+		fcn_4562a5(a1, ((void*)(a2->data)) + (i+2)*12, t - 16, k);
+		sprintf(str, str_cross_sym, (int)tool_amount[idx]);
+		draw_some_text(a1, str, t + 34, k - 10, 1);
+		tab_48c548[j] = i + 1;
+		j++;
+		t += 80;
+		if (t <= 365)
+			continue;
+		t = 45;
+		k += 56;
+	}
+}
+
 void tools_ui()
 {
 	dl = players[current_player].f21;
 	if (dl != 1)
 		goto 0x447f82;
 
-	fcn.0041d546();
+	fcn_41d546();
 	ebx = eax = read_mkf(mkf_panel, 11, NULL, NULL);
 	edi = eax;
-	fcn.00447c6e(0, eax, current_player);
+	fcn_447c6e(NULL, eax, current_player);
 	edx = ebx + 0x18;
 	cl = players[current_player].traffic_method;
 	if (cl == 1) {
 		ebx += 0xc0;
-		fcn.00456280(edx, ebx, 0x145, 0x75);
+		fcn_00456280(edx, ebx, 0x145, 0x75);
 		b_48c556 = 0xe;
 	} else if (cl == 2) {
 		ebx += 0xcc;
-		fcn.00456280(edx, ebx, 0x145, 0x75);
+		fcn_00456280(edx, ebx, 0x145, 0x75);
 		b_48c556 = 0xe;
 	}
 	IDirectDrawSurface_Lock(pddrawsf2, 0, &sfdesc1, 1, 0);
@@ -61,8 +100,7 @@ void tools_ui()
 
 	esi = 0;
 	for (int i = 0; i < 13; i++) {
-		ebx = current_player * 15;
-		if (byte [ebx+i+0x49915c] == 0)
+		if (tool_amount[current_player * 15 + i] == 0)
 			continue;
 		if (i == 9)
 			continue;
