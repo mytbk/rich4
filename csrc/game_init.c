@@ -124,7 +124,7 @@ int init_new_game(int a0)
 		dw_499104 = current_player = 0;
 		game_initial_fund = initial_fund[dw_46cb40];
 		memset(0x499120, 0, 60);
-		memset(0x49915c, 0, 60);
+		memset(tool_amount, 0, 60);
 		for (ebx = 0; ebx < 30; ebx++) {
 			al = byte [ebx*8 + 0x47fdf6];
 			byte [ebx + 0x499198] = al;
