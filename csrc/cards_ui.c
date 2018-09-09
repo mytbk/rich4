@@ -2,6 +2,8 @@
 #include "global.h"
 #include "sound_struct.h"
 
+uint8_t player_cards[60]; // 0x499120
+int selected_card; // 0x48c544
 const char str_use[] = "\xa8\xcf\xa5\xce%s"; // 使用%s
 
 typedef struct
@@ -70,18 +72,18 @@ void fcn_4542ce(sound_struct * a0, int a1)
 	fcn_4540d8(a0->sbuf, a0->f0, a1);
 }
 
-LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x4416f0
+LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 {
-	PAINTSTRUCT ps; /* esp */
-	RECT rect2; /* esp+0x40 */
+	PAINTSTRUCT ps;
+	RECT rect2;
 
 	if (message >= 0x202) {
 		if (message == WM_LBUTTONUP) {
-			if (dword [0x48c544] == 0)
+			if (selected_card == 0)
 				return 0;
 			fcn.00451d4e();
 			fcn.00402460(0);
-			Post_0402_Message(dword [0x48c544]);
+			Post_0402_Message(selected_card);
 			return 0;
 		}
 		if (message >= 0x205) {
@@ -91,7 +93,7 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 				return 0;
 			}
 			if (message == 0x401) {
-				dw_48c544 = 0;
+				selected_card = 0;
 				fcn.00402460(1);
 				InvalidateRect(hWnd, NULL, FALSE);
 				return 0;
@@ -120,7 +122,7 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 			esi = ((edx - 0x87) / 56) * 5;
 			ebx = esi + (ebx - 0x13) / 80;
 			eax = current_player * 15;
-			if (byte [ebx + eax + 0x499120] == 0)
+			if (player_cards[current_player * 15 + ebx] == 0)
 				return 0;
 
 			int t1 = (ebx % 5) * 80;
@@ -131,9 +133,8 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 			rect2.bottom = t2 + 0xbe;
 			fcn.00451b9e(&rect2);
 
-			ebx += current_player * 15;
-			eax = byte [ebx + 0x499120];
-			dword [0x48c544] = eax;
+			eax = player_cards[current_player * 15 + ebx];
+			selected_card = eax;
 			fcn_4542ce(&snd0, 0);
 			return 0;
 		}
@@ -141,7 +142,6 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 	} else {
 		return DefWindowProcA(hWnd, message, wp, lp);
 	}
-
 }
 
 void cards_ui()

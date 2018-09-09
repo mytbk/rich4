@@ -3,6 +3,7 @@
 const char str_cross_sym[] = "\xa1\xd1%d"; // x%d
 
 char tab_48c548[16];
+int selected_tool; // 0x48c560
 uint8_t tool_amount[60]; // 0x49915c 4*15
 
 void fcn_447c6e(struct st *a1, struct st *a2, int player)
@@ -46,11 +47,11 @@ LRESULT CALLBACK toolsProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 
 	if (message >= 0x202) {
 		if (message == 0x202) {
-			if (dw_48c560 == 0)
+			if (selected_tool == 0)
 				return 0;
 			fcn.00451d4e();
 			fcn.00402460(0);
-			Post_0402_Message(dw_48c560);
+			Post_0402_Message(selected_tool);
 			return 0;
 		}
 		if (message < 0x205) {
@@ -65,7 +66,7 @@ LRESULT CALLBACK toolsProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 			return DefWindowProcA(hWnd, message, wp, lp);
 		} else {
 			edx = 0;
-			dw_48c560 = 0;
+			selected_tool = 0;
 			fcn_00402460(1);
 			InvalidateRect(hWnd, NULL, FALSE);
 			return 0;
@@ -95,7 +96,7 @@ LRESULT CALLBACK toolsProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 	ecx = ((edx - 0x87) / 56) * 5;
 	eax = (ebx - 0x13) / 80;
 	ebx = ecx + eax;
-	if (byte [0x48c548 + ebx] == 0)
+	if (tab_48c548[ebx] == 0)
 		return 0;
 
 	eax = (ebx % 5) * 80;
@@ -107,8 +108,7 @@ LRESULT CALLBACK toolsProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 	r1.bottom = eax + 0xbe;
 	fcn.00451b9e(&r1);
 
-	eax = byte [ebx + 0x48c548];
-	dw_48c560 = eax;
+	selected_tool = tab_48c548[ebx];
 	fcn_4542ce(&snd0, 0);
 	return 0;
 }

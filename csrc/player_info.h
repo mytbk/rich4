@@ -65,4 +65,5 @@ extern player_info rich4_players[]; /* 0x47e80c */
 extern int nplayers; /* 0x499114 */
 extern int current_player; /* 0x49910c */
 
+extern uint8_t player_cards[60]; /* 0x499120 */
 extern uint8_t tool_amount[60]; /* 0x49915c */
