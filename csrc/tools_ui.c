@@ -39,6 +39,80 @@ void fcn_447c6e(struct st *a1, struct st *a2, int player)
 	}
 }
 
+LRESULT CALLBACK toolsProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
+{
+	PAINTSTRUCT ps;
+	RECT r1;
+
+	if (message >= 0x202) {
+		if (message == 0x202) {
+			if (dw_48c560 == 0)
+				return 0;
+			fcn.00451d4e();
+			fcn.00402460(0);
+			Post_0402_Message(dw_48c560);
+			return 0;
+		}
+		if (message < 0x205) {
+			return DefWindowProcA(hWnd, message, wp, lp);
+		} else if (message == 0x205) {
+			fcn.00402460(0);
+			Post_0402_Message(0);
+			return 0;
+		}
+
+		if (message != 0x401) {
+			return DefWindowProcA(hWnd, message, wp, lp);
+		} else {
+			edx = 0;
+			dw_48c560 = 0;
+			fcn_00402460(1);
+			InvalidateRect(hWnd, NULL, FALSE);
+			return 0;
+		}
+	}
+
+	if (message < 0xf) {
+		return DefWindowProcA(hWnd, message, wp, lp);
+	} else if (message == 0xf) {
+		BeginPaint(hWnd, &ps);
+		GetCursorPos_35d(&ps.rcPaint);
+		IDirectDrawSurface_BltFast(pddrawsf1, ps.rcPaint.left, ps.rcPaint.top, pddrawsf2, &ps.rcPaint, 0x10);
+		GetCursorPos_250(&ps.rcPaint);
+		EndPaint(hWnd, &ps);
+		return 0;
+	}
+	if (message != 0x201) {
+		return DefWindowProcA(hWnd, message, wp, lp);
+	}
+
+	ebx = (uint16_t)lp;
+	eax = (lp >> 16) & 0xffff;
+	edx = (uint16_t)eax;
+	if (ebx < 0x13 || ebx >= 0x1a3 || edx < 0x87 || edx >= 0x12f)
+		return 0;
+
+	ecx = ((edx - 0x87) / 56) * 5;
+	eax = (ebx - 0x13) / 80;
+	ebx = ecx + eax;
+	if (byte [0x48c548 + ebx] == 0)
+		return 0;
+
+	eax = (ebx % 5) * 80;
+	r1.left = eax + 0x14;
+	r1.right = eax + 0x62;
+
+	eax = (ebx / 5) * 56;
+	r1.top = eax + 0x88;
+	r1.bottom = eax + 0xbe;
+	fcn.00451b9e(&r1);
+
+	eax = byte [ebx + 0x48c548];
+	dw_48c560 = eax;
+	fcn_4542ce(&snd0, 0);
+	return 0;
+}
+
 void tools_ui()
 {
 	dl = players[current_player].f21;
