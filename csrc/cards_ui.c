@@ -73,7 +73,6 @@ void fcn_4542ce(sound_struct * a0, int a1)
 LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x4416f0
 {
 	PAINTSTRUCT ps; /* esp */
-	RECT rect; /* esp+8 */
 	RECT rect2; /* esp+0x40 */
 
 	if (message >= 0x202) {
@@ -106,9 +105,9 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp) // 0x44
 	if (message >= 0xf) {
 		if (message == 0xf) {
 			BeginPaint(hWnd, &ps);
-			GetCursorPos_35d(&rect); /* fcn_4021f8.c */
-			IDirectDrawSurface_BltFast(pddrawsf1, rect.left, rect.top, pddrawsf2, &rect, 0x10);
-			GetCursorPos_250(&rect); /* fcn_4021f8.c */
+			GetCursorPos_35d(&ps.rcPaint); /* fcn_4021f8.c */
+			IDirectDrawSurface_BltFast(pddrawsf1, ps.rcPaint.left, ps.rcPaint.top, pddrawsf2, &ps.rcPaint, 0x10);
+			GetCursorPos_250(&ps.rcPaint); /* fcn_4021f8.c */
 			EndPaint(hWnd, &ps);
 			return 0;
 		}
