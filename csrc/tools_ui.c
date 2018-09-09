@@ -50,14 +50,14 @@ LRESULT CALLBACK toolsProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 			if (selected_tool == 0)
 				return 0;
 			fcn.00451d4e();
-			fcn.00402460(0);
+			fcn_00402460(0);
 			Post_0402_Message(selected_tool);
 			return 0;
 		}
 		if (message < 0x205) {
 			return DefWindowProcA(hWnd, message, wp, lp);
 		} else if (message == 0x205) {
-			fcn.00402460(0);
+			fcn_00402460(0);
 			Post_0402_Message(0);
 			return 0;
 		}

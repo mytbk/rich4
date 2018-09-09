@@ -82,19 +82,19 @@ LRESULT CALLBACK cardProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 			if (selected_card == 0)
 				return 0;
 			fcn.00451d4e();
-			fcn.00402460(0);
+			fcn_00402460(0);
 			Post_0402_Message(selected_card);
 			return 0;
 		}
 		if (message >= 0x205) {
 			if (message == WM_RBUTTONUP) {
-				fcn.00402460(0);
+				fcn_00402460(0);
 				Post_0402_Message(0);
 				return 0;
 			}
 			if (message == 0x401) {
 				selected_card = 0;
-				fcn.00402460(1);
+				fcn_00402460(1);
 				InvalidateRect(hWnd, NULL, FALSE);
 				return 0;
 			}
