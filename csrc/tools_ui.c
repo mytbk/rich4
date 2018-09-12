@@ -115,7 +115,7 @@ LRESULT CALLBACK toolsProc(HWND hWnd, UINT message, WPARAM wp, LPARAM lp)
 
 void tools_ui()
 {
-	dl = players[current_player].f21;
+	dl = players[current_player].who_plays;
 	if (dl != 1)
 		goto 0x447f82;
 

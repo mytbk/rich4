@@ -14,7 +14,7 @@ typedef struct
 	uint8_t ndices; /* 0x496b7a */
 	uint8_t character;
 	uint8_t f20;
-	uint8_t f21; /* 0x496b7d */
+	uint8_t who_plays; /* 0: not alive, 1: human, 2: computer @0x496b7d */
 	uint8_t f22;
 	uint8_t f23;
 	uint8_t f24;

@@ -241,7 +241,7 @@ void fcn_00407ad2()
 		if (*(char*)(0x496b7d+esi) == 0
 				&& *(char*)(0x496bcc+esi) == 0) {
 #endif
-		if (players[ebx].f21 == 0 && player[ebx].f100 == 0) {
+		if (players[ebx].who_plays == 0 && player[ebx].f100 == 0) {
 			eax = *(int32_t*)(0x498eb0+eax);
 			edx = *(int16_t*)(eax + 0xe); /* sign ext */
 			eax += 0xc;

@@ -151,7 +151,7 @@ void cards_ui()
 	uint8_t mem[8]; /* esp + 0x90 */
 
 	eax = current_player * 0x68;
-	uint8_t dl = players[current_player].f21;
+	uint8_t dl = players[current_player].who_plays;
 	if (dl == 1) {
 		fcn.0041d546();
 		edi = eax = read_mkf(mkf_panel, 11, NULL, NULL);

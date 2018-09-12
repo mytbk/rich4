@@ -184,7 +184,7 @@ LRESULT CALLBACK kbdProc(
 		if (b_46cafe != 0 && dw_46cad8 == 1) {
 			uint32_t ebx = 0;
 			for (size_t i = 0; i < nplayers; i++) {
-				if (players[i].f21 == 1 &&
+				if (players[i].who_plays == 1 &&
 						players[i].days_in_hotel == 0 &&
 						players[i].days_disappearing == 0 &&
 						players[i].days_in_prison == 0 &&
