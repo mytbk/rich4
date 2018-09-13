@@ -15,12 +15,13 @@ typedef struct
 	uint8_t f7;
 } rich4_card;
 
-/* 0x47feda */
 rich4_card cards_table[] = {
 	{ NULL, 0, 0, 0, 0 },
 	{ "\xa7\xa1\xb4I\xa5\x64", 1, 200, 2, 2 }, /* 均富卡 */
 	{ "\xa7\xa1\xb3h\xa5\x64", 2, 200, 2, 2 }, /* 均贫卡 */
 	{ "\xc1\xca\xa6\x61\xa5\x64", 4, 35, 0, 1 }, /* 购地卡 */
+	{ "\xb4\xab\xa6\x61\xa5\x64", 4, 25, 0, 0 }, /* 换地卡 */
+	{ "\xb4\xab\xab\xce\xa5\x64", 4, 20, 0, 0 } /* 换屋卡 */
 	/* TODO */
 };
 
