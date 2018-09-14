@@ -10,7 +10,8 @@ card_func card_functions[] = { // 0x475d5c
 	swap_land_card,
 	swap_house_card,
 	turn_back_card,
-   	0x0044309bU, 0x00443225U, 0x004434c0U,
+	restruct_card,
+   	0x00443225U, 0x004434c0U,
   0x004436e0U, 0x00443917U, 0x00443b0fU, 0x00443e3dU, 0x00443f80U,
   0x004440eaU, 0x004441dcU, 0x004444bfU, 0x004420d5U, 0x004420d5U,
   0x004420d5U, 0x004420d5U, 0x00444c45U, 0x00444e1aU, 0x00444f25U,
@@ -620,4 +621,80 @@ int turn_back_card()
 		}
 	}
 	return ebx;
+}
+
+int restruct_card()
+{
+	esi = 0;
+	ebx = players[current_player].f12;
+	eax = ebx * 5;
+	ebx = dw_498e80 + eax;
+	eax = word [ebx + eax*8 + 0x20];
+	if (eax > 2000 && eax < 4000) {
+		eax -= 2000;
+		eax *= 0x34;
+		ebx = dw_498e84 + eax;
+		if (byte [ebx + 0x1a] == 0) {
+			if (esi == 0)
+				return 0;
+			consume_a_card(current_player, 7);
+			fcn_41d546();
+			return esi;
+		}
+		edx = players[current_player].character;
+		eax = edx * 360;
+		ecx = dword [eax + 0x481252];
+		fcn.0044ef41(current_player, 3, ecx);
+		ah = byte [ebx + 0x18] ^ 1;
+		byte [ebx + 0x18] = ah;
+		if (ah != 0 && byte [ebx + 0x1a] > 1) {
+			[ebx + 0x1a] = 1;
+		}
+		esi = 1;
+		consume_a_card(current_player, 7);
+		fcn_41d546();
+		return 1;
+	}
+	//443147
+	if (eax > 4000 && eax < 6000) {
+		eax -= 4000;
+		eax *= 56;
+		ebx = dw_498e88 + eax;
+		if ([ebx + 0x1a] != 0) {
+			edx = players[current_player].character;
+			eax = edx * 360;
+			edi = dword [eax + 0x481252];
+			fcn.0044ef41(current_player, 3, edi);
+			if (players[current_player].who_plays == 1) {
+				edx = eax = fcn.00440aac(1);
+				if (eax == -1) {
+					return 0;
+				}
+			} else {
+				eax = fcn.0041e6f2(0);
+			}
+			byte [ebx + 0x18] = al;
+			esi = 1;
+			dh = byte [ebx + 0x18];
+			if (dh != 0) {
+				if (dh != 3) {
+					if (esi == 0)
+						return 0;
+					consume_a_card(current_player, 7);
+					fcn_41d546();
+					return esi;
+				}
+			}
+			// 4431f8
+			if (byte [ebx + 0x1a] > 1) {
+				byte [ebx + 0x1a] = 1;
+			}
+		}
+	}
+	// 443202
+	if (esi == 0)
+		return 0;
+	consume_a_card(current_player, 7);
+	fcn_41d546();
+	return esi;
 }
