@@ -8,6 +8,15 @@ card_func card_functions[] = { // 0x475d5c
 	average_cash_card2,
 	buy_land_card,
 	swap_land_card,
+	swap_house_card,
+   	turn_back_card,
+   	0x0044309bU, 0x00443225U, 0x004434c0U,
+  0x004436e0U, 0x00443917U, 0x00443b0fU, 0x00443e3dU, 0x00443f80U,
+  0x004440eaU, 0x004441dcU, 0x004444bfU, 0x004420d5U, 0x004420d5U,
+  0x004420d5U, 0x004420d5U, 0x00444c45U, 0x00444e1aU, 0x00444f25U,
+  0x0044503fU, 0x004451f0U, 0x0044542dU, 0x00445593U, 0x00445710U,
+  0x004458dfU, 0x446afb00U, 0x446baa00U, 0x446c8800U, 0x446d6900U
+
 };
 
 // 0x4420d8
@@ -380,6 +389,213 @@ int swap_land_card()
 	if (ebx != 0) {
 		fcn.00441343(current_player, 4);
 		fcn_41d546();
+	}
+	return ebx;
+}
+
+int swap_house_card()
+{
+	ebx = 0;
+	edx = players[current_player].f12 * 40;
+	eax = dw_498e80;
+	eax = word [edx + eax + 0x20] & 0xffff;
+	[esp+8] = eax;
+	if (eax > 2000 && eax < 4000) {
+		eax -= 2000;
+		eax = eax * 0x34;
+		edx = dw_498e84 + eax;
+		[esp+4] = edx;
+		if (players[current_player].who_plays == 1) {
+			eax = fcn.00446ae8(0xe0c0202);
+		} else {
+			eax = fcn.0041e6f2(0);
+		}
+		ebx = eax;
+		if (ebx == 0) {
+			return 0;
+		}
+		fcn.00456c0a(dw_474938, 0x2f440, [esp+8], 0xffff);
+		fcn.00456c0a(dw_474938, 0x2f440, ebx, 0xffff);
+		eax = ebx - 2000;
+		eax = eax * 0x34;
+		ebp = dw_498e84 + eax;
+		edi = [esp+4];
+		edi = byte [edi + 0x19];
+		esi = byte [ebp + 0x19];
+		eax = current_player + 1;
+		edx = [esp+4];
+		if (edi == eax && esi != eax && byte [ebp+0x1a] >= byte [edx+0x1a]) {
+			ecx = edi - 1;
+			eax = players[ecx].character * 360;
+			edx = dword [eax + 0x48124a];
+			fcn.0044ef41(ecx, 3, edx);
+		} else {
+			eax = current_player + 1;
+			int t = [esp+4];
+			if (edi != eax && esi == eax && byte [t+0x1a] >= byte [ebp+0x1a]) {
+				ecx = esi - 1;
+				eax = players[ecx].character * 360;
+				edx = dword [eax + 0x48124a];
+				fcn.0044ef41(ecx, 3, edx);
+			}
+		}
+		if (players[current_player].who_plays != 1) {
+			sub.WINMM.dll_timeGetTime_669(0,
+					(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+					(int)(int16_t)word [ebp], (int)(int16_t)word [ebp + 2], 100);
+		}
+		fcn.00451985();
+		sub.WINMM.dll_timeGetTime_4f8([esp+8], ebx);
+		eax = current_player + 1;
+		t = [esp+4];
+		if (edi == eax && esi != eax && esi != 0 && byte [t+0x1a] >= byte [ebp+0x1a]) {
+			esi --;
+			ebx = players[esi].character;
+			eax = ebx * 360;
+			edi = dword [eax + 0x48133a];
+			fcn.0044ef41(esi, 2, edi);
+		} else {
+			eax = current_player + 1;
+			edx = [esp+4];
+			if (edi != eax && edi != 0 && esi == eax) {
+				al = [ebp+0x1a];
+				edx = [esp+4];
+				if (al >= byte [edx + 0x1a]) {
+					edi --;
+					edx = players[edi].character;
+					eax = edx * 360;
+					esi = dword [eax + 0x48133a];
+					fcn.0044ef41(edi , 2, esi);
+				}
+			}
+		}
+		fcn.00441343(current_player, 5);
+		fcn_41d546();
+		return 1;
+	}
+	//442d3a
+	ebp = [esp+8];
+	if (ebp > 4000 && ebp < 6000) {
+		eax = ebp - 4000;
+		eax *= 56;
+		edx = dw_498e88 + eax;
+		[esp] = edx;
+		if (players[current_player].who_plays == 1) {
+			eax = fcn.00446ae8(0xe0c0204);
+		} else {
+			eax = fcn.0041e6f2(0);
+		}
+		ebx = eax;
+		if (ebx != 0) {
+			fcn.00456c0a(dw_474938, 0x2f440, [esp+8], 0xffff);
+			fcn.00456c0a(dw_474938, 0x2f440, ebx, 0xffff);
+			eax = ebx - 4000;
+			eax *= 56;
+			ebp = dw_498e88 + eax;
+			edi = [esp];
+			edi = byte [edi + 0x19];
+			esi = byte [ebp + 0x19];
+			eax = current_player + 1;
+			edx = [esp];
+			if (edi == eax && esi != eax && byte [ebp+0x1a] >= byte [edx+0x1a]) {
+				ecx = edi - 1;
+				eax = players[ecx].character * 360;
+				edx = dword [eax + 0x48124a];
+				fcn.0044ef41(ecx, 3, edx);
+			} else {
+				eax = current_player + 1;
+				t = [esp];
+				if (edi != eax && esi == eax && byte [t+0x1a] >= [ebp+0x1a]) {
+					ecx = esi - 1;
+					eax = players[ecx].character * 360;
+					edx = dword [eax + 0x48124a];
+					fcn.0044ef41(ecx, 3, edx);
+				}
+			}
+			if (players[current_player].who_plays != 1) {
+				sub.WINMM.dll_timeGetTime_669(0,
+						(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+						(int)(int16_t)word [ebp], (int)(int16_t)word [ebp + 2], 100);
+			}
+			fcn.00451985();
+			sub.WINMM.dll_timeGetTime_4f8([esp+8], ebx);
+			eax = current_player + 1;
+			t = [esp];
+			if (edi == eax && esi != eax && esi != 0 && byte [t + 0x1a] >= byte [ebp+0x1a]) {
+				esi --;
+				eax = players[esi].character * 360;
+				edi = dword [eax + 0x48133a];
+				fcn.0044ef41(esi, 2, edi);
+				fcn.00441343(current_player, 5);
+				fcn_41d546();
+				return 1;
+			}
+			eax = current_player + 1;
+			if (edi == eax || edi == 0 || esi != eax) {
+				fcn.00441343(current_player, 5);
+				fcn_41d546();
+				return 1;
+			}
+			al = byte [ebp + 0x1a];
+			edx = [esp];
+			if (al >= byte [edx + 0x1a]) {
+				edi --;
+				edx = players[edi].character;
+				eax = edx * 360;
+				esi = dword [eax + 0x48133a];
+				fcn.0044ef41(edi , 2, esi);
+			}
+			fcn.00441343(current_player, 5);
+			fcn_41d546();
+			return 1;
+		}
+	}
+	// 442f29
+	if (ebx != 0) {
+		fcn.00441343(current_player, 5);
+		fcn_41d546();
+	}
+	return ebx;
+}
+
+int turn_back_card()
+{
+	if (players[current_player].who_plays == 1) {
+		eax = fcn.00446ae8(0xe0c0010);
+	} else {
+		eax = fcn.0041e6f2(0);
+	}
+	ebx = eax;
+	if (ebx != 0) {
+		fcn.00441343(current_player, 6);
+		esi = players[current_player].character;
+		eax = esi * 360;
+		edi = dword [eax + 0x48124e];
+		fcn.0044ef41(current_player, 3, edi);
+		edx = esi = fcn.0040d293(ebx);
+		if (players[current_player].who_plays != 1) {
+			sub.WINMM.dll_timeGetTime_669(0,
+					(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+					(uint32_t)players[edx].f8, (uint32_t)players[edx].f10, 100);
+
+		}
+		// 443024
+		fcn.0040c78c(esi);
+		if (esi < 4) {
+			edi = current_player;
+			if (esi != edi) {
+				edx = players[esi].character;
+				eax = edx * 360;
+				ebp = dword [eax + 0x48133e];
+				fcn.0044ef41(esi, 2, ebp);
+				fcn_41d546();
+				return ebx;
+			}
+			esi = players[current_player].character;
+			eax = esi * 360;
+			ecx = dword [eax + 0x4812c6];
+			fcn.0044ef41(edi, 0, ecx);
+		}
 	}
 	return ebx;
 }
