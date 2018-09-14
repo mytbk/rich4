@@ -86,7 +86,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 		.cbWndExtra = 0,
 		.hInstance = hInstance,
 		.hIcon = LoadIconA(hInstance, "RICH4_ICON"), // esp+0x14
-		.hCursor = LoadCursorA(0, 0x7f00), // esp+0x18
+		.hCursor = LoadCursorA(0, IDC_ARROW), // esp+0x18
 		.hbrBackground = GetStockObject(4), // esp + 0x1c
 		.lpszMenuName = NULL,
 		.lpszClassName = "Rich4"
