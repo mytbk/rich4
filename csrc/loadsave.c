@@ -308,9 +308,9 @@ int load_checkpoint(int n)
 
 	fread(0x498e28, 0x10, 5, fp);
 	fread(0x496d08, 0x18, 0x2e, fp);
-	fread(0x499120, 1, 0x3c, fp);
+	fread(player_cards, 1, 0x3c, fp);
 	fread(tool_amount, 1, 0x3c, fp);
-	fread(0x499198, 1, 0x1e, fp);
+	fread(card_amount, 1, 30, fp);
 	fread(0x497320, 1, 8, fp);
 	fread(0x499100, 4, 1, fp);
 	fread(0x497328, 4, 0x6c0, fp);

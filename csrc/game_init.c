@@ -123,11 +123,10 @@ int init_new_game(int a0)
 		nplayers = dw_46cb3c + 2;
 		dw_499104 = current_player = 0;
 		game_initial_fund = initial_fund[dw_46cb40];
-		memset(0x499120, 0, 60);
+		memset(player_cards, 0, 60);
 		memset(tool_amount, 0, 60);
-		for (ebx = 0; ebx < 30; ebx++) {
-			al = byte [ebx*8 + 0x47fdf6];
-			byte [ebx + 0x499198] = al;
+		for (int i = 0; i < 30; i++) {
+			card_amount[i] = cards_table[i+1].init_amount;
 		}
 		for (ebx = 0; ebx < 8; ebx++) {
 			al = byte [ebx*8 + 0x47fee6];

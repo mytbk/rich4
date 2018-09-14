@@ -9,7 +9,7 @@ const char str_use[] = "\xa8\xcf\xa5\xce%s"; // 使用%s
 typedef struct
 {
 	const char *name_ptr;
-	uint8_t f4;
+	uint8_t init_amount;
 	uint8_t price;
 	uint8_t f6;
 	uint8_t f7;
@@ -198,7 +198,7 @@ void cards_ui()
 			eax = current_player * 15;
 			edx = esi;
 			esi++;
-			al = [edx + eax + 0x499120];
+			al = player_cards[edx + eax];
 			mem[ebx] = al;
 			if (edi <= 8 || esi != edi)
 				continue;

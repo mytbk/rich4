@@ -9,7 +9,7 @@ card_func card_functions[] = { // 0x475d5c
 	buy_land_card,
 	swap_land_card,
 	swap_house_card,
-   	turn_back_card,
+	turn_back_card,
    	0x0044309bU, 0x00443225U, 0x004434c0U,
   0x004436e0U, 0x00443917U, 0x00443b0fU, 0x00443e3dU, 0x00443f80U,
   0x004440eaU, 0x004441dcU, 0x004444bfU, 0x004420d5U, 0x004420d5U,
@@ -19,13 +19,35 @@ card_func card_functions[] = { // 0x475d5c
 
 };
 
+uint8_t card_amount[30]; /* 0x499198 */
+
+void consume_a_card(int p, int c)
+{
+	int i = 0;
+
+	while (1) {
+		int card = player_cards[p*15+i];
+		if (card != c) {
+			i++;
+			if (i >= 15)
+				return;
+		} else {
+			break;
+		}
+	}
+
+	memcpy(&player_cards[p*15+i], &player_cards[p*15+i+1], 14-i);
+	player_cards[p * 15 + 14] = 0;
+	card_amount[c-1]++;
+}
+
 // 0x4420d8
 int average_cash_card()
 {
 	int sum = 0;
 	int player_count = 0;
 
-	fcn.00441343(current_player, 1);
+	consume_a_card(current_player, 1);
 	eax = (int)players[current_player].character * 360;
 	mov ebx, dword [eax + 0x48123a] ;
 	fcn.0044ef41(current_player, 3, ebx);
@@ -65,7 +87,7 @@ int average_cash_card2()
 	if (result == 0)
 		return 0;
 
-	fcn.00441343(current_player, 2);
+	consume_a_card(current_player, 2);
 	eax = players[current_player].character * 360;
 	edi = dword [eax + 0x48123e];
 	fcn.0044ef41(current_player, 3, edi);
@@ -111,7 +133,7 @@ int buy_land_card()
 		cl = byte [ebx + 0x19];
 		if (cl == 0 || cl == current_player+1) {
 			if (esi != 0) {
-				fcn.00441343(current_player, 3);
+				consume_a_card(current_player, 3);
 			}
 			return esi;
 		}
@@ -124,7 +146,7 @@ int buy_land_card()
 		if (edi > players[current_player].cash) {
 			fcn.00440cac(0x46530c, 1500);
 			if (esi != 0) {
-				fcn.00441343(current_player, 3);
+				consume_a_card(current_player, 3);
 			}
 			return esi;
 		}
@@ -161,7 +183,7 @@ int buy_land_card()
 		edx = dword [eax + 0x481332];
 		fcn.0044ef41(esi, 1, edx);
 		fcn_41d546();
-		fcn.00441343(current_player, 3);
+		consume_a_card(current_player, 3);
 		return 1;
 	}
 	// 4424be
@@ -212,7 +234,7 @@ int buy_land_card()
 					edx = dword [eax + 0x481332];
 					fcn.0044ef41(esi, 1, edx);
 					fcn_41d546();
-					fcn.00441343(current_player, 3);
+					consume_a_card(current_player, 3);
 					return 1;
 				}
 				fcn.00440cac(0x46530c, 1500);
@@ -220,7 +242,7 @@ int buy_land_card()
 		}
 	}
 	if (esi != 0) {
-		fcn.00441343(current_player, 3);
+		consume_a_card(current_player, 3);
 	}
 	return esi;
 }
@@ -304,7 +326,7 @@ int swap_land_card()
 				fcn.0044ef41(edx, 2, ecx);
 			}
 		}
-		fcn.00441343(current_player, 4);
+		consume_a_card(current_player, 4);
 		fcn_41d546();
 		return 1;
 	}
@@ -367,7 +389,7 @@ int swap_land_card()
 				eax = edx * 360;
 				ebx = dword [eax + 0x481336];
 				fcn.0044ef41(ecx, 2, ebx);
-				fcn.00441343(current_player, 4);
+				consume_a_card(current_player, 4);
 				fcn_41d546();
 				return 1;
 			} else {
@@ -379,7 +401,7 @@ int swap_land_card()
 					ecx = dword [eax + 0x481336];
 					fcn.0044ef41(ebx, 2, ecx);
 				}
-				fcn.00441343(current_player, 4);
+				consume_a_card(current_player, 4);
 				fcn_41d546();
 				return 1;
 			}
@@ -387,7 +409,7 @@ int swap_land_card()
 	}
 	// 442ade
 	if (ebx != 0) {
-		fcn.00441343(current_player, 4);
+		consume_a_card(current_player, 4);
 		fcn_41d546();
 	}
 	return ebx;
@@ -469,7 +491,7 @@ int swap_house_card()
 				}
 			}
 		}
-		fcn.00441343(current_player, 5);
+		consume_a_card(current_player, 5);
 		fcn_41d546();
 		return 1;
 	}
@@ -526,13 +548,13 @@ int swap_house_card()
 				eax = players[esi].character * 360;
 				edi = dword [eax + 0x48133a];
 				fcn.0044ef41(esi, 2, edi);
-				fcn.00441343(current_player, 5);
+				consume_a_card(current_player, 5);
 				fcn_41d546();
 				return 1;
 			}
 			eax = current_player + 1;
 			if (edi == eax || edi == 0 || esi != eax) {
-				fcn.00441343(current_player, 5);
+				consume_a_card(current_player, 5);
 				fcn_41d546();
 				return 1;
 			}
@@ -545,14 +567,14 @@ int swap_house_card()
 				esi = dword [eax + 0x48133a];
 				fcn.0044ef41(edi , 2, esi);
 			}
-			fcn.00441343(current_player, 5);
+			consume_a_card(current_player, 5);
 			fcn_41d546();
 			return 1;
 		}
 	}
 	// 442f29
 	if (ebx != 0) {
-		fcn.00441343(current_player, 5);
+		consume_a_card(current_player, 5);
 		fcn_41d546();
 	}
 	return ebx;
@@ -567,7 +589,7 @@ int turn_back_card()
 	}
 	ebx = eax;
 	if (ebx != 0) {
-		fcn.00441343(current_player, 6);
+		consume_a_card(current_player, 6);
 		esi = players[current_player].character;
 		eax = esi * 360;
 		edi = dword [eax + 0x48124e];
