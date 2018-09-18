@@ -11,7 +11,8 @@ card_func card_functions[] = { // 0x475d5c
 	swap_house_card,
 	turn_back_card,
 	restruct_card,
-   	0x00443225U, 0x004434c0U,
+	auction_card,
+	0x004434c0U,
   0x004436e0U, 0x00443917U, 0x00443b0fU, 0x00443e3dU, 0x00443f80U,
   0x004440eaU, 0x004441dcU, 0x004444bfU, 0x004420d5U, 0x004420d5U,
   0x004420d5U, 0x004420d5U, 0x00444c45U, 0x00444e1aU, 0x00444f25U,
@@ -697,4 +698,114 @@ int restruct_card()
 	consume_a_card(current_player, 7);
 	fcn_41d546();
 	return esi;
+}
+
+int auction_card()
+{
+	ebx = 0;
+	edx = players[current_player].f12;
+	eax = edx * 5;
+	edi = (uint16_t)word [dw_498e80 + eax * 8 + 0x20];
+	if (edi > 2000 && edi < 4000) {
+		eax = edi - 2000;
+		eax *= 0x34;
+		esi = dw_498e84 + eax;
+		bl = byte [esi + 0x19];
+		if (ebx != 0) {
+			eax = word [esi + 0x1c];
+			eax *= price_index;
+			mov dword [esp], eax;
+			fild dword [esp];
+			eax = 0;
+			al = byte [esi + 0x1a];
+			mov dword [local_4h], eax;
+			fild word [local_4h];
+			fadd dword [0x465324];
+			fdiv dword [0x465328];
+			fmulp st(1);
+			sub esp, 8;
+			fstp qword [esp];
+			fcn.0040df69(ebx - 1, current_player);
+			/* add esp, 0x10 */
+		}
+		edx = players[current_player].character;
+		eax = edx * 360;
+		ecx = dword [eax + 0x481256];
+		fcn.0044ef41(current_player, 3, ecx);
+		if (ebx != 0 && current_player+1 != ebx) {
+			edx = ebx - 1;
+			ebx = players[edx].character;
+			eax = ebx * 360;
+			ecx = dword [eax + 0x481346];
+			fcn.0044ef41(edx, 1, ecx);
+		}
+		// 443345
+		eax = fcn.0043bde5(current_player, edi, 1);
+		if (eax == 0) {
+			byte [esi + 0x19] = 0;
+			dword [esi + 0x30] = eax;
+			fcn.0040a4e1(eax);
+		}
+		consume_a_card(current_player, 8);
+		dword [0x48be18] = 0;
+		player_action_1(1);
+		return 1;
+	}
+	// 443375
+	if (edi > 4000 && edi < 6000) {
+		eax = edi - 4000;
+		eax *= 56;
+		esi = dw_498e88 + eax;
+		ebx = byte [esi + 0x19];
+		if (ebx != 0) {
+			eax = word [esi + 0x22] * price_index;
+			mov dword [esp], eax;
+			fild dword [esp];
+			eax = byte [esi + 0x1a];
+			mov dword [local_4h], eax;
+			fild word [local_4h];
+			fadd dword [0x465324];
+			fdiv dword [0x465328];
+			fmulp st(1);
+			sub esp, 8;
+			fstp qword [esp];
+			fcn.0040df69(ebx - 1, current_player);
+			/* add esp, 0x10 */
+		}
+		// 4433f7
+		edx = players[current_player].character;
+		eax = edx * 360;
+		ecx = dword [eax + 0x481256];
+		fcn.0044ef41(current_player, 3, ecx);
+		if (ebx != 0 && current_player+1 != ebx) {
+			ebx--;
+			edx = players[ebx].character;
+			eax = edx * 360;
+			edx = dword [eax + 0x481346];
+			fcn.0044ef41(ebx, 1, edx);
+		}
+		// 44346c
+		eax = fcn.0043bde5(current_player, edi, 1);
+		if (eax != 0) {
+			consume_a_card(current_player, 8);
+			dword [0x48be18] = 0;
+			player_action_1(1);
+			return 1;
+		}
+		byte [esi + 0x19] = 0;
+		dword [esi + 0x34] = eax;
+		fcn.0040a4e1(eax);
+		consume_a_card(current_player, 8);
+		dword [0x48be18] = 0;
+		player_action_1(1);
+		return 1;
+	}
+	// 443492
+	if (ebx != 0) {
+		consume_a_card(current_player, 8);
+		dword [0x48be18] = 0;
+		player_action_1(1);
+	}
+	// 4434b9
+	return ebx;
 }
