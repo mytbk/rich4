@@ -1,0 +1,3 @@
+#!/bin/sh
+
+sed '/^"e/d' "${HOME}/.local/share/radare2/projects/${1}/rc"
