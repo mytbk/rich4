@@ -12,7 +12,7 @@ card_func card_functions[] = { // 0x475d5c
 	turn_back_card,
 	restruct_card,
 	auction_card,
-	0x004434c0U,
+	angel_card,
   0x004436e0U, 0x00443917U, 0x00443b0fU, 0x00443e3dU, 0x00443f80U,
   0x004440eaU, 0x004441dcU, 0x004444bfU, 0x004420d5U, 0x004420d5U,
   0x004420d5U, 0x004420d5U, 0x00444c45U, 0x00444e1aU, 0x00444f25U,
@@ -808,4 +808,81 @@ int auction_card()
 	}
 	// 4434b9
 	return ebx;
+}
+
+int angel_card()
+{
+	int t; /* @esp */
+	t = 0;
+	if (players[current_player].who_plays == 1) {
+		eax = fcn.00446ae8(0xe0c0006);
+	} else {
+		eax = fcn.0041e6f2(0);
+	}
+
+	ebp = eax;
+	if (ebp != 0) {
+		consume_a_card(current_player, 9);
+		ebx = players[current_player].character;
+		eax = ebx * 360;
+		edi = dword [eax + 0x48125a];
+		fcn.0044ef41(current_player, 3, edi);
+		if (ebp > 2000 && ebp < 4000) {
+			eax = ebp - 2000;
+			eax *= 0x34;
+			ebx = dw_498e84;
+			edi = dw_498e84 + eax;
+			for (esi = 1; ; esi++) {
+				ebx += 0x34;
+				if (esi > dw_498e98)
+					break;
+				eax = strcmp(edi + 4, ebx + 4);
+				if (eax != 0 || byte [ebx + 0x1a] >= 5)
+					continue;
+				fcn.00456c0a(dw_474938, 0x2f440, esi + 2000, 0xffff);
+				if (byte [ebx + 0x18] == 0) {
+					byte [ebx + 0x1a]++;
+				} else if (byte [ebx + 0x1a] == 0) {
+					byte [ebx + 0x1a] = 1;
+				}
+				if (byte [ebx + 0x18] == 0 && byte [ebx + 0x1a] == 5) {
+					t = 1;
+				}
+			}
+			// 4435e4
+			sub.WINMM.dll_timeGetTime_669(0,
+					(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+					(int32_t)(int16_t)[edi], (int32_t)(int16_t)[edi+2], 100);
+			fcn.00451985();
+			player_action_2(0, 0, 1);
+			if (t != 0) {
+				fcn.0040b0cd();
+			}
+			return ebp;
+		}
+		// 0x443621
+		if (ebp > 4000 && ebp < 6000) {
+			eax = ebp - 4000;
+			eax *= 56;
+			ebx = dw_498e88 + eax;
+			fcn.00456c0a(dw_474938, 0x2f440, ebp, 0xffff);
+			if (players[current_player].who_plays != 1) {
+				sub.WINMM.dll_timeGetTime_669(0,
+						(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+						(int32_t)(int16_t)[ebx], (int32_t)(int16_t)[ebx+2], 100);
+			}
+			fcn.00451985();
+			eax = fcn.0040b110(ebp);
+			if ((al & 0x80) != 0) {
+				t = 1;
+			}
+			player_action_2(0, 0, 1);
+		}
+		// 0x4436ce
+		if (t != 0) {
+			fcn.0040b0cd();
+		}
+	}
+	// 0x4436d9
+	return ebp;
 }
