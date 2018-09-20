@@ -2,6 +2,11 @@
 
 typedef int (*card_func)(void);
 
+int dummy_func()
+{
+	return 0;
+}
+
 card_func card_functions[] = { // 0x475d5c
 	NULL,
 	average_cash_card,
@@ -13,12 +18,24 @@ card_func card_functions[] = { // 0x475d5c
 	restruct_card,
 	auction_card,
 	angel_card,
-  0x004436e0U, 0x00443917U, 0x00443b0fU, 0x00443e3dU, 0x00443f80U,
-  0x004440eaU, 0x004441dcU, 0x004444bfU, 0x004420d5U, 0x004420d5U,
-  0x004420d5U, 0x004420d5U, 0x00444c45U, 0x00444e1aU, 0x00444f25U,
-  0x0044503fU, 0x004451f0U, 0x0044542dU, 0x00445593U, 0x00445710U,
-  0x004458dfU, 0x446afb00U, 0x446baa00U, 0x446c8800U, 0x446d6900U
-
+	devil_card,
+	monster_card,
+	defuse_card,
+	rob_card,
+	stop_card,
+	winter_sleep_card,
+	sleep_walking_card,
+	accuse_card,
+	dummy_func, dummy_func, dummy_func, dummy_func,
+	send_god_card,
+	invite_god_card,
+	red_card,
+	black_card,
+	get_tax_card,
+	price_up_card,
+	seal_up_card,
+	aliance_card,
+	tortoise_walking_card
 };
 
 uint8_t card_amount[30]; /* 0x499198 */
