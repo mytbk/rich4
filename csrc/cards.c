@@ -942,6 +942,33 @@ int stop_card()
 	return edi;
 }
 
+int winter_sleep_card()
+{
+	consume_a_card(current_player, 15);
+	int c = players[current_player].character;
+	player_say(current_player, 3, card_strings[c][0][14]);
+
+	for (int i = 0; i < 8; i++) {
+		if (i < 4) {
+			if (i == current_player || players[i].who_plays == 0 || players[i].f8 == 0 || players[i].days_in_hotel != 0)
+				continue;
+			fcn.0040df69(i, current_player, price_index * 150);
+			players[i].days_sleep_walking = 0;
+			players[i].days_winter_sleep = 5;
+			players[i].total_winter_sleep_days += 5;
+			continue;
+		} else {
+			ch = special_players[i].f10;
+			if (ch != 0)
+				continue;
+			special_players[i].days_sleep_walking = 0;
+			special_players[i].days_winter_sleep = 5;
+		}
+	}
+	player_action_2(0, 0, 1);
+	return 1;
+}
+
 int tortoise_walking_card()
 {
 	if (players[current_player].who_plays == 1) {

@@ -46,7 +46,7 @@ typedef struct
 	/* 0x40 */
 	uint8_t f64;
 	uint8_t f65;
-	uint8_t f66;
+	uint8_t total_winter_sleep_days;
 	uint8_t f67;
 	uint16_t f68;
 	uint16_t f70;
