@@ -23,7 +23,8 @@ typedef struct
 	uint16_t f2;
 	uint16_t f4;
 	uint16_t f6;
-	uint8_t f8[7];
+	uint8_t f8[6];
+	uint8_t days_stopping;
 	uint8_t days_tortoise_walking;
 } special_player_info;
 
