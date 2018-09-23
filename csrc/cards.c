@@ -70,6 +70,23 @@ int has_card(int p, int c)
 	return 0;
 }
 
+int use_revenge_card(int p)
+{
+	static const char str_revenge[] = "%s\n\n\xb4_\xa4\xb3\xa5\x64\xa5\xcd\xae\xc4\xa1I"; /* 复仇卡生效！*/
+	char buf[128];
+	int c;
+
+	player_action_2(players[p].f8, players[p].f10, 0);
+	sprintf(buf, str_revenge, players[p].name_ptr);
+	fcn.00441f73(18, buf);
+	consume_a_card(p, 18);
+	c = players[p].character;
+	player_say(p, 0, card_strings[c][0][17]);
+	c = players[current_player].character;
+	player_say(current_player, 2, card_strings[c][2][17]);
+	return 1;
+}
+
 // 0x4420d8
 int average_cash_card()
 {
@@ -1038,7 +1055,7 @@ int sleep_walking_card()
 				fcn.0040b93b(ebx);
 				if (ebx == selected_player) {
 					if (has_card(selected_player, 18)) { /* 复仇卡 */
-						fcn.00444691(selected_player);
+						use_revenge_card(selected_player);
 						players[current_player].days_sleep_walking = 5;
 						players[current_player].f102 = players[current_player].traffic_method;
 						players[current_player].f103 = players[current_player].ndices;
