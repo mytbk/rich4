@@ -60,6 +60,16 @@ void consume_a_card(int p, int c)
 	card_amount[c-1]++;
 }
 
+int has_card(int p, int c)
+{
+	for (int i = 0; i < 15; i++) {
+		int card = player_cards[p * 15 + i];
+		if (card == c)
+			return 1;
+	}
+	return 0;
+}
+
 // 0x4420d8
 int average_cash_card()
 {
@@ -967,6 +977,88 @@ int winter_sleep_card()
 	}
 	player_action_2(0, 0, 1);
 	return 1;
+}
+
+int sleep_walking_card()
+{
+	if (players[current_player].who_plays == 1) {
+		esi = fcn.00446ae8(0xe0c0710);
+	} else {
+		esi = fcn.0041e6f2(0);
+	}
+
+	if (esi != 0) {
+		consume_a_card(current_player, 16);
+		int c = players[current_player].character;
+		player_say(current_player, 3, card_strings[c][0][15]);
+		int selected_player = fcn.0040d293(esi);
+		if (players[current_player].who_plays != 1) {
+			sub.WINMM.dll_timeGetTime_669(0,
+					players[current_player].f8, players[current_player].f10,
+					players[selected_player].f8, players[selected_player].f10, 100);
+		}
+		if (selected_player < 4 && players[selected_player].days_winter_sleep == 0) {
+			fcn.0040df69(selected_player, current_player, price_index * 150);
+			if (has_card(selected_player, 21)) { /* 免罪卡 */
+				fcn.00444bb2(selected_player);
+			} else {
+				if (has_card(selected_player, 19)) { /* 嫁祸卡 */
+					eax = fcn.0044476a(selected_player, 0, 0);
+					if (eax != -1) {
+						ebx = eax;
+					} else {
+						ebx = selected_player;
+					}
+				}
+				edx = players[ebx].character;
+				eax = edx * 12;
+				edx = eax;
+				ecx = dword [eax*9 + 0x48089e];
+				player_say(ebx, 1, ecx);
+				if (ebx != current_player) {
+					al = 5;
+				} else {
+					al = 4;
+				}
+				players[ebx].days_sleep_walking = al;
+				players[ebx].total_winter_sleep_days += 5;
+				players[ebx].f102 = players[ebx].traffic_method;
+				players[ebx].f103 = players[ebx].ndices;
+				dh = players[ebx].traffic_method;
+				if (dh != 0) {
+					if (dh == 1) {
+						tool_amount[ebx * 15 + 4]++;
+					}
+					if (players[ebx].traffic_method == 2) {
+						tool_amount[ebx * 15 + 5]++;
+					}
+					players[ebx].traffic_method = 0;
+					players[ebx].ndices = 1;
+				}
+				fcn.0040b93b(ebx);
+				if (ebx == selected_player) {
+					if (has_card(selected_player, 18)) { /* 复仇卡 */
+						fcn.00444691(selected_player);
+						players[current_player].days_sleep_walking = 5;
+						players[current_player].f102 = players[current_player].traffic_method;
+						players[current_player].f103 = players[current_player].ndices;
+						if (players[current_player].traffic_method == 1) {
+							tool_amount[current_player * 15 + 4]++;
+						}
+						if (players[current_player].traffic_method == 2) {
+							tool_amount[current_player * 15 + 5]++;
+						}
+						players[current_player].traffic_method = 0;
+						players[current_player].ndices = 1;
+					}
+				}
+			}
+		} else if (ebx >= 4 && special_players[ebx].days_winter_sleep == 0) {
+			special_players[ebx].days_sleep_walking = 5;
+		}
+		fcn_41d546();
+	}
+	return esi;
 }
 
 int tortoise_walking_card()
