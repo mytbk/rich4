@@ -903,3 +903,46 @@ int angel_card()
 	// 0x4436d9
 	return ebp;
 }
+
+int tortoise_walking_card()
+{
+	if (players[current_player].who_plays == 1) {
+		edi = fcn.00446ae8(0xe0c0010);
+	} else {
+		edi = fcn.0041e6f2(0);
+	}
+	if (edi == 0)
+		return 0;
+
+	esi = ebx = fcn.0040d293(edi);
+	int selected_player = fcn.0040d293(edi);
+	consume_a_card(current_player, 30);
+	ebp = current_player;
+	if (selected_player != current_player) {
+		int c = players[current_player].character;
+		player_say(current_player, 3, card_strings[c][0][29]);
+	}
+	if (players[current_player].who_plays != 1) {
+		sub.WINMM.dll_timeGetTime_669(0,
+				players[current_player].f8, players[current_player].f10,
+				players[selected_player].f8, players[selected_player].f10, 100);
+	}
+
+	if (selected_player >= 4) {
+		special_players[selected_player].days_tortoise_walking = 3;
+		return edi;
+	}
+
+	if (selected_player == current_player) {
+		int c = players[current_player].character;
+		player_say(current_player, 3, card_strings[c][1][29]);
+		players[current_player].days_tortoise_walking = 2;
+		return edi;
+	} else {
+		int c = players[selected_player].character;
+		player_say(selected_player, 2, card_strings[c][2][29]);
+		players[selected_player].days_tortoise_walking = 3;
+		fcn_41d546();
+		return edi;
+	}
+}
