@@ -72,3 +72,22 @@ extern int current_player; /* 0x49910c */
 
 extern uint8_t player_cards[60]; /* 0x499120 */
 extern uint8_t tool_amount[60]; /* 0x49915c */
+
+/* still don't know what this means,
+ * assume it's special players */
+typedef struct
+{
+	uint16_t f0;
+	uint16_t f2;
+	uint16_t f4;
+	uint16_t f6;
+	uint8_t f8[2];
+	uint8_t f10; // 0x498df2
+	uint8_t f11;
+	uint8_t days_winter_sleep; // 0x498df4
+	uint8_t days_sleep_walking; // 0x498df5
+	uint8_t days_stopping;
+	uint8_t days_tortoise_walking;
+} special_player_info;
+
+extern special_player_info special_players[5]; // 0x498e28

@@ -3,6 +3,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#include "player_info.h"
+
 int mkf_jump; // 0x48a3b0
 
 int initial_fund[6] = { 300000, 200000, 100000, 50000, 30000, 10000 }; // 0x46cb94
@@ -12,6 +14,10 @@ int winning_condition[6] = { 0, 100, 50, 10, 5, 3 }; // 0x46cc00
 
 int game_initial_fund; // 0x49908c
 int traffic_initial; // 0x46cb44
+
+struct special_player_info default_special_players[5] = {
+	{ .f10 = 1 }, { .f10 = 1 }, { .f10 = 2 }, { .f10 = 2 }, { .f10 = 3 }
+}; // 0x47ecec
 
 void fcn_00445a4d(int a1, int a2)
 {
@@ -182,7 +188,7 @@ int init_new_game(int a0)
 			goto 407210;
 		}
 
-		memcpy(0x498e28, 0x47ecec, 80);
+		memcpy(special_players, default_special_players, sizeof(special_players));
 		memset(0x496b30, 0, 8);
 		memset(0x496b60, 0, 8);
 		b_496b34 = b_496b35 = b_496b66 = b_496b67 = 1;

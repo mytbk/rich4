@@ -311,7 +311,7 @@ int load_checkpoint(int n)
 		players[i].name_ptr = rich4_players[j].name_ptr;
 	}
 
-	fread(0x498e28, 0x10, 5, fp);
+	fread(special_players, 0x10, 5, fp);
 	fread(0x496d08, 0x18, 0x2e, fp);
 	fread(player_cards, 1, 0x3c, fp);
 	fread(tool_amount, 1, 0x3c, fp);

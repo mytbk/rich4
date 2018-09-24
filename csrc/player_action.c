@@ -20,24 +20,7 @@ void player_action_1(int a0)
 	dw_475110 = 0;
 }
 
-/* still don't know what this means,
- * assume it's special players */
-typedef struct
-{
-	uint16_t f0;
-	uint16_t f2;
-	uint16_t f4;
-	uint16_t f6;
-	uint8_t f8[2];
-	uint8_t f10; // 0x498df2
-	uint8_t f11;
-	uint8_t days_winter_sleep; // 0x498df4
-	uint8_t days_sleep_walking; // 0x498df5
-	uint8_t days_stopping;
-	uint8_t days_tortoise_walking;
-} special_player_info;
-
-special_player_info special_players[10]; // 0x498de8
+special_player_info special_players[5]; // 0x498e28
 
 void player_action_2(int a0, int a1, int a2)
 {
@@ -51,8 +34,8 @@ void player_action_2(int a0, int a1, int a2)
 			t0 = players[current_player].f8;
 			t1 = players[current_player].f10;
 		} else {
-			t0 = special_players[current_player].f0;
-			t1 = special_players[current_player].f2;
+			t0 = special_players[current_player - 4].f0;
+			t1 = special_players[current_player - 4].f2;
 		}
 		if (t0 == a0 && t1 == a1) {
 			dw_48be18 = 0;

@@ -983,7 +983,7 @@ int stop_card()
 				fcn_41d546();
 			}
 		} else {
-			special_players[selected_player].days_stopping = 1;
+			special_players[selected_player - 4].days_stopping = 1;
 		}
 	}
 	return edi;
@@ -1005,11 +1005,11 @@ int winter_sleep_card()
 			players[i].total_winter_sleep_days += 5;
 			continue;
 		} else {
-			ch = special_players[i].f10;
+			ch = special_players[i - 4].f10;
 			if (ch != 0)
 				continue;
-			special_players[i].days_sleep_walking = 0;
-			special_players[i].days_winter_sleep = 5;
+			special_players[i - 4].days_sleep_walking = 0;
+			special_players[i - 4].days_winter_sleep = 5;
 		}
 	}
 	player_action_2(0, 0, 1);
@@ -1090,8 +1090,8 @@ int sleep_walking_card()
 					}
 				}
 			}
-		} else if (ebx >= 4 && special_players[ebx].days_winter_sleep == 0) {
-			special_players[ebx].days_sleep_walking = 5;
+		} else if (ebx >= 4 && special_players[ebx - 4].days_winter_sleep == 0) {
+			special_players[ebx - 4].days_sleep_walking = 5;
 		}
 		fcn_41d546();
 	}
@@ -1122,7 +1122,7 @@ int tortoise_walking_card()
 	}
 
 	if (selected_player >= 4) {
-		special_players[selected_player].days_tortoise_walking = 3;
+		special_players[selected_player - 4].days_tortoise_walking = 3;
 		return edi;
 	}
 
