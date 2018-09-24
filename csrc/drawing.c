@@ -163,6 +163,11 @@ void fcn_4562a5(struct st * a0, struct st * a1, int a2, int a3)
 	fcn_455c52((uint16_t)a0->f0, (uint16_t)a0->f2, a0->f8, a1, a2, a3, 0);
 }
 
+void fcn_456418(uint16_t *a0, struct st *a1, int a2, int a3)
+{
+	fcn_455c52(640, 480, a0, a1, a2, a3, 0);
+}
+
 void fcn_417191(int a0)
 {
 	RECT r0;
