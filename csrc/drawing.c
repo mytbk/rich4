@@ -274,3 +274,76 @@ void IntersectRect_4cd(RECT *r0)
 
 	fcn_417191(1);
 }
+
+void player_say(int p, int t, const char *s)
+{
+	RECT r0;
+
+	static const char *ss = NULL; // 0x4762c8
+
+	if (s == ss)
+		return;
+	ss = s;
+	if (p & 0x8000) {
+		edx = 0;
+		p &= 0x7fff;
+	} else {
+		edx = 1;
+	}
+	if (players[p].days_disappearing != 0 || players[p].days_sleep_walking != 0 || players[p].days_winter_sleep != 0)
+		return;
+
+	if (edx != 0) {
+		player_action_2(players[p].f8, players[p].f10, 0);
+	}
+	create_some_font(0x10, 0x101010, 0, 2, 1);
+	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
+	st_46caec.f8 = sfdesc1.lpSurface;
+	struct st * edi = fcn_00451a97(&st_46caec, NULL, 0, 40, 440, 220);
+	fcn_456418(sfdesc1.lpSurface, dw_48bad8+0x54, 220, 130);
+	ecx = dword [p * 0x34 + 0x498eb0];
+	edx = t + 1;
+	eax = edx * 12;
+	ecx += 12;
+	eax += ecx;
+	fcn_456418(sfdesc1.lpSurface, eax, 170, 130);
+
+	if (s != NULL) {
+		if (s[0] == '#') {
+			esi = 5;
+		} else {
+			esi = 0;
+		}
+		const char *s2 = s + esi;
+		if (s2[0] == '@') {
+			eax = (s2[1] - '0') * 10 + (s2[2] - '0');
+			edx = (eax - 1) * 12;
+			eax = dw_48bad4 + 12 + edx;
+			fcn_456418(sfdesc1.lpSurface, eax, 240, 130);
+			if (esi == 5) {
+				eax = (s[1] - '0') * 1000 + (s[2] - '0') * 100 + (s[3] - '0') * 10 + (s[4] - '0');
+				fcn.0045441a(eax);
+			}
+		} else {
+			draw_some_text(0, s, 200, 130, 5);
+		}
+	}
+	// 0x44f157
+	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
+
+	r0.left = 0;
+	r0.top = 40;
+	r0.right = 440;
+	r0.bottom = 260;
+
+	IDirectDrawSurface_BltFast(pddrawsf1, 0, 40, pddrawsf2, &r0, DDBLTFAST_WAIT);
+
+	sub.WINMM.dll_timeGetTime_4f6(1000);
+
+	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
+	fcn.0045643d(sfdesc1.lpSurface, edi, r0.left, r0.top, 0, 0, 440, 220);
+	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
+
+	IDirectDrawSurface_BltFast(pddrawsf1, r0.left, r0.top, pddrawsf2, &r0, DDBLTFAST_WAIT);
+	free(edi);
+}
