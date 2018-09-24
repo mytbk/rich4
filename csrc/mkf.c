@@ -69,7 +69,7 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize) //0x00450441
 	if (hdl == 0)
 		return 0;
 
-	SetFilePointer(hdl, mkf_stdata[mkf_idx].data[a1*4], 0, 0);
+	SetFilePointer(hdl, ((uint32_t*)(mkf_stdata[mkf_idx].data))[a1], 0, 0);
 	ReadFile(hdl, data, 16, &sz, NULL);
 
 	if (buf == NULL) {
