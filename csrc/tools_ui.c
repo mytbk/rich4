@@ -4,6 +4,7 @@
  */
 
 #include "player_info.h"
+#include "window_util.h"
 
 const char str_cross_sym[] = "\xa1\xd1%d"; // x%d
 
@@ -151,7 +152,7 @@ void tools_ui()
 		fcn.004563f5(sfdesc1.lpSurface, edi + 0x18, 0xe, 0x82);
 		IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 
-		esi = fcn_4018e7(toolsProc, 0);
+		esi = register_wait_callback(toolsProc, 0);
 
 		IDirectDrawSurface_Lock(pddrawsf2, 0, &sfdesc1, 1, 0);
 		fcn.004563f5(sfdesc1.lpSurface, dw_48c558, 0, 40);

@@ -7,6 +7,7 @@
 #include "data_struct.h"
 #include "player_info.h"
 #include "sound_struct.h"
+#include "window_util.h"
 
 DDSURFACEDESC sfdesc1; // 0x0048a068
 DDSURFACEDESC sfdesc2; // 0x0048a0f8
@@ -186,7 +187,7 @@ LRESULT CALLBACK kbdProc(
 	/* hotkey 0x497172 */
 	k = R4_KEY(global_rich4_cfg.hotkeys[5]); /* cancel */
 	if (wParam == k && R4_KEY_RELEASED(lParam)) {
-		if (b_46cafe != 0 && dw_46cad8 == 1) {
+		if (b_46cafe != 0 && cb_top == 1) {
 			uint32_t ebx = 0;
 			for (size_t i = 0; i < nplayers; i++) {
 				if (players[i].who_plays == 1 &&
@@ -672,7 +673,8 @@ bool initialize()
 	mid_status[5] = 0;
 	memset(0x4990f0, 0, 4);
 	dw_474938 = malloc(387200);
-	dw_474930 = dw_474934 = dw_46cad8 = 0;
+	dw_474930 = dw_474934 = 0;
+	cb_top = 0;
 	windowCallbacks[0] = NULL;
 	b_47e771 = 0;
 	return 1;

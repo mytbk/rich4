@@ -4,6 +4,7 @@
  */
 
 #include "player_info.h"
+#include "window_util.h"
 
 int mkf_jump; // 0x48a3b0
 
@@ -126,7 +127,7 @@ int init_new_game(int a0)
 
 	sub.WINMM.dll_mciSendStringA_9cf(0x8001); /* TODO: 0x4549cf */
 
-	int res = fcn_4018e7(0x404e44, a0); /* function in cards_ui.c */
+	int res = register_wait_callback(0x404e44, a0);
 	*(int*)(esp + 4) = res;
 	unload_mkf(mkf_jump);
 

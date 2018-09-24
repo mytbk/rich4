@@ -6,13 +6,13 @@
 #include <windows.h>
 #include <ddraw.h>
 #include "global.h"
+#include "window_util.h"
 
 HINSTANCE ghInstance; // 48a064
 HWND gwindowHandle; // 48a0d4
 RECT g_rect;
 
 char mid_status[7]; // 0x46cb00
-wProc windowCallbacks[100]; // 48a010
 
 LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -22,10 +22,10 @@ LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 			PostQuitMessage(0);
 			return 0;
 		}
-		if (windowCallbacks[dw_46cad8] == NULL) {
+		if (windowCallbacks[cb_top] == NULL) {
 			return DefWindowProcA(hWnd, message, wParam, lParam);
 		} else {
-			return (windowCallbacks[dw_46cad8](hWnd, message, wParam, lParam));
+			return (windowCallbacks[cb_top](hWnd, message, wParam, lParam));
 		}
 	}
 	if (message == WM_ACTIVATEAPP) {
@@ -71,10 +71,10 @@ LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 		sub_mciSendStringA_d2c();
 		return 0;
 	}
-	if (windowCallbacks[dw_46cad8] == NULL) {
+	if (windowCallbacks[cb_top] == NULL) {
 		return DefWindowProcA(hWnd, message, wParam, lParam);
 	} else {
-		return (windowCallbacks[dw_46cad8](hWnd, message, wParam, lParam));
+		return (windowCallbacks[cb_top](hWnd, message, wParam, lParam));
 	}
 }
 
@@ -213,7 +213,7 @@ int fcn_004029fd()
 	create_some_font(0x10, 0xf0f0f0, 0x101010, 3, 1);
 	draw_some_text(dw_48a180 + 12, "V3.11", 638, 470, 6);
 	sub.WINMM.dll_mciSendStringA_9cf(0);
-	ebx = fcn_4018e7(entryCallback, 0);
+	ebx = register_wait_callback(entryCallback, 0);
 	sub.WINMM.dll_mciSendStringA_acb();
 	free(dw_48a180);
 	return ebx;

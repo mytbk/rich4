@@ -28,8 +28,6 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize);
 extern HINSTANCE ghInstance; // 48a064
 extern HWND gwindowHandle; // 48a0d4
 extern RECT g_rect; /* struct tagRECT { left, top, right, bottom } @ 0x46cadc */
-typedef LRESULT (CALLBACK *wProc)(HWND, UINT, WPARAM, LPARAM);
-extern wProc windowCallbacks[100]; // 48a010
 
 /* card.c */
 extern uint8_t card_amount[30];

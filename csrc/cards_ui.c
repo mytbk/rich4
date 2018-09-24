@@ -6,6 +6,7 @@
 #include "player_info.h"
 #include "global.h"
 #include "sound_struct.h"
+#include "window_util.h"
 
 uint8_t player_cards[60]; // 0x499120
 int selected_card; // 0x48c544
@@ -53,29 +54,6 @@ rich4_card cards_table[] = {
 	{ "\xa6\x50\xb7\xf9\xa5\x64", 2, 40, 0, 0 }, /* 同盟卡 */
 	{ "\xaf\x51\xc0\x74\xa5\x64", 3, 70, 0, 0 }, /* 乌龟卡 */
 };
-
-int fcn_4018e7(wProc a1, int a2)
-{
-	dw_46cad8++;
-	windowCallbacks[dw_46cad8] = a1;
-	PostMessageA(gwindowHandle, 0x401, 0, a2);
-	while (1) {
-		MSG msg;
-		if (PeekMessageA(&msg, 0, 0, 0, 1) == 0)
-			continue;
-		if (msg.message == 0x402) {
-			dw_46cad8--;
-			return msg.lParam;
-		}
-		TranslateMessage(&msg);
-		DispatchMessageA(&msg);
-	}
-}
-
-void Post_0402_Message(LPARAM lp)
-{
-	PostMessageA(gwindowHandle, 0x402, 0, lp);
-}
 
 sound_struct snd0 = {1, NULL}; // 0x00482322
 sound_struct snd1 = {3, NULL}; // 0x0048233a
@@ -196,7 +174,7 @@ void cards_ui()
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 			fcn_004563f5(sfdesc1.lpSurface, edi+12, 14, 130);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
-			ebx = fcn_4018e7(cardProc, 0);
+			ebx = register_wait_callback(cardProc, 0);
 			fcn_00451edb(ebp, 0, 0x8028);
 			if (ebx != 0) {
 				edx = cards_table[ebx].name_ptr; /* cards_table has 8 bytes per item */
