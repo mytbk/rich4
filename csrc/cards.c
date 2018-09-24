@@ -87,6 +87,21 @@ int use_revenge_card(int p)
 	return 1;
 }
 
+int use_absolution_card(int p)
+{
+	static const char str_absolution[] = "%s\n\n\xa7K\xb8o\xa5\x64\xa5\xcd\xae\xc4\xa1I" /* 免罪卡生效 */
+	char buf[128];
+	int c;
+
+	player_action_2(players[p].f8, players[p].f10, 0);
+	sprintf(buf, str_absolution, players[p].name_ptr);
+	fcn.00441f73(21, buf);
+	consume_a_card(p, 21);
+	c = players[p].character;
+	player_say(p, 0, card_strings[c][0][20]);
+	return 1;
+}
+
 // 0x4420d8
 int average_cash_card()
 {
@@ -1017,7 +1032,7 @@ int sleep_walking_card()
 		if (selected_player < 4 && players[selected_player].days_winter_sleep == 0) {
 			fcn.0040df69(selected_player, current_player, price_index * 150);
 			if (has_card(selected_player, 21)) { /* 免罪卡 */
-				fcn.00444bb2(selected_player);
+				use_absolution_card(selected_player);
 			} else {
 				if (has_card(selected_player, 19)) { /* 嫁祸卡 */
 					eax = fcn.0044476a(selected_player, 0, 0);
