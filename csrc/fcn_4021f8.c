@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)  2018 Iru Cai <mytbk920423@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 #include <windows.h>
 
 void fcn_004021f8(int a1, int a2, int a3)

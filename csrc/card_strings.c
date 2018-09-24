@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)  2018 Iru Cai <mytbk920423@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 #include <stddef.h>
 
 const char *card_strings[12][3][30] = {

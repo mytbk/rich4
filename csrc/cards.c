@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)  2018 Iru Cai <mytbk920423@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 #include "player_info.h"
 
 typedef int (*card_func)(void);

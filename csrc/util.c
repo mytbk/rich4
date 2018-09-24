@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)  2018 Iru Cai <mytbk920423@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 #include <string.h>
 
 void strcpy_without_spaces(char * a1, const char * a2)

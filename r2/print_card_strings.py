@@ -1,3 +1,6 @@
+# Copyright (C)  2018 Iru Cai <mytbk920423@gmail.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 import r2pipe
 import opencc
 

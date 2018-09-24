@@ -1,3 +1,8 @@
+/*
+ * Copyright (C)  2018 Iru Cai <mytbk920423@gmail.com>
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 int mkf_jump; // 0x48a3b0
 
 int initial_fund[6] = { 300000, 200000, 100000, 50000, 30000, 10000 }; // 0x46cb94
