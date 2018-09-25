@@ -450,9 +450,9 @@ void fcn_004551bb(uint16_t *esi, uint32_t *ecx, uint16_t *ret_bx)
 		uint16_t cf = esi[_ecx / 16] & (1 << (_ecx % 16));
 #endif
 		(*ecx)++;
-		if (!cf)
-			continue;
-		bx += 2;
+		if (cf) {
+			bx += 2;
+		}
 	}
 
 	bx -= 0x502;
