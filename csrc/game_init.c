@@ -147,25 +147,6 @@ int init_new_game(int a0)
 
 		for (int i = 0; i < 4; i++) {
 			int money_in_bank;
-			goto 0x40726f;
-4071d4:
-			players[i].cash = trunc(players[i].init_cash_ratio * (game_initial_fund / 100.0))
-			money_in_bank = game_initial_fund - players[i].cash;
-407210:
-			players[i].money_in_bank = money_in_bank;
-			players[i].traffic_method = traffic_initial;
-			if (traffic_initial != 0) {
-				eax = traffic_initial;
-				byte [eax + 0x497323] --;
-			}
-			players[i].ndices = traffic_initial + 1;
-			if (players[i].f100 & 1) {
-				dw_499104++;
-			}
-			continue;
-40726f:
-			esi = i * 0x68;
-			ebp = &players[i];
 			if (i >= nplayers) {
 				memset(&players[i], 0, sizeof(player_info));
 				continue;
@@ -176,17 +157,25 @@ int init_new_game(int a0)
 			fcn.00445a4d(i, 4);
 			fcn.00445a4d(i, 8);
 			fcn.00445a4d(i, 9);
-			edi = i * 12;
-			eax = dword [edi + 0x48a35c] & 0xff;
-			memcpy(&players[i], &rich4_players[eax], sizeof(player_info));
-			eax = dword [edi + 0x48a35c];
-			eax = (eax >> 31)&1;
-			eax++;
-			players[i].f100 = al;
-			if ((al & 1) == 0)
-				goto 4071d4; /* AI players */
-			players[i].cash = money_in_bank = game_initial_fund / 2;
-			goto 407210;
+			uint32_t character = dword [i * 12 + 0x48a35c];
+			memcpy(&players[i], &rich4_players[character & 0xff], sizeof(player_info));
+			players[i].f100 = (character >> 31) + 1;
+			if ((al & 1) == 0) { /* AI players */
+				players[i].cash = trunc(players[i].init_cash_ratio * (game_initial_fund / 100.0));
+				money_in_bank = game_initial_fund - players[i].cash;
+			} else {
+				players[i].cash = money_in_bank = game_initial_fund / 2;
+			}
+			players[i].money_in_bank = money_in_bank;
+			players[i].traffic_method = traffic_initial;
+			if (traffic_initial != 0) {
+				eax = traffic_initial;
+				byte [eax + 0x497323] --;
+			}
+			players[i].ndices = traffic_initial + 1;
+			if (players[i].f100 & 1) {
+				dw_499104++;
+			}
 		}
 
 		memcpy(special_players, default_special_players, sizeof(special_players));
