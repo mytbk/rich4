@@ -44,7 +44,7 @@ int init_new_game(int a0)
 	dw_48a354 = malloc(0x96000);
 	dw_48a358 = malloc(0x96000);
 	mkf_jump = load_mkf("JUMP.MKF");
-	read_mkf(mkf_jump, w_4991b6*4+w_4991b8 /* sign ext */, dw_48a358, NULL);
+	read_mkf(mkf_jump, game_stage*4+w_4991b8 /* sign ext */, dw_48a358, NULL);
 	fcn_004552b7(dw_48a354, dw_48a358, 0x96000, -16); /* @ bit_functions.c */
 	dw_48a3a4 = allocate_some_struct(440, 155, 0, 0);
 	dw_48a3a0 = allocate_some_struct(192, 461, 0, 0);
@@ -93,7 +93,7 @@ int init_new_game(int a0)
 
 	dw_46cb54 = w_4991b8; /* sign ext */
 
-	edx = w_4991b6; /* sign ext */
+	edx = game_stage; /* sign ext */
 	eax = edx*20;
 	edx = eax+1;
 	eax = edx * 3;
@@ -101,7 +101,7 @@ int init_new_game(int a0)
 	eax = dw_48a3b8 + 12 + edx;
 	dw_48a390 = fcn_00451a97(eax, 0, 0x8a, 15, 41, 133); /* function in data_struct.c */
 
-	edx = w_4991b6; /* sign ext */
+	edx = game_stage; /* sign ext */
 	eax = edx * 20;
 	edx = eax + 1;
 	eax = edx * 12;
@@ -109,7 +109,7 @@ int init_new_game(int a0)
 	eax += edx;
 	dw_48a398 = fcn_00451a97(eax, 0, 11, 166, 79, 39);
 
-	edx = w_4991b6; /* sign ext */
+	edx = game_stage; /* sign ext */
 	eax = edx * 20;
 	edx = eax + 1;
 	eax = edx * 12;
@@ -117,7 +117,7 @@ int init_new_game(int a0)
 	eax += edx;
 	dw_48a394 = fcn_00451a97(eax, 0, 99, 166, 79, 39);
 
-	edx = w_4991b6; /* sign ext */
+	edx = game_stage; /* sign ext */
 	eax = edx * 20;
 	edx = eax + 1;
 	eax = edx * 3;
@@ -198,7 +198,7 @@ int init_new_game(int a0)
 				dword [ecx + eax*4 + 0x497328] = 0;
 			}
 		}
-		eax = w_4991b6 * 4; // sign ext
+		eax = game_stage * 4; // sign ext
 		edx = w_4991b8 + eax; // sign ext
 		eax = edx * 48;
 		edx = eax;

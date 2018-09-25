@@ -93,11 +93,11 @@ void fcn_00407ad2()
 {
 	fcn_004080f5();
 	ebx = edi = load_mkf("MAP.MKF");
-	eax = (w_4991b6*4+w_4991b8)*2;
+	eax = (game_stage*4+w_4991b8)*2;
 	dw_474945 = read_mkf(ebx, eax, NULL, NULL);
-	eax = (w_4991b6*4+w_4991b8)+16;
+	eax = (game_stage*4+w_4991b8)+16;
 	dw_48badc = read_mkf(ebx, eax, NULL, NULL);
-	eax = w_4991b6*4+w_4991b8+16;
+	eax = game_stage*4+w_4991b8+16;
 	dw_48bad0 = read_mkf(ebx, eax, NULL, NULL);
 	memcpy(0x48b6b4, dw_474945 + 0x10, 512);
 	dw_48bac4 = *(int*)dw_474945 + 0x210;
@@ -108,11 +108,11 @@ void fcn_00407ad2()
 	if (dw_47493c == 0) {
 		esi = eax = load_mkf("MAPDAT.MKF");
 		if (eax != -1) {
-			eax = w_4991b6*4+w_4991b8;
+			eax = game_stage*4+w_4991b8;
 			dw_47493c = read_mkf(esi, eax, NULL, NULL);
 			unload_mkf(esi);
 		} else {
-			eax = (w_4991b6*4+w_4991b8)*2+1;
+			eax = (game_stage*4+w_4991b8)*2+1;
 			dw_47493c = read_mkf(ebx, eax, NULL, NULL);
 		}
 		/* 0x407c3f */
@@ -175,7 +175,7 @@ void fcn_00407ad2()
 	}
 	/* 0x407e0b */
 	for (ebx = 0; ebx < 5; ebx++) {
-		eax = *(int16_t*)0x4991b6; /* sign ext */
+		eax = game_stage; /* sign ext */
 		eax *= 4;
 		edx = *(int16_t*)0x4991b8; /* sign ext */
 		esi = edx + eax;
@@ -183,11 +183,11 @@ void fcn_00407ad2()
 		*(int*)(0x48ae4c + ebx*4) = read_mkf(edi, eax, NULL, NULL);
 	}
 	edx = *(int16_t*)0x4991b8; /* sign ext */
-	eax = *(int16_t*)0x4991b6; /* sign ext */
+	eax = game_stage; /* sign ext */
 	edx += 0x4f;
 	eax = eax * 4 + edx;
 	dw_48ae60 = read_mkf(edi, eax, NULL, NULL);
-	if (*(int16_t*)0x4991b6 == 0) {
+	if (game_stage == 0) {
 		for (ebx = 0; ebx < 17; ebx++) {
 			dw_48ae64[ebx] = read_mkf(edi, ebx+0x57, NULL, NULL);
 		}
@@ -301,7 +301,7 @@ int load_checkpoint(int n)
 	fseek(fp, 4, SEEK_SET);
 	fread(&global_rich4_cfg.day, 4, 1, fp); // read day,month,year
 	fread(0x4991b8, 2, 1, fp);
-	fread(0x4991b6, 2, 1, fp);
+	fread(&game_stage, 2, 1, fp);
 	fread(&nplayers, 4, 1, fp);
 	fread(players, sizeof(player_info), 4, fp);
 	fread(0x499104, 4, 1, fp);
@@ -323,7 +323,7 @@ int load_checkpoint(int n)
 	fread(0x496980, 0x24, 0xc, fp);
 
 	for (int i = 0; i < 12; i++) {
-		int32_t edx = (*(int16_t*)0x4991b6) << 2;
+		int32_t edx = game_stage << 2;
 		edx += (*(int16_t*))0x4991b8;
 		eax = edx << 2;
 		eax -= edx; /* eax = edx * 3 */

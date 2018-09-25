@@ -14,6 +14,17 @@ RECT g_rect;
 
 char mid_status[7]; // 0x46cb00
 
+typedef struct { int16_t x; int16_t y } pos_t;
+pos_t mpos[5] = { // 0x46cb28
+	{190, 380}, // start
+	{328, 380}, // load
+	{468, 378}, // options
+	{328, 450}, // exit
+	{62, 380} // new stage
+};
+
+int16_t game_stage;
+
 LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (message < 0x1c) {
@@ -81,9 +92,9 @@ LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (message >= 0x200) {
-		if (message == 0x200) {
-			edx = (u16)lParam;
-			ecx = (lParam >> 16) & 0xffff;
+		if (message == WM_MOUSEMOVE) {
+			int xPos = LOWORD(lParam);
+			int yPos = HIWORD(lParam);
 			int var_54 = dw_48a184;
 			RECT r0; // @ esp + 0x40
 
@@ -92,23 +103,23 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				edi = (i * 2 + 2) * 12;
 				eax = dw_48a180;
 				ebx = i * 4;
-				r0.left = (s16)word [ebx + 0x46cb28] - (s16)word [edi + eax + 0x10];
-				r0.top = (s16)word [ebx + 0x46cb2a] - (s16)word [edi + eax + 0x12];
+				r0.left = mpos[i].x - (s16)word [edi + eax + 0x10];
+				r0.top = mpos[i].y - (s16)word [edi + eax + 0x12];
 				r0.right = r0.left + (s16)word [edi + eax + 0xc];
 				r0.bottom = r0.top + (s16)word [edi + eax + 0xe];
-				if (edx < r0.left)
+				if (xPos < r0.left)
 					continue;
-				if (ecx < r0.top)
+				if (yPos < r0.top)
 					continue;
-				if (edx >= r0.right)
+				if (xPos >= r0.right)
 					continue;
-				if (ecx >= r0.bottom)
+				if (yPos >= r0.bottom)
 					continue;
 				if (i == dw_48a184)
 					break;
 				dw_48a184 = i;
 				IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-				fcn_456418(sfdesc1.lpSurface, dw_48a180 + 12 + edi, (s16)word [ebx + 0x46cb28], (s16)word [ebx + 0x46cb2a]);
+				fcn_456418(sfdesc1.lpSurface, dw_48a180 + 12 + edi, mpos[i].x, mpos[i].y);
 				IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 				InvalidateRect(hWnd, &r0, FALSE);
 				fcn_4542ce(0x48231a, 0);
@@ -122,8 +133,8 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				return 0;
 			edx = dw_48a180;
 			eax = dw_48a180 + (var_54 * 2 + 2) * 12;
-			r0.left = (s16)word [var_54*4 + 0x46cb28] - (s16)word [eax + 0x10];
-			r0.top = (s16)word [var_54*4 + 0x46cb2a] - (s16)word [eax + 0x12];
+			r0.left = mpos[var_54].x - (s16)word [eax + 0x10];
+			r0.top = mpos[var_54].y - (s16)word [eax + 0x12];
 			r0.right = r0.left + (s16)word [eax + 0xc];
 			r0.bottom = r0.top + (s16)word [eax + 0xe];
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
@@ -134,7 +145,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			InvalidateRect(hWnd, &r0, FALSE);
 			return 0;
 		}
-		if (message == 0x201) {
+		if (message == WM_LBUTTONDOWN) {
 			if (dw_48a184 != -1) {
 				fcn_4542ce(0x482322, 0);
 			}
@@ -185,7 +196,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		}
 		return DefWindowProcA(hWnd, message, wParam, lParam);
 	}
-	if (message == 15) {
+	if (message == WM_PAINT) {
 		PAINTSTRUCT ps;
 		BeginPaint(hWnd, &ps);
 		GetCursorPos_35d(&ps.rcPaint);
@@ -202,8 +213,8 @@ int fcn_004029fd()
 	dw_48a180 = read_mkf(mkf_data, 1, NULL, NULL);
 
 	for (int i = 0; i < 5; i++) { // i in ebx
-		int t1 = (signed short)word [ebx*4 + 0x46cb28];
-		int t2 = (signed short)word [ebx*4 + 0x46cb2a];
+		int t1 = mpos[i].x;
+		int t2 = mpos[i].y;
 		edx = (i * 2 + 1) * 12;
 		eax = dw_48a180 + 12;
 		edx += eax;
@@ -253,7 +264,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 	play_avi("START.AVI", &g_rect, 1);
 
 case_401de8_0:
-	w_4991b6 = 0;
+	game_stage = 0;
 	w_4991b8 = 0;
 	dw_4990f0 = 0;
 	b_46cafc = 0;
@@ -262,7 +273,7 @@ case_401de8_0:
 L401cb3:
 	switch (ret) {
 		case 4:
-			w_4991b6 = 1;
+			game_stage = 1;
 			// fallthrough
 		case 0:
 			if (init_new_game((int)b_46cafc)==0)

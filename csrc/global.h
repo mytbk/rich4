@@ -28,6 +28,7 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize);
 extern HINSTANCE ghInstance; // 48a064
 extern HWND gwindowHandle; // 48a0d4
 extern RECT g_rect; /* struct tagRECT { left, top, right, bottom } @ 0x46cadc */
+int16_t game_stage;
 
 /* card.c */
 extern uint8_t card_amount[30];
