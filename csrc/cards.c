@@ -1098,6 +1098,35 @@ int sleep_walking_card()
 	return esi;
 }
 
+int send_god_card ()
+{
+	dl = players[current_player].f64;
+	if (dl != 0) {
+		eax = dl;
+		fcn.0040e14d(eax);
+		ebx = 1;
+	}
+	dh = players[current_player].god_info;
+	if (dh != 0) {
+		edx = dh - 1;
+		eax = edx * 3;
+		eax = byte [eax*8 + 0x496d08];
+		if (eax == 5 || eax == 6 || ecx == 7 || eax == 8 || eax == 10 || eax == 15) {
+			fcn.0040e32c(current_player);
+			consume_a_card(current_player, 22);
+			int c = players[current_player].character;
+			player_say(current_player, 0, card_strings[c][0][21]);
+			return 1;
+		}
+	}
+	if (ebx == 0)
+		return 0;
+	consume_a_card(current_player, 22);
+	int c = players[current_player].character;
+	player_say(current_player, 0, card_strings[c][0][21]);
+	return ebx;
+}
+
 int tortoise_walking_card()
 {
 	if (players[current_player].who_plays == 1) {
