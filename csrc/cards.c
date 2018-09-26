@@ -1127,6 +1127,37 @@ int send_god_card ()
 	return ebx;
 }
 
+int invite_god_card ()
+{
+	if (players[current_player].who_plays == 1) {
+		esi = fcn.00444d1a();
+	} else {
+		esi = fcn.0041e6f2(0);
+	}
+
+	if (esi == 0)
+		return 0;
+
+	consume_a_card(current_player, 23);
+	int c = players[current_player].character;
+	player_say(current_player, 0, card_strings[c][0][22]);
+	eax = esi - 1;
+	ebx = eax * 3;
+	edi = word [ebx * 8 + 0x496d0a];
+	word [ebx * 8 + 0x496d0a] = 0;
+	player_action_2(0, 0, 1);
+
+	int _eax = edi * 40 + dw_498e80;
+	sub.WINMM.dll_timeGetTime_669(esi,
+			(int16_t) word [eax], (int16_t) word [eax + 2],
+			players[current_player].f8, players[current_player].f10, 0);
+
+	word [ebx * 8 + 0x496d0a] = di;
+	fcn.0040ead7(current_player, (u32)(u16)di, esi);
+	fcn_41d546();
+	return esi;
+}
+
 int tortoise_walking_card()
 {
 	if (players[current_player].who_plays == 1) {
