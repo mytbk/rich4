@@ -9,8 +9,8 @@ typedef struct
 {
 	uint32_t name_ptr;
 	uint32_t f4;
-	uint16_t f8; /* 0x496b70 */
-	uint16_t f10; /* 0x496b72 */
+	uint16_t xpos; /* 0x496b70 */
+	uint16_t ypos; /* 0x496b72 */
 	uint16_t f12;
 	uint16_t f14;
 	/* 0x10 */

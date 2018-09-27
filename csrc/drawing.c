@@ -299,7 +299,7 @@ void player_say(int p, int t, const char *s)
 		return;
 
 	if (edx != 0) {
-		player_action_2(players[p].f8, players[p].f10, 0);
+		player_action_2(players[p].xpos, players[p].ypos, 0);
 	}
 	create_some_font(0x10, 0x101010, 0, 2, 1);
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
