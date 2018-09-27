@@ -172,8 +172,7 @@ int average_cash_card2()
 	players[current_player].cash = esi;
 	players[ebp].cash = esi;
 	if (players[current_player].who_plays != 1) {
-		sub.WINMM.dll_timeGetTime_669(0, 
-				players[current_player].f8, players[current_player].f10,
+		move_animation(0, players[current_player].f8, players[current_player].f10,
 				players[ebp].f8, players[ebp].f10, 100);
 	}
 	fcn.0041d433(current_player);
@@ -361,8 +360,7 @@ int swap_land_card()
 		}
 		// 44277f
 		if (players[current_player].who_plays != 1) {
-			sub.WINMM.dll_timeGetTime_669(0,
-				   	(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+			move_animation(0, players[current_player].f8, players[current_player].f10,
 				   	(int)(int16_t)word [esi], (int)(int16_t)word [esi + 2], 100);
 		}
 		// 4427bb
@@ -436,8 +434,7 @@ int swap_land_card()
 			}
 			// 4429cd
 			if (players[current_player].who_plays != 1) {
-				sub.WINMM.dll_timeGetTime_669(0,
-						(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+				move_animation(0, players[current_player].f8, players[current_player].f10,
 						(int)(int16_t)word [esi], (int)(int16_t)word [esi + 2], 100);
 			}
 			// 442a09
@@ -528,8 +525,7 @@ int swap_house_card()
 			}
 		}
 		if (players[current_player].who_plays != 1) {
-			sub.WINMM.dll_timeGetTime_669(0,
-					(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+			move_animation(0, players[current_player].f8, players[current_player].f10,
 					(int)(int16_t)word [ebp], (int)(int16_t)word [ebp + 2], 100);
 		}
 		fcn.00451985();
@@ -601,8 +597,7 @@ int swap_house_card()
 				}
 			}
 			if (players[current_player].who_plays != 1) {
-				sub.WINMM.dll_timeGetTime_669(0,
-						(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+				move_animation(0, players[current_player].f8, players[current_player].f10,
 						(int)(int16_t)word [ebp], (int)(int16_t)word [ebp + 2], 100);
 			}
 			fcn.00451985();
@@ -662,10 +657,8 @@ int turn_back_card()
 		player_say(current_player, 3, edi);
 		edx = esi = fcn.0040d293(ebx);
 		if (players[current_player].who_plays != 1) {
-			sub.WINMM.dll_timeGetTime_669(0,
-					(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
-					(uint32_t)players[edx].f8, (uint32_t)players[edx].f10, 100);
-
+			move_animation(0, players[current_player].f8, players[current_player].f10,
+					players[edx].f8, players[edx].f10, 100);
 		}
 		// 443024
 		fcn.0040c78c(esi);
@@ -914,8 +907,7 @@ int angel_card()
 				}
 			}
 			// 4435e4
-			sub.WINMM.dll_timeGetTime_669(0,
-					(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+			move_animation(0, players[current_player].f8, players[current_player].f10,
 					(int32_t)(int16_t)[edi], (int32_t)(int16_t)[edi+2], 100);
 			fcn.00451985();
 			player_action_2(0, 0, 1);
@@ -931,8 +923,7 @@ int angel_card()
 			ebx = dw_498e88 + eax;
 			fcn.00456c0a(dw_474938, 0x2f440, ebp, 0xffff);
 			if (players[current_player].who_plays != 1) {
-				sub.WINMM.dll_timeGetTime_669(0,
-						(uint32_t)players[current_player].f8, (uint32_t)players[current_player].f10,
+				move_animation(0, players[current_player].f8, players[current_player].f10,
 						(int32_t)(int16_t)[ebx], (int32_t)(int16_t)[ebx+2], 100);
 			}
 			fcn.00451985();
@@ -967,7 +958,7 @@ int stop_card()
 			player_say(current_player, 3, card_strings[c][0][13]);
 		}
 		if (players[current_player].who_plays != 1) {
-			sub.WINMM.dll_timeGetTime_669(0,
+			move_animation(0,
 					players[current_player].f8, players[current_player].f10,
 					players[selected_player].f8, players[selected_player].f10, 100);
 		}
@@ -1030,7 +1021,7 @@ int sleep_walking_card()
 		player_say(current_player, 3, card_strings[c][0][15]);
 		int selected_player = fcn.0040d293(esi);
 		if (players[current_player].who_plays != 1) {
-			sub.WINMM.dll_timeGetTime_669(0,
+			move_animation(0,
 					players[current_player].f8, players[current_player].f10,
 					players[selected_player].f8, players[selected_player].f10, 100);
 		}
@@ -1148,7 +1139,7 @@ int invite_god_card ()
 	player_action_2(0, 0, 1);
 
 	int _eax = edi * 40 + dw_498e80;
-	sub.WINMM.dll_timeGetTime_669(esi,
+	move_animation(esi,
 			(int16_t) word [eax], (int16_t) word [eax + 2],
 			players[current_player].f8, players[current_player].f10, 0);
 
@@ -1176,7 +1167,7 @@ int tortoise_walking_card()
 		player_say(current_player, 3, card_strings[c][0][29]);
 	}
 	if (players[current_player].who_plays != 1) {
-		sub.WINMM.dll_timeGetTime_669(0,
+		move_animation(0,
 				players[current_player].f8, players[current_player].f10,
 				players[selected_player].f8, players[selected_player].f10, 100);
 	}

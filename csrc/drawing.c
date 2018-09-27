@@ -352,3 +352,92 @@ void player_say(int p, int t, const char *s)
 	IDirectDrawSurface_BltFast(pddrawsf1, r0.left, r0.top, pddrawsf2, &r0, DDBLTFAST_WAIT);
 	free(edi);
 }
+
+void move_animation(int obj, int x1, int y1, int x2, int y2, int T)
+{
+	/* push 4 regs, sub esp, 0x68 */
+	if (obj != 0) {
+		eax = (obj - 1) * 3;
+		ecx = byte [eax*8 + 0x496d09];
+		ebp = (8 - dword [0x499088] + ecx) & 7;
+		edi = byte [eax*8 + 0x496d08];
+		edi = dword [edi*4 + 0x49692c];
+		eax = ebp * 12;
+		ebx = edi + 12 + eax;
+	} else {
+		ebp = 0;
+		edi = dword [0x49697c];
+		ebx = edi + 12;
+	}
+
+	int x3, y3, x4, y4; /* sp + 0x30,0x34,0x38,0x3c */
+	fcn.00409a23(&x1, &y1, &x3, &y3);
+	fcn.00409a23(&x2, &y2, &x4, &y4);
+	int distx = x4 - x3;
+	int disty = y4 - y3;
+
+	if (edx == 0 && ecx == 0) {
+		return;
+	}
+
+	int dist = trunc(1 + sqrtf(disty * disty + distx * distx)); /* @ sp + 0x60 */
+	float dx = distx / (float)dist; /* @ sp+0x48 */
+	float dy = disty / (float)dist; /* @sp+0x44 */
+	float curx = x3 + dx; /* @ sp+0x58 */
+	float cury = y3 + dy; /* @ sp+0x5c */
+
+	RECT r0, r1, r2; /* @ sp, sp+0x10, sp+0x20 */
+	r0.left = -1000;
+	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
+	st_46caec.f8 = sfdesc1.lpSurface;
+	struct st * st0 = fcn_00451a97(&st_46caec, NULL, 0, 40, 440, 440); /* st0 @ sp+0x4c */
+	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
+
+	while (dist != 0) {
+		esi = timeGetTime();
+		int icurx = trunc(curx); /* @ sp+0x54 */
+		int icury = trunc(cury); /* @ sp+0x50 */
+		IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
+		if (r0.left != -1000) {
+			fcn.00456469(sfdesc1.lpSurface, st0, r0.left, r0.top, r0.left, r0.top - 40, r0.right - r0.left, r0.bottom - r0.top);
+		}
+		fcn.00456770(sfdesc1.lpSurface, edi, ebp, icurx, icury);
+		IDirectDrawSurface_Unlock(pddrawsf2, NULL);
+		r2.left = icurx - (s16)word [ebx + 4];
+		r2.top = icury - (s16) word [ebx + 6];
+		r2.right = r2.left + (s16)word[ebx];
+		r2.bottom = r2.top + (s16) word [ebx+2];
+		if (r0.left != -1000) {
+			fcn.00452808(&r2, &r0, &r1);
+		} else {
+			memcpy(&r1, &r2, sizeof(RECT));
+		}
+		if (r1.right > 0 && r1.top < 480) {
+			if (r1.left < 0) {
+				r1.left = 0;
+			}
+			if (r1.bottom > 480) {
+				r1.bottom = 480;
+			}
+			IDirectDrawSurface_BltFast(pddrawsf1, r1.left, r1.top, pddrawsf2, &r1, DDBLTFAST_WAIT);
+		}
+		memcpy(&r0, &r2, sizeof(RECT));
+		eax = timeGetTime() - esi;
+		if (eax < 24) {
+			sub.WINMM.dll_timeGetTime_85e(24 - eax);
+		}
+		curx += dx;
+		cury += dy;
+		dist--;
+	}
+	// 40e9bd
+	sub.WINMM.dll_timeGetTime_85e(T);
+	if (obj == 0) {
+		IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
+		fcn.00456469(sfdesc1.lpSurface, st0, r0.left, r0.top, r0.left, r0.top - 40, r0.right - r0.left, r0.bottom - r0.top);
+		IDirectDrawSurface_Unlock(pddrawsf2, NULL);
+		IDirectDrawSurface_BltFast(pddrawsf1, r0.left, r0.top, pddrawsf2, &r0, DDBLTFAST_WAIT);
+	}
+	// 0x40ea4d
+	free(st0);
+}
