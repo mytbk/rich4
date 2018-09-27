@@ -24,6 +24,7 @@ pos_t mpos[5] = { // 0x46cb28
 };
 
 int16_t game_stage;
+int price_index;
 
 LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {

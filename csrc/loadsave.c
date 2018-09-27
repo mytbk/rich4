@@ -345,7 +345,7 @@ int load_checkpoint(int n)
 	fread(0x49911c, 4, 1, fp);
 	fread(0x499108, 4, 1, fp);
 	fread(0x49908c, 4, 1, fp);
-	fread(0x4990e8, 4, 1, fp);
+	fread(&price_index, 4, 1, fp);
 	fread(0x4990e4, 4, 1, fp);
 	fread(0x499084, 4, 1, fp);
 	fread(0x4990dc, 4, 1, fp);

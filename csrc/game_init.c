@@ -187,7 +187,7 @@ int init_new_game(int a0)
 		dw_49911c = days[dw_46cb4c];
 		dw_499108 = winning_condition[dw_46cb50] * game_initial_fund;
 		w_4991b8 = w_46cb54;
-		dw_4990e8 = 1;
+		price_index = 1;
 		dw_4990e4 = dw_499084 = dw_4990dc = dw_4990ec = dw_499100 = esi = 0;
 
 		for (ebx = 0; ebx < 12; ebx++) {
