@@ -942,6 +942,71 @@ int angel_card()
 	return ebp;
 }
 
+int devil_card()
+{
+	if (players[current_player].who_plays == 1) {
+		ebp = fcn.00446ae8(0xe0c0006);
+	} else {
+		ebp = fcn.0041e6f2(0);
+	}
+
+	if (ebp == 0)
+		return 0;
+
+	consume_a_card(current_player, 10);
+	int c = players[current_player].character;
+	player_say(current_player, 0, card_strings[c][0][9]);
+
+	if (ebp > 2000 && ebp < 4000) {
+		eax = (ebp - 2000) * 0x34;
+		ebx = dw_498e84;
+		edi = dw_498e84 + eax;
+
+		for (int i = 1, ebx+=0x34; i <= dw_498e98; i++, ebx+=0x34) {
+			eax = strcmp(edi + 4, ebx + 4);
+			if (eax == 0) {
+				if (byte [ebx + 0x19] != 0) {
+					edx = byte [ebx + 0x1a] * 2;
+					eax = edx * 15 * price_index;
+					fcn.0040df69(byte [ebx + 0x19] - 1, current_player, eax);
+				}
+				fcn.00456c0a(dw_474938, 0x2f440, esi + 2000, 0xffff);
+				byte [ebx + 0x1a] = 0;
+				byte [ebx + 0x18] = 0;
+			}
+		}
+		if (players[current_player].who_plays != 1) {
+			move_animation(0, players[current_player].xpos, players[current_player].ypos,
+					(s16)word [edi], (s16)word [edi+2], 100);
+		}
+		fcn.00451985();
+		player_action_2(0, 0, 1);
+		return ebp;
+	}
+
+	if (ebp > 4000 && ebp < 6000) {
+		eax = (ebp - 4000) * 56;
+		ebx = dw_498e88 + eax;
+		if (byte [ebx + 0x19] != 0) {
+			edx = byte [ebx + 0x1a] * 2;
+			eax = edx * 15 * price_index;
+			fcn.0040df69((u8)(byte [ebx + 0x19] - 1), current_player, eax);
+		}
+		fcn.00456c0a(dw_474938, 0x2f440, ebp, 0xffff);
+		byte [ebx + 0x1a] = 0;
+		byte [ebx + 0x18] = 0;
+		fcn.0040dffa();
+		if (players[current_player].who_plays != 1) {
+			move_animation(0, players[current_player].xpos, players[current_player].ypos,
+					(s16)[ebx], (s16)[ebx+2], 100);
+		}
+		fcn.00451985();
+		player_action_2(0, 0, 1);
+	}
+
+	return ebp;
+}
+
 int stop_card()
 {
 	if (players[current_player].who_plays == 1) {
