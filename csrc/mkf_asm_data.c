@@ -628,3 +628,50 @@ void cfcn_004551bb(uint16_t *esi, uint32_t *ecx, uint32_t *ebx)
 	bx >>= 1;
 	*ebx = bx;
 }
+
+void cfcn_00455040(void *arg1, void *arg2)
+{
+	uint32_t bx;
+	uint32_t eax, ecx, edx;
+
+	memcpy(&gtables, data_483630, sizeof(gtables));
+	ecx = 0; /* after a rep movsd */
+	void *edi = arg1;
+	void *esi = arg2;
+	edx = 0;
+
+	while (1) {
+		cfcn_004551bb(esi, &ecx, &bx);
+		if ((bx & 0xff00) == 0) {
+			*(char*)edi = bx & 0xff;
+			edi++;
+			continue;
+		}
+		eax = ecx;
+		uint32_t old_ecx = ecx;/* push ecx */
+		eax >>= 3;
+		ecx &= 7;
+		eax = *(uint32_t*)(esi + eax);
+		eax >>= ecx;
+		size_t ebp = eax & 0xff;
+		uint8_t cl = table_483530[ebp];
+		uint8_t dh = table_483430[ebp];
+		eax >>= cl;
+		uint8_t dl = eax << 2;
+		uint16_t dx = (((uint16_t)dh << 8) | dl) >> 2;
+		cl += 6;
+		eax = cl;
+		/* pop ecx */
+		ecx = old_ecx + eax;
+		if (dx == 0xfff)
+			return;
+		old_ecx = ecx; /* backup ecx */
+		bx -= 0xfd;
+		void *old_esi = esi; /* push esi */
+		esi = edi - 1 - dx;
+		memcpy(edi, esi, bx); /* using rep movsb */
+		edi += bx; /* by movsb */
+		esi = old_esi; /* pop esi */
+		ecx = old_ecx; /* restore ecx */
+	}
+}

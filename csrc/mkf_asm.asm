@@ -8,8 +8,10 @@ extern cfcn_45511b
 extern cfcn_004550cc
 extern cfcn_00455109
 extern cfcn_004551bb
+extern cfcn_00455040
 
 fcn_00455040:
+;jmp cfcn_00455040
 push ebp
 mov ebp, esp
 push ebx
