@@ -593,3 +593,11 @@ void cfcn_004550cc()
 	}
 	return;
 }
+
+void cfcn_00455109(uint32_t ebx)
+{
+	if (gtables.tab1[640] == 0x8000) {
+		cfcn_004550cc();
+	}
+	cfcn_45511b(ebx);
+}

@@ -6,6 +6,7 @@ extern data_483630
 extern gtables
 extern cfcn_45511b
 extern cfcn_004550cc
+extern cfcn_00455109
 
 fcn_00455040:
 push ebp
@@ -91,27 +92,13 @@ push ebx
 push ecx
 push edi
 
-call fcn_00455109
+push ebx
+call cfcn_00455109
+add esp, 4
 
 pop edi
 pop ecx
 pop ebx
 shr bx, 1
-
-ret
-
-fcn_00455109:
-cmp word [gtables + 1280], 0x8000
-jne L20_1
-
-push ebx
-call cfcn_004550cc
-pop ebx
-
-L20_1:
-
-push ebx
-call cfcn_45511b
-add esp, 4
 
 ret
