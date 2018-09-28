@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 int load_mkf(const char *fn);
 void unload_mkf(int mkf_idx);
 char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize);

@@ -3,19 +3,19 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include <windows.h>
-#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "mkf.h"
 
-#define NULL_HND ((HANDLE)(-1))
+#define NULL_HND ((FILE*)(-1))
 
 /* mkf_00455040.c */
 void fcn_00455040(char *arg1, char *arg2);
 
 struct mkf
 {
-	HANDLE handle;
+	FILE *handle;
 	char *data;
 };
 struct mkf mkf_stdata[16] = { { NULL_HND, NULL } }; // 0x4762f4
@@ -29,20 +29,21 @@ int load_mkf(const char *fn)
 	if (mkf_stdata[0].handle == NULL_HND)
 		memset(mkf_stdata, 0, sizeof(mkf_stdata));
 
-	HANDLE fhdl = CreateFileA(fn, 0x80000000, 0, 0, 3, 128, 0);
-	if (fhdl == NULL_HND)
+	FILE *fp = fopen(fn, "rb");
+	if (fp == NULL)
 		return -1;
 
 	for (i = 0; mkf_stdata[i].handle != 0; i++)
 		;
 
-	mkf_stdata[i].handle = fhdl;
-	ReadFile(fhdl, &x, 4, &sz, NULL);
-	int filesz = GetFileSize(fhdl, NULL);
-	int t = filesz - x;
-	SetFilePointer(fhdl, x, 0, 0);
+	mkf_stdata[i].handle = fp;
+	fread(&x, 4, 1, fp);
+	fseek(fp, -1, SEEK_END);
+	long filesz = ftell(fp) + 1;
+	size_t t = filesz - x;
+	fseek(fp, x, SEEK_SET);
 	mkf_stdata[i].data = (char*)malloc(t);
-	ReadFile(fhdl, mkf_stdata[i].data, t, &sz, NULL);
+	fread(mkf_stdata[i].data, 1, t, fp);
 	return i;
 }
 
@@ -52,7 +53,7 @@ void unload_mkf(int mkf_idx)
 	if (m->handle == NULL) {
 		return;
 	}
-	CloseHandle(m->handle);
+	fclose(m->handle);
 	free(m->data);
 	m->handle = NULL;
 	m->data = NULL;
@@ -134,14 +135,13 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize)
 	 * [3]: graphics data size in bytes
 	 */
 	uint32_t data[4];
-	int sz;
 
-	HANDLE hdl = mkf_stdata[mkf_idx].handle;
+	FILE * hdl = mkf_stdata[mkf_idx].handle;
 	if (hdl == 0)
 		return 0;
 
-	SetFilePointer(hdl, ((uint32_t*)(mkf_stdata[mkf_idx].data))[a1], 0, 0);
-	ReadFile(hdl, data, 16, &sz, NULL);
+	fseek(hdl, ((uint32_t*)(mkf_stdata[mkf_idx].data))[a1], SEEK_SET);
+	fread(data, 4, 4, hdl);
 
 	if (buf == NULL) {
 		buf = malloc(data[0]);
@@ -149,10 +149,10 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize)
 
 	int bufsz = data[0];
 	if (data[1] == bufsz) {
-		ReadFile(hdl, buf, bufsz, &sz, NULL);
+		fread(buf, 1, bufsz, hdl);
 	} else {
-		char *tmpbuf = malloc(data[1]);
-		ReadFile(hdl, tmpbuf, data[1], &sz, NULL);
+		void *tmpbuf = malloc(data[1]);
+		fread(tmpbuf, 1, data[1], hdl);
 		fcn_00455040(buf, tmpbuf);
 		free(tmpbuf);
 	}
