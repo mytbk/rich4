@@ -279,7 +279,7 @@ L401cb3:
 		case 0:
 			if (init_new_game((int)b_46cafc)==0)
 				goto case_401de8_0;
-			fcn_00401543();
+			show_loading_scene();
 			fcn_00407ad2();
 			fcn_004190cf();
 			fcn_004291d6();

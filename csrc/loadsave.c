@@ -20,11 +20,11 @@ char *dw_48bad0;
 char *dw_48badc;
 char *dw_496930[20];
 
-void fcn_00401543()
+void show_loading_scene()
 {
 	char *ebx = read_mkf(mkf_data, 0x259, NULL, NULL);
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, NULL);
-	memcpy(sfdesc1.lpSurface, ebx, 0x96000);
+	memcpy(sfdesc1.lpSurface, ebx, 0x96000 /* 640*480*2 */);
 	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 	IDirectDrawSurface_BltFast(pddrawsf1, g_rect.left, g_rect.top,
 			pddrawsf2, &g_rect, 16);
@@ -296,7 +296,7 @@ int load_checkpoint(int n)
 	if (fp == NULL) {
 		return 0;
 	}
-	fcn_00401543();
+	show_loading_scene();
 	ebp = timeGetTime(); /* esi = 0 */
 	fcn_004080f5();
 
