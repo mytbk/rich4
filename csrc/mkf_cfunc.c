@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdint.h>
 
-extern int pixel_fmt;
+int pixel_fmt;
 
 #ifndef UNROLL
 void fcn_00451801(int16_t *a, int nbytes)
@@ -122,43 +122,3 @@ void fcn_00451801(int16_t *a1, int nbytes)
 	}
 }
 #endif
-
-struct spr_smp
-{
-	char sig[4]; /* "SPR" or "SMP" */
-	int t1;
-	int t2;
-	int t3, t4; /* unused? */
-	struct {
-		int v1;
-		int v2, v3; /* unused? */
-	} t[0];
-};
-
-void fcn_00450069(char *s)
-{
-	struct spr_smp *sst = (struct spr_smp*)s;
-
-	if (strcmp(sst->sig, "SPR") == 0) {
-		int oldv = sst->t[0].v1;
-		sst->t[0].v1 = (int32_t)s + sst->t2 + 0x200;
-
-		for (int i = 1; i < sst->t1; i++) {
-			int t = sst->t[i].v1;
-			/* sum of old and new values of sst->t[i-1] */
-			sst->t[i].v1 = oldv + sst->t[i-1].v1;
-			oldv = t;
-		}
-	}
-
-	if (strcmp(sst->sig, "SMP") == 0) {
-		int oldv = sst->t[0].v1; // oldv@esi
-		sst->t[0].v1 = (int32_t)s + sst->t2;
-
-		for (int i = 1; i < sst->t1; i++) {
-			int t = sst->t[i].v1;
-			sst->t[i].v1 = oldv + sst->t[i-1].v1;
-			oldv = t;
-		}
-	}
-}

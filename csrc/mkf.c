@@ -5,6 +5,8 @@
 
 #include <windows.h>
 #include <stdint.h>
+#include <string.h>
+#include "mkf.h"
 
 #define NULL_HND ((HANDLE)(-1))
 
@@ -13,7 +15,6 @@ void fcn_00455040(char *arg1, char *arg2);
 
 /* mkf_cfunc.c */
 void fcn_00451801(int16_t *a, int nbytes);
-void fcn_00450069(char *s);
 
 struct mkf
 {
@@ -22,7 +23,7 @@ struct mkf
 };
 struct mkf mkf_stdata[16] = { { NULL_HND, NULL } }; // 0x4762f4
 
-int32_t load_mkf(const char *fn)
+int load_mkf(const char *fn)
 {
 	int i;
 	int32_t x;
@@ -60,7 +61,35 @@ void unload_mkf(int mkf_idx)
 	m->data = NULL;
 }
 
-char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize) //0x00450441
+static void update_spr_smp_ptr(char *s)
+{
+	struct spr_smp *sst = (struct spr_smp*)s;
+	int lastsz;
+
+	if (strcmp(sst->sig, "SPR") == 0) {
+		lastsz = sst->chunk_tab[0].chunk_sz;
+		sst->chunk_tab[0].chunk_sz = (int32_t)s + sst->start_offset + 0x200;
+
+		for (int i = 1; i < sst->nchunk; i++) {
+			int t = sst->chunk_tab[i].chunk_sz;
+			sst->chunk_tab[i].chunk_sz = lastsz + sst->chunk_tab[i-1].chunk_sz;
+			lastsz = t;
+		}
+	}
+
+	if (strcmp(sst->sig, "SMP") == 0) {
+		lastsz = sst->chunk_tab[0].chunk_sz;
+		sst->chunk_tab[0].chunk_sz = (int32_t)s + sst->start_offset;
+
+		for (int i = 1; i < sst->nchunk; i++) {
+			int t = sst->chunk_tab[i].chunk_sz;
+			sst->chunk_tab[i].chunk_sz = lastsz + sst->chunk_tab[i-1].chunk_sz;
+			lastsz = t;
+		}
+	}
+}
+
+char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize)
 {
 	uint32_t data[4];
 	int sz;
@@ -93,7 +122,7 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize) //0x00450441
 	}
 	if (strncmp(buf, "SPR", 3) == 0
 			|| strncmp(buf, "SMP", 3) == 0) {
-		fcn_00450069(buf);
+		update_spr_smp_ptr(buf);
 	}
 	return buf;
 }

@@ -39,7 +39,6 @@ uint16_t modded_key; // 0x46cb07
 struct st st_46cb14 = {640, 480, 0, 0, NULL}; // 0x46cb14, 12 bytes
 uint8_t speed_tab[3] = {6, 4, 2}; // 0x64cb20
 uint32_t dw_46cb23 = 0;
-int pixel_fmt; // 0x47637c
 
 void fcn_00456280(struct st *s, int a1, int a2, int a3)
 {
