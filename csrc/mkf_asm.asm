@@ -7,6 +7,7 @@ extern gtables
 extern cfcn_45511b
 extern cfcn_004550cc
 extern cfcn_00455109
+extern cfcn_004551bb
 
 fcn_00455040:
 push ebp
@@ -15,7 +16,7 @@ push ebx
 push ecx
 push esi
 push edi
-sub esp, 4
+sub esp, 8
 mov esi, data_483630
 mov edi, gtables
 mov ecx, 0x463              ; 1123
@@ -26,7 +27,17 @@ xor edx, edx
 
 L0:
 
-call fcn_004551bb
+mov [esp+4], ebx
+mov [esp], ecx
+lea eax, [esp+4]
+push eax
+lea eax, [esp+4]
+push eax
+push esi
+call cfcn_004551bb
+add  esp, 12
+mov ecx, [esp]
+mov ebx, [esp+4]
 
 or bh, bh
 jne L1
@@ -66,39 +77,10 @@ pop esi
 mov ecx, ebp
 jmp L0
 L2:
-add esp, 4
+add esp, 8
 pop edi
 pop esi
 pop ecx
 pop ebx
 pop ebp
-ret
-
-
-fcn_004551bb:
-mov ebx, 0x500              ; 1280
-L11:
-mov bx, word [ebx + gtables + 1284] ; [0x484cc0:2]=0
-cmp bx, 0x502               ; 1282
-jae L10
-bt dword [esi], ecx
-inc ecx
-jae L11
-add bx, 2
-jmp L11
-L10:
-sub ebx, 0x502
-push ebx
-push ecx
-push edi
-
-push ebx
-call cfcn_00455109
-add esp, 4
-
-pop edi
-pop ecx
-pop ebx
-shr bx, 1
-
 ret

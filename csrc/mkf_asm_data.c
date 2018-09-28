@@ -1,5 +1,6 @@
 #include <stdint.h>
 #include <stdlib.h>
+#include <string.h>
 
 const uint8_t table_483430[256] = {
   0x3f, 0x0b, 0x17, 0x03, 0x2f, 0x0a, 0x16, 0x00, 0x2e, 0x09,
@@ -600,4 +601,30 @@ void cfcn_00455109(uint32_t ebx)
 		cfcn_004550cc();
 	}
 	cfcn_45511b(ebx);
+}
+
+void cfcn_004551bb(uint16_t *esi, uint32_t *ecx, uint32_t *ebx)
+{
+	uint16_t bx = 0x500;
+
+	while (1) {
+		bx = gtables.tab2[bx / 2];
+
+		if (bx >= 0x502)
+			break;
+
+		uint32_t _ecx = *ecx;
+		uint16_t cf = esi[_ecx / 16] & (1 << (_ecx % 16));
+
+		(*ecx)++;
+
+		if (cf) {
+			bx += 2;
+		}
+	}
+
+	bx -= 0x502;
+	cfcn_00455109(bx);
+	bx >>= 1;
+	*ebx = bx;
 }
