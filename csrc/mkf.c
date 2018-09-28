@@ -20,6 +20,15 @@ struct mkf
 };
 struct mkf mkf_stdata[16] = { { NULL_HND, NULL } }; // 0x4762f4
 
+#ifdef MKF_INFO
+static int mkfc[16];
+
+int mkf_nchunks(int i)
+{
+	return mkfc[i];
+}
+#endif
+
 int load_mkf(const char *fn)
 {
 	int i;
@@ -44,6 +53,9 @@ int load_mkf(const char *fn)
 	fseek(fp, x, SEEK_SET);
 	mkf_stdata[i].data = malloc(t);
 	fread(mkf_stdata[i].data, 1, t, fp);
+#ifdef MKF_INFO
+	mkfc[i] = t / 4;
+#endif
 	return i;
 }
 
