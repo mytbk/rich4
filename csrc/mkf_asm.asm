@@ -3,7 +3,8 @@ global fcn_00455040
 extern table_483430
 extern table_483530
 extern data_483630
-extern data_4847bc
+extern gtables
+extern cfcn_45511b
 
 fcn_00455040:
 push ebp
@@ -12,15 +13,19 @@ push ebx
 push ecx
 push esi
 push edi
+sub esp, 4
 mov esi, data_483630
-mov edi, data_4847bc
+mov edi, gtables
 mov ecx, 0x463              ; 1123
 rep movsd
 mov edi, dword [ebp + 8]    ; [0x8:4]=-1 ; 8
 mov esi, dword [ebp + 0xc]  ; [0xc:4]=-1 ; 12
 xor edx, edx
+
 L0:
+
 call fcn_004551bb
+
 or bh, bh
 jne L1
 mov byte [edi], bl
@@ -59,6 +64,7 @@ pop esi
 mov ecx, ebp
 jmp L0
 L2:
+add esp, 4
 pop edi
 pop esi
 pop ecx
@@ -70,7 +76,7 @@ ret
 fcn_004551bb:
 mov ebx, 0x500              ; 1280
 L11:
-mov bx, word [ebx + data_4847bc + 1284] ; [0x484cc0:2]=0
+mov bx, word [ebx + gtables + 1284] ; [0x484cc0:2]=0
 cmp bx, 0x502               ; 1282
 jae L10
 bt dword [esi], ecx
@@ -83,75 +89,55 @@ sub ebx, 0x502
 push ebx
 push ecx
 push edi
+
 call fcn_00455109
+
 pop edi
 pop ecx
 pop ebx
 shr bx, 1
+
 ret
 
 fcn_00455109:
-cmp word [data_4847bc + 1280], 0x8000
-jne L20
+cmp word [gtables + 1280], 0x8000
+jne L20_1
+
 push ebx
 call fcn_004550cc
 pop ebx
-L20:
-mov bx, word [ebx + data_4847bc + 3848]
-L21:
-inc word [ebx + data_4847bc]
-mov ax, word [ebx + data_4847bc]
-cmp ax, word [ebx + data_4847bc + 2]
-jbe L22
-lea edi, [ebx + data_4847bc + 2]
-mov ecx, 0x282
-dec ax
-repe scasw
-sub edi, data_4847bc+4
-inc ax
-xchg word [edi + data_4847bc], ax
-mov word [ebx + data_4847bc], ax
-mov ax, word [ebx + data_4847bc + 1284]
-mov cx, word [edi + data_4847bc + 1284]
-mov word [ecx + data_4847bc + 2566], bx
-cmp cx, 0x502
-jae L24
-mov word [ecx + data_4847bc + 2568], bx
-L24:
-xchg ax, cx
-mov word [ecx + data_4847bc + 2566], di
-cmp cx, 0x502
-jae L23
-mov word [ecx + data_4847bc + 2568], di
-L23:
-mov word [ebx + data_4847bc + 1284], ax
-mov word [edi + data_4847bc + 1284], cx
-mov bx, di
-L22:
-mov bx, word [ebx + data_4847bc + 2566]
-or bx, bx
-jne L21
+
+L20_1:
+
+push ebx
+call cfcn_45511b
+add esp, 4
+
 ret
 
 fcn_004550cc:
-mov edx, 0x141              ; 321
+
+mov edx, 0x141
 xor ebp, ebp
 xor ecx, ecx
 L30:
-mov cx, word [ebp + data_4847bc + 3848]
-test word [ecx + data_4847bc], 1
+mov cx, word [ebp + gtables + 3848]
+test word [ecx + gtables], 1
 je L31
-mov ebx, ebp
-call L20
+
+push ebp
+call cfcn_45511b
+add esp, 4
+
 L31:
 add ebp, 2
 dec edx
 jne L30
 xor ebx, ebx
 L32:
-shr word [ebx + data_4847bc], 1
+shr word [ebx + gtables], 1
 add ebx, 2
 cmp ebx, 0x502              ; 1282
 jb L32
-ret
 
+ret

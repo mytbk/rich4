@@ -511,4 +511,64 @@ const uint8_t data_483630[4492] = {
   0x00, 0x00
 };
 
-uint8_t data_4847bc[4492];
+struct {
+  uint16_t tab1[642]; /* 0x4847bc, from 0x483630 */
+  uint16_t tab2[641]; /* 0x484cc0, from 0x483b34 */
+  uint16_t tab3[641]; /* 0x4851c2, from 0x484036 */
+  uint16_t tab4[322]; /* 0x4856c4, from 0x484538 */
+} gtables; /* 0x4847bc */
+
+void cfcn_45511b(uint32_t ebx)
+{
+	uint16_t ax, cx, tmp;
+	ebx = gtables.tab4[ebx / 2];
+	do {
+		gtables.tab1[ebx / 2]++;
+		ax = gtables.tab1[ebx / 2];
+		if (ax <= gtables.tab1[ebx / 2 + 1]) {
+			ebx = gtables.tab3[ebx / 2];
+			if (ebx)
+				continue;
+			else
+				break;
+		}
+
+		uint16_t *edi = &gtables.tab1[ebx / 2 + 1];
+		cx = 0x282;
+		ax --;
+		int zf;
+		do {
+			zf = (*edi == ax);
+			edi++;
+			cx--;
+		} while (zf && cx);
+
+		uint32_t _edi = (uint32_t)edi - (uint32_t)(&gtables.tab1[2]);
+		ax++;
+
+		tmp = ax;
+		ax = gtables.tab1[_edi / 2];
+		gtables.tab1[_edi / 2] = tmp;
+		gtables.tab1[ebx / 2] = ax;
+
+		ax = gtables.tab2[ebx / 2];
+		cx = gtables.tab2[_edi / 2];
+		gtables.tab3[cx / 2] = ebx;
+		if (cx < 0x502) {
+			gtables.tab3[cx / 2 + 1] = ebx;
+		}
+
+		tmp = ax;
+		ax = cx;
+		cx = tmp;
+
+		gtables.tab3[cx / 2] = _edi;
+		if (cx < 0x502) {
+			gtables.tab3[cx / 2 + 1] = _edi;
+		}
+		gtables.tab2[ebx / 2] = ax;
+		gtables.tab2[_edi / 2] = cx;
+		ebx = _edi & 0xffff;
+		ebx = gtables.tab3[ebx / 2];
+	} while (ebx);
+}
