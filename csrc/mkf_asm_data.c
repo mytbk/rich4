@@ -669,8 +669,22 @@ void cfcn_00455040(void *arg1, void *arg2)
 		bx -= 0xfd;
 		void *old_esi = esi; /* push esi */
 		esi = edi - 1 - dx;
-		memcpy(edi, esi, bx); /* using rep movsb */
+
+		/* the following is a little bit tricky,
+		 * if we use memcpy/memmove, the picture is broken
+		 */
+#if 1
+		ecx = bx;
+		do {
+			*(uint8_t*)edi = *(uint8_t*)esi;
+			edi++;
+			esi++;
+			ecx--;
+		} while (ecx);
+#else
+		memmove(edi, esi, bx); /* using rep movsb */
 		edi += bx; /* by movsb */
+#endif
 		esi = old_esi; /* pop esi */
 		ecx = old_ecx; /* restore ecx */
 	}
