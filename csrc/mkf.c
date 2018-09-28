@@ -16,7 +16,7 @@ void fcn_00455040(char *arg1, char *arg2);
 struct mkf
 {
 	FILE *handle;
-	char *data;
+	void *data;
 };
 struct mkf mkf_stdata[16] = { { NULL_HND, NULL } }; // 0x4762f4
 
@@ -42,7 +42,7 @@ int load_mkf(const char *fn)
 	long filesz = ftell(fp) + 1;
 	size_t t = filesz - x;
 	fseek(fp, x, SEEK_SET);
-	mkf_stdata[i].data = (char*)malloc(t);
+	mkf_stdata[i].data = malloc(t);
 	fread(mkf_stdata[i].data, 1, t, fp);
 	return i;
 }
@@ -59,7 +59,7 @@ void unload_mkf(int mkf_idx)
 	m->data = NULL;
 }
 
-static void update_spr_smp_ptr(char *s)
+static void update_spr_smp_ptr(void *s)
 {
 	struct spr_smp *sst = (struct spr_smp*)s;
 	int lastsz;
