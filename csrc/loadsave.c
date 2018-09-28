@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "global.h"
 #include "player_info.h"
+#include "mkf.h"
 
 char *dw_47493c;
 char *dw_474945;
@@ -22,12 +23,13 @@ char *dw_496930[20];
 void fcn_00401543()
 {
 	char *ebx = read_mkf(mkf_data, 0x259, NULL, NULL);
-	(*pddrawsf2)->Lock(pddrawsf2, NULL, &sfdesc1, 1, NULL);
+	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, NULL);
 	memcpy(sfdesc1.lpSurface, ebx, 0x96000);
-	(*pddrawsf2)->Unlock(pddrawsf2, NULL);
-	(*pddrawsf1)->BltFast(pddrawsf1, g_rect.left, g_rect.top,
+	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
+	IDirectDrawSurface_BltFast(pddrawsf1, g_rect.left, g_rect.top,
 			pddrawsf2, &g_rect, 16);
 	free(ebx);
+	/* TODO: fcn.00454edc() */
 }
 
 void fcn_0040e033(int a1, int a2, a3, a4)
@@ -92,28 +94,28 @@ label_40e082:
 void fcn_00407ad2()
 {
 	fcn_004080f5();
-	ebx = edi = load_mkf("MAP.MKF");
+	int mkf_map_ = load_mkf("MAP.MKF");
 	eax = (game_stage*4+w_4991b8)*2;
-	dw_474945 = read_mkf(ebx, eax, NULL, NULL);
+	dw_474945 = read_mkf(mkf_map_, eax, NULL, NULL);
 	eax = (game_stage*4+w_4991b8)+16;
-	dw_48badc = read_mkf(ebx, eax, NULL, NULL);
+	dw_48badc = read_mkf(mkf_map_, eax, NULL, NULL);
 	eax = game_stage*4+w_4991b8+16;
-	dw_48bad0 = read_mkf(ebx, eax, NULL, NULL);
+	dw_48bad0 = read_mkf(mkf_map_, eax, NULL, NULL);
 	memcpy(0x48b6b4, dw_474945 + 0x10, 512);
 	dw_48bac4 = *(int*)dw_474945 + 0x210;
 	dw_48bacc = *(int*)dw_474945 + 10896; /* 0x2a90 = 10896 */
-	dw_474949 = read_mkf(ebx, 24, NULL, NULL);
-	dw_47494d = read_mkf(ebx, 26, NULL, NULL);
+	dw_474949 = read_mkf(mkf_map_, 24, NULL, NULL);
+	dw_47494d = read_mkf(mkf_map_, 26, NULL, NULL);
 
 	if (dw_47493c == 0) {
-		esi = eax = load_mkf("MAPDAT.MKF");
+		int mkf_map_dat = load_mkf("MAPDAT.MKF");
 		if (eax != -1) {
 			eax = game_stage*4+w_4991b8;
-			dw_47493c = read_mkf(esi, eax, NULL, NULL);
-			unload_mkf(esi);
+			dw_47493c = read_mkf(mkf_map_dat, eax, NULL, NULL);
+			unload_mkf(mkf_map_dat);
 		} else {
 			eax = (game_stage*4+w_4991b8)*2+1;
-			dw_47493c = read_mkf(ebx, eax, NULL, NULL);
+			dw_47493c = read_mkf(mkf_map_, eax, NULL, NULL);
 		}
 		/* 0x407c3f */
 		int *eax = dw_47493c;
@@ -180,23 +182,23 @@ void fcn_00407ad2()
 		edx = *(int16_t*)0x4991b8; /* sign ext */
 		esi = edx + eax;
 		eax = esi * 5 + ebx + 0x27;
-		*(int*)(0x48ae4c + ebx*4) = read_mkf(edi, eax, NULL, NULL);
+		*(int*)(0x48ae4c + ebx*4) = read_mkf(mkf_map_, eax, NULL, NULL);
 	}
 	edx = *(int16_t*)0x4991b8; /* sign ext */
 	eax = game_stage; /* sign ext */
 	edx += 0x4f;
 	eax = eax * 4 + edx;
-	dw_48ae60 = read_mkf(edi, eax, NULL, NULL);
+	dw_48ae60 = read_mkf(mkf_map_, eax, NULL, NULL);
 	if (game_stage == 0) {
 		for (ebx = 0; ebx < 17; ebx++) {
-			dw_48ae64[ebx] = read_mkf(edi, ebx+0x57, NULL, NULL);
+			dw_48ae64[ebx] = read_mkf(mkf_map_, ebx+0x57, NULL, NULL);
 		}
 	} else {
 		edx = *(int16_t*)0x4991b8;
 		eax = edx*17;
 		esi = eax + 0x68;
 		for (ebx = 0; ebx < 17; ebx++) {
-			dw_48ae64[ebx] = read_mkf(edi, esi + ebx, NULL, NULL);
+			dw_48ae64[ebx] = read_mkf(mkf_map_, esi + ebx, NULL, NULL);
 		}
 	}
 	for (ebx = 1; ebx <= dw_498e90; ebx++) {
@@ -210,7 +212,7 @@ void fcn_00407ad2()
 		if (ebp != 0)
 			continue;
 		eax += 0x26;
-		*(int32_t*)(0x48ae4c+esi) = read_mkf(edi, eax, NULL, NULL);
+		*(int32_t*)(0x48ae4c+esi) = read_mkf(mkf_map_, eax, NULL, NULL);
 	}
 	for (ebx = 1; ebx <= dw_499074; ebx++) {
 		edx = eax * 28;
@@ -223,9 +225,9 @@ void fcn_00407ad2()
 		if (edx != 0)
 			continue;
 		eax += 0x26;
-		*(int32_t*)(0x48ae4c+esi) = read_mkf(edi, eax, NULL, NULL);
+		*(int32_t*)(0x48ae4c+esi) = read_mkf(mkf_map_, eax, NULL, NULL);
 	}
-	dw_48aea8 = read_mkf(edi, 0x19, 0, 0);
+	dw_48aea8 = read_mkf(mkf_map_, 0x19, 0, 0);
 	memset(0x498ea0, 0, 0x1d4);
 	for (ebx = 0; ebx < 9; ebx++) {
 		if (ebx >= nplayers) {
@@ -239,7 +241,7 @@ void fcn_00407ad2()
 		eax = *(char*)(0x496b7b+esi) + 0x1b;
 #endif
 		uint8_t eax = players[ebx].character + 0x1b;
-		edx = read_mkf(edi, eax, NULL, NULL);
+		edx = read_mkf(mkf_map_, eax, NULL, NULL);
 		eax = ebx * 0x34;
 		*(int32_t*)(0x498eb0+eax) = edx;
 #if 0
@@ -258,7 +260,7 @@ void fcn_00407ad2()
 			fcn_0040b93b(ebx);
 		}
 	}
-	unload_mkf(edi);
+	unload_mkf(mkf_map_);
 	edi = dw_498e9c;
 	for (ebx = 1; ebx <= edi; ebx++) {
 		eax = ebx * 5;
