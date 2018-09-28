@@ -13,9 +13,6 @@
 /* mkf_00455040.c */
 void fcn_00455040(char *arg1, char *arg2);
 
-/* mkf_cfunc.c */
-void fcn_00451801(int16_t *a, int nbytes);
-
 struct mkf
 {
 	HANDLE handle;
@@ -89,8 +86,53 @@ static void update_spr_smp_ptr(char *s)
 	}
 }
 
+int pixel_fmt;
+
+static void update_pixels(uint16_t *a, int nbytes)
+{
+	int nw = nbytes >> 1;
+
+	switch (pixel_fmt) {
+		case 1:
+			for (int i = 0; i < nw; i++) {
+				uint16_t t = a[i];
+				uint16_t t2 = t * 2;
+				t &= 0x001f; /* t[0:4] */
+				t2 &= 0xffc0; /* t2[6:15] = t[5:14] */
+				a[i] = t | t2; /* t[0:4],0,t[5:14] */
+			}
+			return;
+		case 2:
+			for (int i = 0; i < nw; i++) {
+				uint16_t t = a[i];
+				uint16_t v1 = (t & 0x7c00) >> 10; /* v1[0:4] = t[10:14] */
+				uint16_t v2 = (t & 0x03e0) << 1; /* v2[6:10] = t[5:9] */
+				uint16_t v3 = (t & 0x001f) << 11; /* v3[11:15] = t[0:4] */
+				a[i] = v1 | v2 | v3; /* t[10:14],0,t[5:9],t[0:4] */
+			}
+			return;
+		case 3:
+			for (int i = 0; i < nw; i++) {
+				uint16_t t = a[i];
+				uint16_t v1 = (t & 0x7800) >> 3; /* v1[8:11] = t[11:14] */
+				uint16_t v2 = (t & 0x03c0) >> 2; /* v2[4:7] = t[6:9] */
+				uint16_t v3 = (t & 0x001e) >> 1; /* v3[0:3] = t[1:4] */
+				a[i] = v1 | v2 | v3; /* t[1:4],t[6:9],t[11:14] */
+			}
+			return;
+		default:
+			return;
+	}
+}
+
 char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize)
 {
+	/* 4-dword mkf info:
+	 * [0]: real data size
+	 * [1]: original size in file
+	 * [2]: graphics data offset
+	 * [3]: graphics data size in bytes
+	 */
 	uint32_t data[4];
 	int sz;
 
@@ -115,7 +157,7 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize)
 		free(tmpbuf);
 	}
 	if (data[3] != 0) {
-		fcn_00451801(buf+data[2], data[3]);
+		update_pixels((uint16_t*)(buf + data[2]), data[3]);
 	}
 	if (bufsize != NULL) {
 		*bufsize = data[0];
