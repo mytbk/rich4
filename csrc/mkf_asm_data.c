@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdlib.h>
 
 const uint8_t table_483430[256] = {
   0x3f, 0x0b, 0x17, 0x03, 0x2f, 0x0a, 0x16, 0x00, 0x2e, 0x09,
@@ -571,4 +572,24 @@ void cfcn_45511b(uint32_t ebx)
 		ebx = _edi & 0xffff;
 		ebx = gtables.tab3[ebx / 2];
 	} while (ebx);
+}
+
+void cfcn_004550cc()
+{
+	uint16_t cx;
+	size_t ebp = 0;
+	int edx = 0x141;
+	do {
+		cx = gtables.tab4[ebp/2]; /* 0x4856c4 + 0x141 * 2 = 0x485946 */
+		/* assert((cx % 2) == 0) */
+		if (gtables.tab1[cx/2] & 1) {
+			cfcn_45511b(ebp);
+		}
+		ebp += 2;
+		edx--;
+	} while(edx);
+	for (size_t i = 0; i < 0x502; i += 2) {
+		gtables.tab1[i/2] >>= 1;
+	}
+	return;
 }

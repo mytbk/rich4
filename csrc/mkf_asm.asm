@@ -5,6 +5,7 @@ extern table_483530
 extern data_483630
 extern gtables
 extern cfcn_45511b
+extern cfcn_004550cc
 
 fcn_00455040:
 push ebp
@@ -104,7 +105,7 @@ cmp word [gtables + 1280], 0x8000
 jne L20_1
 
 push ebx
-call fcn_004550cc
+call cfcn_004550cc
 pop ebx
 
 L20_1:
@@ -112,32 +113,5 @@ L20_1:
 push ebx
 call cfcn_45511b
 add esp, 4
-
-ret
-
-fcn_004550cc:
-
-mov edx, 0x141
-xor ebp, ebp
-xor ecx, ecx
-L30:
-mov cx, word [ebp + gtables + 3848]
-test word [ecx + gtables], 1
-je L31
-
-push ebp
-call cfcn_45511b
-add esp, 4
-
-L31:
-add ebp, 2
-dec edx
-jne L30
-xor ebx, ebx
-L32:
-shr word [ebx + gtables], 1
-add ebx, 2
-cmp ebx, 0x502              ; 1282
-jb L32
 
 ret
