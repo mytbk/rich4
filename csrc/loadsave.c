@@ -322,19 +322,13 @@ int load_checkpoint(int n)
 	fread(0x499100, 4, 1, fp);
 	fread(0x497328, 4, 0x6c0, fp);
 	fread(0x4971a0, 8, 0x30, fp);
-	fread(0x496980, 0x24, 0xc, fp);
 
+	/* 12 stocks */
+	fread(0x496980, 0x24, 12, fp);
 	for (int i = 0; i < 12; i++) {
-		int32_t edx = game_stage << 2;
-		edx += (*(int16_t*))0x4991b8;
-		eax = edx << 2;
-		eax -= edx; /* eax = edx * 3 */
-		eax <<= 4; /* eax = edx * 48 */
-		esi = eax << 3; /* esi = edx * 384 */
-		esi += eax; /* esi = edx * 432 */
-		eax = i << 3;
-		eax += i; /* eax = i * 9 */
-		eax <<= 2; /* eax = i * 36 */
+		int32_t edx = game_stage * 4 + w_4991b8;
+		esi = edx * 432;
+		eax = i * 36;
 		edx = esi + eax;
 		edx = *(int*)(0x47f072+edx);
 		*(int*)(0x496980+eax) = edx;
@@ -398,17 +392,8 @@ int load_checkpoint(int n)
 	*(int*)0x498e78 = eax;
 
 	for (int i = 0; i < nplayers; i++) {
-		eax = i << 3;
-		eax += i; /* eax = i * 9 */
-		eax <<= 2; /* eax = i * 36 */
-		eax -= i; /* eax = i * 35 */
-		eax <<= 2; /* eax = i * 140 */
-		eax -= i; /* eax = i * 139 */
-		eax <<= 3; /* eax = i * 1112 */
-		esi = eax << 3; /* esi = eax * 8 */
-		esi += eax; /* esi = eax * 9 = i * 10008 = i * 0x2718 */
-		eax = 0x48cb80 + esi;
-		fread(eax, 0x2718, 1, fp);
+		esi = i * 0x2718;
+		fread(0x48cb80 + esi, 0x2718, 1, fp);
 		*(int*)(0x48f294 + esi) = malloc(*(int*)0x498e94);
 		fread(*(int*)(0x48f294+esi), 1, *(int*)0x498e94, fp);
 	}
