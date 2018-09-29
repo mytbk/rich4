@@ -1214,6 +1214,36 @@ int invite_god_card ()
 	return esi;
 }
 
+const char use_rb_card[] = "\xb9\xef%s\xa8\xcf\xa5\xce%s\xa1I";
+
+int red_card()
+{
+	int c = players[current_player].character;
+	char name[20], buf[128];
+
+	player_say(current_player, 0, card_strings[c][0][23]);
+	if (players[current_player].who_plays != 1) {
+		edx = eax = fcn.0041e6f2(0);
+		ebx = eax * 36;
+		byte [ebx + 0x496987] = 0x20;
+		fcn.00429040(edx + 1);
+		strcpy_without_spaces(name, dword [ebx + 0x496980]);
+		sprintf(buf, use_rb_card, name, cards_table[24].name_ptr);
+		fcn.00440cac(buf, 1500);
+		consume_a_card(current_player, 24);
+		return 1;
+	} else {
+		fcn.004021f8(12, 15, 10);
+		int selected_stock = stock_ui(1);
+		fcn.004021f8(41, 1, 0);
+		player_action_1(1);
+		if (selected_stock == 0)
+			return 0;
+		consume_a_card(current_player, 24);
+		return selected_stock;
+	}
+}
+
 int tortoise_walking_card()
 {
 	if (players[current_player].who_plays == 1) {
