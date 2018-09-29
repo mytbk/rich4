@@ -520,7 +520,7 @@ struct {
   uint16_t tab4[322]; /* 0x4856c4, from 0x484538 */
 } gtables; /* 0x4847bc */
 
-void cfcn_45511b(uint32_t ebx)
+static void cfcn_45511b(uint32_t ebx)
 {
 	uint16_t ax, cx, tmp;
 	ebx = gtables.tab4[ebx / 2];
@@ -575,14 +575,13 @@ void cfcn_45511b(uint32_t ebx)
 	} while (ebx);
 }
 
-void cfcn_004550cc()
+static void cfcn_004550cc()
 {
 	uint16_t cx;
 	size_t ebp = 0;
 	int edx = 0x141;
 	do {
-		cx = gtables.tab4[ebp/2]; /* 0x4856c4 + 0x141 * 2 = 0x485946 */
-		/* assert((cx % 2) == 0) */
+		cx = gtables.tab4[ebp/2];
 		if (gtables.tab1[cx/2] & 1) {
 			cfcn_45511b(ebp);
 		}
@@ -595,7 +594,7 @@ void cfcn_004550cc()
 	return;
 }
 
-void cfcn_00455109(uint32_t ebx)
+static void cfcn_00455109(uint32_t ebx)
 {
 	if (gtables.tab1[640] == 0x8000) {
 		cfcn_004550cc();
@@ -603,7 +602,7 @@ void cfcn_00455109(uint32_t ebx)
 	cfcn_45511b(ebx);
 }
 
-void cfcn_004551bb(uint16_t *esi, uint32_t *ecx, uint32_t *ebx)
+static void cfcn_004551bb(uint16_t *esi, uint32_t *ecx, uint32_t *ebx)
 {
 	uint16_t bx = 0x500;
 
@@ -629,16 +628,15 @@ void cfcn_004551bb(uint16_t *esi, uint32_t *ecx, uint32_t *ebx)
 	*ebx = bx;
 }
 
-void cfcn_00455040(void *arg1, void *arg2)
+void mkf_decompress(void *arg1, void *arg2)
 {
 	uint32_t bx;
-	uint32_t eax, ecx, edx;
+	uint32_t eax, ecx;
 
 	memcpy(&gtables, data_483630, sizeof(gtables));
-	ecx = 0; /* after a rep movsd */
+	ecx = 0;
 	void *edi = arg1;
 	void *esi = arg2;
-	edx = 0;
 
 	while (1) {
 		cfcn_004551bb(esi, &ecx, &bx);
@@ -648,7 +646,7 @@ void cfcn_00455040(void *arg1, void *arg2)
 			continue;
 		}
 		eax = ecx;
-		uint32_t old_ecx = ecx;/* push ecx */
+		uint32_t old_ecx = ecx;
 		eax >>= 3;
 		ecx &= 7;
 		eax = *(uint32_t*)(esi + eax);
@@ -661,13 +659,12 @@ void cfcn_00455040(void *arg1, void *arg2)
 		uint16_t dx = (((uint16_t)dh << 8) | dl) >> 2;
 		cl += 6;
 		eax = cl;
-		/* pop ecx */
 		ecx = old_ecx + eax;
 		if (dx == 0xfff)
 			return;
-		old_ecx = ecx; /* backup ecx */
+		old_ecx = ecx;
 		bx -= 0xfd;
-		void *old_esi = esi; /* push esi */
+		void *old_esi = esi;
 		esi = edi - 1 - dx;
 
 		/* the following is a little bit tricky,
@@ -685,7 +682,7 @@ void cfcn_00455040(void *arg1, void *arg2)
 		memmove(edi, esi, bx); /* using rep movsb */
 		edi += bx; /* by movsb */
 #endif
-		esi = old_esi; /* pop esi */
-		ecx = old_ecx; /* restore ecx */
+		esi = old_esi;
+		ecx = old_ecx;
 	}
 }

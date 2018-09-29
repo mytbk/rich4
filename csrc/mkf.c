@@ -10,8 +10,7 @@
 
 #define NULL_HND ((FILE*)(-1))
 
-/* mkf_00455040.c */
-void fcn_00455040(char *arg1, char *arg2);
+void mkf_decompress(void *arg1, void *arg2);
 
 struct mkf
 {
@@ -33,7 +32,6 @@ int load_mkf(const char *fn)
 {
 	int i;
 	int32_t x;
-	int sz;
 
 	if (mkf_stdata[0].handle == NULL_HND)
 		memset(mkf_stdata, 0, sizeof(mkf_stdata));
@@ -165,7 +163,7 @@ char * read_mkf(int mkf_idx, int a1, char *buf, int *bufsize)
 	} else {
 		void *tmpbuf = malloc(data[1]);
 		fread(tmpbuf, 1, data[1], hdl);
-		fcn_00455040(buf, tmpbuf);
+		mkf_decompress(buf, tmpbuf);
 		free(tmpbuf);
 	}
 	if (data[3] != 0) {

@@ -1,4 +1,4 @@
-/* gcc -m32 -I.. dump_600.c ../mkf.c ../mkf_00455040.c -o dump_600 */
+/* gcc -m32 -I.. dump_600.c ../libmkf.a -o dump_600 */
 /* copy Data.mkf and run this, open loading.data with GIMP,
  * data type is RGB565 little endian, size 165*256, it's a tortoise card! */
 
