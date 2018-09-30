@@ -402,18 +402,13 @@ static void cfcn_45511b(size_t i)
 			gtables.tab3[cx / 2 + 1] = ebx;
 		}
 
-		tmp = ax;
-		ax = cx;
-		cx = tmp;
-
-		gtables.tab3[cx / 2] = _edi;
-		if (cx < 0x502) {
-			gtables.tab3[cx / 2 + 1] = _edi;
+		gtables.tab3[ax / 2] = _edi;
+		if (ax < 0x502) {
+			gtables.tab3[ax / 2 + 1] = _edi;
 		}
-		gtables.tab2[ebx / 2] = ax;
-		gtables.tab2[_edi / 2] = cx;
-		ebx = _edi & 0xffff;
-		ebx = gtables.tab3[ebx / 2];
+		gtables.tab2[ebx / 2] = cx;
+		gtables.tab2[_edi / 2] = ax;
+		ebx = gtables.tab3[_edi / 2];
 	} while (ebx);
 }
 
