@@ -364,10 +364,10 @@ ctabs ctab_orig = {
 
 ctabs gtables;
 
-static void cfcn_45511b(uint32_t ebx)
+static void cfcn_45511b(size_t i)
 {
 	uint16_t ax, cx, tmp;
-	ebx = gtables.tab4[ebx / 2];
+	uint16_t ebx = gtables.tab4[i];
 	do {
 		gtables.tab1[ebx / 2]++;
 		ax = gtables.tab1[ebx / 2];
@@ -422,7 +422,7 @@ static void cfcn_004550cc()
 	for (size_t i = 0; i < 321; i++) {
 		uint16_t cx = gtables.tab4[i];
 		if (gtables.tab1[cx/2] & 1) {
-			cfcn_45511b(i * 2);
+			cfcn_45511b(i);
 		}
 	}
 
@@ -430,12 +430,12 @@ static void cfcn_004550cc()
 		gtables.tab1[i] >>= 1;
 }
 
-static void cfcn_00455109(uint32_t ebx)
+static void cfcn_00455109(size_t i)
 {
 	if (gtables.tab1[640] == 0x8000) {
 		cfcn_004550cc();
 	}
-	cfcn_45511b(ebx);
+	cfcn_45511b(i);
 }
 
 static void cfcn_004551bb(const void *s, uint32_t *ecx, uint32_t *ebx)
@@ -456,7 +456,7 @@ static void cfcn_004551bb(const void *s, uint32_t *ecx, uint32_t *ebx)
 	*ecx = _c;
 
 	bx -= 641;
-	cfcn_00455109(bx * 2);
+	cfcn_00455109(bx);
 	*ebx = bx;
 }
 
