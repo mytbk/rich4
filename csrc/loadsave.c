@@ -8,6 +8,7 @@
 #include "global.h"
 #include "player_info.h"
 #include "mkf.h"
+#include "stock.h"
 
 char *dw_47493c;
 char *dw_474945;
@@ -167,9 +168,7 @@ void fcn_00407ad2()
 			eax = dw_498e7c;
 			esi += eax;
 			edx = *(char*)(esi + 25);
-			eax = edx * 9;
-			eax = *(int16_t*)(0x496988 + eax*4);
-			edx = 0x2710 - eax;
+			edx = 0x2710 - stocks[edx].f8;
 			*(int*)(esi + 0x30) = edx;
 		}
 		fcn_0042915a();
@@ -324,14 +323,11 @@ int load_checkpoint(int n)
 	fread(0x4971a0, 8, 0x30, fp);
 
 	/* 12 stocks */
-	fread(0x496980, 0x24, 12, fp);
+	fread(stocks, sizeof(stock_info), 12, fp);
 	for (int i = 0; i < 12; i++) {
-		int32_t edx = game_stage * 4 + w_4991b8;
-		esi = edx * 432;
-		eax = i * 36;
-		edx = esi + eax;
-		edx = *(int*)(0x47f072+edx);
-		*(int*)(0x496980+eax) = edx;
+		int m = game_stage * 4 + w_4991b8;
+		int idx = m * 12 + i;
+		stocks[i].name_ptr = game_stocks[idx].name_ptr;
 	}
 
 	fread(0x4967e0, 0xc, 0x1c, fp);
