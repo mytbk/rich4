@@ -4,6 +4,7 @@
  */
 
 #include "player_info.h"
+#include "stock.h"
 
 typedef int (*card_func)(void);
 
@@ -1223,11 +1224,10 @@ int red_card()
 
 	player_say(current_player, 0, card_strings[c][0][23]);
 	if (players[current_player].who_plays != 1) {
-		edx = eax = fcn.0041e6f2(0);
-		ebx = eax * 36;
-		byte [ebx + 0x496987] = 0x20;
-		fcn.00429040(edx + 1);
-		strcpy_without_spaces(name, dword [ebx + 0x496980]);
+		int sel = fcn.0041e6f2(0);
+		stocks[sel].f7 = 0x20;
+		fcn.00429040(sel + 1);
+		strcpy_without_spaces(name, stocks[sel].name_ptr);
 		sprintf(buf, use_rb_card, name, cards_table[24].name_ptr);
 		fcn.00440cac(buf, 1500);
 		consume_a_card(current_player, 24);
@@ -1247,19 +1247,18 @@ int red_card()
 int black_card()
 {
 	char buf[128];
-	int t[12]; /* @ sp+0x80 */
-	char name[20]; /* @sp+0xb0 */
-	float fall; /* @sp+0xc4 */
+	float t[12];
+	char name[20];
+	float fall;
 
 	int sel;
 
 	int c = players[current_player].character;
 	player_say(current_player, 0, card_strings[c][0][24]);
 
-	for (int i = 0; i < 12; i++) {
-		edx = dword [i * 36 + 0x496994];
-		t[i] = edx;
-	}
+	for (int i = 0; i < 12; i++)
+		t[i] = stocks[i].f20;
+
 	if (players[current_player].who_plays == 1) {
 		fcn.004021f8(12, 15, 10);
 		sel = stock_ui(2);
@@ -1267,19 +1266,18 @@ int black_card()
 		player_action_1(1);
 	} else {
 		sel = fcn.0041e6f2(0);
-		byte [sel * 36 + 0x496987] = 2;
+		stocks[sel].f7 = 2;
 		fcn.00429040(sel + 1);
-		edi = dword [sel * 36 + 0x496980];
-		strcpy_without_spaces(name, edi);
+		strcpy_without_spaces(name, stocks[sel].name_ptr);
 		sprintf(buf, use_rb_card, name, cards_table[25].name_ptr);
 		fcn.00440cac(buf, 1500);
+		sel++;
 	}
 
 	if (sel == 0)
 		return 0;
 
-	eax = (sel - 1) * 9;
-	fall = dword [sp + sel*4 + 0x7c]:float - dword [eax*4 + 0x496994]:float;
+	fall = t[sel-1] - stocks[sel-1].f20;
 
 	for (int i = 0; i < nplayers; i++) {
 		eax = i * 3 * 32 + ebx * 8;
@@ -1288,7 +1286,7 @@ int black_card()
 			fcn.0040df69(i, current_player, t /* it just put the double qword on the stack */);
 		}
 	}
-	// 0x4451d2
+
 	consume_a_card(current_player, 25);
 	return ebx;
 }
