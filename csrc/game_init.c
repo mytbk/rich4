@@ -5,6 +5,7 @@
 
 #include "player_info.h"
 #include "window_util.h"
+#include "stock.h"
 
 int mkf_jump; // 0x48a3b0
 
@@ -198,19 +199,13 @@ int init_new_game(int a0)
 				dword [ecx + eax*4 + 0x497328] = 0;
 			}
 		}
-		eax = game_stage * 4; // sign ext
-		edx = w_4991b8 + eax; // sign ext
-		eax = edx * 48;
-		edx = eax;
-		eax = edx * 9;
-		eax += 0x47f072;
-		memcpy(0x496980, eax, 432);
+		int _m = game_stage * 4 + w_4991b8; // sign ext
+		memcpy(stocks, &game_stocks[_m * 12], sizeof(stock_info) * 12);
 
 		float sum = 0; /* esp + 8 */
 
-		for (ebx = 0; ebx < 12; ebx++) {
-			sum += *(float*)(ebx * 36 + 0x49698c);
-		}
+		for (int i = 0; i < 12; i++)
+			sum += stocks[i].f12;
 
 		dw_49907c = trunc(sum * 10.0);
 		memset(0x4967e0, 0, 336);
