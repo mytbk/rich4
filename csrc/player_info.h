@@ -7,7 +7,7 @@
 
 typedef struct
 {
-	uint32_t name_ptr;
+	const char *name_ptr;
 	uint32_t f4;
 	uint16_t xpos; /* 0x496b70 */
 	uint16_t ypos; /* 0x496b72 */
@@ -18,7 +18,7 @@ typedef struct
 	uint8_t traffic_method; /* 0x496b79 */
 	uint8_t ndices; /* 0x496b7a */
 	uint8_t character;
-	uint8_t f20;
+	uint8_t sex; /* 0: female, 1: male */
 	uint8_t who_plays; /* 0: not alive, 1: human, 2: computer @0x496b7d */
 	uint8_t f22;
 	uint8_t f23;
