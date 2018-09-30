@@ -821,8 +821,8 @@ int auction_card()
 			eax = byte [esi + 0x1a];
 			mov dword [local_4h], eax;
 			fild word [local_4h];
-			fadd dword [0x465324];
-			fdiv dword [0x465328];
+			fadd 2.0f;
+			fdiv 5.0f;
 			fmulp st(1);
 			sub esp, 8;
 			fstp qword [esp];
@@ -1242,6 +1242,55 @@ int red_card()
 		consume_a_card(current_player, 24);
 		return selected_stock;
 	}
+}
+
+int black_card()
+{
+	char buf[128];
+	int t[12]; /* @ sp+0x80 */
+	char name[20]; /* @sp+0xb0 */
+	float fall; /* @sp+0xc4 */
+
+	int sel;
+
+	int c = players[current_player].character;
+	player_say(current_player, 0, card_strings[c][0][24]);
+
+	for (int i = 0; i < 12; i++) {
+		edx = dword [i * 36 + 0x496994];
+		t[i] = edx;
+	}
+	if (players[current_player].who_plays == 1) {
+		fcn.004021f8(12, 15, 10);
+		sel = stock_ui(2);
+		fcn.004021f8(41, 1, 0);
+		player_action_1(1);
+	} else {
+		sel = fcn.0041e6f2(0);
+		byte [sel * 36 + 0x496987] = 2;
+		fcn.00429040(sel + 1);
+		edi = dword [sel * 36 + 0x496980];
+		strcpy_without_spaces(name, edi);
+		sprintf(buf, use_rb_card, name, cards_table[25].name_ptr);
+		fcn.00440cac(buf, 1500);
+	}
+
+	if (sel == 0)
+		return 0;
+
+	eax = (sel - 1) * 9;
+	fall = dword [sp + sel*4 + 0x7c]:float - dword [eax*4 + 0x496994]:float;
+
+	for (int i = 0; i < nplayers; i++) {
+		eax = i * 3 * 32 + ebx * 8;
+		if (dword [eax + 0x497198] != 0) {
+			double t = dword [eax + 0x497198]:int * fall / 200.0f;
+			fcn.0040df69(i, current_player, t /* it just put the double qword on the stack */);
+		}
+	}
+	// 0x4451d2
+	consume_a_card(current_player, 25);
+	return ebx;
 }
 
 int tortoise_walking_card()
