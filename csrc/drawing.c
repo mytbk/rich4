@@ -62,115 +62,114 @@ void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct graph_st *a4, int a5, int
 	return ret;
 }
 
-int fcn_455c52(uint32_t a0, uint32_t a1, uint16_t *a2, struct graph_st * a3, int a4, int a5, int a6)
+/* put graph gtop on top of graph with pixels pix size width*height,
+ * gtop centered at (xpos, ypos) */
+int graph_overlay(uint32_t width, uint32_t height, uint16_t *pix, struct graph_st * gtop, int xpos, int ypos, int a6)
 {
-	a4 -= (int16_t)a3->f4;
-	a5 -= (int16_t)a3->f6;
+	/* get left top position */
+	xpos -= gtop->x;
+	ypos -= gtop->y;
+
+	int gtcrop_x, width_to_cpy, gtcrop_y, height_to_cpy;
+
 	if (a6 != 1) {
-		if (a4 >= a0 ||
-				a4 + (uint16_t)a3->f0 <= 0 ||
-				a5 >= a1 ||
-				a5 + (uint16_t)a3->f2 <= 0)
+		if (xpos >= width || xpos + gtop->width <= 0 ||
+				ypos >= height || ypos + gtop->height <= 0)
 			return 1;
 
-		[ebp-4] = 0;
-		[ebp-8] = 0;
-		[ebp-12] = (uint16_t)a3->f0;
-		[ebp-16] = (uint16_t)a3->f2;
-
-		if (a4 < 0) {
-			[ebp-4] -= a4;
-			[ebp-12] += a4;
-			a4 = 0;
+		if (xpos < 0) {
+			gtcrop_x = -xpos;
+			width_to_cpy = gtop->width + xpos;
+			xpos = 0;
 		} else {
-			eax = [ebp-12] + a4 - a0;
-			if (eax > 0) {
-				[ebp-12] -= eax;
+			gtcrop_x = 0;
+			int t = gtop->width + xpos - width;
+			if (t > 0) {
+				width_to_cpy = width - xpos;
+			} else {
+				width_to_cpy = gtop->width;
 			}
 		}
 
-		if (a5 < 0) {
-			[ebp-8] -= a5;
-			[ebp-16] += a5;
-			a5 = 0;
+		if (ypos < 0) {
+			gtcrop_y = -ypos;
+			height_to_cpy = gtop->height + ypos;
+			ypos = 0;
 		} else {
-			eax = [ebp-16] + a5 - a1;
-			if (eax > 0) {
-				[ebp-16] -= eax;
+			gtcrop_y = 0;
+			int t = gtop->height + ypos - height;
+			if (t > 0) {
+				height_to_cpy = height - ypos;
+			} else {
+				height_to_cpy = gtop->height;
 			}
 		}
 	} else {
-		if (a4 >= dw_4861c0
-				|| a4 + (uint16_t)a3->f0 <= dw_4861b8
-				|| a5 >= dw_4861c4
-				|| a5 + (uint16_t)a3->f2 <= dw_4861bc)
+		if (xpos >= dw_4861c0 || xpos + (uint16_t)gtop->width <= dw_4861b8
+				|| ypos >= dw_4861c4 || ypos + (uint16_t)gtop->height <= dw_4861bc)
 			return 1;
 
-		[ebp - 4] = 0;
-		[ebp - 8] = 0;
-		[ebp - 12] = (uint16_t)a3->f0;
-		[ebp - 16] = (uint16_t)a3->f2;
-
-		if (a4 < dw_4861b8) {
-			eax = dw_4861b8 - a4;
-			a4 = dw_4861b8;
-			[ebp - 4] += eax;
-			[ebp - 12] -= eax;
+		if (xpos < dw_4861b8) {
+			eax = dw_4861b8 - xpos;
+			xpos = dw_4861b8;
+			gtcrop_x = eax;
+			width_to_cpy = gtop->width - eax;
 		} else {
-			eax = [ebp - 12] + a4 - dw_4861c0;
+			gtcrop_x = 0;
+			eax = gtop->width + xpos - dw_4861c0;
 			if (eax > 0) {
-				[ebp - 12] -= eax;
+				width_to_cpy = dw_4861c0 - xpos;
+			} else {
+				width_to_cpy = gtop->width;
 			}
 		}
 
-		if (a5 < dw_4861bc) {
-			eax = dw_4861bc - a5;
-			a5 = dw_4861bc;
-			[ebp - 8] += eax;
-			[ebp - 16] -= eax;
+		if (ypos < dw_4861bc) {
+			eax = dw_4861bc - ypos;
+			ypos = dw_4861bc;
+			gtcrop_y = eax;
+			height_to_cpy = gtop->height - eax;
 		} else {
-			eax = [ebp  - 16] + a5 - dw_4861c4;
+			gtcrop_y = 0;
+			eax = gtop->height + ypos - dw_4861c4;
 			if (eax > 0) {
-				[ebp - 16] -= eax;
+				height_to_cpy = dw_4861c4 - ypos;
+			} else {
+				height_to_cpy = gtop->height;
 			}
 		}
 
 	}
 
-	eax = (uint16_t)a3->f0 * [ebp-8] + [ebp-4];
-	esi = &a3->f8[eax];
-	[ebp - 4] = ((uint16_t)a3->f0 - [ebp - 12]) * 2;
-	[ebp - 8] = (a0 - [ebp-12]) * 2;
-	edi = (a5 * a0 + a4) * 2 + a2;
+	int crop_start = gtop->width * gtcrop_y + gtcrop_x;
+	uint16_t *src = &gtop->gdata[crop_start];
+	int gt_width_skip = gtop->width - width_to_cpy;
+	int pix_width_skip = width - width_to_cpy;
+	uint16_t *dst = &pix[width * ypos + xpos];
 
-	edx = [ebp - 12];
-	ebx = [ebp - 16];
-	do {
-		ecx = edx;
-		do {
-			ax = [esi];
-			(uint16_t*)esi ++;
-			if (ax != 0) {
-				*edi = ax;
-			}
-			(uint16_t*)edi ++;
-		} while (--ecx);
+	for (int i = 0; i < height_to_cpy; i++) {
+		for (int j = 0; j < width_to_cpy; j++) {
+			if (*src != 0)
+				*dst = *src;
+			src++;
+			dst++;
+		}
 
-		esi += [ebp - 4];
-		edi += [ebp - 8];
-	} while (--ebx);
+		src += gt_width_skip;
+		dst += pix_width_skip;
+	}
 
 	return 0;
 }
 
 void fcn_4562a5(struct graph_st * a0, struct graph_st * a1, int a2, int a3)
 {
-	fcn_455c52((uint16_t)a0->f0, (uint16_t)a0->f2, a0->f8, a1, a2, a3, 0);
+	graph_overlay(a0->width, a0->height, a0->gdata, a1, a2, a3, 0);
 }
 
 void fcn_456418(uint16_t *a0, struct graph_st *a1, int a2, int a3)
 {
-	fcn_455c52(640, 480, a0, a1, a2, a3, 0);
+	graph_overlay(640, 480, a0, a1, a2, a3, 0);
 }
 
 void fcn_417191(int a0)
