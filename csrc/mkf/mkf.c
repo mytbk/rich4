@@ -72,28 +72,22 @@ void unload_mkf(int mkf_idx)
 static void update_spr_smp_ptr(void *s)
 {
 	struct spr_smp *sst = (struct spr_smp*)s;
-	int lastsz;
+	size_t lastsz;
 
 	if (strcmp(sst->sig, "SPR") == 0) {
-		lastsz = sst->chunk_tab[0].chunk_sz;
-		sst->chunk_tab[0].chunk_sz = (int32_t)s + sst->start_offset + 0x200;
-
-		for (int i = 1; i < sst->nchunk; i++) {
-			int t = sst->chunk_tab[i].chunk_sz;
-			sst->chunk_tab[i].chunk_sz = lastsz + sst->chunk_tab[i-1].chunk_sz;
-			lastsz = t;
-		}
+		lastsz = (size_t)(sst->chunk_tab[0].gdata);
+		sst->chunk_tab[0].gdata = (int16_t*)(s + sst->start_offset + 0x200);
+	} else if (strcmp(sst->sig, "SMP") == 0) {
+		lastsz = (size_t)(sst->chunk_tab[0].gdata);
+		sst->chunk_tab[0].gdata = (int16_t*)(s + sst->start_offset);
+	} else {
+		return;
 	}
 
-	if (strcmp(sst->sig, "SMP") == 0) {
-		lastsz = sst->chunk_tab[0].chunk_sz;
-		sst->chunk_tab[0].chunk_sz = (int32_t)s + sst->start_offset;
-
-		for (int i = 1; i < sst->nchunk; i++) {
-			int t = sst->chunk_tab[i].chunk_sz;
-			sst->chunk_tab[i].chunk_sz = lastsz + sst->chunk_tab[i-1].chunk_sz;
-			lastsz = t;
-		}
+	for (int i = 1; i < sst->nchunk; i++) {
+		size_t t = (size_t)(sst->chunk_tab[i].gdata);
+		sst->chunk_tab[i].gdata = (int16_t*)((void*)(sst->chunk_tab[i-1].gdata) + lastsz);
+		lastsz = t;
 	}
 }
 
