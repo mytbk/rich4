@@ -161,7 +161,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 						break;
 					}
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-					fcn.004563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
+					fcn_4563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 					fcn.00402460(1);
 					InvalidateRect(hWnd, NULL, FALSE);
@@ -172,7 +172,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 					options_ui(0);
 					sub.WINMM.dll_mciSendStringA_9cf(0);
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-					fcn.004563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
+					fcn_4563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 					fcn.00402460(1);
 					return 0;
@@ -190,7 +190,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		if (message == 0x401) {
 			dw_48a184 = -1;
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-			fcn.004563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
+			fcn_4563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 			InvalidateRect(hWnd, NULL, FALSE);
 			fcn.00402460(1);

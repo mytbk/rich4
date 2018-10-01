@@ -441,3 +441,8 @@ void move_animation(int obj, int x1, int y1, int x2, int y2, int T)
 	// 0x40ea4d
 	free(st0);
 }
+
+void fcn_4563f5(uint16_t *a0, struct st *a1, int a2, int a3)
+{
+	fcn_00455b3a(640, 480, a0, a1, a2, a3);
+}
