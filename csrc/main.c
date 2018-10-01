@@ -15,7 +15,7 @@ RECT g_rect;
 char mid_status[7]; // 0x46cb00
 
 typedef struct { int16_t x; int16_t y } pos_t;
-pos_t mpos[5] = { // 0x46cb28
+static pos_t mpos[5] = { // central position of the buttons @0x46cb28
 	{190, 380}, // start
 	{328, 380}, // load
 	{468, 378}, // options
@@ -216,10 +216,9 @@ int fcn_004029fd()
 {
 	data1 = (struct spr_smp*)read_mkf(mkf_data, 1, NULL, NULL);
 
-	for (int i = 0; i < 5; i++) { // i in ebx
-		int t1 = mpos[i].x;
-		int t2 = mpos[i].y;
-		fcn_4562a5(&data1->chunk_tab[0], &data1->chunk_tab[i * 2 + 1], t1, t2);
+	for (int i = 0; i < 5; i++) {
+		fcn_4562a5(&data1->chunk_tab[0], &data1->chunk_tab[i * 2 + 1],
+				mpos[i].x, mpos[i].y);
 	}
 
 	create_some_font(0x10, 0xf0f0f0, 0x101010, 3, 1);
