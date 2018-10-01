@@ -11,8 +11,9 @@ const char str_cross_sym[] = "\xa1\xd1%d"; // x%d
 char tab_48c548[16];
 int selected_tool; // 0x48c560
 uint8_t tool_amount[60]; // 0x49915c 4*15
+struct graph_st * dw_48c558;
 
-void fcn_447c6e(struct st *a1, struct st *a2, int player)
+void fcn_447c6e(struct graph_st *a1, struct graph_st *a2, int player)
 {
 	char str[40];
 
@@ -20,9 +21,9 @@ void fcn_447c6e(struct st *a1, struct st *a2, int player)
 	create_some_font(20, 0xffffff, 0x101010, 3, 0);
 
 	if (a1 == NULL) {
-		a1 = (struct st*)((void*)(a2) + 24);
+		a1 = (struct graph_st*)((void*)(a2) + 24);
 	} else {
-		fcn_00456280(a1, (struct st*)((void*)(a2) + 24), 0, 0);
+		fcn_00456280(a1, (struct graph_st*)((void*)(a2) + 24), 0, 0);
 	}
 
 	int j = 0;
@@ -142,7 +143,7 @@ void tools_ui()
 	}
 	IDirectDrawSurface_Lock(pddrawsf2, 0, &sfdesc1, 1, 0);
 	st_46caec.f8 = sfdesc1.lpSurface;
-	/* struct st* */ dw_48c558 = fcn_00451a97(&st_46caec, NULL, 0, 40, 440, 440);
+	dw_48c558 = crop_graph(&st_46caec, NULL, 0, 40, 440, 440);
 	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 
 	do {

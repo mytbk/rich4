@@ -4,7 +4,7 @@
  */
 
 #include "global.h"
-#include "data_struct.h"
+#include "graph_struct.h"
 #include "player_info.h"
 #include "sound_struct.h"
 #include "window_util.h"
@@ -36,11 +36,11 @@ int32_t dw_48a164, dw_48a168;
 MMRESULT gTimerEvent; // 0x48a16c
 
 uint16_t modded_key; // 0x46cb07
-struct st st_46cb14 = {640, 480, 0, 0, NULL}; // 0x46cb14, 12 bytes
+struct graph_st st_46cb14 = {640, 480, 0, 0, NULL}; // 0x46cb14, 12 bytes
 uint8_t speed_tab[3] = {6, 4, 2}; // 0x64cb20
 uint32_t dw_46cb23 = 0;
 
-void fcn_00456280(struct st *s, int a1, int a2, int a3)
+void fcn_00456280(struct graph_st *s, int a1, int a2, int a3)
 {
 	fcn_00455b3a((uint32_t)s->f0, (uint32_t)s->f2, s->f8, a1, a2, a3);
 }
@@ -614,7 +614,7 @@ void init_data_and_timer()
 
 	/* edx = 0 */
 	dw_46cb10 = read_mkf(mkf_data, 0, NULL, NULL);
-	dw_48a0e8 = allocate_some_struct(32, 32, 0, 0);
+	dw_48a0e8 = allocate_graph_st(32, 32, 0, 0);
 	b_48a179 = b_48a17a = b_48a178 = 0;
 	dw_48a168 = -1;
 	ShowCursor(0);

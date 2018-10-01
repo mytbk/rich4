@@ -5,11 +5,11 @@
 
 #include <windows.h>
 #include "player_info.h"
-#include "data_struct.h"
+#include "graph_struct.h"
 
-struct st st_46caec;
+struct graph_st st_46caec;
 
-void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct st *a4, int a5, int a6)
+void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct graph_st *a4, int a5, int a6)
 {
 	int ret = 1;
 	a5 -= (int16_t)a4->f4;
@@ -62,7 +62,7 @@ void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct st *a4, int a5, int a6)
 	return ret;
 }
 
-int fcn_455c52(uint32_t a0, uint32_t a1, uint16_t *a2, struct st * a3, int a4, int a5, int a6)
+int fcn_455c52(uint32_t a0, uint32_t a1, uint16_t *a2, struct graph_st * a3, int a4, int a5, int a6)
 {
 	a4 -= (int16_t)a3->f4;
 	a5 -= (int16_t)a3->f6;
@@ -163,12 +163,12 @@ int fcn_455c52(uint32_t a0, uint32_t a1, uint16_t *a2, struct st * a3, int a4, i
 	return 0;
 }
 
-void fcn_4562a5(struct st * a0, struct st * a1, int a2, int a3)
+void fcn_4562a5(struct graph_st * a0, struct graph_st * a1, int a2, int a3)
 {
 	fcn_455c52((uint16_t)a0->f0, (uint16_t)a0->f2, a0->f8, a1, a2, a3, 0);
 }
 
-void fcn_456418(uint16_t *a0, struct st *a1, int a2, int a3)
+void fcn_456418(uint16_t *a0, struct graph_st *a1, int a2, int a3)
 {
 	fcn_455c52(640, 480, a0, a1, a2, a3, 0);
 }
@@ -304,7 +304,7 @@ void player_say(int p, int t, const char *s)
 	create_some_font(0x10, 0x101010, 0, 2, 1);
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 	st_46caec.f8 = sfdesc1.lpSurface;
-	struct st * edi = fcn_00451a97(&st_46caec, NULL, 0, 40, 440, 220);
+	struct graph_st * edi = crop_graph(&st_46caec, NULL, 0, 40, 440, 220);
 	fcn_456418(sfdesc1.lpSurface, dw_48bad8+0x54, 220, 130);
 	ecx = dword [p * 0x34 + 0x498eb0];
 	edx = t + 1;
@@ -390,7 +390,7 @@ void move_animation(int obj, int x1, int y1, int x2, int y2, int T)
 	r0.left = -1000;
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 	st_46caec.f8 = sfdesc1.lpSurface;
-	struct st * st0 = fcn_00451a97(&st_46caec, NULL, 0, 40, 440, 440); /* st0 @ sp+0x4c */
+	struct graph_st * st0 = crop_graph(&st_46caec, NULL, 0, 40, 440, 440); /* st0 @ sp+0x4c */
 	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 
 	while (dist != 0) {
@@ -442,7 +442,7 @@ void move_animation(int obj, int x1, int y1, int x2, int y2, int T)
 	free(st0);
 }
 
-void fcn_4563f5(uint16_t *a0, struct st *a1, int a2, int a3)
+void fcn_4563f5(uint16_t *a0, struct graph_st *a1, int a2, int a3)
 {
 	fcn_00455b3a(640, 480, a0, a1, a2, a3);
 }

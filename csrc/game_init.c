@@ -6,6 +6,7 @@
 #include "player_info.h"
 #include "window_util.h"
 #include "stock.h"
+#include "graph_struct.h"
 
 int mkf_jump; // 0x48a3b0
 
@@ -47,8 +48,8 @@ int init_new_game(int a0)
 	mkf_jump = load_mkf("JUMP.MKF");
 	read_mkf(mkf_jump, game_stage * 4 + game_map, dw_48a358, NULL);
 	fcn_004552b7(dw_48a354, dw_48a358, 0x96000, -16); /* @ bit_functions.c */
-	dw_48a3a4 = allocate_some_struct(440, 155, 0, 0);
-	dw_48a3a0 = allocate_some_struct(192, 461, 0, 0);
+	dw_48a3a4 = allocate_graph_st(440, 155, 0, 0);
+	dw_48a3a0 = allocate_graph_st(192, 461, 0, 0);
 	dw_48a3b8 = read_mkf(dw_48a3b0, 8, NULL, NULL);
 	dw_48a3c0 = read_mkf(mkf_data, 2, NULL, NULL);
 	dw_48a3ac = ebp = 0;
@@ -100,7 +101,7 @@ int init_new_game(int a0)
 	eax = edx * 3;
 	edx = eax * 4;
 	eax = dw_48a3b8 + 12 + edx;
-	dw_48a390 = fcn_00451a97(eax, 0, 0x8a, 15, 41, 133); /* function in data_struct.c */
+	dw_48a390 = crop_graph(eax, 0, 0x8a, 15, 41, 133);
 
 	edx = game_stage; /* sign ext */
 	eax = edx * 20;
@@ -108,7 +109,7 @@ int init_new_game(int a0)
 	eax = edx * 12;
 	edx = dw_48a3b8 + 12;
 	eax += edx;
-	dw_48a398 = fcn_00451a97(eax, 0, 11, 166, 79, 39);
+	dw_48a398 = crop_graph(eax, 0, 11, 166, 79, 39);
 
 	edx = game_stage; /* sign ext */
 	eax = edx * 20;
@@ -116,7 +117,7 @@ int init_new_game(int a0)
 	eax = edx * 12;
 	edx = dw_48a3b8 + 12;
 	eax += edx;
-	dw_48a394 = fcn_00451a97(eax, 0, 99, 166, 79, 39);
+	dw_48a394 = crop_graph(eax, 0, 99, 166, 79, 39);
 
 	edx = game_stage; /* sign ext */
 	eax = edx * 20;
@@ -124,7 +125,7 @@ int init_new_game(int a0)
 	eax = edx * 3;
 	edx = eax * 4;
 	eax = dw_48a3b8 + 12 + edx;
-	dw_48a39c = fcn_00451a97(eax, 0, 157, 216, 23, 24);
+	dw_48a39c = crop_graph(eax, 0, 157, 216, 23, 24);
 
 	sub.WINMM.dll_mciSendStringA_9cf(0x8001); /* TODO: 0x4549cf */
 
