@@ -12,49 +12,6 @@ uint8_t player_cards[60]; // 0x499120
 int selected_card; // 0x48c544
 const char str_use[] = "\xa8\xcf\xa5\xce%s"; // 使用%s
 
-typedef struct
-{
-	const char *name_ptr;
-	uint8_t init_amount;
-	uint8_t price;
-	uint8_t f6;
-	uint8_t f7;
-} rich4_card;
-
-rich4_card cards_table[] = {
-	{ NULL, 0, 0, 0, 0 },
-	{ "\xa7\xa1\xb4\x49\xa5\x64", 1, 200, 2, 2 }, /* 均富卡 */
-	{ "\xa7\xa1\xb3\x68\xa5\x64", 2, 200, 2, 2 }, /* 均贫卡 */
-	{ "\xc1\xca\xa6\x61\xa5\x64", 4, 35, 0, 1 }, /* 购地卡 */
-	{ "\xb4\xab\xa6\x61\xa5\x64", 4, 25, 0, 0 }, /* 换地卡 */
-	{ "\xb4\xab\xab\xce\xa5\x64", 4, 20, 0, 0 }, /* 换屋卡 */
-	{ "\xc2\xe0\xa6\x56\xa5\x64", 3, 20, 0, 0 }, /* 转向卡 */
-	{ "\xa7\xef\xab\xd8\xa5\x64", 8, 15, 0, 0 }, /* 改建卡 */
-	{ "\xa9\xe7\xbd\xe6\xa5\x64", 3, 20, 0, 1 }, /* 拍卖卡 */
-	{ "\xa4\xd1\xa8\xcf\xa5\x64", 2, 160, 2, 0 }, /* 天使卡 */
-	{ "\xb4\x63\xc5\x5d\xa5\x64", 1, 180, 2, 2 }, /* 恶魔卡 */
-	{ "\xa9\xc7\xc3\x7e\xa5\x64", 2, 60, 0, 2 }, /* 怪兽卡 */
-	{ "\xa9\xee\xb0\xa3\xa5\x64", 5, 15, 0, 1 }, /* 拆除卡 */
-	{ "\xb7\x6d\xb9\xdc\xa5\x64", 4, 25, 0, 2 }, /* 抢夺卡 */
-	{ "\xb0\xb1\xaf\x64\xa5\x64", 4, 20, 0, 0 }, /* 停留卡 */
-	{ "\xa5\x56\xaf\x76\xa5\x64", 2, 100, 2, 2 }, /* 冬眠卡 */
-	{ "\xb9\xda\xb9\x43\xa5\x64", 4, 25, 0, 1 }, /* 梦游卡 */
-	{ "\xb3\xb4\xae\x60\xa5\x64", 4, 20, 0, 2 }, /* 陷害卡 */
-	{ "\xb4\x5f\xa4\xb3\xa5\x64", 4, 20, 0, 0 }, /* 复仇卡 */
-	{ "\xb6\xf9\xba\xd7\xa5\x64", 4, 40, 0, 0 }, /* 嫁祸卡 */
-	{ "\xa7\x4b\xb6\x4f\xa5\x64", 4, 25, 0, 0 }, /* 免费卡 */
-	{ "\xa7\x4b\xb8\x6f\xa5\x64", 4, 25, 0, 0 }, /* 免罪卡 */
-	{ "\xb0\x65\xaf\xab\xb2\xc5", 3, 10, 0, 0 }, /* 送神符 */
-	{ "\xbd\xd0\xaf\xab\xb2\xc5", 3, 20, 0, 0 }, /* 请神符 */
-	{ "\xac\xf5\xa5\x64", 3, 50, 0, 0 }, /* 红卡 */
-	{ "\xb6\xc2\xa5\x64", 3, 30, 0, 1 }, /* 黑卡 */
-	{ "\xac\x64\xb5\x7c\xa5\x64", 4, 35, 0, 1 }, /* 查税卡 */
-	{ "\xba\xa6\xbb\xf9\xa5\x64", 3, 35, 0, 0 }, /* 涨价卡 */
-	{ "\xac\x64\xab\xca\xa5\x64", 3, 35, 0, 1 }, /* 查封卡 */
-	{ "\xa6\x50\xb7\xf9\xa5\x64", 2, 40, 0, 0 }, /* 同盟卡 */
-	{ "\xaf\x51\xc0\x74\xa5\x64", 3, 70, 0, 0 }, /* 乌龟卡 */
-};
-
 sound_struct snd0 = {1, NULL}; // 0x00482322
 sound_struct snd1 = {3, NULL}; // 0x0048233a
 sound_struct snd2; // 0x0048cae0
@@ -174,13 +131,13 @@ void cards_ui()
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 			fcn_004563f5(sfdesc1.lpSurface, edi+12, 14, 130);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
-			ebx = register_wait_callback(cardProc, 0);
+			int cardid = register_wait_callback(cardProc, 0);
 			fcn_00451edb(ebp, 0, 0x8028);
 			if (ebx != 0) {
-				edx = cards_table[ebx].name_ptr; /* cards_table has 8 bytes per item */
+				edx = cards_table[cardid - 1].name_ptr;
 				sprintf(s, str_use, edx);
-				fcn_00441f73(ebx, s);
-				esi = eax = call[0x475d5c+ebx*4];
+				fcn_00441f73(cardid, s);
+				esi = eax = card_functions[cardid]();
 				if (eax) {
 					fcn_4542ce(&snd1, eax);
 				}
@@ -221,12 +178,12 @@ void cards_ui()
 			continue;
 
 		eax = mem[ebx];
-		ecx = cards_table[eax].name_ptr;
+		ecx = cards_table[eax - 1].name_ptr;
 		sprintf(s, str_use, ecx);
 		eax = mem[ebx];
 		fcn_00441f73(eax, s);
 		eax = mem[ebx];
-		call dword [eax*4 + 0x475d5c];
+		card_functions[eax]();
 		return;
 	}
 }

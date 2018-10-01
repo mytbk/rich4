@@ -139,7 +139,7 @@ int init_new_game(int a0)
 		memset(player_cards, 0, 60);
 		memset(tool_amount, 0, 60);
 		for (int i = 0; i < 30; i++) {
-			card_amount[i] = cards_table[i+1].init_amount;
+			card_amount[i] = cards_table[i].init_amount;
 		}
 		for (ebx = 0; ebx < 8; ebx++) {
 			al = byte [ebx*8 + 0x47fee6];
