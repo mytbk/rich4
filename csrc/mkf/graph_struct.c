@@ -7,14 +7,10 @@
 #include <string.h>
 #include "graph_struct.h"
 
-static inline void mem_copy_words(void *dst, void *src, size_t n)
-{
-	memcpy(dst, src, n*2);
-}
-
 struct graph_st * allocate_graph_st(int w, int h, int x, int y)
 {
-	struct graph_st * newst = (struct graph_st *)malloc(w * h * 2 + sizeof(graph_st));
+	struct graph_st * newst = (struct graph_st *)
+		malloc(w * h * 2 + sizeof(struct graph_st));
 	newst->width = w;
 	newst->height = h;
 	newst->x = x;
@@ -38,7 +34,7 @@ struct graph_st * crop_graph(struct graph_st *a1, struct graph_st *a2, int x, in
 	int16_t *dst = a2->gdata;
 
 	for (int i = 0; i < h; i++) {
-		mem_copy_words(esi, ebx, w);
+		memcpy(dst, src, w * 2);
 		dst = dst + w;
 		src = src + a1->width;
 	}
