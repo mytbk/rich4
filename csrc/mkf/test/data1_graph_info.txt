@@ -1,0 +1,11 @@
+width = 640, height = 480, x = 0, y = 0
+width = 108, height = 105, x = 55, y = 53
+width = 116, height = 113, x = 59, y = 57
+width = 107, height = 92, x = 51, y = 51
+width = 114, height = 99, x = 55, y = 54
+width = 98, height = 90, x = 51, y = 42
+width = 103, height = 98, x = 53, y = 46
+width = 53, height = 18, x = 27, y = 9
+width = 58, height = 19, x = 29, y = 10
+width = 76, height = 91, x = 37, y = 45
+width = 90, height = 107, x = 45, y = 52
