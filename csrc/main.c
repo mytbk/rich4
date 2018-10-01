@@ -27,6 +27,8 @@ int16_t game_stage;
 int16_t game_map;
 int price_index;
 
+static struct spr_smp *data1; // 0x48a180
+
 LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (message < 0x1c) {
@@ -103,7 +105,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			int i;
 			for (i = 0; i < 5; i++) {
 				edi = (i * 2 + 2) * 12;
-				eax = dw_48a180;
+				eax = data1;
 				ebx = i * 4;
 				r0.left = mpos[i].x - (s16)word [edi + eax + 0x10];
 				r0.top = mpos[i].y - (s16)word [edi + eax + 0x12];
@@ -121,7 +123,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 					break;
 				dw_48a184 = i;
 				IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-				fcn_456418(sfdesc1.lpSurface, dw_48a180 + 12 + edi, mpos[i].x, mpos[i].y);
+				fcn_456418(sfdesc1.lpSurface, data1 + 12 + edi, mpos[i].x, mpos[i].y);
 				IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 				InvalidateRect(hWnd, &r0, FALSE);
 				fcn_4542ce(0x48231a, 0);
@@ -133,8 +135,8 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				return 0;
 			if (var_54 == -1)
 				return 0;
-			edx = dw_48a180;
-			eax = dw_48a180 + (var_54 * 2 + 2) * 12;
+			edx = data1;
+			eax = data1 + (var_54 * 2 + 2) * 12;
 			r0.left = mpos[var_54].x - (s16)word [eax + 0x10];
 			r0.top = mpos[var_54].y - (s16)word [eax + 0x12];
 			r0.right = r0.left + (s16)word [eax + 0xc];
@@ -142,7 +144,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 			int t1 = r0.bottom - r0.top;
 			int t0 = r0.right - r0.left;
-			fcn.0045643d(sfdesc1.lpSurface, dw_48a180+12, r0.left, r0.top, r0.left, r0.top, t0, t1);
+			fcn.0045643d(sfdesc1.lpSurface, data1+12, r0.left, r0.top, r0.left, r0.top, t0, t1);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 			InvalidateRect(hWnd, &r0, FALSE);
 			return 0;
@@ -161,7 +163,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 						break;
 					}
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-					fcn_4563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
+					fcn_4563f5(sfdesc1.lpSurface, data1 + 12, 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 					fcn.00402460(1);
 					InvalidateRect(hWnd, NULL, FALSE);
@@ -172,7 +174,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 					options_ui(0);
 					sub.WINMM.dll_mciSendStringA_9cf(0);
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-					fcn_4563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
+					fcn_4563f5(sfdesc1.lpSurface, data1 + 12, 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 					fcn.00402460(1);
 					return 0;
@@ -190,7 +192,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		if (message == 0x401) {
 			dw_48a184 = -1;
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-			fcn_4563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
+			fcn_4563f5(sfdesc1.lpSurface, data1 + 12, 0, 0);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 			InvalidateRect(hWnd, NULL, FALSE);
 			fcn.00402460(1);
@@ -212,23 +214,20 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 
 int fcn_004029fd()
 {
-	dw_48a180 = read_mkf(mkf_data, 1, NULL, NULL);
+	data1 = (struct spr_smp*)read_mkf(mkf_data, 1, NULL, NULL);
 
 	for (int i = 0; i < 5; i++) { // i in ebx
 		int t1 = mpos[i].x;
 		int t2 = mpos[i].y;
-		edx = (i * 2 + 1) * 12;
-		eax = dw_48a180 + 12;
-		edx += eax;
-		fcn_4562a5(eax, edx, t1, t2);
+		fcn_4562a5(&data1->chunk_tab[0], &data1->chunk_tab[i * 2 + 1], t1, t2);
 	}
 
 	create_some_font(0x10, 0xf0f0f0, 0x101010, 3, 1);
-	draw_some_text(dw_48a180 + 12, "V3.11", 638, 470, 6);
+	draw_some_text(&data1->chunk_tab[0], "V3.11", 638, 470, 6);
 	sub.WINMM.dll_mciSendStringA_9cf(0);
 	ebx = register_wait_callback(entryCallback, 0);
 	sub.WINMM.dll_mciSendStringA_acb();
-	free(dw_48a180);
+	free(data1);
 	return ebx;
 }
 
