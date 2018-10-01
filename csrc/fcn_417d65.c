@@ -9,7 +9,7 @@ void fcn_00419703()
 	fcn_00417191(0);
 }
 
-void fcn_00417d65(int v)
+void topbar_btn(int v)
 {
 	int res;
 
@@ -20,25 +20,25 @@ void fcn_00417d65(int v)
 
 	switch (v) {
 		case 0:
-			fcn_0044eb39(20, 60);
+			help_ui(20, 60);
 			break;
 		case 1:
-			fcn_00411b53(1);
+			options_ui(1);
 			break;
 		case 2:
 			hosted_ai_ui();
 			break;
 		case 3:
-			res = process_checkpoint(1);
+			res = load_ui(1);
 			break;
 		case 4:
-			fcn_00404165();
+			save_ui();
 			break;
 		case 5:
-			fcn_0040a9bd();
+			map_ui();
 			break;
 		case 6:
-			fcn_00424492();
+			query_user_ui();
 			break;
 		case 7:
 			tools_ui();
@@ -47,7 +47,7 @@ void fcn_00417d65(int v)
 			cards_ui();
 			break;
 		case 9:
-			player_info_stock_ui();
+			sales_ui();
 			break;
 		case 10:
 			stock_ui(0);

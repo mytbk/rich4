@@ -155,7 +155,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			switch (dw_48a184) {
 				case 1:
 					fcn.00402460(0);
-					eax = process_checkpoint(0);
+					eax = load_ui(0);
 					if (eax != -1) {
 						Post_0402_Message(dw_48a184);
 						break;
@@ -169,7 +169,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 				case 2:
 					fcn.00402460(0);
 					sub.WINMM.dll_mciSendStringA_acb();
-					fcn.00411b53(0);
+					options_ui(0);
 					sub.WINMM.dll_mciSendStringA_9cf(0);
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 					fcn.004563f5(sfdesc1.lpSurface, dw_48a180 + 12, 0, 0);
@@ -347,7 +347,7 @@ start_msg_loop:
 			fcn_004075c1();
 			goto case_401de8_0;
 		case 3:
-			if (process_checkpoint(0) == -1)
+			if (load_ui(0) == -1)
 				goto case_401de8_0;
 			goto switch_401cb8_case_1;
 		default:

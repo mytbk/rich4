@@ -270,33 +270,33 @@ L401306:
 	/* hotkey 497180 */
 	k = R4_KEY(global_rich4_cfg.hotkeys[12]); /* stock */
 	if (modded_key == k) {
-		fcn_00417d65(10);
+		topbar_btn(10);
 		goto L401523;
 	}
 	/* hotkey 497182 */
-	k = R4_KEY(global_rich4_cfg.hotkeys[13]); /* trade */
+	k = R4_KEY(global_rich4_cfg.hotkeys[13]); /* sales */
 	if (modded_key == k) {
-		fcn_00417d65(9);
+		topbar_btn(9);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[14]); /* card */
 	if (modded_key == k) {
-		fcn_00417d65(8);
+		topbar_btn(8);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[15]); /* tool */
 	if (modded_key == k) {
-		fcn_00417d65(7);
+		topbar_btn(7);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[16]); /* query */
 	if (modded_key == k) {
-		fcn_00417d65(6);
+		topbar_btn(6);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[17]); /* map */
 	if (modded_key == k) {
-		fcn_00417d65(5);
+		topbar_btn(5);
 		goto L401523;
 	}
 	/* hotkey 40718c */
@@ -322,28 +322,28 @@ L401306:
 	/* hotkey 407190 */
 	k = R4_KEY(global_rich4_cfg.hotkeys[20]); /* hosted AI */
 	if (modded_key == k) {
-		fcn_00417d65(2);
+		topbar_btn(2);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[21]); /* system */
 	if (modded_key == k) {
-		fcn_00417d65(1);
+		topbar_btn(1);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[22]); /* save */
 	if (modded_key == k) {
-		fcn_00417d65(4);
+		topbar_btn(4);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[23]); /* load */
 	if (modded_key == k) {
-		fcn_00417d65(3);
+		topbar_btn(3);
 		goto L401523;
 	}
 	/* hotkey 497198 */
 	k = R4_KEY(global_rich4_cfg.hotkeys[24]);
 	if (modded_key == k) {
-		fcn_00417d65(0);
+		topbar_btn(0);
 		goto L401523;
 	}
 	k = R4_KEY(global_rich4_cfg.hotkeys[27]);
