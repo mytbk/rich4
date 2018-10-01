@@ -24,6 +24,7 @@ pos_t mpos[5] = { // 0x46cb28
 };
 
 int16_t game_stage;
+int16_t game_map;
 int price_index;
 
 LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -266,7 +267,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
 
 case_401de8_0:
 	game_stage = 0;
-	w_4991b8 = 0;
+	game_map = 0;
 	dw_4990f0 = 0;
 	b_46cafc = 0;
 	ret = fcn_004029fd();

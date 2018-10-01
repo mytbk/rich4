@@ -29,6 +29,7 @@ extern HINSTANCE ghInstance; // 48a064
 extern HWND gwindowHandle; // 48a0d4
 extern RECT g_rect; /* struct tagRECT { left, top, right, bottom } @ 0x46cadc */
 extern int16_t game_stage;
+extern int16_t game_map;
 extern int price_index;
 
 /* card.c */

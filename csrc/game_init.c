@@ -45,7 +45,7 @@ int init_new_game(int a0)
 	dw_48a354 = malloc(0x96000);
 	dw_48a358 = malloc(0x96000);
 	mkf_jump = load_mkf("JUMP.MKF");
-	read_mkf(mkf_jump, game_stage*4+w_4991b8 /* sign ext */, dw_48a358, NULL);
+	read_mkf(mkf_jump, game_stage * 4 + game_map, dw_48a358, NULL);
 	fcn_004552b7(dw_48a354, dw_48a358, 0x96000, -16); /* @ bit_functions.c */
 	dw_48a3a4 = allocate_some_struct(440, 155, 0, 0);
 	dw_48a3a0 = allocate_some_struct(192, 461, 0, 0);
@@ -54,7 +54,7 @@ int init_new_game(int a0)
 	dw_48a3ac = ebp = 0;
 
 	if (a0 == 0) {
-		w_4991b8 = 0;
+		game_map = 0;
 		memset(0x4990f4, 0, 12);
 		memset(0x46cb3c, 0, 28);
 		dw_46cb3c = 2;
@@ -92,7 +92,7 @@ int init_new_game(int a0)
 		fcn_00404d0a(0, eax);
 	}
 
-	dw_46cb54 = w_4991b8; /* sign ext */
+	dw_46cb54 = game_map; /* sign ext */
 
 	edx = game_stage; /* sign ext */
 	eax = edx*20;
@@ -187,7 +187,7 @@ int init_new_game(int a0)
 		dw_499110 = dw_46cb48;
 		dw_49911c = days[dw_46cb4c];
 		dw_499108 = winning_condition[dw_46cb50] * game_initial_fund;
-		w_4991b8 = w_46cb54;
+		game_map = w_46cb54;
 		price_index = 1;
 		dw_4990e4 = dw_499084 = dw_4990dc = dw_4990ec = dw_499100 = esi = 0;
 
@@ -199,7 +199,7 @@ int init_new_game(int a0)
 				dword [ecx + eax*4 + 0x497328] = 0;
 			}
 		}
-		int _m = game_stage * 4 + w_4991b8; // sign ext
+		int _m = game_stage * 4 + game_map; // sign ext
 		memcpy(stocks, &game_stocks[_m * 12], sizeof(stock_info) * 12);
 
 		float sum = 0; /* esp + 8 */

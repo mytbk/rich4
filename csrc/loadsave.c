@@ -96,12 +96,10 @@ void fcn_00407ad2()
 {
 	fcn_004080f5();
 	int mkf_map_ = load_mkf("MAP.MKF");
-	eax = (game_stage*4+w_4991b8)*2;
-	dw_474945 = read_mkf(mkf_map_, eax, NULL, NULL);
-	eax = (game_stage*4+w_4991b8)+16;
-	dw_48badc = read_mkf(mkf_map_, eax, NULL, NULL);
-	eax = game_stage*4+w_4991b8+16;
-	dw_48bad0 = read_mkf(mkf_map_, eax, NULL, NULL);
+	int gmap = game_stage * 4 + game_map;
+	dw_474945 = read_mkf(mkf_map_, gmap * 2, NULL, NULL);
+	dw_48badc = read_mkf(mkf_map_, gmap + 16, NULL, NULL);
+	dw_48bad0 = read_mkf(mkf_map_, gmap + 16, NULL, NULL);
 	memcpy(0x48b6b4, dw_474945 + 0x10, 512);
 	dw_48bac4 = *(int*)dw_474945 + 0x210;
 	dw_48bacc = *(int*)dw_474945 + 10896; /* 0x2a90 = 10896 */
@@ -111,12 +109,10 @@ void fcn_00407ad2()
 	if (dw_47493c == 0) {
 		int mkf_map_dat = load_mkf("MAPDAT.MKF");
 		if (eax != -1) {
-			eax = game_stage*4+w_4991b8;
-			dw_47493c = read_mkf(mkf_map_dat, eax, NULL, NULL);
+			dw_47493c = read_mkf(mkf_map_dat, gmap, NULL, NULL);
 			unload_mkf(mkf_map_dat);
 		} else {
-			eax = (game_stage*4+w_4991b8)*2+1;
-			dw_47493c = read_mkf(mkf_map_, eax, NULL, NULL);
+			dw_47493c = read_mkf(mkf_map_, gmap * 2 + 1, NULL, NULL);
 		}
 		/* 0x407c3f */
 		int *eax = dw_47493c;
@@ -175,29 +171,18 @@ void fcn_00407ad2()
 		dw_499088 = 0;
 	}
 	/* 0x407e0b */
-	for (ebx = 0; ebx < 5; ebx++) {
-		eax = game_stage; /* sign ext */
-		eax *= 4;
-		edx = *(int16_t*)0x4991b8; /* sign ext */
-		esi = edx + eax;
-		eax = esi * 5 + ebx + 0x27;
-		*(int*)(0x48ae4c + ebx*4) = read_mkf(mkf_map_, eax, NULL, NULL);
+	for (int i = 0; i < 5; i++) {
+		*(int*)(0x48ae4c + i*4) = read_mkf(mkf_map_, gmap * 5 + 39 + i, NULL, NULL);
 	}
-	edx = *(int16_t*)0x4991b8; /* sign ext */
-	eax = game_stage; /* sign ext */
-	edx += 0x4f;
-	eax = eax * 4 + edx;
-	dw_48ae60 = read_mkf(mkf_map_, eax, NULL, NULL);
+	dw_48ae60 = read_mkf(mkf_map_, gmap + 79, NULL, NULL);
 	if (game_stage == 0) {
-		for (ebx = 0; ebx < 17; ebx++) {
-			dw_48ae64[ebx] = read_mkf(mkf_map_, ebx+0x57, NULL, NULL);
+		for (int i = 0; i < 17; i++) {
+			dw_48ae64[i] = read_mkf(mkf_map_, 87 + i, NULL, NULL);
 		}
 	} else {
-		edx = *(int16_t*)0x4991b8;
-		eax = edx*17;
-		esi = eax + 0x68;
-		for (ebx = 0; ebx < 17; ebx++) {
-			dw_48ae64[ebx] = read_mkf(mkf_map_, esi + ebx, NULL, NULL);
+		int b = game_map * 17 + 104;
+		for (int i = 0; i < 17; i++) {
+			dw_48ae64[i] = read_mkf(mkf_map_, b + i, NULL, NULL);
 		}
 	}
 	for (ebx = 1; ebx <= dw_498e90; ebx++) {
@@ -235,18 +220,12 @@ void fcn_00407ad2()
 			fcn_0040b93b(ebx);
 			continue;
 		}
-#if 0
-		esi = ebx * 0x68;
-		eax = *(char*)(0x496b7b+esi) + 0x1b;
-#endif
+
 		uint8_t eax = players[ebx].character + 0x1b;
 		edx = read_mkf(mkf_map_, eax, NULL, NULL);
 		eax = ebx * 0x34;
 		*(int32_t*)(0x498eb0+eax) = edx;
-#if 0
-		if (*(char*)(0x496b7d+esi) == 0
-				&& *(char*)(0x496bcc+esi) == 0) {
-#endif
+
 		if (players[ebx].who_plays == 0 && player[ebx].f100 == 0) {
 			eax = *(int32_t*)(0x498eb0+eax);
 			edx = *(int16_t*)(eax + 0xe); /* sign ext */
@@ -274,9 +253,8 @@ void fcn_00407ad2()
 	fcn_00428caf();
 	dw_48bad8 = read_mkf(mkf_data, 0x205, NULL, NULL);
 	dw_48bad4 = read_mkf(mkf_data, 0x207, NULL, NULL);
-	for (ebx = 0; ebx < 20; ebx++) {
-		eax = ebx + 0x18c;
-		dw_496930[ebx] = read_mkf(mkf_data, eax, NULL, NULL);
+	for (int i = 0; i < 20; i++) {
+		dw_496930[i] = read_mkf(mkf_data, 396 + i, NULL, NULL);
 	}
 	fcn_00454176(0x48234a);
 	fcn_0040a4e1(0);
@@ -301,7 +279,7 @@ int load_checkpoint(int n)
 
 	fseek(fp, 4, SEEK_SET);
 	fread(&global_rich4_cfg.day, 4, 1, fp); // read day,month,year
-	fread(0x4991b8, 2, 1, fp);
+	fread(&game_map, 2, 1, fp);
 	fread(&game_stage, 2, 1, fp);
 	fread(&nplayers, 4, 1, fp);
 	fread(players, sizeof(player_info), 4, fp);
@@ -325,7 +303,7 @@ int load_checkpoint(int n)
 	/* 12 stocks */
 	fread(stocks, sizeof(stock_info), 12, fp);
 	for (int i = 0; i < 12; i++) {
-		int m = game_stage * 4 + w_4991b8;
+		int m = game_stage * 4 + game_map;
 		int idx = m * 12 + i;
 		stocks[i].name_ptr = game_stocks[idx].name_ptr;
 	}
