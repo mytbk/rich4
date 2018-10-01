@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include "global.h"
 #include "player_info.h"
-#include "mkf.h"
+#include "mkf/mkf.h"
 #include "stock.h"
 
 char *dw_47493c;
