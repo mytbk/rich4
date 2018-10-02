@@ -9,57 +9,50 @@
 
 struct graph_st st_46caec;
 
-void fcn_00455b3a(int a1, int a2, uint16_t *a3, struct graph_st *a4, int a5, int a6)
+int graph_overlay0(int width, int height, uint16_t *pix, struct graph_st *gtop, int xpos, int ypos)
 {
 	int ret = 1;
-	a5 -= (int16_t)a4->f4;
-	a6 -= (int16_t)a4->f6;
-	int t1, t2, t3, t4;
+	xpos -= gtop->x;
+	ypos -= gtop->y;
+	int startX, startY, width_to_cpy, height_to_cpy;
 
-	if (a5 < a1 && a5 + (uint16_t)a4->f0 > 0 && a6 < a2 && a6 + (uint16_t)a4->f2 > 0) {
-		t1 = 0;
-		t2 = 0;
-		t3 = (uint16_t)a4->f0;
-		t4 = (uint16_t)a4->f2;
+	if (xpos < width && xpos + gtop->width > 0
+			&& ypos < height && ypos + gtop->height > 0) {
+		startX = 0;
+		startY = 0;
+		width_to_cpy = gtop->width;
+		height_to_cpy = gtop->height;
 
-		if (a5 < 0) {
-			t1 -= a5;
-			t3 += a5;
-			a5 = 0;
-		} else {
-			int t = t3 + a5 - a1;
-			if (t > 0) {
-				t3 = a1 - a5;
-			}
+		if (xpos < 0) {
+			startX -= xpos;
+			width_to_cpy += xpos;
+			xpos = 0;
+		} else if (xpos + gtop->width > width) {
+			width_to_cpy = width - xpos;
 		}
 
-		if (a6 < 0) {
-			t2 -= a6;
-			t4 += a6;
-			a6 = 0;
-		} else {
-			int t = t4 + a6 - a2;
-			if (t > 0) {
-				t4 = a2 - a6;
-			}
+		if (ypos < 0) {
+			startY -= ypos;
+			height_to_cpy += ypos;
+			ypos = 0;
+		} else if (ypos + gtop->height > height) {
+			height_to_cpy = height - ypos;
 		}
-		uint16_t *esi = &a4->f8[a4->f0 * t2 + t1];
-		uint16_t *edi = &a3[a6 * a1 + a5];
-		size_t r1 = (a4->f0 - t3);
-		size_t r2 = (a1 - t3);
-		ret = t4;
+		uint16_t *src = &gtop->gdata[gtop->width * startY + startX];
+		uint16_t *dst = &pix[ypos * width + xpos];
 
-		if (t3 != 0) {
-			do {
-				memcpy(edi, esi, sizeof(uint16_t) * t3);
-				esi += t3 + r1;
-				edi += t3 + r2;
-				t4--;
-			} while (t4 != 0);
-			ret = 0;
+		if (width_to_cpy != 0) {
+			for (int i = 0; i < height_to_cpy; i++) {
+				memcpy(edi, esi, sizeof(uint16_t) * width_to_cpy);
+				src += gtop->width;
+				dst += width;
+			}
+			return 0;
+		} else {
+			return height_to_cpy;
 		}
 	}
-	return ret;
+	return 1;
 }
 
 /* put graph gtop on top of graph with pixels pix size width*height,
@@ -444,9 +437,9 @@ void move_animation(int obj, int x1, int y1, int x2, int y2, int T)
 	free(st0);
 }
 
-void fcn_4563f5(uint16_t *a0, struct graph_st *a1, int a2, int a3)
+int fcn_4563f5(uint16_t *a0, struct graph_st *a1, int a2, int a3)
 {
-	fcn_00455b3a(640, 480, a0, a1, a2, a3);
+	return graph_overlay0(640, 480, a0, a1, a2, a3);
 }
 
 /* overlay the graph a2 on top of a1,
