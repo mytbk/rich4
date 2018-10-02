@@ -348,7 +348,7 @@ void player_say(int p, int t, const char *s)
 	sub.WINMM.dll_timeGetTime_4f6(1000);
 
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-	fcn.0045643d(sfdesc1.lpSurface, edi, r0.left, r0.top, 0, 0, 440, 220);
+	overlay_fullwidth(sfdesc1.lpSurface, edi, r0.left, r0.top, 0, 0, 440, 220);
 	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 
 	IDirectDrawSurface_BltFast(pddrawsf1, r0.left, r0.top, pddrawsf2, &r0, DDBLTFAST_WAIT);

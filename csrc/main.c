@@ -140,7 +140,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			r0.right = r0.left + data1->chunk_tab[idx].width;
 			r0.bottom = r0.top + data1->chunk_tab[idx].height;
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-			fcn.0045643d(sfdesc1.lpSurface, &data1->chunk_tab[0],
+			overlay_fullwidth(sfdesc1.lpSurface, &data1->chunk_tab[0],
 					r0.left, r0.top, r0.left, r0.top,
 					r0.right - r0.left, r0.bottom - r0.top);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
