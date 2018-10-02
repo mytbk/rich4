@@ -29,7 +29,7 @@ int price_index;
 
 static struct spr_smp *data1; // 0x48a180
 
-LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+static LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (message < 0x1c) {
 		if (message == WM_DESTROY) {
@@ -93,7 +93,7 @@ LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 	}
 }
 
-LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	if (message >= 0x200) {
 		if (message == WM_MOUSEMOVE) {
@@ -210,7 +210,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 	return DefWindowProcA(hWnd, message, wParam, lParam);
 }
 
-int fcn_004029fd()
+static int ui_entry()
 {
 	data1 = (struct spr_smp*)read_mkf(mkf_data, 1, NULL, NULL);
 
@@ -295,8 +295,8 @@ case_401de8_0:
 	game_map = 0;
 	dw_4990f0 = 0;
 	b_46cafc = 0;
-	ret = fcn_004029fd();
-	// jump table: 401cc8 401d08 401d2b 401d18 401cbf
+	ret = ui_entry();
+
 L401cb3:
 	switch (ret) {
 		case 4:
@@ -323,7 +323,7 @@ switch_401cb8_case_1:
 			deinit_game();
 			DestroyWindow(gwindowHandle);
 			break;
-		default:
+		default: /* also case 2 */
 			break;
 	}
 
