@@ -123,7 +123,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 					break;
 				dw_48a184 = i;
 				IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-				fcn_456418(sfdesc1.lpSurface, data1 + 12 + edi, mpos[i].x, mpos[i].y);
+				fullscreen_overlay(sfdesc1.lpSurface, data1 + 12 + edi, mpos[i].x, mpos[i].y);
 				IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 				InvalidateRect(hWnd, &r0, FALSE);
 				fcn_4542ce(0x48231a, 0);

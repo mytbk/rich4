@@ -168,9 +168,11 @@ void graph_st_overlay(struct graph_st * a0, struct graph_st * a1, int xpos, int 
 	graph_overlay(a0->width, a0->height, a0->gdata, a1, xpos, ypos, 0);
 }
 
-void fcn_456418(uint16_t *a0, struct graph_st *a1, int a2, int a3)
+/* put graph a1 over fullscreen sized (640*480) pixel image a0
+ * and make a1 centered on (xpos, ypos) of graph a0 */
+void fullscreen_overlay(uint16_t *a0, struct graph_st *a1, int xpos, int ypos)
 {
-	graph_overlay(640, 480, a0, a1, a2, a3, 0);
+	graph_overlay(640, 480, a0, a1, xpos, ypos, 0);
 }
 
 void fcn_417191(int a0)
@@ -305,13 +307,13 @@ void player_say(int p, int t, const char *s)
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 	st_46caec.f8 = sfdesc1.lpSurface;
 	struct graph_st * edi = crop_graph(&st_46caec, NULL, 0, 40, 440, 220);
-	fcn_456418(sfdesc1.lpSurface, dw_48bad8+0x54, 220, 130);
+	fullscreen_overlay(sfdesc1.lpSurface, dw_48bad8+0x54, 220, 130);
 	ecx = dword [p * 0x34 + 0x498eb0];
 	edx = t + 1;
 	eax = edx * 12;
 	ecx += 12;
 	eax += ecx;
-	fcn_456418(sfdesc1.lpSurface, eax, 170, 130);
+	fullscreen_overlay(sfdesc1.lpSurface, eax, 170, 130);
 
 	if (s != NULL) {
 		if (s[0] == '#') {
@@ -324,7 +326,7 @@ void player_say(int p, int t, const char *s)
 			eax = (s2[1] - '0') * 10 + (s2[2] - '0');
 			edx = (eax - 1) * 12;
 			eax = dw_48bad4 + 12 + edx;
-			fcn_456418(sfdesc1.lpSurface, eax, 240, 130);
+			fullscreen_overlay(sfdesc1.lpSurface, eax, 240, 130);
 			if (esi == 5) {
 				eax = (s[1] - '0') * 1000 + (s[2] - '0') * 100 + (s[3] - '0') * 10 + (s[4] - '0');
 				fcn.0045441a(eax);
