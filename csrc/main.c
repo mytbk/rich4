@@ -257,6 +257,18 @@ void deinit_game()
 	}
 }
 
+static void start_game_loop(int a0)
+{
+	cb_top++;
+	windowCallbacks[cb_top] = some_game_loop_func;
+	PostMessageA(gwindowHandle, 0x401, 0, 0);
+
+	byte [current_player * 0x34 + 0x498ea0] |= 0x80;
+	if (a0 != 0) {
+		sub.WINMM.dll_mciSendStringA_d91(0);
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance,
 		HINSTANCE hPrevInstance,
 		LPSTR lpCmdLine,
@@ -311,13 +323,13 @@ L401cb3:
 			fcn_004291d6();
 			fcn_00415872();
 			b_46cafc = 1;
-			sub_PostMessageA_981(0);
+			start_game_loop(0);
 			break;
 		case 1:
 switch_401cb8_case_1:
 			fcn_004190cf();
 			b_46cafc = 1;
-			sub_PostMessageA_981(1);
+			start_game_loop(1);
 			break;
 		case 3:
 			deinit_game();
