@@ -162,9 +162,10 @@ int graph_overlay(uint32_t width, uint32_t height, uint16_t *pix, struct graph_s
 	return 0;
 }
 
-void fcn_4562a5(struct graph_st * a0, struct graph_st * a1, int a2, int a3)
+/* put graph a1 over a0 and make a1 centered on (xpos, ypos) of graph a0 */
+void graph_st_overlay(struct graph_st * a0, struct graph_st * a1, int xpos, int ypos)
 {
-	graph_overlay(a0->width, a0->height, a0->gdata, a1, a2, a3, 0);
+	graph_overlay(a0->width, a0->height, a0->gdata, a1, xpos, ypos, 0);
 }
 
 void fcn_456418(uint16_t *a0, struct graph_st *a1, int a2, int a3)
@@ -209,16 +210,16 @@ void fcn_417191(int a0)
 	edx = dw_48bdd4 + ebx;
 	edx = edx * 12 + dw_48be04 + 12;
 
-	fcn_4562a5(&st_46caec, edx, dw_475284, dw_475288);
+	graph_st_overlay(&st_46caec, edx, dw_475284, dw_475288);
 
 	eax = players[current_player].traffic_method & 3;
 	switch (eax) {
 		case 0:
 			eax = dw_475288 + 0x1a;
 			if (players[current_player].days_stopping == 0) {
-				fcn_4562a5(&st_46caec, dw_48be04+0x60, dw_475284+7, eax);
+				graph_st_overlay(&st_46caec, dw_48be04+0x60, dw_475284+7, eax);
 			} else {
-				fcn_4562a5(&st_46caec, dw_48be04+0x54, dw_475284+8, eax);
+				graph_st_overlay(&st_46caec, dw_48be04+0x54, dw_475284+8, eax);
 			}
 			break;
 		case 1:
@@ -228,11 +229,11 @@ void fcn_417191(int a0)
 					eax_1 = ebx * 19 + dw_475288 + 0x10;
 					edx = (ebx * 2 + 7) * 12;
 					eax_2 = dw_48be04 + 0xc + edx;
-					fcn_4562a5(&st_46caec, eax_2, dw_475284 + 7, eax_1);
+					graph_st_overlay(&st_46caec, eax_2, dw_475284 + 7, eax_1);
 				} else {
 					eax_1 = ebx*19 + dw_475288 + 0x10;
 					eax_2 = (ebx * 2 + 6) * 12 + dw_48be04 + 0xc;
-					fcn_4562a5(&st_46caec, eax_2, dw_475284 + 8, eax_1);
+					graph_st_overlay(&st_46caec, eax_2, dw_475284 + 8, eax_1);
 				}
 			}
 			break;
@@ -243,12 +244,12 @@ void fcn_417191(int a0)
 					a4 = ebx * 16 + dw_475288 + 9;
 					a3 = dw_475284 + 7;
 					a2 = (ebx * 2 + 7) * 12 + dw_48be04 + 0xc;
-					fcn_4562a5(&st_46caec, a2, a3, a4);
+					graph_st_overlay(&st_46caec, a2, a3, a4);
 				} else {
 					a4 = ebx * 16 + dw_475288 + 9;
 					a3 = dw_475284 + 8;
 					a2 = (ebx * 2 + 6) * 12 + dw_48be04 + 0xc;
-					fcn_4562a5(&st_46caec, a2, a3, a4);
+					graph_st_overlay(&st_46caec, a2, a3, a4);
 				}
 			}
 			break;

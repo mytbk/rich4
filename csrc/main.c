@@ -217,7 +217,7 @@ int fcn_004029fd()
 	data1 = (struct spr_smp*)read_mkf(mkf_data, 1, NULL, NULL);
 
 	for (int i = 0; i < 5; i++) {
-		fcn_4562a5(&data1->chunk_tab[0], &data1->chunk_tab[i * 2 + 1],
+		graph_st_overlay(&data1->chunk_tab[0], &data1->chunk_tab[i * 2 + 1],
 				mpos[i].x, mpos[i].y);
 	}
 

@@ -34,7 +34,7 @@ void fcn_447c6e(struct graph_st *a1, struct graph_st *a2, int player)
 		size_t idx = player * 15 + i;
 		if (tool_amount[idx] == 0)
 			continue;
-		fcn_4562a5(a1, ((void*)(a2->data)) + (i+2)*12, t - 16, k);
+		graph_st_overlay(a1, ((void*)(a2->data)) + (i+2)*12, t - 16, k);
 		sprintf(str, str_cross_sym, (int)tool_amount[idx]);
 		draw_some_text(a1, str, t + 34, k - 10, 1);
 		tab_48c548[j] = i + 1;
