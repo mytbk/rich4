@@ -99,18 +99,16 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		if (message == WM_MOUSEMOVE) {
 			int xPos = LOWORD(lParam);
 			int yPos = HIWORD(lParam);
-			int var_54 = dw_48a184;
+			int tmp = dw_48a184;
 			RECT r0; // @ esp + 0x40
 
 			int i;
 			for (i = 0; i < 5; i++) {
-				edi = (i * 2 + 2) * 12;
-				eax = data1;
-				ebx = i * 4;
-				r0.left = mpos[i].x - (s16)word [edi + eax + 0x10];
-				r0.top = mpos[i].y - (s16)word [edi + eax + 0x12];
-				r0.right = r0.left + (s16)word [edi + eax + 0xc];
-				r0.bottom = r0.top + (s16)word [edi + eax + 0xe];
+				int idx = i * 2 + 2;
+				r0.left = mpos[i].x - data1->chunk_tab[idx].x;
+				r0.top = mpos[i].y - data1->chunk_tab[idx].y;
+				r0.right = r0.left + data1->chunk_tab[idx].width;
+				r0.bottom = r0.top + data1->chunk_tab[idx].height;
 				if (xPos < r0.left)
 					continue;
 				if (yPos < r0.top)
@@ -123,7 +121,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 					break;
 				dw_48a184 = i;
 				IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-				fullscreen_overlay(sfdesc1.lpSurface, data1 + 12 + edi, mpos[i].x, mpos[i].y);
+				fullscreen_overlay(sfdesc1.lpSurface, &data1->chunk_tab[idx], mpos[i].x, mpos[i].y);
 				IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 				InvalidateRect(hWnd, &r0, FALSE);
 				fcn_4542ce(0x48231a, 0);
@@ -131,20 +129,20 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 			}
 			if (i == 5)
 				dw_48a184 = -1;
-			if (var_54 == dw_48a184)
+			if (tmp == dw_48a184)
 				return 0;
-			if (var_54 == -1)
+			if (tmp == -1)
 				return 0;
-			edx = data1;
-			eax = data1 + (var_54 * 2 + 2) * 12;
-			r0.left = mpos[var_54].x - (s16)word [eax + 0x10];
-			r0.top = mpos[var_54].y - (s16)word [eax + 0x12];
-			r0.right = r0.left + (s16)word [eax + 0xc];
-			r0.bottom = r0.top + (s16)word [eax + 0xe];
+
+			int idx = tmp * 2 + 2;
+			r0.left = mpos[tmp].x - data1->chunk_tab[idx].x;
+			r0.top = mpos[tmp].y - data1->chunk_tab[idx].y;
+			r0.right = r0.left + data1->chunk_tab[idx].width;
+			r0.bottom = r0.top + data1->chunk_tab[idx].height;
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-			int t1 = r0.bottom - r0.top;
-			int t0 = r0.right - r0.left;
-			fcn.0045643d(sfdesc1.lpSurface, data1+12, r0.left, r0.top, r0.left, r0.top, t0, t1);
+			fcn.0045643d(sfdesc1.lpSurface, &data1->chunk_tab[0],
+					r0.left, r0.top, r0.left, r0.top,
+					r0.right - r0.left, r0.bottom - r0.top);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 			InvalidateRect(hWnd, &r0, FALSE);
 			return 0;
@@ -163,7 +161,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 						break;
 					}
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-					fcn_4563f5(sfdesc1.lpSurface, data1 + 12, 0, 0);
+					fcn_4563f5(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 					fcn.00402460(1);
 					InvalidateRect(hWnd, NULL, FALSE);
@@ -174,7 +172,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 					options_ui(0);
 					sub.WINMM.dll_mciSendStringA_9cf(0);
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-					fcn_4563f5(sfdesc1.lpSurface, data1 + 12, 0, 0);
+					fcn_4563f5(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 					fcn.00402460(1);
 					return 0;
@@ -192,7 +190,7 @@ LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lP
 		if (message == 0x401) {
 			dw_48a184 = -1;
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-			fcn_4563f5(sfdesc1.lpSurface, data1 + 12, 0, 0);
+			fcn_4563f5(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 			InvalidateRect(hWnd, NULL, FALSE);
 			fcn.00402460(1);
