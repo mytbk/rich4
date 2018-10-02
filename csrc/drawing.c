@@ -448,3 +448,79 @@ void fcn_4563f5(uint16_t *a0, struct graph_st *a1, int a2, int a3)
 {
 	fcn_00455b3a(640, 480, a0, a1, a2, a3);
 }
+
+/* overlay the graph a2 on top of a1,
+ * a1 has width a0
+ * (xpos, ypos) is the center of a2 after putting on a1
+ * a2 has size width*height
+ */
+void graph_overlay2(int a0, uint16_t *a1, struct graph_st *a2,
+		int xpos, int ypos, int a2x, int a2y, int width, int height, int a9)
+{
+	/* let (xpos, ypos) be the left-top corner */
+	xpos -= a2->x;
+	ypos -= a2->y;
+	if ((a9 & 1) == 0) {
+		if (xpos >= 640 || xpos + width <= 0)
+			return;
+
+		if (xpos + width > 640) {
+			width = 640 - xpos;
+		} else if (xpos < 0) {
+			width += xpos;
+			a2x -= xpos;
+			xpos = 0;
+		}
+
+		if (ypos >= 480 || ypos + height <= 0)
+			return;
+
+		if (ypos + height > 480) {
+			height = 480 - ypos;
+		} else if (ypos < 0) {
+			height += ypos;
+			a2y -= ypos;
+			ypos = 0;
+		}
+	} else {
+		if (xpos >= dw_4861c0 || xpos + width <= dw_4861b8)
+			return;
+
+		if (xpos + width > dw_4861c0) {
+			width = dw_4861c0 - xpos;
+		} else if (xpos < dw_4861b8) {
+			width += xpos - dw_4861b8;
+			a2x += dw_4861b8 - xpos;
+			xpos = dw_4861b8;
+		}
+
+		if (ypos >= dw_4861c4 || ypos + height <= dw_4861bc)
+			return;
+
+		if (ypos + height > dw_4861c4) {
+			height = dw_4861c4 - ypos;
+		} else if (ypos < dw_4861bc) {
+			height += ypos - dw_4861bc;
+			a2y += dw_4861bc - ypos;
+			ypos = dw_4861bc;
+		}
+	}
+
+	uint16_t *src = &a2->gdata[a2->width * a2y + a2x];
+	uint16_t *dst = &a1[a0 * ypos + xpos];
+
+	if (width == 0)
+		return;
+
+	for (int i = 0; i < height; i++) {
+		memcpy(dst, src, width * 2);
+		src += a2->width;
+		dst += a0;
+	}
+}
+
+void overlay_fullwidth(uint16_t *a0, struct graph_st *a1,
+		int a2, int a3, int a4, int a5, int a6, int a7)
+{
+	graph_overlay2(640, a0, a1, a2, a3, a4, a5, a6, a7, 0);
+}
