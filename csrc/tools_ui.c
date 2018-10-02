@@ -150,13 +150,13 @@ void tools_ui()
 		ebx = 1;
 
 		IDirectDrawSurface_Lock(pddrawsf2, 0, &sfdesc1, 1, 0);
-		fcn_4563f5(sfdesc1.lpSurface, edi + 0x18, 0xe, 0x82);
+		overlay_fullscreen(sfdesc1.lpSurface, edi + 0x18, 0xe, 0x82);
 		IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 
 		esi = register_wait_callback(toolsProc, 0);
 
 		IDirectDrawSurface_Lock(pddrawsf2, 0, &sfdesc1, 1, 0);
-		fcn_4563f5(sfdesc1.lpSurface, dw_48c558, 0, 40);
+		overlay_fullscreen(sfdesc1.lpSurface, dw_48c558, 0, 40);
 		IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 
 		RECT r1 = { .left = 0, .top = 40, .right = 440, .bottom = 480 };

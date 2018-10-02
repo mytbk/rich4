@@ -437,7 +437,7 @@ void move_animation(int obj, int x1, int y1, int x2, int y2, int T)
 	free(st0);
 }
 
-int fcn_4563f5(uint16_t *a0, struct graph_st *a1, int a2, int a3)
+int overlay_fullscreen(uint16_t *a0, struct graph_st *a1, int a2, int a3)
 {
 	return graph_overlay0(640, 480, a0, a1, a2, a3);
 }

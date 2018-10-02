@@ -129,7 +129,7 @@ void cards_ui()
 			esi = 1;
 			fcn_00441b0a(0, edi, current_player);
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-			fcn_4563f5(sfdesc1.lpSurface, edi+12, 14, 130);
+			overlay_fullscreen(sfdesc1.lpSurface, edi+12, 14, 130);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 			int cardid = register_wait_callback(cardProc, 0);
 			fcn_00451edb(ebp, 0, 0x8028);
