@@ -255,3 +255,12 @@ void draw_some_text(a1, const char *str, int a3, int a4, int a5)
 	fcn.004561be(0x4762e8, fmt_dim1.left, fmt_dim1.top, width, height, 0);
 	IDirectDrawSurface_Unlock(NULL);
 }
+
+void deinit_font()
+{
+	if (gFont != NULL)
+		DeleteObject(gFont);
+
+	if (pddrawsf3 != NULL)
+		IDirectDrawSurface_Release(pddrawsf3);
+}

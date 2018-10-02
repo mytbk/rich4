@@ -33,7 +33,7 @@ LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 {
 	if (message < 0x1c) {
 		if (message == WM_DESTROY) {
-			sub_UnhookWindowsHookEx_815();
+			deinit_game();
 			PostQuitMessage(0);
 			return 0;
 		}
@@ -228,6 +228,35 @@ int fcn_004029fd()
 	return ebx;
 }
 
+void deinit_game()
+{
+	if (mid_status[5] == 0) {
+		sub.WINMM.dll_timeGetTime_3c4();
+		free(dw_474938);
+		sub.WINMM.dll_timeKillEvent_1b2();
+		sub.WINMM.dll_mciSendStringA_8ef();
+		unload_mkf(mkf_effect);
+		unload_mkf(mkf_panel);
+		unload_mkf(mkf_speaking);
+		unload_mkf(mkf_data);
+		sub.USER32.dll_KillTimer_228();
+		deinit_font();
+		UnhookWindowsHookEx(&ghook);
+		fcn.00454240(0x48231a);
+		fcn.00453d28();
+		if (pddrawsf2 != NULL) {
+			IDirectDrawSurface_Release(pddrawsf2);
+		}
+		if (pddrawsf1 != NULL) {
+			IDirectDrawSurface_Release(pddrawsf1);
+		}
+		if (pddraw != NULL) {
+			IDirectDraw_Release(pddraw);
+		}
+		mid_status[5] = 1;
+	}
+}
+
 int WINAPI WinMain(HINSTANCE hInstance,
 		HINSTANCE hPrevInstance,
 		LPSTR lpCmdLine,
@@ -291,7 +320,7 @@ switch_401cb8_case_1:
 			sub_PostMessageA_981(1);
 			break;
 		case 3:
-			sub_UnhookWindowsHookEx_815();
+			deinit_game();
 			DestroyWindow(gwindowHandle);
 			break;
 		default:
@@ -355,7 +384,7 @@ loop_end:
 	if (b_46caf9 == 0)
 		goto start_msg_loop;
 	fcn_00451b36();
-	sub_UnhookWindowsHookEx_815();
+	deinit_game();
 	DestroyWindow(gwindowHandle);
 	goto start_msg_loop;
 }
