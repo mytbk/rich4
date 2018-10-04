@@ -679,7 +679,7 @@ bool initialize()
 	ghook = SetWindowsHookExA(WH_KEYBOARD, kbdProc, ghInstance, 0);
 	init_data_and_timer();
 	mciSendStringA_5ba(); /* 0x4545ba */
-	fcn_004021f8(0x29, 1, 0);
+	set_cursor_icon(41, 1, 0);
 	b_46caf8 = 0;
 	b_46caf9 = 0;
 	b_46cafd = 0;

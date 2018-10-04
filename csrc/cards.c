@@ -1265,9 +1265,9 @@ int red_card()
 		consume_a_card(current_player, 24);
 		return 1;
 	} else {
-		fcn.004021f8(12, 15, 10);
+		set_cursor_icon(12, 15, 10);
 		int selected_stock = stock_ui(1);
-		fcn.004021f8(41, 1, 0);
+		set_cursor_icon(41, 1, 0);
 		player_action_1(1);
 		if (selected_stock == 0)
 			return 0;
@@ -1292,9 +1292,9 @@ int black_card()
 		t[i] = stocks[i].f20;
 
 	if (players[current_player].who_plays == 1) {
-		fcn.004021f8(12, 15, 10);
+		set_cursor_icon(12, 15, 10);
 		sel = stock_ui(2);
-		fcn.004021f8(41, 1, 0);
+		set_cursor_icon(41, 1, 0);
 		player_action_1(1);
 	} else {
 		sel = fcn.0041e6f2(0);

@@ -4,10 +4,13 @@
  */
 
 #include <windows.h>
+#include "mkf/mkf.h"
 
-void fcn_004021f8(int a1, int a2, int a3)
+struct graph_st *current_cursors; // 0x48a0f4
+
+void set_cursor_icon(int data0_idx, int a2, int a3)
 {
-	dw_48a0f4 = &data0->chunk_tab[a1];
+	current_cursors = &data0->chunk_tab[data0_idx];
 	w_48a170 = a2;
 	w_48a174 = a3;
 	w_48a172 = w_48a176 = 0;
@@ -46,7 +49,7 @@ void GetCursorPos_35d(RECT *rect)
 
 	GetCursorPos(&p);
 	if (rect != NULL) {
-		eax = w_48a172 * 12 + dw_48a0f4;
+		eax = &current_cursors[w_48a172];
 		edx = *(int16_t*)(eax + 4); /* sign extend */
 		edx = p.x - edx;
 		eax = *(int16_t*)(eax + 6);
@@ -93,7 +96,7 @@ void GetCursorPos_250(RECT *rect)
 
 	GetCursorPos(&p);
 	if (rect != NULL) {
-		eax = w_48a172 * 12 + dw_48a0f4;
+		eax = &current_cursors[w_48a172];
 		edx = *(int16_t*)(eax + 4); /* sign extend */
 		edx = p.x - edx;
 		eax = *(int16_t*)(eax + 6);
