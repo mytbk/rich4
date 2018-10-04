@@ -104,7 +104,7 @@ void CALLBACK *timeProc(
 		IDirectDraw_WaitForVerticalBlank(pddraw, 1, NULL);
 	}
 	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc2, 1, NULL);
-	st_46cb14.f8 = dw_48a11c;
+	st_46cb14.gdata = sfdesc2.lpSurface;
 	fcn_00401f5e();
 	fcn_00401e59(p.x, p.y);
 	IDirectDrawSurface_Unlock(pddrawsf1, NULL);

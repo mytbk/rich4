@@ -49,11 +49,9 @@ void GetCursorPos_35d(RECT *rect)
 
 	GetCursorPos(&p);
 	if (rect != NULL) {
-		eax = &current_cursors[w_48a172];
-		edx = *(int16_t*)(eax + 4); /* sign extend */
-		edx = p.x - edx;
-		eax = *(int16_t*)(eax + 6);
-		eax = p.y - eax;
+		struct graph_st *csor = &current_cursors[w_48a172];
+		edx = p.x - csor->x;
+		eax = p.y - csor->y;
 		ecx = edx + 0x20;
 		esi = eax + 0x20;
 		if (edx >= rect->right || ecx <= rect->left || eax >= rect->bottom || esi <= rect->top) {
@@ -73,7 +71,7 @@ void GetCursorPos_35d(RECT *rect)
 	}
 	b_48a17a = 1;
 	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc2, 1, 0);
-	st_46cb14.f8 = dw_48a11c;
+	st_46cb14.gdata = sfdesc2.lpSurface;
 	fcn_00401f5e();
 	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
 	b_48a17a = 0;
@@ -96,11 +94,9 @@ void GetCursorPos_250(RECT *rect)
 
 	GetCursorPos(&p);
 	if (rect != NULL) {
-		eax = &current_cursors[w_48a172];
-		edx = *(int16_t*)(eax + 4); /* sign extend */
-		edx = p.x - edx;
-		eax = *(int16_t*)(eax + 6);
-		eax = p.y - eax;
+		struct graph_st *csor = &current_cursors[w_48a172];
+		edx = p.x - csor->x;
+		eax = p.y - csor->y;
 		ecx = edx + 0x20;
 		esi = eax + 0x20;
 		if (edx >= rect->right || ecx <= rect->left || eax >= rect->bottom || esi <= rect->top) {
@@ -120,7 +116,7 @@ void GetCursorPos_250(RECT *rect)
 	}
 	b_48a17a = 1;
 	IDirectDrawSurface_Lock(pddrawsf1, NULL, &sfdesc2, 1, 0);
-	st_46cb14.f8 = dw_48a11c;
+	st_46cb14.gdata = sfdesc2.lpSurface;
 	fcn_00401e59(p.x, p.y);
 	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
 	b_48a17a = 0;
