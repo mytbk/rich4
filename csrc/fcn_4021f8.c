@@ -7,7 +7,7 @@
 
 void fcn_004021f8(int a1, int a2, int a3)
 {
-	dw_48a0f4 = dw_46cb10 + 12 + a1 * 12;
+	dw_48a0f4 = &data0->chunk_tab[a1];
 	w_48a170 = a2;
 	w_48a174 = a3;
 	w_48a172 = w_48a176 = 0;

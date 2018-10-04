@@ -8,6 +8,7 @@
 #include "player_info.h"
 #include "sound_struct.h"
 #include "window_util.h"
+#include "mkf/mkf.h"
 
 DDSURFACEDESC sfdesc1; // 0x0048a068
 DDSURFACEDESC sfdesc2; // 0x0048a0f8
@@ -36,6 +37,7 @@ int32_t dw_48a164, dw_48a168;
 MMRESULT gTimerEvent; // 0x48a16c
 
 uint16_t modded_key; // 0x46cb07
+struct spr_smp *data0; // 0x46cb10
 struct graph_st st_46cb14 = {640, 480, 0, 0, NULL}; // 0x46cb14, 12 bytes
 uint8_t speed_tab[3] = {6, 4, 2}; // 0x64cb20
 uint32_t dw_46cb23 = 0;
@@ -609,11 +611,11 @@ void load_sound_from_mkf(int32_t *a1)
 
 void init_data_and_timer()
 {
-	if (dw_46cb10 != 0)
+	if (data0 != NULL)
 		return;
 
 	/* edx = 0 */
-	dw_46cb10 = read_mkf(mkf_data, 0, NULL, NULL);
+	data0 = read_mkf(mkf_data, 0, NULL, NULL);
 	dw_48a0e8 = allocate_graph_st(32, 32, 0, 0);
 	b_48a179 = b_48a17a = b_48a178 = 0;
 	dw_48a168 = -1;
@@ -624,6 +626,18 @@ void init_data_and_timer()
 	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
 	gTimerEvent = timeSetEvent(20 /* uDelay */, 5 /* uResolution */, timeProc /* TODO @ 0x401f98 */,
 			0 /* dwUser */, 1 /* fuEvent */);
+}
+
+void deinit_data_and_timer()
+{
+	if (data0 == NULL)
+		return;
+
+	b_48a179 = 0;
+	free(data0);
+	free(dw_48a0e8);
+	timeKillEvent(gTimerEvent);
+	ShowCursor(1);
 }
 
 bool initialize()

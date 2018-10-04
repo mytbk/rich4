@@ -233,7 +233,7 @@ void deinit_game()
 	if (mid_status[5] == 0) {
 		sub.WINMM.dll_timeGetTime_3c4();
 		free(dw_474938);
-		sub.WINMM.dll_timeKillEvent_1b2();
+		deinit_data_and_timer();
 		sub.WINMM.dll_mciSendStringA_8ef();
 		unload_mkf(mkf_effect);
 		unload_mkf(mkf_panel);
