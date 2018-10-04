@@ -551,7 +551,7 @@ void direct_sound_init(int a0)
 	return 1;
 }
 
-void fcn_0044f935()
+static void create_font_surface()
 {
 	sfdesc1.dwFlags = 7;
 	sfdesc1.ddsCaps = 0x840;
@@ -564,7 +564,7 @@ void fcn_0044f935()
 	IDirectDrawSurface_Unlock(pddrawsf3, NULL);
 }
 
-void fcn_0045175d()
+void set_pixel_fmt()
 {
 	DDPIXELFORMAT fmt;
 	fmt.dwSize = 0x20;
@@ -654,8 +654,8 @@ bool initialize()
 	sfdesc1.dwHeight = 480;
 	IDirectDraw_CreateSurface(pddraw, &sfdesc1, &pddrawsf2, NULL);
 	srand(GetTicketCount());
-	fcn_0044f935();
-	fcn_0045175d();
+	create_font_surface();
+	set_pixel_fmt();
 	mkf_data = load_mkf("data.mkf");
 	mkf_speaking = load_mkf("speaking.mkf");
 	mkf_panel = load_mkf("panel.mkf");
