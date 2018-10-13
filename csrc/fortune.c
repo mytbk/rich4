@@ -184,3 +184,47 @@ void fortune_events(void)
 	sub.WINMM.dll_timeGetTime_8b9(800);
 	free(dw_48c5e0);
 }
+
+/* all the fortunes */
+
+void break_down_a_house(int a0)
+{
+	static const char *str_break_down_a_house =
+		"#0185\xb1j\xa8\xee\xa9\xee\xb0\xa3\xa9\xd0\xab\xce\xa4@\xb4\xc9";
+	short arr[512];
+
+	if (a0 == 0) {
+		ebx = 0;
+		for (int i = 1; i <= dw_498e98; i++) {
+			edx = i * 0x34 + dw_498e84;
+			ecx = byte [edx + 0x19];
+			esi = current_player + 1;
+			if (ecx == esi && byte [edx + 0x1a] != 0) {
+				arr[ebx] = i;
+				ebx++;
+			}
+		}
+		edx = rand() % ebx;
+		eax = arr[edx];
+		dw_48c5b0 = eax;
+		draw_some_text(dw_48c5e0 + 0x18, str_break_down_a_house, 24, 330, 0);
+		graph_st_overlay(dw_48c5e0 + 0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
+	} else {
+		ebx = dw_48c5b0 * 0x34 + dw_498e84;
+		player_action_2(word [ebx], word [ebx+2], 2);
+		fcn.00409b18(1);
+		fcn.00456c0a(dw_474938, 0x2f440, dw_48c5b0 + 0x7d0, 0xffff);
+		add_money_to_player(current_player, byte [ebx + 0x1a] * word [ebx + 0x1e], 1);
+		byte [ebx + 0x1a] = 0;
+		byte [ebx + 0x18] = 0;
+		fcn.00451985();
+		player_action_2(0, 0, 1);
+		sub.WINMM.dll_timeGetTime_8b9(300);
+		edx = players[current_player].character;
+		eax = edx * 12;
+		ebx = eax * 9;
+		eax = rand() & 1;
+		edx = dword [ebx + eax*4 + 0x480856];
+		player_say(current_player, 2, edx);
+	}
+}
