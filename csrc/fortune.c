@@ -1,9 +1,13 @@
+#include "land.h"
+
+struct housing_land *hlands; // @0x498e84
+
 int fcn.0044bb4b(int *v)
 {
 	switch (*v) {
 		case 0:
 			ebx = 1;
-			eax = dw_498e84 + 0x34;
+			eax = &hlands[1];
 			ebp = dw_498e98;
 			while (ebx <= ebp) {
 				esi = byte [eax + 0x19];
@@ -18,7 +22,7 @@ int fcn.0044bb4b(int *v)
 			return 0;
 		case 1:
 			ebx = 1;
-			eax = dw_498e84 + 0x34;
+			eax = &hlands[1];
 
 			while (ebx <= dw_498e98) {
 				edx = byte [eax + 0x19];
@@ -187,6 +191,18 @@ void fortune_events(void)
 
 /* all the fortunes */
 
+static
+void land_house_lost()
+{
+	fcn.00451985();
+	player_action_2(0, 0, 1);
+	sub.WINMM.dll_timeGetTime_8b9(300);
+	int c = players[current_player].character;
+	eax = rand() & 1;
+	edx = dword [c * 108 + eax*4 + 0x480856];
+	player_say(current_player, 2, edx);
+}
+
 void break_down_a_house(int a0)
 {
 	static const char *str_break_down_a_house =
@@ -194,37 +210,59 @@ void break_down_a_house(int a0)
 	short arr[512];
 
 	if (a0 == 0) {
-		ebx = 0;
+		int count = 0;
 		for (int i = 1; i <= dw_498e98; i++) {
-			edx = i * 0x34 + dw_498e84;
-			ecx = byte [edx + 0x19];
-			esi = current_player + 1;
-			if (ecx == esi && byte [edx + 0x1a] != 0) {
-				arr[ebx] = i;
-				ebx++;
+			struct housing_land *lnd = &hlands[i];
+			if (lnd->owner == current_player+1 && lnd->level != 0) {
+				arr[count] = i;
+				count++;
 			}
 		}
-		edx = rand() % ebx;
+		edx = rand() % count;
 		eax = arr[edx];
 		dw_48c5b0 = eax;
 		draw_some_text(dw_48c5e0 + 0x18, str_break_down_a_house, 24, 330, 0);
 		graph_st_overlay(dw_48c5e0 + 0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
 	} else {
-		ebx = dw_48c5b0 * 0x34 + dw_498e84;
-		player_action_2(word [ebx], word [ebx+2], 2);
+		struct housing_land *lnd = &hlands[dw_48c5b0];
+		player_action_2(lnd->x, lnd->y, 2);
 		fcn.00409b18(1);
 		fcn.00456c0a(dw_474938, 0x2f440, dw_48c5b0 + 0x7d0, 0xffff);
-		add_money_to_player(current_player, byte [ebx + 0x1a] * word [ebx + 0x1e], 1);
-		byte [ebx + 0x1a] = 0;
-		byte [ebx + 0x18] = 0;
-		fcn.00451985();
-		player_action_2(0, 0, 1);
-		sub.WINMM.dll_timeGetTime_8b9(300);
-		edx = players[current_player].character;
-		eax = edx * 12;
-		ebx = eax * 9;
-		eax = rand() & 1;
-		edx = dword [ebx + eax*4 + 0x480856];
-		player_say(current_player, 2, edx);
+		add_money_to_player(current_player, lnd->level * lnd->house_price, 1);
+		lnd->level = 0;
+		lnd->type = 0;
+		land_house_lost();
+	}
+}
+
+void remove_a_land(int a0)
+{
+	short arr[512];
+	const char *str_remove_a_land = "#0186\xb1j\xa8\xee\xbcx\xa6\xac\xa4g\xa6\x61\xa4@\xb3\x42";
+
+	if (a0 == 0) {
+		int count = 0;
+		for (int i = 1; i <= dw_498e98; i++) {
+			struct housing_land *lnd = &hlands[i];
+			if (lnd->owner == current_player+1 && lnd->level == 0) {
+				arr[count] = i;
+				count++;
+			}
+		}
+		edx = rand() % count;
+		eax = arr[edx];
+		dw_48c5b0 = eax;
+		draw_some_text(dw_48c5e0+0x18, str_remove_a_land, 24, 330, 0);
+		graph_st_overlay(dw_48c5e0+0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
+	} else {
+		struct housing_land *lnd = &hlands[dw_48c5b0];
+		player_action_2(lnd->x, lnd->y, 2);
+		fcn.00409b18(1);
+		fcn.00456c0a(dw_474938, 0x2f440, dw_48c5b0+0x7d0, 0xffff);
+		add_money_to_player(current_player, lnd->land_price, 1);
+		lnd->owner = 0;
+		lnd->flast = 0;
+		fcn.0040a4e1(0);
+		land_house_lost();
 	}
 }
