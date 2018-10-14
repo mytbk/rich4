@@ -108,7 +108,7 @@ void fcn_00407ad2()
 
 	if (dw_47493c == 0) {
 		int mkf_map_dat = load_mkf("MAPDAT.MKF");
-		if (eax != -1) {
+		if (mkf_map_dat != -1) {
 			dw_47493c = read_mkf(mkf_map_dat, gmap, NULL, NULL);
 			unload_mkf(mkf_map_dat);
 		} else {
