@@ -2,6 +2,9 @@
 
 struct housing_land *hlands; // @0x498e84
 
+typedef void (*fortune_call(int));
+fortune_call fortune_call_table[];
+
 int fcn.0044bb4b(int *v)
 {
 	switch (*v) {
@@ -311,3 +314,54 @@ void bank_reject_a_month(int a0)
 		}
 	}
 }
+
+fortune_call fortune_call_table[] = {
+	break_down_a_house,
+	remove_a_land,
+	fake_loan,
+	bank_reject_a_month,
+	invade_bank_computer,
+	get_one_card_from_each_player,
+	travel_abroad,
+	kidnapped_by_alien,
+	lose_stock,
+	sell_all_the_stock,
+	moto_stolen,
+	car_destroyed,
+	drowned_to_hospital,
+	fall_off_moto,
+	fined_when_crossing_road,
+	fcn.0044cf1e, fcn.0044d06d,
+	invite_others_meal,
+	fined_for_throwing_trash,
+	fined_for_your_dog,
+	pick_money_on_road,
+	pick_money_on_road2,
+	pick_money_on_road3,
+	lose_wallet,
+	lose_wallet2,
+	get_heritage,
+	scammed_money,
+	win_lottery,
+	win_lottery2,
+	win_lottery3,
+	pay_assurance,
+	get_assurance,
+	sell_all_cards_and_tools,
+	goto_prison_for_drunk,
+	goto_prison_for_taste,
+	goto_prison_for_drug,
+	goto_prison_for_drug2,
+	goto_prison_for_drunk2,
+	goto_prison_for_parade,
+	goto_prison_for_catching_animal,
+	goto_prison_for_selling_treasure,
+	goto_prison_for_seducing,
+	goto_prison_for_taste2,
+	goto_prison_for_drug3,
+	goto_prison_for_poisoning,
+	goto_prison_for_guns,
+	goto_prison_for_hitting_police,
+	goto_prison_for_catching_animal2,
+	goto_prison_for_selling_secret
+};
