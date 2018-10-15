@@ -266,3 +266,48 @@ void remove_a_land(int a0)
 		land_house_lost();
 	}
 }
+
+void fake_loan(int a0)
+{
+	static const char *str_fake_loan = "#0187\xa4H\xc0Y\xb3Q\xb5s\xa5\xce\xab_\xb6U%d\xa4\xb8";
+	char buf[128];
+	if (a0 == 0) {
+		dw_48c5b4 = eax = price_index * 10000;
+		sprintf(buf, str_fake_loan, eax);
+		draw_some_text(dw_48c5e0+0x18, buf, 24, 330, 0);
+		graph_st_overlay(dw_48c5e0+0x18, dword [current_player * 0x34 + 0x498eb0]+0x30, 390, 344);
+	} else {
+		dw_48c5b0 = eax = fcn.0044b896(0, 1);
+		if (eax == 1) {
+			player_action_2(0, 0, 3);
+			fcn.00440cac(0x48c5b8, 1500);
+			return;
+		}
+		if (eax == 2) {
+			player_action_2(0, 0, 3);
+			fcn.00440cac(0x48c5b8, 1500);
+			dw_48c5b4 *= 2;
+		}
+		players[current_player].loan = dw_48c5b4;
+		fcn.00433b7e(current_player);
+		fcn.0044ba63(current_player, dw_48c5b4, 0);
+	}
+}
+
+void bank_reject_a_month(int a0)
+{
+	static const char *str_bank_reject = "#0188\xa4\xe4\xb2\xbc\xb8\xf5\xb2\xbc\n"
+		"\xbb\xc8\xa6\xe6\xa9\xda\xb5\xb4\xa9\xb9\xa8\xd3\xa4@\xad\xd3\xa4\xeb";
+	if (a0 == 0) {
+		draw_some_text(dw_48c5e0+0x18, str_bank_reject, 24, 330, 0);
+		graph_st_overlay(dw_48c5e0+0x18, dword [current_player * 0x34 + 0x498eb0]+0x30, 390, 344);
+	} else {
+		dw_48c5b0 = eax = fcn.0044b896(0, 1);
+		if (eax == 1) {
+			player_action_2(0, 0, 3);
+			fcn.00440cac(0x48c5b8, 1500);
+		} else {
+			players[current_player].days_rejected_by_bank = 30;
+		}
+	}
+}
