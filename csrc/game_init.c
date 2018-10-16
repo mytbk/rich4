@@ -210,7 +210,7 @@ int init_new_game(int a0)
 
 		dw_49907c = trunc(sum * 10.0);
 		memset(0x4967e0, 0, 336);
-		memset(0x4971a0, 0, 384);
+		memset(player_stocks, 0, 384);
 		memset(0x4990b8, 0, 36);
 		dw_499080 = ebp = 0;
 		fcn.00448b81();

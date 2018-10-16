@@ -18,3 +18,11 @@ typedef struct
 
 extern stock_info stocks[]; /* 0x496980 */
 extern stock_info game_stocks[]; /* 0x47f072 */
+
+typedef struct
+{
+	int amount;
+	int _;
+} player_stock_info;
+
+extern player_stock_info player_stocks[]; // 0x4971a0

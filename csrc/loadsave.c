@@ -298,7 +298,7 @@ int load_checkpoint(int n)
 	fread(0x497320, 1, 8, fp);
 	fread(0x499100, 4, 1, fp);
 	fread(0x497328, 4, 0x6c0, fp);
-	fread(0x4971a0, 8, 0x30, fp);
+	fread(player_stocks, sizeof(player_stock_info), 48, fp);
 
 	/* 12 stocks */
 	fread(stocks, sizeof(stock_info), 12, fp);
