@@ -314,6 +314,31 @@ void bank_reject_a_month(int a0)
 	}
 }
 
+void invade_bank_computer(int a0)
+{
+	static const char *str_invade = "#0189\xabI\xa4J\xbb\xc8\xa6\xe6\xb9q\xb8\xa3\n"
+		"\xae\xbf\xa5\xce\xa8\xe4\xa5L\xa4H\xa6s\xb4\xda%d\xa2H";
+
+	char buf[128];
+
+	if (a0 == 0) {
+		dw_48c5b0 = 10;
+		sprintf(buf, str_invade, 10);
+		draw_some_text(fortune_panel + 0x18, buf, 24, 330, 0);
+		graph_st_overlay(fortune_panel + 0x18, [current_player * 0x34 + 0x498eb0] + 0x18, 390, 344);
+	} else {
+		float t1 = dw_48c5b0 / 100.0;
+		for (int i = 0; i < nplayers; i++) {
+			if (i != current_player
+					&& players[i].who_plays != 0
+					&& players[i].money_in_bank != 0) {
+				int t2 = trunc(players[i].money_in_bank * t1);
+				fcn.0041d2c6(i, current_player, t2, 4);
+			}
+		}
+	}
+}
+
 void sell_all_the_stock(int a0)
 {
 	static const char *str_sell = "#0194\xc5\xdc\xbd\xe6\xa9\xd2\xa6\xb3\xaa\xd1\xb2\xbc\xa8\x44\xb2{";
