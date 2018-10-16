@@ -1,9 +1,19 @@
 #include "land.h"
+#include "mkf/mkf.h"
 
 struct housing_land *hlands; // @0x498e84
 
 typedef void (*fortune_call(int));
 fortune_call fortune_call_table[];
+
+const uint16_t fortune_data_idx[48] = {
+  0x01dd, 0x01de, 0x01df, 0x01e0, 0x01e1, 0x01e2, 0x01e3, 0x01e4,
+  0x01e5, 0x01e6, 0x01e7, 0x01e8, 0x01e9, 0x01ea, 0x01eb, 0x01ec,
+  0x01ed, 0x01ee, 0x01ef, 0x01f0, 0x01f1, 0x01f1, 0x01f1, 0x01f2,
+  0x01f2, 0x01f3, 0x01f4, 0x01f5, 0x01f5, 0x01f5, 0x01f6, 0x01f7,
+  0x01f8, 0x01f9, 0x01fa, 0x01fb, 0x01fc, 0x01f9, 0x01fd, 0x01fe,
+  0x01ff, 0x0200, 0x01fa, 0x01fb, 0x0201, 0x0202, 0x0203, 0x01fe
+};
 
 int fcn.0044bb4b(int *v)
 {
@@ -136,14 +146,16 @@ int fcn.0044bb4b(int *v)
 	}
 }
 
+static void *fortune_panel; // @ 0x48c5e0
+
 void fortune_events(void)
 {
 	uint32_t edi;
 	RECT r0;
 	int t;
 
-	dw_48c5e0 = read_mkf(mkf_panel, 66, NULL, NULL);
-	ebx = allocate_graph_st(388, 251, 0, 0);
+	fortune_panel = read_mkf(mkf_panel, 66, NULL, NULL);
+	struct graph_st *fgraph = allocate_graph_st(388, 251, 0, 0);
 
 	do {
 		esi = dw_4990b4;
@@ -151,20 +163,16 @@ void fortune_events(void)
 		esi = edi = fcn.0044bb4b(&t);
 		create_some_font(28, 0xf0f0f0, 0x101010, 3, 0);
 		if (esi == 1) {
-			ebp = t;
-			eax = ebp * 2;
-			if (ebp < 33) {
-				read_mkf(mkf_data, word [eax + 0x475fb4], dword [ebx + 8], NULL);
-				fcn_00456280(dword [0x48c5e0] + 0x18, ebx, 25, 44);
-				eax = t;
-				fortune_call_table[eax](0);
+			if (t < 33) {
+				read_mkf(mkf_data, fortune_data_idx[t], fgraph->gdata, NULL);
+				fcn_00456280(fortune_panel + 0x18, fgraph, 25, 44);
+				fortune_call_table[t](0);
 			} else {
-				read_mkf(mkf_data, word [eax + game_map*8 + 0x475fb4], dword [ebx + 8], NULL);
-				fcn_00456280(dw_48c5e0 + 0x18, ebx, 25, 44);
-				eax = t;
-				fortune_call_table[game_map * 4 + eax](0);
+				read_mkf(mkf_data, fortune_data_idx[game_map * 4 + t], fgraph->gdata, NULL);
+				fcn_00456280(fortune_panel + 0x18, fgraph, 25, 44);
+				fortune_call_table[game_map * 4 + t](0);
 			}
-			free(ebx);
+			free(fgraph);
 		}
 		dw_4990b4++;
 		esi = dw_4990b4;
@@ -174,7 +182,7 @@ void fortune_events(void)
 	} while (edi == 0);
 
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-	overlay_fullscreen(sfdesc1.lpSurface, dw_48c5e0+0x18, 0, 0);
+	overlay_fullscreen(sfdesc1.lpSurface, fortune_panel+0x18, 0, 0);
 	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 	r0.left = 0;
 	r0.top = 0;
@@ -189,7 +197,7 @@ void fortune_events(void)
 		fortune_call_table[game_map * 4 + ebp](1);
 	}
 	sub.WINMM.dll_timeGetTime_8b9(800);
-	free(dw_48c5e0);
+	free(fortune_panel);
 }
 
 /* all the fortunes */
@@ -224,8 +232,8 @@ void break_down_a_house(int a0)
 		edx = rand() % count;
 		eax = arr[edx];
 		dw_48c5b0 = eax;
-		draw_some_text(dw_48c5e0 + 0x18, str_break_down_a_house, 24, 330, 0);
-		graph_st_overlay(dw_48c5e0 + 0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
+		draw_some_text(fortune_panel + 0x18, str_break_down_a_house, 24, 330, 0);
+		graph_st_overlay(fortune_panel + 0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
 	} else {
 		struct housing_land *lnd = &hlands[dw_48c5b0];
 		player_action_2(lnd->x, lnd->y, 2);
@@ -255,8 +263,8 @@ void remove_a_land(int a0)
 		edx = rand() % count;
 		eax = arr[edx];
 		dw_48c5b0 = eax;
-		draw_some_text(dw_48c5e0+0x18, str_remove_a_land, 24, 330, 0);
-		graph_st_overlay(dw_48c5e0+0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
+		draw_some_text(fortune_panel+0x18, str_remove_a_land, 24, 330, 0);
+		graph_st_overlay(fortune_panel+0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
 	} else {
 		struct housing_land *lnd = &hlands[dw_48c5b0];
 		player_action_2(lnd->x, lnd->y, 2);
@@ -277,8 +285,8 @@ void fake_loan(int a0)
 	if (a0 == 0) {
 		dw_48c5b4 = eax = price_index * 10000;
 		sprintf(buf, str_fake_loan, eax);
-		draw_some_text(dw_48c5e0+0x18, buf, 24, 330, 0);
-		graph_st_overlay(dw_48c5e0+0x18, dword [current_player * 0x34 + 0x498eb0]+0x30, 390, 344);
+		draw_some_text(fortune_panel+0x18, buf, 24, 330, 0);
+		graph_st_overlay(fortune_panel+0x18, dword [current_player * 0x34 + 0x498eb0]+0x30, 390, 344);
 	} else {
 		dw_48c5b0 = eax = fcn.0044b896(0, 1);
 		if (eax == 1) {
@@ -302,8 +310,8 @@ void bank_reject_a_month(int a0)
 	static const char *str_bank_reject = "#0188\xa4\xe4\xb2\xbc\xb8\xf5\xb2\xbc\n"
 		"\xbb\xc8\xa6\xe6\xa9\xda\xb5\xb4\xa9\xb9\xa8\xd3\xa4@\xad\xd3\xa4\xeb";
 	if (a0 == 0) {
-		draw_some_text(dw_48c5e0+0x18, str_bank_reject, 24, 330, 0);
-		graph_st_overlay(dw_48c5e0+0x18, dword [current_player * 0x34 + 0x498eb0]+0x30, 390, 344);
+		draw_some_text(fortune_panel+0x18, str_bank_reject, 24, 330, 0);
+		graph_st_overlay(fortune_panel+0x18, dword [current_player * 0x34 + 0x498eb0]+0x30, 390, 344);
 	} else {
 		dw_48c5b0 = eax = fcn.0044b896(0, 1);
 		if (eax == 1) {
