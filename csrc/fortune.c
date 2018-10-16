@@ -1,5 +1,6 @@
 #include "land.h"
 #include "mkf/mkf.h"
+#include "stock.h"
 
 struct housing_land *hlands; // @0x498e84
 
@@ -16,56 +17,47 @@ const uint16_t fortune_data_idx[49] = {
   0x0204
 };
 
-int fcn.0044bb4b(int *v)
+int fortune_check(int *v)
 {
+	struct housing_land *lnd;
+
 	switch (*v) {
 		case 0:
-			ebx = 1;
-			eax = &hlands[1];
-			ebp = dw_498e98;
-			while (ebx <= ebp) {
-				esi = byte [eax + 0x19];
-				edx = current_player + 1;
-				if (esi == edx) {
-					if (byte [eax + 0x1a] != 0)
+			lnd = &hlands[1];
+			for (int i = 1; i <= dw_498e98; i++) {
+				if (lnd->owner == current_player + 1) {
+					if (lnd->level != 0)
 						return 1;
 				}
-				ebx ++;
-				eax += 0x34;
+				lnd++;
 			}
 			return 0;
 		case 1:
-			ebx = 1;
-			eax = &hlands[1];
-
-			while (ebx <= dw_498e98) {
-				edx = byte [eax + 0x19];
-				esi = current_player + 1;
-				if (edx == esi) {
-					if (byte [eax + 0x1a] == 0)
+			lnd = &hlands[1];
+			for (int i = 1; i <= dw_498e98; i++) {
+				if (lnd->owner == current_player + 1) {
+					if (lnd->level == 0)
 						return 1;
 				}
-				eax += 0x34;
-				ebx ++;
+				lnd++;
 			}
 			return 0;
 		case 5:
-			ebx = 0;
-			esi = 0;
-			while (ebx < nplayers) {
-				if (ebx != current_player) {
-					esi = fcn.00441262(ebx);
+			int ncards = 0;
+			for (int i = 0; i < nplayers; i++) {
+				if (i != current_player) {
+					ncards += player_cards_num(i);
 				}
-				ebx++;
 			}
-			if (esi != 0)
+			if (ncards != 0) {
 				return 1;
-			return 0;
+			} else {
+				return 0;
+			}
 		case 8:
 		case 9:
-			for (ebx = 0; ebx < 12; ebx++) {
-				edx = current_player * 96;
-				if (dword [edx + ebx*8 + 0x4971a0] != 0)
+			for (int i = 0; i < 12; i++) {
+				if (player_stocks[current_player * 12 + i].amount != 0)
 					return 1;
 			}
 			return 0;
@@ -151,6 +143,7 @@ static void *fortune_panel; // @ 0x48c5e0
 
 void fortune_events(void)
 {
+	int res;
 	uint32_t edi;
 	RECT r0;
 	int t;
@@ -159,11 +152,10 @@ void fortune_events(void)
 	struct graph_st *fgraph = allocate_graph_st(388, 251, 0, 0);
 
 	do {
-		esi = dw_4990b4;
-		t = byte [esi + 0x496b38];
-		esi = edi = fcn.0044bb4b(&t);
+		t = byte [dw_4990b4 + 0x496b38];
+		res = fortune_check(&t);
 		create_some_font(28, 0xf0f0f0, 0x101010, 3, 0);
-		if (esi == 1) {
+		if (res == 1) {
 			if (t < 33) {
 				read_mkf(mkf_data, fortune_data_idx[t], fgraph->gdata, NULL);
 				fcn_00456280(fortune_panel + 0x18, fgraph, 25, 44);
@@ -176,11 +168,10 @@ void fortune_events(void)
 			free(fgraph);
 		}
 		dw_4990b4++;
-		esi = dw_4990b4;
-		if (esi == 37) {
+		if (dw_4990b4 == 37) {
 			dw_4990b4 = 0;
 		}
-	} while (edi == 0);
+	} while (res == 0);
 
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 	overlay_fullscreen(sfdesc1.lpSurface, fortune_panel+0x18, 0, 0);
@@ -191,11 +182,10 @@ void fortune_events(void)
 	r0.bottom = 480;
 	IDirectDrawSurface_BltFast(pddrawsf1, 0, 0, pddrawsf2, &r0, DDBLTFAST_WAIT);
 	sub.WINMM.dll_timeGetTime_4f6(1600);
-	eax = ebp * 4;
-	if (ebp < 33) {
-		fortune_call_table[ebp](1);
+	if (t < 33) {
+		fortune_call_table[t](1);
 	} else {
-		fortune_call_table[game_map * 4 + ebp](1);
+		fortune_call_table[game_map * 4 + t](1);
 	}
 	sub.WINMM.dll_timeGetTime_8b9(800);
 	free(fortune_panel);
@@ -339,10 +329,10 @@ void sell_all_the_stock(int a0)
 			return;
 		} else {
 			for (int i = 0; i < 12; i++) {
-				esi = dword [current_player * 96 + i * 8 + 0x4971a0];
-				if (esi == 0)
+				int amt = player_stocks[current_player * 12 + i].amount;
+				if (amt == 0)
 					continue;
-				fcn.00428e23(current_player, i, esi, 1);
+				fcn.00428e23(current_player, i, amt, 1);
 			}
 			fcn.0041d433(current_player);
 			int c = players[current_player].character;
