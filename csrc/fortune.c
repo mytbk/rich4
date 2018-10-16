@@ -324,6 +324,57 @@ void bank_reject_a_month(int a0)
 	}
 }
 
+void sell_all_the_stock(int a0)
+{
+	static const char *str_sell = "#0194\xc5\xdc\xbd\xe6\xa9\xd2\xa6\xb3\xaa\xd1\xb2\xbc\xa8\x44\xb2{";
+
+	if (a0 == 0) {
+		draw_some_text(fortune_panel + 0x18, str_sell, 24, 330, 0);
+		graph_st_overlay(fortune_panel + 0x18, dword [current_player * 0x34 + 0x498eb0]+0x24, 390, 344);
+	} else {
+		dw_48c5b0 = fcn.0044b896(0, 1);
+		player_action_2(0, 0, 3);
+		if (dw_48c5b0 == 1) {
+			fcn.00440cac(0x48c5b8, 1500);
+			return;
+		} else {
+			for (int i = 0; i < 12; i++) {
+				esi = dword [current_player * 96 + i * 8 + 0x4971a0];
+				if (esi == 0)
+					continue;
+				fcn.00428e23(current_player, i, esi, 1);
+			}
+			fcn.0041d433(current_player);
+			int c = players[current_player].character;
+			ecx = [c * 108 + 0x48085e];
+			player_say(current_player, 2, ecx);
+			fcn.00436b0a(0);
+		}
+	}
+}
+
+void sell_all_cards_and_tools(int a0)
+{
+	static const char *str_sell = "#0217\xc5\xdc\xbd\xe6\xa9\xd2\xa6\xb3\xa5\x64\xa4\xf9\xb9\x44\xa8\xe3";
+
+	if (a0 == 0) {
+		draw_some_text(fortune_panel + 0x18, str_sell, 24, 330, 0);
+		graph_st_overlay(fortune_panel + 0x18, dword [current_player * 0x34 + 0x498eb0] + 0x24, 390, 344);
+	} else {
+		dw_48c5b0 = fcn.0044b896(1, 1);
+		player_action_2(0, 0, 3);
+		if (dw_48c5b0 == 1) {
+			fcn.00440cac(0x48c5b8, 1500);
+		} else {
+			players[current_player].points += fcn.00445b3f(current_player);
+			players[current_player].points += fcn.00441f21(current_player);
+			fcn.0041d433(current_player);
+			int c = players[current_player].character;
+			player_say(current_player, 2, dword [c * 108 + 0x480856]);
+		}
+	}
+}
+
 fortune_call fortune_call_table[] = {
 	break_down_a_house,
 	remove_a_land,
