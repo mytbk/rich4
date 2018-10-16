@@ -148,7 +148,7 @@ void cards_ui()
 		return;
 	}
 	if ((dl & 6) && (players[current_player].f22 & 1)) {
-		edi = esi = eax = fcn_00441262(current_player);
+		edi = esi = eax = player_cards_num(current_player);
 		if (eax == 0)
 			return;
 		memset(mem, 0, 8);

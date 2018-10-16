@@ -108,6 +108,17 @@ int has_card(int p, int c)
 	return 0;
 }
 
+int player_cards_num(int p)
+{
+	int n = 0;
+	for (int i = 0; i < 15; i++) {
+		if (player_cards[p * 15 + i] == 0)
+			continue;
+		n++;
+	}
+	return n;
+}
+
 int use_revenge_card(int p)
 {
 	static const char str_revenge[] = "%s\n\n\xb4_\xa4\xb3\xa5\x64\xa5\xcd\xae\xc4\xa1I"; /* 复仇卡生效！*/
