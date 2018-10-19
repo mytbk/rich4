@@ -3,6 +3,7 @@
 #include "stock.h"
 
 struct housing_land *hlands; // @0x498e84
+struct business_land *blands; // @0x498e88
 
 typedef void (*fortune_call(int));
 fortune_call fortune_call_table[];

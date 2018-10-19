@@ -6,6 +6,7 @@
 #include "player_info.h"
 #include "stock.h"
 #include "card.h"
+#include "land.h"
 
 rich4_card cards_table[] = {
 	{ "\xa7\xa1\xb4\x49\xa5\x64", 1, 200, 2, 2 }, /* 均富卡 */
@@ -237,8 +238,7 @@ int buy_land_card()
 	eax = word [ecx + eax*8 + 0x20] & 0xffff;
 	if (eax > 2000 && eax < 4000) {
 		eax -= 2000;
-		eax *= 52;
-		ebx = dw_498e84 + eax;
+		ebx = &hlands[eax];
 		cl = byte [ebx + 0x19];
 		if (cl == 0 || cl == current_player+1) {
 			if (esi != 0) {
@@ -297,9 +297,7 @@ int buy_land_card()
 	}
 	// 4424be
 	if (eax > 4000 && eax < 6000) {
-		eax -= 4000;
-		eax *= 56;
-		ebx = dw_498e88 + eax;
+		ebx = &blands[eax-4000];
 		if (byte [ebx + 0x19] != 0) {
 			eax = byte [ebx + 0x19];
 			edx = current_player + 1;
@@ -364,9 +362,7 @@ int swap_land_card()
 	esi = dw_498e80;
 	esi = word [esi + eax*8 + 0x20] & 0xffff;
 	if (esi > 2000 && esi < 4000) {
-		eax = esi - 2000;
-		eax = eax * 0x34;
-		edi = dw_498e84 + eax;
+		edi = &hlands[esi - 2000];
 		if (players[current_player].who_plays == 1) {
 			eax = fcn.00446ae8(0xe0c0202);
 		} else {
@@ -378,9 +374,7 @@ int swap_land_card()
 		}
 		fcn.00456c0a(dw_474938, 0x2f440, esi, 0xffff);
 		fcn.00456c0a(dw_474938, 0x2f440, ebx, 0xffff);
-		ebx -= 2000;
-		ebx = ebx * 0x34;
-		esi = dw_498e84 + ebx;
+		esi = &hlands[ebx-2000];
 		ebx = (uint8_t)byte [edi + 0x19];
 		eax = (uint8_t)bype [esi + 0x19];
 		[esp] = eax;
@@ -441,9 +435,7 @@ int swap_land_card()
 	// 44288c
 
 	if (esi > 4000 && esi < 6000) {
-		eax = esi - 4000;
-		eax *= 56;
-		edi = dw_498e88 + eax;
+		edi = &blands[esi-4000];
 		if (players[current_player].who_plays == 1) {
 			eax = fcn.00446ae8(0xe0c0204);
 		} else {
@@ -453,9 +445,7 @@ int swap_land_card()
 		if (ebx != 0) {
 			fcn.00456c0a(dw_474938, 0x2f440, esi, 0xffff);
 			fcn.00456c0a(dw_474938, 0x2f440, ebx, 0xffff);
-			eax = ebx - 4000;
-			eax *= 56;
-			esi = dw_498e88 + eax;
+			esi = &blands[ebx-4000];
 			ebx = (uint8_t)byte [edi + 0x19];
 			eax = (u8)byte [esi + 0x19];
 			[esp] = eax;
@@ -530,9 +520,7 @@ int swap_house_card()
 	eax = word [edx + eax + 0x20] & 0xffff;
 	[esp+8] = eax;
 	if (eax > 2000 && eax < 4000) {
-		eax -= 2000;
-		eax = eax * 0x34;
-		edx = dw_498e84 + eax;
+		edx = &hlands[eax-2000];
 		[esp+4] = edx;
 		if (players[current_player].who_plays == 1) {
 			eax = fcn.00446ae8(0xe0c0202);
@@ -545,9 +533,7 @@ int swap_house_card()
 		}
 		fcn.00456c0a(dw_474938, 0x2f440, [esp+8], 0xffff);
 		fcn.00456c0a(dw_474938, 0x2f440, ebx, 0xffff);
-		eax = ebx - 2000;
-		eax = eax * 0x34;
-		ebp = dw_498e84 + eax;
+		ebp = &hlands[ebx-2000];
 		edi = [esp+4];
 		edi = byte [edi + 0x19];
 		esi = byte [ebp + 0x19];
@@ -604,9 +590,7 @@ int swap_house_card()
 	//442d3a
 	ebp = [esp+8];
 	if (ebp > 4000 && ebp < 6000) {
-		eax = ebp - 4000;
-		eax *= 56;
-		edx = dw_498e88 + eax;
+		edx = &blands[ebp-4000];
 		[esp] = edx;
 		if (players[current_player].who_plays == 1) {
 			eax = fcn.00446ae8(0xe0c0204);
@@ -617,9 +601,7 @@ int swap_house_card()
 		if (ebx != 0) {
 			fcn.00456c0a(dw_474938, 0x2f440, [esp+8], 0xffff);
 			fcn.00456c0a(dw_474938, 0x2f440, ebx, 0xffff);
-			eax = ebx - 4000;
-			eax *= 56;
-			ebp = dw_498e88 + eax;
+			ebp = &blands[ebx-4000];
 			edi = [esp];
 			edi = byte [edi + 0x19];
 			esi = byte [ebp + 0x19];
@@ -733,9 +715,7 @@ int restruct_card()
 	ebx = dw_498e80 + eax;
 	eax = word [ebx + eax*8 + 0x20];
 	if (eax > 2000 && eax < 4000) {
-		eax -= 2000;
-		eax *= 0x34;
-		ebx = dw_498e84 + eax;
+		ebx = &hlands[eax-2000];
 		if (byte [ebx + 0x1a] == 0) {
 			if (esi == 0)
 				return 0;
@@ -759,9 +739,7 @@ int restruct_card()
 	}
 	//443147
 	if (eax > 4000 && eax < 6000) {
-		eax -= 4000;
-		eax *= 56;
-		ebx = dw_498e88 + eax;
+		ebx = &blands[eax-4000];
 		if ([ebx + 0x1a] != 0) {
 			edx = players[current_player].character;
 			eax = edx * 360;
@@ -808,9 +786,7 @@ int auction_card()
 	eax = edx * 5;
 	edi = (uint16_t)word [dw_498e80 + eax * 8 + 0x20];
 	if (edi > 2000 && edi < 4000) {
-		eax = edi - 2000;
-		eax *= 0x34;
-		esi = dw_498e84 + eax;
+		esi = &hlands[edi-2000];
 		bl = byte [esi + 0x19];
 		if (ebx != 0) {
 			eax = word [esi + 0x1c];
@@ -854,9 +830,7 @@ int auction_card()
 	}
 	// 443375
 	if (edi > 4000 && edi < 6000) {
-		eax = edi - 4000;
-		eax *= 56;
-		esi = dw_498e88 + eax;
+		esi = &blands[edi-4000];
 		ebx = byte [esi + 0x19];
 		if (ebx != 0) {
 			eax = word [esi + 0x22] * price_index;
@@ -929,12 +903,9 @@ int angel_card()
 		edi = dword [eax + 0x48125a];
 		player_say(current_player, 3, edi);
 		if (ebp > 2000 && ebp < 4000) {
-			eax = ebp - 2000;
-			eax *= 0x34;
-			ebx = dw_498e84;
-			edi = dw_498e84 + eax;
+			edi = &hlands[ebp-2000];
 			for (esi = 1; ; esi++) {
-				ebx += 0x34;
+				ebx = &hlands[esi];
 				if (esi > dw_498e98)
 					break;
 				eax = strcmp(edi + 4, ebx + 4);
@@ -962,9 +933,7 @@ int angel_card()
 		}
 		// 0x443621
 		if (ebp > 4000 && ebp < 6000) {
-			eax = ebp - 4000;
-			eax *= 56;
-			ebx = dw_498e88 + eax;
+			ebx = &blands[ebp-4000];
 			fcn.00456c0a(dw_474938, 0x2f440, ebp, 0xffff);
 			if (players[current_player].who_plays != 1) {
 				move_animation(0, players[current_player].xpos, players[current_player].ypos,
@@ -1002,11 +971,10 @@ int devil_card()
 	player_say(current_player, 0, card_strings[c][0][9]);
 
 	if (ebp > 2000 && ebp < 4000) {
-		eax = (ebp - 2000) * 0x34;
-		ebx = dw_498e84;
-		edi = dw_498e84 + eax;
+		edi = &hlands[ebp-2000];
 
-		for (int i = 1, ebx+=0x34; i <= dw_498e98; i++, ebx+=0x34) {
+		for (int i = 1; i <= dw_498e98; i++) {
+			ebx = &hlands[i];
 			eax = strcmp(edi + 4, ebx + 4);
 			if (eax == 0) {
 				if (byte [ebx + 0x19] != 0) {
@@ -1029,8 +997,7 @@ int devil_card()
 	}
 
 	if (ebp > 4000 && ebp < 6000) {
-		eax = (ebp - 4000) * 56;
-		ebx = dw_498e88 + eax;
+		ebx = &blands[ebp-4000];
 		if (byte [ebx + 0x19] != 0) {
 			edx = byte [ebx + 0x1a] * 2;
 			eax = edx * 15 * price_index;
@@ -1350,15 +1317,12 @@ int price_up_card()
 	player_say(current_player, 0, card_strings[c][0][26]);
 
 	if (ebp > 2000 && ebp < 4000) {
-		edi = ebp - 2000;
-		edi *= 0x34;
-		edi += dw_498e84;
-		ebx = dw_498e84 + 0x34;
+		edi = &hlands[ebp-2000];
 		for (int i = 1; i <= dw_498e98; i++) {
+			ebx = &hlands[i];
 			if (strcmp(edi+4, ebx+4) == 0) {
 				byte [ebx + 0x17] = 0x50;
 			}
-			ebx += 0x34;
 		}
 		if (players[current_player].who_plays == 1) {
 			player_action_2(0, 0, 1);
@@ -1366,9 +1330,7 @@ int price_up_card()
 		}
 		move_animation(0, players[current_player].xpos, players[current_player].ypos, word [edi], word [edi + 2], 100);
 	} else if (ebp > 4000 && ebp < 6000) {
-		eax = ebp - 4000;
-		eax *= 56;
-		ebx = dw_498e88 + eax;
+		ebx = &blands[ebp-4000];
 		byte [ebx + 0x1c] = 0x50;
 		if (players[current_player].who_plays == 1) {
 			player_action_2(0, 0, 1);

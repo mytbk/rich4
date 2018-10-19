@@ -9,6 +9,7 @@
 #include "player_info.h"
 #include "mkf/mkf.h"
 #include "stock.h"
+#include "land.h"
 
 char *dw_47493c;
 char *dw_474945;
@@ -119,9 +120,9 @@ void fcn_00407ad2()
 		dw_498e9c = eax[0];
 		dw_498e80 = &eax[eax[1]];
 		dw_498e98 = eax[2];
-		dw_498e84 = &eax[eax[3]];
+		hlands = &eax[eax[3]];
 		dw_498e8c = eax[4];
-		dw_498e88 = &eax[eax[5]];
+		blands = &eax[eax[5]];
 		dw_498e90 = eax[6];
 		dw_498e7c = &eax[eax[7]];
 		dw_499074 = eax[8];
@@ -348,12 +349,12 @@ int load_checkpoint(int n)
 	*(int*)0x498e98 = edx;
 	edx = *(int*)(eax + 12);
 	ebx = eax + edx;
-	*(int*)0x498e84 = ebx;
+	hlands = ebx;
 	edx = *(int*)(eax + 16);
 	*(int*)0x498e8c = edx;
 	edx = *(int*)(eax + 20);
 	ebx = eax + edx;
-	*(int*)0x498e88 = ebx;
+	blands = ebx;
 	edx = *(int*)(eax + 24);
 	*(int*)0x498e90 = edx;
 	edx = *(int*)(eax + 28);

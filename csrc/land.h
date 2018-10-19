@@ -22,3 +22,6 @@ struct business_land
 	uint16_t house_price; // 0x24
 	uint32_t _; // 0x34
 }; /* size is 0x38=56 */
+
+extern struct housing_land *hlands; // @0x498e84
+extern struct business_land *blands; // @0x498e88
