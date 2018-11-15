@@ -269,6 +269,43 @@ static void start_game_loop(int a0)
 	}
 }
 
+char *panel_0; // @ 0x48be0c
+char *panel_1; // @ 0x475118
+char *panel_2; // @ 0x48be10
+char *panel_3; // @ 0x48be14
+char *panel_7; // @ 0x48be04
+char *panel_8; // @ 0x48be08
+char *panel_456[3]; // @ 0x48bdf8
+
+struct graph_st *gst_48bdcc;
+struct graph_st *gst_48bde0;
+RECT rect_48bdb8;
+
+static void fcn_004190cf()
+{
+	if (panel_1 != NULL)
+		return;
+
+	panel_0 = read_mkf(mkf_panel, 0, NULL, NULL);
+	panel_1 = read_mkf(mkf_panel, 1, NULL, NULL);
+	panel_2 = read_mkf(mkf_panel, 2, NULL, NULL);
+	panel_3 = read_mkf(mkf_panel, 3, NULL, NULL);
+	panel_7 = read_mkf(mkf_panel, 7, NULL, NULL);
+	panel_8 = read_mkf(mkf_panel, 8, NULL, NULL);
+
+	for (int i = 0; i < 3; i++) {
+		panel_456[i] = read_mkf(mkf_panel, i + 4, NULL, NULL);
+	}
+
+	gst_48bdcc = allocate_graph_st(200, 200, 0, 0);
+	gst_48bde0 = allocate_graph_st(data_0205->chunk_tab[0].width,
+			data_0205->chunk_tab[0].height, 0, 0);
+	rect_48bdb8.left = 220 - data_0205->chunk_tab[5].x;
+	rect_48bdb8.top = 140 - data_0205->chunk_tab[5].y;
+	rect_48bdb8.right = rect_48bdb8.left + data_0205->chunk_tab[5].width;
+	rect_48bdb8.bottom = rect_48bdb8.top + data_0205->chunk_tab[5].height;
+}
+
 int WINAPI WinMain(HINSTANCE hInstance,
 		HINSTANCE hPrevInstance,
 		LPSTR lpCmdLine,

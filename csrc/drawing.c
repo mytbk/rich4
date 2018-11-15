@@ -300,7 +300,7 @@ void player_say(int p, int t, const char *s)
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 	st_46caec.f8 = sfdesc1.lpSurface;
 	struct graph_st * edi = crop_graph(&st_46caec, NULL, 0, 40, 440, 220);
-	fullscreen_overlay(sfdesc1.lpSurface, dw_48bad8+0x54, 220, 130);
+	fullscreen_overlay(sfdesc1.lpSurface, data_0205->chunk_tab[6], 220, 130);
 	ecx = dword [p * 0x34 + 0x498eb0];
 	edx = t + 1;
 	eax = edx * 12;
@@ -316,10 +316,8 @@ void player_say(int p, int t, const char *s)
 		}
 		const char *s2 = s + esi;
 		if (s2[0] == '@') {
-			eax = (s2[1] - '0') * 10 + (s2[2] - '0');
-			edx = (eax - 1) * 12;
-			eax = dw_48bad4 + 12 + edx;
-			fullscreen_overlay(sfdesc1.lpSurface, eax, 240, 130);
+			int nn = (s2[1] - '0') * 10 + (s2[2] - '0');
+			fullscreen_overlay(sfdesc1.lpSurface, data_0207->chunk_tab[nn - 1], 240, 130);
 			if (esi == 5) {
 				eax = (s[1] - '0') * 1000 + (s[2] - '0') * 100 + (s[3] - '0') * 10 + (s[4] - '0');
 				fcn.0045441a(eax);

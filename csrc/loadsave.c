@@ -93,6 +93,9 @@ label_40e082:
 	return ebx + 1;
 }
 
+struct spr_smp *data_0205; // @ 0x48bad8
+struct spr_smp *data_0207; // @ 0x48bad4
+
 void fcn_00407ad2()
 {
 	fcn_004080f5();
@@ -252,8 +255,8 @@ void fcn_00407ad2()
 			*(int16_t*)0x48bae0 = (int16_t)ebx;
 	}
 	fcn_00428caf();
-	dw_48bad8 = read_mkf(mkf_data, 0x205, NULL, NULL);
-	dw_48bad4 = read_mkf(mkf_data, 0x207, NULL, NULL);
+	data_0205 = read_mkf(mkf_data, 0x205, NULL, NULL);
+	data_0207 = read_mkf(mkf_data, 0x207, NULL, NULL);
 	for (int i = 0; i < 20; i++) {
 		dw_496930[i] = read_mkf(mkf_data, 396 + i, NULL, NULL);
 	}
