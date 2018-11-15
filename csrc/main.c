@@ -154,7 +154,7 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 			// 0x402638
 			switch (dw_48a184) {
 				case 1:
-					fcn.00402460(0);
+					fcn_00402460(0);
 					eax = load_ui(0);
 					if (eax != -1) {
 						Post_0402_Message(dw_48a184);
@@ -163,23 +163,23 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 					overlay_fullscreen(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
-					fcn.00402460(1);
+					fcn_00402460(1);
 					InvalidateRect(hWnd, NULL, FALSE);
 					break;
 				case 2:
-					fcn.00402460(0);
+					fcn_00402460(0);
 					sub.WINMM.dll_mciSendStringA_acb();
 					options_ui(0);
 					sub.WINMM.dll_mciSendStringA_9cf(0);
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 					overlay_fullscreen(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
-					fcn.00402460(1);
+					fcn_00402460(1);
 					return 0;
 				case 0:
 				case 3:
 				case 4:
-					fcn.00402460(0);
+					fcn_00402460(0);
 					Post_0402_Message(dw_48a184);
 					break;
 				default:
@@ -193,7 +193,7 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 			overlay_fullscreen(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 			InvalidateRect(hWnd, NULL, FALSE);
-			fcn.00402460(1);
+			fcn_00402460(1);
 			return 0;
 		}
 		return DefWindowProcA(hWnd, message, wParam, lParam);
@@ -222,10 +222,10 @@ static int ui_entry()
 	create_some_font(0x10, 0xf0f0f0, 0x101010, 3, 1);
 	draw_some_text(&data1->chunk_tab[0], "V3.11", 638, 470, 6);
 	sub.WINMM.dll_mciSendStringA_9cf(0);
-	ebx = register_wait_callback(entryCallback, 0);
+	int ret = register_wait_callback(entryCallback, 0);
 	sub.WINMM.dll_mciSendStringA_acb();
 	free(data1);
-	return ebx;
+	return ret;
 }
 
 void deinit_game()
