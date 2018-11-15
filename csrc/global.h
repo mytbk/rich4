@@ -4,6 +4,7 @@
  */
 
 #include <windows.h>
+#include <ddraw.h>
 #include <stdint.h>
 
 /* media_init.c */

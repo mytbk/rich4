@@ -4,6 +4,7 @@
  */
 
 #include <windows.h>
+#include "global.h"
 #include "player_info.h"
 #include "graph_struct.h"
 
