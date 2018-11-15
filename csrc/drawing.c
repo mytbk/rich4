@@ -8,6 +8,15 @@
 #include "graph_struct.h"
 
 struct graph_st st_46caec;
+RECT draw_rect; // @ 0x4861b8
+
+void set_rect(int left, int top, int right, int bottom)
+{
+	draw_rect.left = left;
+	draw_rect.top = top;
+	draw_rect.right = right;
+	draw_rect.bottom = bottom;
+}
 
 int graph_overlay0(int width, int height, uint16_t *pix, struct graph_st *gtop, int xpos, int ypos)
 {
@@ -43,7 +52,7 @@ int graph_overlay0(int width, int height, uint16_t *pix, struct graph_st *gtop, 
 
 		if (width_to_cpy != 0) {
 			for (int i = 0; i < height_to_cpy; i++) {
-				memcpy(edi, esi, sizeof(uint16_t) * width_to_cpy);
+				memcpy(dst, src, sizeof(uint16_t) * width_to_cpy);
 				src += gtop->width;
 				dst += width;
 			}
@@ -98,35 +107,33 @@ int graph_overlay(uint32_t width, uint32_t height, uint16_t *pix, struct graph_s
 			}
 		}
 	} else {
-		if (xpos >= dw_4861c0 || xpos + (uint16_t)gtop->width <= dw_4861b8
-				|| ypos >= dw_4861c4 || ypos + (uint16_t)gtop->height <= dw_4861bc)
+		if (xpos >= draw_rect.right || xpos + (uint16_t)gtop->width <= draw_rect.left
+				|| ypos >= draw_rect.bottom || ypos + (uint16_t)gtop->height <= draw_rect.top)
 			return 1;
 
-		if (xpos < dw_4861b8) {
-			eax = dw_4861b8 - xpos;
-			xpos = dw_4861b8;
-			gtcrop_x = eax;
-			width_to_cpy = gtop->width - eax;
+		if (xpos < draw_rect.left) {
+			int delta = draw_rect.left - xpos;
+			xpos = draw_rect.left;
+			gtcrop_x = delta;
+			width_to_cpy = gtop->width - delta;
 		} else {
 			gtcrop_x = 0;
-			eax = gtop->width + xpos - dw_4861c0;
-			if (eax > 0) {
-				width_to_cpy = dw_4861c0 - xpos;
+			if (gtop->width + xpos - draw_rect.right > 0) {
+				width_to_cpy = draw_rect.right - xpos;
 			} else {
 				width_to_cpy = gtop->width;
 			}
 		}
 
-		if (ypos < dw_4861bc) {
-			eax = dw_4861bc - ypos;
-			ypos = dw_4861bc;
-			gtcrop_y = eax;
-			height_to_cpy = gtop->height - eax;
+		if (ypos < draw_rect.top) {
+			int delta = draw_rect.top - ypos;
+			ypos = draw_rect.top;
+			gtcrop_y = delta;
+			height_to_cpy = gtop->height - delta;
 		} else {
 			gtcrop_y = 0;
-			eax = gtop->height + ypos - dw_4861c4;
-			if (eax > 0) {
-				height_to_cpy = dw_4861c4 - ypos;
+			if (gtop->height + ypos - draw_rect.bottom > 0) {
+				height_to_cpy = draw_rect.bottom - ypos;
 			} else {
 				height_to_cpy = gtop->height;
 			}
@@ -199,8 +206,8 @@ void fcn_417191(int a0)
 		ebx = 4;
 
 	IDirectDrawSurface_Lock(pddrawsf1, 0, &sfdesc1, 1, 0);
-	st_46caec.f0 = sfdesc1.DUMMYUNIONNAME1.lPitch / 2;
-	st_46caec.f8 = sfdesc1.lpSurface;
+	st_46caec.width = sfdesc1.DUMMYUNIONNAME1.lPitch / 2;
+	st_46caec.gdata = sfdesc1.lpSurface;
 
 	edx = dw_48bdd4 + ebx;
 	edx = edx * 12 + dw_48be04 + 12;
@@ -253,7 +260,7 @@ void fcn_417191(int a0)
 	}
 	IDirectDrawSurface_Unlock(pddrawsf1, NULL);
 	GetCursorPos_250(&r0);
-	st_46caec.f0 = 640;
+	st_46caec.width = 640;
 }
 
 void IntersectRect_4cd(RECT *r0)
@@ -298,7 +305,7 @@ void player_say(int p, int t, const char *s)
 	}
 	create_some_font(0x10, 0x101010, 0, 2, 1);
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-	st_46caec.f8 = sfdesc1.lpSurface;
+	st_46caec.gdata = sfdesc1.lpSurface;
 	struct graph_st * edi = crop_graph(&st_46caec, NULL, 0, 40, 440, 220);
 	fullscreen_overlay(sfdesc1.lpSurface, data_0205->chunk_tab[6], 220, 130);
 	ecx = dword [p * 0x34 + 0x498eb0];
@@ -382,7 +389,7 @@ void move_animation(int obj, int x1, int y1, int x2, int y2, int T)
 	RECT r0, r1, r2; /* @ sp, sp+0x10, sp+0x20 */
 	r0.left = -1000;
 	IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
-	st_46caec.f8 = sfdesc1.lpSurface;
+	st_46caec.gdata = sfdesc1.lpSurface;
 	struct graph_st * st0 = crop_graph(&st_46caec, NULL, 0, 40, 440, 440); /* st0 @ sp+0x4c */
 	IDirectDrawSurface_Unlock(pddrawsf2, NULL);
 
@@ -474,26 +481,26 @@ void graph_overlay2(int a0, uint16_t *a1, struct graph_st *a2,
 			ypos = 0;
 		}
 	} else {
-		if (xpos >= dw_4861c0 || xpos + width <= dw_4861b8)
+		if (xpos >= draw_rect.right || xpos + width <= draw_rect.left)
 			return;
 
-		if (xpos + width > dw_4861c0) {
-			width = dw_4861c0 - xpos;
-		} else if (xpos < dw_4861b8) {
-			width += xpos - dw_4861b8;
-			a2x += dw_4861b8 - xpos;
-			xpos = dw_4861b8;
+		if (xpos + width > draw_rect.right) {
+			width = draw_rect.right - xpos;
+		} else if (xpos < draw_rect.left) {
+			width += xpos - draw_rect.left;
+			a2x += draw_rect.left - xpos;
+			xpos = draw_rect.left;
 		}
 
-		if (ypos >= dw_4861c4 || ypos + height <= dw_4861bc)
+		if (ypos >= draw_rect.bottom || ypos + height <= draw_rect.top)
 			return;
 
-		if (ypos + height > dw_4861c4) {
-			height = dw_4861c4 - ypos;
-		} else if (ypos < dw_4861bc) {
-			height += ypos - dw_4861bc;
-			a2y += dw_4861bc - ypos;
-			ypos = dw_4861bc;
+		if (ypos + height > draw_rect.bottom) {
+			height = draw_rect.bottom - ypos;
+		} else if (ypos < draw_rect.top) {
+			height += ypos - draw_rect.top;
+			a2y += draw_rect.top - ypos;
+			ypos = draw_rect.top;
 		}
 	}
 
