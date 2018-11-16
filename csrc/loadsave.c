@@ -216,32 +216,49 @@ void fcn_00407ad2()
 		*(int32_t*)(0x48ae4c+esi) = read_mkf(mkf_map_, eax, NULL, NULL);
 	}
 	dw_48aea8 = read_mkf(mkf_map_, 0x19, 0, 0);
-	memset(0x498ea0, 0, 0x1d4);
-	for (ebx = 0; ebx < 9; ebx++) {
-		if (ebx >= nplayers) {
-			if (ebx < 4)
-				continue;
-			fcn_0040b93b(ebx);
+
+#if 0
+	/* structure with size 0x34 @ 0x498ea0 is */
+	struct {
+		int8_t b0, b1, b2, b3, b4, b5;
+		int8_t padding[10];
+		char *f16; // 0x498eb0
+		int32_t f20; // 0x498eb4
+		int32_t f24; // 0x498eb8
+		int32_t f28; // 0x498ebc
+		int32_t f32; // 0x498ec0
+		int32_t f36; // 0x498ec4
+		int32_t f40; // 0x498ec8
+		int32_t f44; // 0x498ecc
+		int32_t padding;
+	};
+#endif
+	memset(0x498ea0, 0, 0x34 * 9);
+	for (int i = 0; i < 9; i++) {
+		if (i >= nplayers) {
+			if (i >= 4) {
+				fcn_0040b93b(i);
+			}
 			continue;
 		}
 
-		uint8_t eax = players[ebx].character + 0x1b;
-		edx = read_mkf(mkf_map_, eax, NULL, NULL);
-		eax = ebx * 0x34;
+		edx = read_mkf(mkf_map_, players[i].character + 0x1b, NULL, NULL);
+		eax = i * 0x34;
 		*(int32_t*)(0x498eb0+eax) = edx;
 
-		if (players[ebx].who_plays == 0 && player[ebx].f100 == 0) {
+		if (players[i].who_plays == 0 && player[i].f100 == 0) {
 			eax = *(int32_t*)(0x498eb0+eax);
 			edx = *(int16_t*)(eax + 0xe); /* sign ext */
 			eax += 0xc;
 			fcn_004553fe(eax, 0, 0, *(int16_t*)eax, edx);
 		}
-		if (ebx >= nplayers) {
+		if (i >= nplayers) {
 			if (edx < 4)
 				continue;
-			fcn_0040b93b(ebx);
+			fcn_0040b93b(i);
 		}
 	}
+
 	unload_mkf(mkf_map_);
 	edi = dw_498e9c;
 	for (ebx = 1; ebx <= edi; ebx++) {
