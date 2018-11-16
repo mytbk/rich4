@@ -36,3 +36,11 @@ extern char mid_status[7]; // 0x46cb00
 
 /* card.c */
 extern uint8_t card_amount[30];
+
+/* misc.c */
+extern char b_46caf8;
+extern char b_46caf9;
+extern char b_46cafa;
+extern char b_46cafb;
+extern char b_46cafc;
+extern char b_46cafd;

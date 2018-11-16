@@ -7,6 +7,9 @@
 #include <ddraw.h>
 #include "global.h"
 #include "window_util.h"
+#include "mkf.h"
+#include "drawing.h"
+#include "misc.h"
 
 HINSTANCE ghInstance; // 48a064
 HWND gwindowHandle; // 48a0d4
@@ -14,7 +17,7 @@ RECT g_rect;
 
 char mid_status[7]; // 0x46cb00
 
-typedef struct { int16_t x; int16_t y } pos_t;
+typedef struct { int16_t x; int16_t y; } pos_t;
 static pos_t mpos[5] = { // central position of the buttons @0x46cb28
 	{190, 380}, // start
 	{328, 380}, // load
@@ -29,8 +32,18 @@ int price_index;
 
 static struct spr_smp *data1; // 0x48a180
 
+void deinit_game(void);
+
+static void fcn_0045174a(void)
+{
+	mid_status[2] = 0;
+	Post_0402_Message(0);
+}
+
 static LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	static int initiated = 0;
+
 	if (message < 0x1c) {
 		if (message == WM_DESTROY) {
 			deinit_game();
@@ -45,7 +58,7 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARA
 	}
 	if (message == WM_ACTIVATEAPP) {
 		if (wParam != 0) {
-			if (dw_46cb0b != 0) {
+			if (initiated != 0) {
 				if (pddrawsf1 != NULL) {
 					IDirectDrawSurface_Restore(pddrawsf1);
 				}
@@ -63,7 +76,7 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARA
 			mid_status[1] = 1;
 			return 0;
 		}
-		dw_46cb0b = 1;
+		initiated = 1;
 		mid_status[1] = 0;
 		if (mid_status[2] != 0) {
 			mciSendStringA("pause vfw", 0,0,0);
@@ -83,7 +96,7 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARA
 			fcn_0045174a();
 			return 0;
 		}
-		sub_mciSendStringA_d2c();
+		playmid_454d2c();
 		return 0;
 	}
 	if (windowCallbacks[cb_top] == NULL) {
@@ -157,8 +170,7 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 			switch (status) {
 				case 1:
 					fcn_00402460(0);
-					eax = load_ui(0);
-					if (eax != -1) {
+					if (load_ui(0) != -1) {
 						Post_0402_Message(status);
 						break;
 					}

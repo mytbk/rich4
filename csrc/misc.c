@@ -21,3 +21,20 @@ void close_mid_454acb(void)
 	mid_status[3] = 0;
 	b_47e772 = 0;
 }
+
+void play_avi(const char *fn, RECT *r, int x)
+{
+	/* TODO */
+}
+
+char b_46caf8;
+char b_46caf9;
+char b_46cafa;
+char b_46cafb;
+char b_46cafc;
+char b_46cafd;
+
+void playmid_454d2c(void)
+{
+	/* TODO */
+}
