@@ -95,11 +95,13 @@ static LRESULT CALLBACK windowProc(HWND hWnd, UINT message, WPARAM wParam, LPARA
 
 static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	static int status;
+
 	if (message >= 0x200) {
 		if (message == WM_MOUSEMOVE) {
 			int xPos = LOWORD(lParam);
 			int yPos = HIWORD(lParam);
-			int tmp = dw_48a184;
+			int tmp = status;
 			RECT r0; // @ esp + 0x40
 
 			int i;
@@ -117,9 +119,9 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 					continue;
 				if (yPos >= r0.bottom)
 					continue;
-				if (i == dw_48a184)
+				if (i == status)
 					break;
-				dw_48a184 = i;
+				status = i;
 				IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 				fullscreen_overlay(sfdesc1.lpSurface, &data1->chunk_tab[idx], mpos[i].x, mpos[i].y);
 				IDirectDrawSurface_Unlock(pddrawsf2, NULL);
@@ -128,8 +130,8 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 				break;
 			}
 			if (i == 5)
-				dw_48a184 = -1;
-			if (tmp == dw_48a184)
+				status = -1;
+			if (tmp == status)
 				return 0;
 			if (tmp == -1)
 				return 0;
@@ -148,16 +150,16 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 			return 0;
 		}
 		if (message == WM_LBUTTONDOWN) {
-			if (dw_48a184 != -1) {
+			if (status != -1) {
 				fcn_4542ce(0x482322, 0);
 			}
 			// 0x402638
-			switch (dw_48a184) {
+			switch (status) {
 				case 1:
 					fcn_00402460(0);
 					eax = load_ui(0);
 					if (eax != -1) {
-						Post_0402_Message(dw_48a184);
+						Post_0402_Message(status);
 						break;
 					}
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
@@ -180,7 +182,7 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 				case 3:
 				case 4:
 					fcn_00402460(0);
-					Post_0402_Message(dw_48a184);
+					Post_0402_Message(status);
 					break;
 				default:
 					break;
@@ -188,7 +190,7 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 			return 0;
 		}
 		if (message == 0x401) {
-			dw_48a184 = -1;
+			status = -1;
 			IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 			overlay_fullscreen(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 			IDirectDrawSurface_Unlock(pddrawsf2, NULL);
