@@ -10,9 +10,11 @@
 
 * csrc: 逆向后的C代码
 * docs: 相关文档
-* r2: radare2 工程文件和辅助脚本
 
-r2/rc
------
 
-现在的 r2/rc 保留了大量信息，包括函数标记、交叉引用、类型标记等，更新 r2/rc 生成的 diff 非常大，因此我将 r2/rc 存到 r2rc 分支中，并且会使用 git push --force 更新该分支。
+radare2 工程文件和辅助脚本
+-----------------------------
+
+本项目的 radare2 工程文件和辅助脚本在另一仓库中，用如下方式获取::
+
+  git clone https://git.wehack.space/rich4.r2 r2
