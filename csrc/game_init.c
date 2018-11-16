@@ -127,7 +127,7 @@ int init_new_game(int a0)
 	eax = dw_48a3b8 + 12 + edx;
 	dw_48a39c = crop_graph(eax, 0, 157, 216, 23, 24);
 
-	sub.WINMM.dll_mciSendStringA_9cf(0x8001); /* TODO: 0x4549cf */
+	playmid_4549cf(0x8001); /* TODO: 0x4549cf */
 
 	int res = register_wait_callback(0x404e44, a0);
 	*(int*)(esp + 4) = res;

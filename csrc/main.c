@@ -170,9 +170,9 @@ static LRESULT CALLBACK entryCallback(HWND hWnd, UINT message, WPARAM wParam, LP
 					break;
 				case 2:
 					fcn_00402460(0);
-					sub.WINMM.dll_mciSendStringA_acb();
+					close_mid_454acb();
 					options_ui(0);
-					sub.WINMM.dll_mciSendStringA_9cf(0);
+					playmid_4549cf(0);
 					IDirectDrawSurface_Lock(pddrawsf2, NULL, &sfdesc1, 1, 0);
 					overlay_fullscreen(sfdesc1.lpSurface, &data1->chunk_tab[0], 0, 0);
 					IDirectDrawSurface_Unlock(pddrawsf2, NULL);
@@ -223,9 +223,9 @@ static int ui_entry()
 
 	create_some_font(0x10, 0xf0f0f0, 0x101010, 3, 1);
 	draw_some_text(&data1->chunk_tab[0], "V3.11", 638, 470, 6);
-	sub.WINMM.dll_mciSendStringA_9cf(0);
+	playmid_4549cf(0);
 	int ret = register_wait_callback(entryCallback, 0);
-	sub.WINMM.dll_mciSendStringA_acb();
+	close_mid_454acb();
 	free(data1);
 	return ret;
 }

@@ -32,6 +32,7 @@ extern RECT g_rect; /* struct tagRECT { left, top, right, bottom } @ 0x46cadc */
 extern int16_t game_stage;
 extern int16_t game_map;
 extern int price_index;
+extern char mid_status[7]; // 0x46cb00
 
 /* card.c */
 extern uint8_t card_amount[30];
