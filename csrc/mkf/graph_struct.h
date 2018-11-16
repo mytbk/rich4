@@ -3,6 +3,9 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+#ifndef RICH4_GRAPH_STRUCT_H_YxnQlWsLYw
+#define RICH4_GRAPH_STRUCT_H_YxnQlWsLYw
+
 #include <stdint.h>
 
 struct graph_st
@@ -17,3 +20,5 @@ struct graph_st
 
 struct graph_st * allocate_graph_st(int w, int h, int x, int y);
 struct graph_st * crop_graph(struct graph_st *a1, struct graph_st *a2, int x, int y, int w, int h);
+
+#endif
