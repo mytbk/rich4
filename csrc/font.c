@@ -89,14 +89,86 @@ void surface_bound(uint16_t *lpSurface, RECT *dim1, RECT *dim2)
 	}
 }
 
+static void fcn_00455fd9(int width, int16_t *sf, struct graph_st *a3,
+		int xx, int yy, int a6, int a7, int ww, int hh, int a10)
+{
+	xx -= a3->x;
+	yy -= a3->y;
+
+	if ((a10 & 1) == 0) {
+		if (xx >= 640 || xx + ww <= 0) {
+			return;
+		}
+		if (xx + ww > 640) {
+			ww = 640 - xx;
+		} else if (xx < 0) {
+			ww = xx + ww;
+			a6 -= xx;
+			xx = 0;
+		}
+
+		if (yy >= 480 || yy + hh <= 0) {
+			return;
+		}
+		if (yy + hh > 480) {
+			hh = 480 - yy;
+		} else if (yy < 0) {
+			hh = yy + hh;
+			a7 -= yy;
+			yy = 0;
+		}
+	} else {
+		if (xx >= draw_rect.right) {
+			return;
+		}
+		if (xx + ww <= draw_rect.left) {
+			return;
+		}
+		if (xx + ww > draw_rect.right) {
+			ww = draw_rect.right - xx;
+		} else if (xx < draw_rect.left) {
+			ww -= draw_rect.left - xx;
+			a6 += draw_rect.left - xx;
+			xx = draw_rect.left;
+		}
+
+		if (yy >= draw_rect.bottom) {
+			return;
+		}
+		if (yy + hh <= draw_rect.top) {
+			return;
+		}
+		if (yy + hh > draw_rect.bottom) {
+			hh = draw_rect.bottom - yy;
+		} else if (yy < draw_rect.top) {
+			hh -= draw_rect.top - yy;
+			a7 += draw_rect.top - yy;
+			yy = draw_rect.top;
+		}
+	}
+
+	int16_t *src = &a3->gdata[a3->width * a7 + a6];
+	int16_t *dst = &sf[width * yy + xx];
+
+	for (int i = 0; i < hh; i++) {
+		for (int j = 0; j < ww; j++) {
+			if (src[j] != 0)
+				dst[j] = src[j];
+		}
+
+		src += a3->width;
+		dst += width;
+	}
+}
+
 void fcn_4564e6(void *sf, int a1, int a2, int a3, int a4, int a5, int a6, int a7)
 {
-	fcn.00455fd9(640, sf, a1, a2, a3, a4, a5, a6, a7, 1);
+	fcn_00455fd9(640, sf, a1, a2, a3, a4, a5, a6, a7, 1);
 }
 
 void fcn_456495(void *sf, int a1, int a2, int a3, int a4, int a5, int a6, int a7)
 {
-	fcn.00455fd9(640, sf, a1, a2, a3, a4, a5, a6, a7, 0);
+	fcn_00455fd9(640, sf, a1, a2, a3, a4, a5, a6, a7, 0);
 }
 
 void draw_some_text(a1, const char *str, int a3, int a4, int a5)
