@@ -5,6 +5,8 @@
 
 #include <windows.h>
 #include <stdint.h>
+#include "global.h"
+#include "drawing.h"
 
 HFONT gFont; // 0x4762d0
 int gFontHeight; // 0x4762d4
@@ -55,10 +57,10 @@ void drawStringY(HDC hdc, int nXStart, int nYStart, LPCSTR str)
 
 void surface_bound(uint16_t *lpSurface, RECT *dim1, RECT *dim2)
 {
-	j_min = 10000;
-	i_min = 10000;
-	j_max = -10000;
-	i_max = -10000;
+	int j_min = 10000;
+	int i_min = 10000;
+	int j_max = -10000;
+	int i_max = -10000;
 
 
 	for (int i = 0; i < dim1->bottom; i++) {
@@ -86,7 +88,7 @@ void surface_bound(uint16_t *lpSurface, RECT *dim1, RECT *dim2)
 	} else {
 		dim2->left = j_min;
 		dim2->top = i_min;
-		dim2->right = j_max
+		dim2->right = j_max;
 		dim2->bottom = i_max;
 	}
 }
@@ -219,10 +221,8 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 		fmt_dim2.right = t2;
 		fmt_dim2.bottom = t1;
 	} else if (a5 == 4 || a5 == 7) {
-		eax = fmt_dim2.right / 2;
-		fmt_dim2.left = 256 - eax;
-		eax += 256;
-		fmt_dim2.right = eax;
+		fmt_dim2.left = 256 - fmt_dim2.right / 2;
+		fmt_dim2.right = 256 + fmt_dim2.right / 2;
 	}
 	uint8_t dh = gfa[0];
 	if ( (dh & 1) != 0 ) {
@@ -248,37 +248,36 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 			drawStringY(hDC, 0, 1, str);
 			drawStringY(hDC, 2, 1, str);
 		} else {
+			int mode;
 			if (a5 == 4 || a5 == 7) {
-				esi = 1;
+				mode = 1;
 			} else {
-				esi = 0;
+				mode = 0;
 			}
 
 			fmt_dim1.left = 1;
 			fmt_dim1.top = 0;
-			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, mode);
 
 			fmt_dim1.left = 1;
 			fmt_dim1.top = 2;
-			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, mode);
 
 			fmt_dim1.left = 0;
 			fmt_dim1.top = 1;
-			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, mode);
 
 			fmt_dim1.left = 2;
 			fmt_dim1.top = 1;
-			DrawTextA(hDC, str, strlen(str), &fmt_dim1, esi);
+			DrawTextA(hDC, str, strlen(str), &fmt_dim1, mode);
 		}
 	}
 
 	SetTextColor(hDC, txt_colors[0]);
 	if ( ((uint8_t)gfa[0] & 4) != 0 ) {
-		edi = 1;
 		fmt_dim1.left = 1;
 		fmt_dim1.top = 1;
 	} else {
-		ecx = 0;
 		fmt_dim1.left = 0;
 		fmt_dim1.top = 0;
 	}
@@ -303,8 +302,8 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 	int width = fmt_dim1.right - fmt_dim1.left + 1;
 	int height = fmt_dim1.bottom - fmt_dim1.top + 1;
 	gst_4762e8.gdata = desc.lpSurface;
-	eax = a5-1;
-	switch (eax) {
+
+	switch (a5 - 1) {
 		case 0:
 			a3 -= width;
 			break;
