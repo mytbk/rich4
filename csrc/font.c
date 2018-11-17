@@ -10,6 +10,8 @@ HFONT gFont; // 0x4762d0
 int gFontHeight; // 0x4762d4
 uint32_t gfa[2]; // 0x4762d8, 0x4762dc
 COLORREF txt_colors[2]; // 0x4762e0, 0x4762e4
+struct graph_st gst_4762e8;
+
 const char tfname[] = "\xb2\xd3\xa9\xfa\xc5\xe9"; // 0x4660a0, typeface name, BIG5:细明体
 
 static inline uint32_t swapbytes3(uint32_t x)
@@ -300,7 +302,7 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 	surface_bound(desc.lpSurface, &fmt_dim2, &fmt_dim1);
 	int width = fmt_dim1.right - fmt_dim1.left + 1;
 	int height = fmt_dim1.bottom - fmt_dim1.top + 1;
-	dw_4762f0 = desc.lpSurface;
+	gst_4762e8.gdata = desc.lpSurface;
 	eax = a5-1;
 	switch (eax) {
 		case 0:
@@ -328,18 +330,22 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 
 	if ( ((uint8_t)gfa[0] & 8) != 0) {
 		if (!gg) {
-			fcn_4564e6(sfdesc1.lpSurface, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
+			fcn_4564e6(sfdesc1.lpSurface, &gst_4762e8,
+					a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		} else {
-			fcn_00456356(gg, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
+			fcn_00456356(gg, &gst_4762e8,
+					a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		}
 	} else {
 		if (!gg) {
-			fcn_456495(sfdesc1.lpSurface, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
+			fcn_456495(sfdesc1.lpSurface, &gst_4762e8,
+					a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		} else {
-			fcn_00456328(gg, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
+			fcn_00456328(gg, &gst_4762e8,
+					a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		}
 	}
-	fcn.004561be(0x4762e8, fmt_dim1.left, fmt_dim1.top, width, height, 0);
+	fcn.004561be(&gst_4762e8, fmt_dim1.left, fmt_dim1.top, width, height, 0);
 	IDirectDrawSurface_Unlock(NULL);
 }
 
