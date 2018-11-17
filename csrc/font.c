@@ -345,7 +345,7 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 		}
 	}
 	fcn.004561be(&gst_4762e8, fmt_dim1.left, fmt_dim1.top, width, height, 0);
-	IDirectDrawSurface_Unlock(NULL);
+	IDirectDrawSurface_Unlock(pddrawsf3, NULL);
 }
 
 void deinit_font()

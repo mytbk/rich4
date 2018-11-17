@@ -13,6 +13,7 @@ extern IDirectDraw *pddraw; // 0x0048a0d8
 extern DDSURFACEDESC sfdesc1; // 0x0048a068
 extern IDirectDrawSurface *pddrawsf1; // 0x0048a0dc
 extern IDirectDrawSurface *pddrawsf2; // 0x0048a0e0
+extern IDirectDrawSurface *pddrawsf3; // 0x004762cc
 
 extern int mkf_data; // 0x48a0e4
 extern int mkf_speaking; // 0x48a054
