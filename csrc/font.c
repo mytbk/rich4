@@ -195,6 +195,19 @@ void speak_words(int n)
 	/* TODO */
 }
 
+void graph_fill(struct graph_st *gg, int left, int top, int width, int height, int v)
+{
+	uint16_t color = fcn_4551f0(v);
+	uint16_t *fill_line= &gg->gdata[gg->width * top + left];
+
+	for (int i = 0; i < height; i++) {
+		for (int j = 0; j < width; j++) {
+			fill_line[j] = color;
+		}
+		fill_line += gg->width;
+	}
+}
+
 void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5)
 {
 	DDSURFACEDESC desc; /* esp */
@@ -349,7 +362,7 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 					a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		}
 	}
-	fcn.004561be(&gst_4762e8, fmt_dim1.left, fmt_dim1.top, width, height, 0);
+	graph_fill(&gst_4762e8, fmt_dim1.left, fmt_dim1.top, width, height, 0);
 	IDirectDrawSurface_Unlock(pddrawsf3, NULL);
 }
 
