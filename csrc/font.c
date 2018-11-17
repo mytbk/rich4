@@ -174,7 +174,19 @@ void fcn_456495(void *sf, struct graph_st *a1, int a2, int a3, int a4, int a5, i
 	graph_overlay_2a(640, sf, a1, a2, a3, a4, a5, a6, a7, 0);
 }
 
-void draw_some_text(a1, const char *str, int a3, int a4, int a5)
+void fcn_00456356(struct graph_st *a1, struct graph_st *a2,
+		int a3, int a4, int a5, int a6, int a7, int a8)
+{
+	graph_overlay_2a(a1->width, a1->gdata, a2, a3, a4, a5, a6, a7, a8, 1);
+}
+
+void fcn_00456328(struct graph_st *a1, struct graph_st *a2,
+		int a3, int a4, int a5, int a6, int a7, int a8)
+{
+	graph_overlay_2a(a1->width, a1->gdata, a2, a3, a4, a5, a6, a7, a8, 0);
+}
+
+void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5)
 {
 	DDSURFACEDESC desc; /* esp */
 	RECT fmt_dim1; /* esp + 0x6c */
@@ -315,16 +327,16 @@ void draw_some_text(a1, const char *str, int a3, int a4, int a5)
 	}
 
 	if ( ((uint8_t)gfa[0] & 8) != 0) {
-		if (!a1) {
+		if (!gg) {
 			fcn_4564e6(sfdesc1.lpSurface, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		} else {
-			fcn.00456356(a1, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
+			fcn_00456356(gg, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		}
 	} else {
-		if (!a1) {
+		if (!gg) {
 			fcn_456495(sfdesc1.lpSurface, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		} else {
-			fcn.00456328(a1, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
+			fcn_00456328(gg, 0x4762e8, a3, a4, fmt_dim1.left, fmt_dim1.top, width, height);
 		}
 	}
 	fcn.004561be(0x4762e8, fmt_dim1.left, fmt_dim1.top, width, height, 0);
