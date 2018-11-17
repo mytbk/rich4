@@ -328,7 +328,7 @@ void player_say(int p, int t, const char *s)
 			fullscreen_overlay(sfdesc1.lpSurface, data_0207->chunk_tab[nn - 1], 240, 130);
 			if (esi == 5) {
 				eax = (s[1] - '0') * 1000 + (s[2] - '0') * 100 + (s[3] - '0') * 10 + (s[4] - '0');
-				fcn.0045441a(eax);
+				speak_words(eax);
 			}
 		} else {
 			draw_some_text(0, s, 200, 130, 5);

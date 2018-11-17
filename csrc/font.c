@@ -190,6 +190,11 @@ void fcn_00456328(struct graph_st *a1, struct graph_st *a2,
 	graph_overlay_2a(a1->width, a1->gdata, a2, a3, a4, a5, a6, a7, a8, 0);
 }
 
+void speak_words(int n)
+{
+	/* TODO */
+}
+
 void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5)
 {
 	DDSURFACEDESC desc; /* esp */
@@ -205,7 +210,7 @@ void draw_some_text(struct graph_st *gg, const char *str, int a3, int a4, int a5
 	if (str[0] == '#') {
 		int t = (str[1] - '0') * 1000 + (str[2] - '0') * 100 +
 			(str[3] - '0') * 10 + (str[4] - '0');
-		fcn.0045441a(t);
+		speak_words(t);
 		str += 5;
 	}
 	IDirectDrawSurface_GetDC(pddrawsf3, &hDC);
