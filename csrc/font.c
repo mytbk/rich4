@@ -89,7 +89,10 @@ void surface_bound(uint16_t *lpSurface, RECT *dim1, RECT *dim2)
 	}
 }
 
-static void fcn_00455fd9(int width, int16_t *sf, struct graph_st *a3,
+/* TODO: very similar to graph_overlay2 except the copying part,
+ * deduplicate the code
+ */
+static void graph_overlay_2a(int width, int16_t *sf, struct graph_st *a3,
 		int xx, int yy, int a6, int a7, int ww, int hh, int a10)
 {
 	xx -= a3->x;
@@ -161,14 +164,14 @@ static void fcn_00455fd9(int width, int16_t *sf, struct graph_st *a3,
 	}
 }
 
-void fcn_4564e6(void *sf, int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+void fcn_4564e6(void *sf, struct graph_st *a1, int a2, int a3, int a4, int a5, int a6, int a7)
 {
-	fcn_00455fd9(640, sf, a1, a2, a3, a4, a5, a6, a7, 1);
+	graph_overlay_2a(640, sf, a1, a2, a3, a4, a5, a6, a7, 1);
 }
 
-void fcn_456495(void *sf, int a1, int a2, int a3, int a4, int a5, int a6, int a7)
+void fcn_456495(void *sf, struct graph_st *a1, int a2, int a3, int a4, int a5, int a6, int a7)
 {
-	fcn_00455fd9(640, sf, a1, a2, a3, a4, a5, a6, a7, 0);
+	graph_overlay_2a(640, sf, a1, a2, a3, a4, a5, a6, a7, 0);
 }
 
 void draw_some_text(a1, const char *str, int a3, int a4, int a5)
