@@ -2579,7 +2579,7 @@ shl eax, 3
 add eax, ebx
 shl eax, 2
 lea edx, [esi + eax]
-mov edx, dword [edx + ref_0047f072]  ; mov edx, dword [edx + 0x47f072]
+mov edx, dword [edx + _game_stocks]  ; mov edx, dword [edx + 0x47f072]
 mov dword [eax + ref_00496980], edx  ; mov dword [eax + 0x496980], edx
 inc ebx
 cmp ebx, 0xc
@@ -8459,7 +8459,7 @@ shl eax, 4
 mov edx, eax
 shl eax, 3
 add eax, edx
-add eax, ref_0047f072  ; add eax, 0x47f072
+add eax, _game_stocks  ; add eax, 0x47f072
 push eax
 push ref_00496980  ; push 0x496980
 call _memcpy  ; call 0x456de8
@@ -95073,7 +95073,7 @@ shl eax, 3
 add eax, ebx
 shl eax, 2
 lea edx, [ecx + eax]
-mov edx, dword [edx + ref_0047f072]  ; mov edx, dword [edx + 0x47f072]
+mov edx, dword [edx + _game_stocks]  ; mov edx, dword [edx + 0x47f072]
 mov dword [eax + ref_00496980], edx  ; mov dword [eax + 0x496980], edx
 inc ebx
 cmp ebx, 0xc
@@ -168554,7 +168554,7 @@ dd 0x00000000
 db 0x00
 db 0x00
 
-ref_0047f072:
+_game_stocks:
 dd ref_0046677d
 db 0x01
 db 0x00
