@@ -5,7 +5,7 @@ LDFLAGS=-e fcn_0045709c
 LIBS=-lgdi32 -luser32 -lkernel32 -lwinmm -ldsound -lddraw
 LIBS+=-lmsvcrt
 
-OBJS = rich4.obj rich4_time.obj card_strings.obj stocks.obj
+OBJS = rich4.obj rich4_time.obj card_strings.obj stocks_data.obj
 
 rich4.exe: $(OBJS)
 	$(LD) -o $@ $(OBJS) $(LDFLAGS) $(LIBS)
