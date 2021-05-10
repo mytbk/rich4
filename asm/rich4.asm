@@ -133,6 +133,7 @@ extern _memcmp
 extern _get_local_time
 
 extern _card_strings
+;; extern _card_table
 
 section .text
 db 0xcc
@@ -8259,7 +8260,7 @@ add esp, 0xc
 xor ebx, ebx
 
 loc_004071a5:
-mov al, byte [ebx*8 + ref_0047fdf6]  ; mov al, byte [ebx*8 + 0x47fdf6]
+mov al, byte [ebx*8 + (_card_table + 4)]  ; mov al, byte [ebx*8 + 0x47fdf6]
 mov byte [ebx + ref_00499198], al  ; mov byte [ebx + 0x499198], al
 inc ebx
 cmp ebx, 0x1e
@@ -18841,7 +18842,7 @@ test eax, eax
 je near fcn_0040ece6  ; je 0x40ece6
 mov ebx, eax
 shl ebx, 3
-mov edi, dword [ebx + ref_0047fdea]  ; mov edi, dword [ebx + 0x47fdea]
+mov edi, dword [ebx + (_card_table - 8)]  ; mov edi, dword [ebx + 0x47fdea]
 push edi
 mov ebp, dword [esi*4 + ref_0047ed76]  ; mov ebp, dword [esi*4 + 0x47ed76]
 push ebp
@@ -18856,7 +18857,7 @@ push eax
 call fcn_00440cac  ; call 0x440cac
 add esp, 8
 xor eax, eax
-mov al, byte [ebx + ref_0047fdef]  ; mov al, byte [ebx + 0x47fdef]
+mov al, byte [ebx + (_card_table - 3)]  ; mov al, byte [ebx + 0x47fdef]
 push eax
 mov eax, dword [ref_0049910c]  ; mov eax, dword [0x49910c]
 push eax
@@ -18906,9 +18907,9 @@ call fcn_00441e12  ; call 0x441e12
 add esp, 4
 mov esi, eax
 shl esi, 3
-mov ebp, dword [esi + ref_0047fdea]  ; mov ebp, dword [esi + 0x47fdea]
+mov ebp, dword [esi + (_card_table - 8)]  ; mov ebp, dword [esi + 0x47fdea]
 push ebp
-mov eax, dword [ebx*8 + ref_0047fdea]  ; mov eax, dword [ebx*8 + 0x47fdea]
+mov eax, dword [ebx*8 + (_card_table - 8)]  ; mov eax, dword [ebx*8 + 0x47fdea]
 push eax
 push ref_00463353  ; push 0x463353
 lea eax, [esp + 0xc]
@@ -18921,9 +18922,9 @@ push eax
 call fcn_00440cac  ; call 0x440cac
 add esp, 8
 xor edx, edx
-mov dl, byte [ebx*8 + ref_0047fdef]  ; mov dl, byte [ebx*8 + 0x47fdef]
+mov dl, byte [ebx*8 + (_card_table - 3)]  ; mov dl, byte [ebx*8 + 0x47fdef]
 xor eax, eax
-mov al, byte [esi + ref_0047fdef]  ; mov al, byte [esi + 0x47fdef]
+mov al, byte [esi + (_card_table - 3)]  ; mov al, byte [esi + 0x47fdef]
 add eax, edx
 push eax
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -19104,7 +19105,7 @@ call fcn_00441e77  ; call 0x441e77
 add esp, 4
 test eax, eax
 je near fcn_0040ece6  ; je 0x40ece6
-mov esi, dword [eax*8 + ref_0047fdea]  ; mov esi, dword [eax*8 + 0x47fdea]
+mov esi, dword [eax*8 + (_card_table - 8)]  ; mov esi, dword [eax*8 + 0x47fdea]
 push esi
 push ref_004633ab  ; push 0x4633ab
 lea eax, [esp + 8]
@@ -35353,7 +35354,7 @@ mov ebx, eax
 add esp, 4
 test eax, eax
 je near loc_0041b3d0  ; je 0x41b3d0
-mov edi, dword [eax*8 + ref_0047fdea]  ; mov edi, dword [eax*8 + 0x47fdea]
+mov edi, dword [eax*8 + (_card_table - 8)]  ; mov edi, dword [eax*8 + 0x47fdea]
 push edi
 push ref_00463aa8  ; push 0x463aa8
 lea eax, [esp + 8]
@@ -35366,7 +35367,7 @@ push ebx
 call fcn_00441f73  ; call 0x441f73
 add esp, 8
 xor eax, eax
-mov al, byte [ebx*8 + ref_0047fdef]  ; mov al, byte [ebx*8 + 0x47fdef]
+mov al, byte [ebx*8 + (_card_table - 3)]  ; mov al, byte [ebx*8 + 0x47fdef]
 push eax
 mov ebp, dword [ref_0049910c]  ; mov ebp, dword [0x49910c]
 push ebp
@@ -36483,7 +36484,7 @@ push eax
 call fcn_004542e9  ; call 0x4542e9
 add esp, 4
 mov eax, ebx
-mov esi, dword [eax*8 + ref_0047fdea]  ; mov esi, dword [eax*8 + 0x47fdea]
+mov esi, dword [eax*8 + (_card_table - 8)]  ; mov esi, dword [eax*8 + 0x47fdea]
 push esi
 lea eax, [esp + 0x84]
 push eax
@@ -39640,7 +39641,7 @@ ret
 fcn_0041e69e:
 mov eax, dword [esp + 4]
 xor edx, edx
-mov dl, byte [eax*8 + ref_0047fdf1]  ; mov dl, byte [eax*8 + 0x47fdf1]
+mov dl, byte [eax*8 + (_card_table - 1)]  ; mov dl, byte [eax*8 + 0x47fdf1]
 imul eax, dword [ref_0049910c], 0x68  ; imul eax, dword [0x49910c], 0x68
 mov al, byte [eax + ref_00496b7f]  ; mov al, byte [eax + 0x496b7f]
 and eax, 0xff
@@ -41366,9 +41367,9 @@ mov dl, byte [edx + ref_00499120]  ; mov dl, byte [edx + 0x499120]
 and edx, 0xff
 mov eax, edx
 shl eax, 3
-cmp byte [eax + ref_0047fdf1], 1  ; cmp byte [eax + 0x47fdf1], 1
+cmp byte [eax + (_card_table - 1)], 1  ; cmp byte [eax + 0x47fdf1], 1
 jb short loc_0041fa03  ; jb 0x41fa03
-mov al, byte [eax + ref_0047fdef]  ; mov al, byte [eax + 0x47fdef]
+mov al, byte [eax + (_card_table - 3)]  ; mov al, byte [eax + 0x47fdef]
 and eax, 0xff
 cmp eax, esi
 jle short loc_0041fa03  ; jle 0x41fa03
@@ -41421,10 +41422,10 @@ mov dl, byte [edx + ref_00499120]  ; mov dl, byte [edx + 0x499120]
 and edx, 0xff
 mov eax, edx
 shl eax, 3
-cmp byte [eax + ref_0047fdf1], 2  ; cmp byte [eax + 0x47fdf1], 2
+cmp byte [eax + (_card_table - 1)], 2  ; cmp byte [eax + 0x47fdf1], 2
 jne short loc_0041faae  ; jne 0x41faae
 xor ecx, ecx
-mov cl, byte [eax + ref_0047fdef]  ; mov cl, byte [eax + 0x47fdef]
+mov cl, byte [eax + (_card_table - 3)]  ; mov cl, byte [eax + 0x47fdef]
 cmp ecx, esi
 jle short loc_0041faae  ; jle 0x41faae
 mov ax, word [esp + ebx*2]
@@ -46823,7 +46824,7 @@ mov ecx, dword [esp + 0x88]
 push ecx
 mov al, byte [eax + ref_00499120]  ; mov al, byte [eax + 0x499120]
 and eax, 0xff
-mov edi, dword [eax*8 + ref_0047fdea]  ; mov edi, dword [eax*8 + 0x47fdea]
+mov edi, dword [eax*8 + (_card_table - 8)]  ; mov edi, dword [eax*8 + 0x47fdea]
 push edi
 push 0
 call fcn_0044fabc  ; call 0x44fabc
@@ -51324,7 +51325,7 @@ push edi
 push ebx
 mov al, dl
 and eax, 0xff
-mov edx, dword [eax*8 + ref_0047fdea]  ; mov edx, dword [eax*8 + 0x47fdea]
+mov edx, dword [eax*8 + (_card_table - 8)]  ; mov edx, dword [eax*8 + 0x47fdea]
 push edx
 push 0
 call fcn_0044fabc  ; call 0x44fabc
@@ -51457,7 +51458,7 @@ jmp near loc_004261c4  ; jmp 0x4261c4
 loc_00426f0f:
 xor eax, eax
 mov al, dh
-mov al, byte [eax*8 + ref_0047fdef]  ; mov al, byte [eax*8 + 0x47fdef]
+mov al, byte [eax*8 + (_card_table - 3)]  ; mov al, byte [eax*8 + 0x47fdef]
 and eax, 0xff
 imul eax, eax, 0x64
 mov ebx, dword [ref_004990e8]  ; mov ebx, dword [0x4990e8]
@@ -52153,7 +52154,7 @@ add edx, 0x78
 push edx
 mov ax, word [eax + ref_004967e2]  ; mov ax, word [eax + 0x4967e2]
 and eax, 0xffff
-mov edi, dword [eax*8 + ref_0047fdea]  ; mov edi, dword [eax*8 + 0x47fdea]
+mov edi, dword [eax*8 + (_card_table - 8)]  ; mov edi, dword [eax*8 + 0x47fdea]
 push edi
 push 0
 call fcn_0044fabc  ; call 0x44fabc
@@ -52169,7 +52170,7 @@ sub eax, edx
 xor edx, edx
 mov dx, word [ecx + eax*4 + ref_004967e2]  ; mov dx, word [ecx + eax*4 + 0x4967e2]
 xor eax, eax
-mov al, byte [edx*8 + ref_0047fdef]  ; mov al, byte [edx*8 + 0x47fdef]
+mov al, byte [edx*8 + (_card_table - 3)]  ; mov al, byte [edx*8 + 0x47fdef]
 mov dword [esp + 0xe4], eax
 imul eax, dword [ref_004990e8], 0x64  ; imul eax, dword [0x4990e8], 0x64
 mov edx, dword [esp + 0xe4]
@@ -53526,7 +53527,7 @@ add esp, 8
 loc_0042892f:
 push 0
 mov eax, dword [esp + 0x14]
-mov al, byte [eax*8 + ref_0047fdef]  ; mov al, byte [eax*8 + 0x47fdef]
+mov al, byte [eax*8 + (_card_table - 3)]  ; mov al, byte [eax*8 + 0x47fdef]
 and eax, 0xff
 imul eax, eax, 0x64
 imul eax, dword [ref_004990e8]  ; imul eax, dword [0x4990e8]
@@ -53635,7 +53636,7 @@ cmp cl, 4
 jne short loc_00428a8c  ; jne 0x428a8c
 xor eax, eax
 mov ax, word [edx + ref_004967e2]  ; mov ax, word [edx + 0x4967e2]
-mov al, byte [eax*8 + ref_0047fdef]  ; mov al, byte [eax*8 + 0x47fdef]
+mov al, byte [eax*8 + (_card_table - 3)]  ; mov al, byte [eax*8 + 0x47fdef]
 and eax, 0xff
 imul eax, eax, 0x64
 mov esi, dword [ref_004990e8]  ; mov esi, dword [0x4990e8]
@@ -59356,8 +59357,8 @@ xor ecx, ecx
 mov cl, byte [esp]
 xor ebx, ebx
 mov bl, dl
-mov cl, byte [ecx*8 + ref_0047fdf7]  ; mov cl, byte [ecx*8 + 0x47fdf7]
-cmp cl, byte [ebx*8 + ref_0047fdf7]  ; cmp cl, byte [ebx*8 + 0x47fdf7]
+mov cl, byte [ecx*8 + (_card_table + 5)]  ; mov cl, byte [ecx*8 + 0x47fdf7]
+cmp cl, byte [ebx*8 + (_card_table + 5)]  ; cmp cl, byte [ebx*8 + 0x47fdf7]
 jbe short loc_0042d122  ; jbe 0x42d122
 mov eax, 0xffffffff
 
@@ -59366,8 +59367,8 @@ xor ebx, ebx
 mov bl, byte [esp]
 xor ecx, ecx
 mov cl, dl
-mov dl, byte [ebx*8 + ref_0047fdf7]  ; mov dl, byte [ebx*8 + 0x47fdf7]
-cmp dl, byte [ecx*8 + ref_0047fdf7]  ; cmp dl, byte [ecx*8 + 0x47fdf7]
+mov dl, byte [ebx*8 + (_card_table + 5)]  ; mov dl, byte [ebx*8 + 0x47fdf7]
+cmp dl, byte [ecx*8 + (_card_table + 5)]  ; cmp dl, byte [ecx*8 + 0x47fdf7]
 jae short loc_0042d140  ; jae 0x42d140
 mov eax, 1
 
@@ -59387,7 +59388,7 @@ add esp, 8
 imul ecx, dword [esp + 0x14], 0x68
 mov edx, dword [esp + 0x18]
 xor eax, eax
-mov al, byte [edx*8 + ref_0047fdef]  ; mov al, byte [edx*8 + 0x47fdef]
+mov al, byte [edx*8 + (_card_table - 3)]  ; mov al, byte [edx*8 + 0x47fdef]
 mov dword [esp + 0xc], eax
 fild word [esp + 0xc]
 fmul qword [ref_00464364]  ; fmul qword [0x464364]
@@ -59402,7 +59403,7 @@ fistp dword [esp + 8]
 mov eax, dword [esp + 8]
 mov word [ecx + ref_00496b98], ax  ; mov word [ecx + 0x496b98], ax
 xor eax, eax
-mov al, byte [edx*8 + ref_0047fdef]  ; mov al, byte [edx*8 + 0x47fdef]
+mov al, byte [edx*8 + (_card_table - 3)]  ; mov al, byte [edx*8 + 0x47fdef]
 add esp, 0x10
 ret
 
@@ -59460,7 +59461,7 @@ add esp, 8
 imul edx, dword [esp + 8], 0x68
 mov eax, dword [esp + 0xc]
 xor bh, bh
-mov bl, byte [eax*8 + ref_0047fdef]  ; mov bl, byte [eax*8 + 0x47fdef]
+mov bl, byte [eax*8 + (_card_table - 3)]  ; mov bl, byte [eax*8 + 0x47fdef]
 
 loc_0042d25c:
 sub word [edx + ref_00496b98], bx  ; sub word [edx + 0x496b98], bx
@@ -60609,7 +60610,7 @@ je near loc_0042d48d  ; je 0x42d48d
 xor eax, eax
 mov al, byte [ebx + ref_0048c31c]  ; mov al, byte [ebx + 0x48c31c]
 xor edx, edx
-mov dl, byte [eax*8 + ref_0047fdef]  ; mov dl, byte [eax*8 + 0x47fdef]
+mov dl, byte [eax*8 + (_card_table - 3)]  ; mov dl, byte [eax*8 + 0x47fdef]
 mov ecx, dword [ref_0049910c]  ; mov ecx, dword [0x49910c]
 imul eax, ecx, 0x68
 mov ax, word [eax + ref_00496b98]  ; mov ax, word [eax + 0x496b98]
@@ -60674,7 +60675,7 @@ push eax
 push 0x5a
 xor eax, eax
 mov al, byte [ebx + ref_0048c31c]  ; mov al, byte [ebx + 0x48c31c]
-mov edx, dword [eax*8 + ref_0047fdea]  ; mov edx, dword [eax*8 + 0x47fdea]
+mov edx, dword [eax*8 + (_card_table - 8)]  ; mov edx, dword [eax*8 + 0x47fdea]
 push edx
 mov eax, dword [ref_0048c308]  ; mov eax, dword [0x48c308]
 add eax, 0x18
@@ -60683,7 +60684,7 @@ call fcn_0044fabc  ; call 0x44fabc
 add esp, 0x14
 xor eax, eax
 mov al, byte [ebx + ref_0048c31c]  ; mov al, byte [ebx + 0x48c31c]
-mov al, byte [eax*8 + ref_0047fdef]  ; mov al, byte [eax*8 + 0x47fdef]
+mov al, byte [eax*8 + (_card_table - 3)]  ; mov al, byte [eax*8 + 0x47fdef]
 and eax, 0xff
 push eax
 push ref_00464374  ; push 0x464374
@@ -61219,13 +61220,13 @@ call fcn_00441e12  ; call 0x441e12
 add esp, 4
 mov ebx, eax
 shl ebx, 3
-mov esi, dword [ebx + ref_0047fdea]  ; mov esi, dword [ebx + 0x47fdea]
+mov esi, dword [ebx + (_card_table - 8)]  ; mov esi, dword [ebx + 0x47fdea]
 push esi
 lea eax, [esp + 0x124]
 push eax
 call fcn_00457d96  ; call 0x457d96
 add esp, 8
-mov bl, byte [ebx + ref_0047fdef]  ; mov bl, byte [ebx + 0x47fdef]
+mov bl, byte [ebx + (_card_table - 3)]  ; mov bl, byte [ebx + 0x47fdef]
 
 loc_0042e9ea:
 and ebx, 0xff
@@ -61364,7 +61365,7 @@ dec byte [esp + edx + 0x103]
 lea eax, [ebx + 0x53]
 push eax
 push 0x5a
-mov ecx, dword [edx*8 + ref_0047fdea]  ; mov ecx, dword [edx*8 + 0x47fdea]
+mov ecx, dword [edx*8 + (_card_table - 8)]  ; mov ecx, dword [edx*8 + 0x47fdea]
 push ecx
 mov eax, dword [ref_0048c308]  ; mov eax, dword [0x48c308]
 add eax, 0x18
@@ -61373,7 +61374,7 @@ call fcn_0044fabc  ; call 0x44fabc
 add esp, 0x14
 xor eax, eax
 mov al, byte [edi + ref_0048c31c]  ; mov al, byte [edi + 0x48c31c]
-mov al, byte [eax*8 + ref_0047fdef]  ; mov al, byte [eax*8 + 0x47fdef]
+mov al, byte [eax*8 + (_card_table - 3)]  ; mov al, byte [eax*8 + 0x47fdef]
 and eax, 0xff
 push eax
 push ref_00464374  ; push 0x464374
@@ -61542,7 +61543,7 @@ add eax, edi
 cmp byte [eax + ref_00499120], 0  ; cmp byte [eax + 0x499120], 0
 je short loc_0042ee1d  ; je 0x42ee1d
 xor ebx, ebx
-mov bl, byte [edi*8 + ref_0047fdf9]  ; mov bl, byte [edi*8 + 0x47fdf9]
+mov bl, byte [edi*8 + (_card_table + 7)]  ; mov bl, byte [edi*8 + 0x47fdf9]
 mov ecx, dword [ref_0049910c]  ; mov ecx, dword [0x49910c]
 imul edx, ecx, 0x68
 mov dl, byte [edx + ref_00496b7f]  ; mov dl, byte [edx + 0x496b7f]
@@ -61636,7 +61637,7 @@ test bh, bh
 je short loc_0042eecb  ; je 0x42eecb
 xor edx, edx
 mov dl, bh
-mov al, byte [edx*8 + ref_0047fdef]  ; mov al, byte [edx*8 + 0x47fdef]
+mov al, byte [edx*8 + (_card_table - 3)]  ; mov al, byte [edx*8 + 0x47fdef]
 and eax, 0xff
 cmp eax, esi
 jge short loc_0042eecb  ; jge 0x42eecb
@@ -61779,11 +61780,11 @@ jge short loc_0042f063  ; jge 0x42f063
 mov eax, edx
 shl eax, 3
 xor edx, edx
-mov dl, byte [eax + ref_0047fdf7]  ; mov dl, byte [eax + 0x47fdf7]
+mov dl, byte [eax + (_card_table + 5)]  ; mov dl, byte [eax + 0x47fdf7]
 cmp edi, edx
 jl short loc_0042f063  ; jl 0x42f063
 xor edx, edx
-mov dl, byte [eax + ref_0047fdf9]  ; mov dl, byte [eax + 0x47fdf9]
+mov dl, byte [eax + (_card_table + 7)]  ; mov dl, byte [eax + 0x47fdf9]
 imul eax, ecx, 0x68
 mov al, byte [eax + ref_00496b7f]  ; mov al, byte [eax + 0x496b7f]
 and eax, 0xff
@@ -61821,7 +61822,7 @@ je short loc_0042f16c  ; je 0x42f16c
 xor eax, eax
 mov edx, dword [esp + 0x130]
 mov al, byte [esp + edx + 0x80]
-mov dl, byte [eax*8 + ref_0047fdf7]  ; mov dl, byte [eax*8 + 0x47fdf7]
+mov dl, byte [eax*8 + (_card_table + 5)]  ; mov dl, byte [eax*8 + 0x47fdf7]
 and edx, 0xff
 cmp edi, edx
 jl short loc_0042f163  ; jl 0x42f163
@@ -61835,7 +61836,7 @@ add ebp, eax
 xor eax, eax
 mov edx, dword [esp + 0x130]
 mov al, byte [esp + edx + 0x80]
-mov al, byte [eax*8 + ref_0047fdf7]  ; mov al, byte [eax*8 + 0x47fdf7]
+mov al, byte [eax*8 + (_card_table + 5)]  ; mov al, byte [eax*8 + 0x47fdf7]
 and eax, 0xff
 sub edi, eax
 
@@ -65804,7 +65805,7 @@ push eax
 call fcn_00457110  ; call 0x457110
 add esp, 0xc
 mov eax, ebx
-mov ebx, dword [eax*8 + ref_0047fdea]  ; mov ebx, dword [eax*8 + 0x47fdea]
+mov ebx, dword [eax*8 + (_card_table - 8)]  ; mov ebx, dword [eax*8 + 0x47fdea]
 push ebx
 push ref_00464839  ; push 0x464839
 lea eax, [esp + 0x88]
@@ -84850,7 +84851,7 @@ cmp byte [eax + ref_00499120], 0  ; cmp byte [eax + 0x499120], 0
 je short loc_004412a1  ; je 0x4412a1
 xor edx, edx
 mov dl, byte [eax + ref_00499120]  ; mov dl, byte [eax + 0x499120]
-mov al, byte [edx*8 + ref_0047fdef]  ; mov al, byte [edx*8 + 0x47fdef]
+mov al, byte [edx*8 + (_card_table - 3)]  ; mov al, byte [edx*8 + 0x47fdef]
 and eax, 0xff
 cmp ebx, eax
 jle short loc_004412a1  ; jle 0x4412a1
@@ -85545,7 +85546,7 @@ lea eax, [esp + 0x84]
 push eax
 call fcn_00452946  ; call 0x452946
 add esp, 8
-mov ebp, dword [esi*8 + ref_0047fdea]  ; mov ebp, dword [esi*8 + 0x47fdea]
+mov ebp, dword [esi*8 + (_card_table - 8)]  ; mov ebp, dword [esi*8 + 0x47fdea]
 push ebp
 lea eax, [esp + 0x84]
 push eax
@@ -85656,7 +85657,7 @@ push edi
 push ebx
 mov al, dl
 and eax, 0xff
-mov edx, dword [eax*8 + ref_0047fdea]  ; mov edx, dword [eax*8 + 0x47fdea]
+mov edx, dword [eax*8 + (_card_table - 8)]  ; mov edx, dword [eax*8 + 0x47fdea]
 push edx
 push ebp
 call fcn_0044fabc  ; call 0x44fabc
@@ -85740,7 +85741,7 @@ add esp, 0xc
 test ebx, ebx
 je short loc_00441ce1  ; je 0x441ce1
 mov eax, ebx
-mov edx, dword [eax*8 + ref_0047fdea]  ; mov edx, dword [eax*8 + 0x47fdea]
+mov edx, dword [eax*8 + (_card_table - 8)]  ; mov edx, dword [eax*8 + 0x47fdea]
 push edx
 push ref_00465305  ; push 0x465305
 lea eax, [esp + 8]
@@ -85854,7 +85855,7 @@ cmp eax, 1
 jne short loc_00441d9c  ; jne 0x441d9c
 xor eax, eax
 mov al, byte [esp + ebx + 0x90]
-mov ecx, dword [eax*8 + ref_0047fdea]  ; mov ecx, dword [eax*8 + 0x47fdea]
+mov ecx, dword [eax*8 + (_card_table - 8)]  ; mov ecx, dword [eax*8 + 0x47fdea]
 push ecx
 push ref_00465305  ; push 0x465305
 lea eax, [esp + 8]
@@ -86037,7 +86038,7 @@ je short loc_00441f2d  ; je 0x441f2d
 xor edx, edx
 mov dl, byte [eax + ref_00499120]  ; mov dl, byte [eax + 0x499120]
 inc byte [edx + ref_00499197]  ; inc byte [edx + 0x499197]
-mov dl, byte [edx*8 + ref_0047fdef]  ; mov dl, byte [edx*8 + 0x47fdef]
+mov dl, byte [edx*8 + (_card_table - 3)]  ; mov dl, byte [edx*8 + 0x47fdef]
 and edx, 0xff
 add ebx, edx
 xor dh, dh
@@ -88812,7 +88813,7 @@ add esp, 0xc
 mov ebx, eax
 test eax, eax
 je near loc_00441f1b  ; je 0x441f1b
-mov al, byte [eax*8 + ref_0047fdef]  ; mov al, byte [eax*8 + 0x47fdef]
+mov al, byte [eax*8 + (_card_table - 3)]  ; mov al, byte [eax*8 + 0x47fdef]
 and eax, 0xff
 push eax
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -109344,7 +109345,7 @@ jmp short loc_0045271a  ; jmp 0x45271a
 loc_004526d3:
 cmp ebx, 4
 jne short loc_0045271a  ; jne 0x45271a
-mov edi, dword [eax + ref_0047fdea]  ; mov edi, dword [eax + 0x47fdea]
+mov edi, dword [eax + (_card_table - 8)]  ; mov edi, dword [eax + 0x47fdea]
 push edi
 lea eax, [esp + 0x84]
 push eax
@@ -109352,7 +109353,7 @@ push ref_004661c4  ; push 0x4661c4
 jmp short loc_0045272f  ; jmp 0x45272f
 
 loc_004526ee:
-mov ecx, dword [eax + ref_0047fdea]  ; mov ecx, dword [eax + 0x47fdea]
+mov ecx, dword [eax + (_card_table - 8)]  ; mov ecx, dword [eax + 0x47fdea]
 push ecx
 lea eax, [esp + 0x84]
 push eax
@@ -109360,7 +109361,7 @@ push ref_004661dd  ; push 0x4661dd
 jmp short loc_0045272f  ; jmp 0x45272f
 
 loc_00452704:
-mov edx, dword [eax + ref_0047fdea]  ; mov edx, dword [eax + 0x47fdea]
+mov edx, dword [eax + (_card_table - 8)]  ; mov edx, dword [eax + 0x47fdea]
 push edx
 lea eax, [esp + 0x84]
 push eax
@@ -109368,7 +109369,7 @@ push ref_004661f2  ; push 0x4661f2
 jmp short loc_0045272f  ; jmp 0x45272f
 
 loc_0045271a:
-mov ebx, dword [ebp*8 + ref_0047fdea]  ; mov ebx, dword [ebp*8 + 0x47fdea]
+mov ebx, dword [ebp*8 + (_card_table - 8)]  ; mov ebx, dword [ebp*8 + 0x47fdea]
 push ebx
 lea eax, [esp + 0x84]
 push eax
@@ -109385,7 +109386,7 @@ push ebp
 call fcn_00441f73  ; call 0x441f73
 add esp, 8
 xor eax, eax
-mov al, byte [ebp*8 + ref_0047fdef]  ; mov al, byte [ebp*8 + 0x47fdef]
+mov al, byte [ebp*8 + (_card_table - 3)]  ; mov al, byte [ebp*8 + 0x47fdef]
 push eax
 push esi
 call fcn_0044f230  ; call 0x44f230
@@ -169704,30 +169705,20 @@ dd 0x000041f0
 dd 0x999a41f0
 db 0x99
 db 0x3f
-
-ref_0047fdea:
 db 0x00
 db 0x00
 db 0x00
 db 0x00
 db 0x00
-
-ref_0047fdef:
+db 0x00
 db 0x00
 db 0x00
 
-ref_0047fdf1:
-db 0x00
-dd ref_00466ac2
-
-ref_0047fdf6:
+_card_table:			; 0x47fdf2
+dd ref_00466ac2			; card 0
 db 0x01
-
-ref_0047fdf7:
 db 0xc8
 db 0x02
-
-ref_0047fdf9:
 db 0x02
 dd ref_00466ac9
 db 0x02
@@ -169821,7 +169812,7 @@ db 0x00
 db 0x00
 
 ref_0047fe8a:
-dd ref_00466b47
+dd ref_00466b47			; card 19
 db 0x04
 db 0x19
 db 0x00
@@ -169843,14 +169834,14 @@ db 0x00
 db 0x00
 
 ref_0047feaa:
-dd ref_00466b63
+dd ref_00466b63			; card 23
 db 0x03
 db 0x32
 db 0x00
 db 0x00
 
 ref_0047feb2:
-dd ref_00466b68
+dd ref_00466b68			; card 24
 db 0x03
 db 0x1e
 db 0x00
@@ -169877,7 +169868,7 @@ db 0x00
 db 0x00
 
 ref_0047feda:
-dd ref_00466b89
+dd ref_00466b89			; card 29 (last card)
 db 0x03
 
 ref_0047fedf:
