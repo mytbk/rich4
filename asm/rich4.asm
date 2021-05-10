@@ -130,6 +130,8 @@ extern _memcpy
 extern _strlen
 extern _memcmp
 
+extern _get_local_time
+
 section .text
 db 0xcc
 db 0xeb
@@ -22525,7 +22527,7 @@ cmp ebx, 3
 jl short loc_00411a01  ; jl 0x411a01
 mov eax, esp
 push eax
-call fcn_00458331  ; call 0x458331
+call _get_local_time  ; call 0x458331
 add esp, 4
 xor eax, eax
 mov ax, word [esp + 2]
@@ -22573,7 +22575,7 @@ fcn_00411aa3:
 sub esp, 8
 mov eax, esp
 push eax
-call fcn_00458331  ; call 0x458331
+call _get_local_time  ; call 0x458331
 add esp, 4
 xor eax, eax
 mov ax, word [esp + 2]
@@ -22970,7 +22972,7 @@ add esp, 0xc
 loc_00411f1e:
 mov eax, esp
 push eax
-call fcn_00458331  ; call 0x458331
+call _get_local_time  ; call 0x458331
 add esp, 4
 mov edx, dword [esp + 2]
 cmp dx, 0x7ce
@@ -118699,31 +118701,6 @@ mov eax, edi
 pop edi
 pop esi
 ret
-
-fcn_00458331:
-push ebx
-sub esp, 0x10
-mov ebx, dword [esp + 0x18]
-mov eax, esp
-push eax
-call dword [cs:__imp__GetLocalTime@4]  ; ucall: call dword cs:[0x4623b0]
-mov al, byte [esp + 6]
-mov byte [ebx], al
-mov al, byte [esp + 2]
-mov byte [ebx + 1], al
-mov eax, dword [esp]
-mov word [ebx + 2], ax
-mov al, byte [esp + 4]
-mov byte [ebx + 4], al
-add esp, 0x10
-pop ebx
-ret
-
-endloc_00458363:
-db 0x00
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
 
 fcn_00458370:
 push edx
