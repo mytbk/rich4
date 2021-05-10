@@ -15,3 +15,8 @@ rich4.exe: $(OBJS)
 
 %.obj: %.c
 	$(CC) $(CFLAGS) -c -o $@ $<
+
+.PHONY: clean
+
+clean:
+	rm -f rich4.exe $(OBJS)
