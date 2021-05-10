@@ -128,6 +128,7 @@ global fcn_0045709c
 
 extern _memcpy
 extern _strlen
+extern _memcmp
 
 section .text
 db 0xcc
@@ -106004,14 +106005,14 @@ loc_0045051b:
 push 3
 push ref_004660a8  ; push 0x4660a8
 push ebx
-call fcn_00458599  ; call 0x458599
+call _memcmp  ; call 0x458599
 add esp, 0xc
 test eax, eax
 je short loc_00450543  ; je 0x450543
 push 3
 push ref_004660ac  ; push 0x4660ac
 push ebx
-call fcn_00458599  ; call 0x458599
+call _memcmp  ; call 0x458599
 add esp, 0xc
 test eax, eax
 jne short loc_0045054c  ; jne 0x45054c
@@ -119012,30 +119013,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-fcn_00458599:
-push esi
-push edi
-mov ecx, dword [esp + 0x14]
-mov edi, dword [esp + 0x10]
-mov esi, dword [esp + 0xc]
-push es
-mov eax, ds
-mov es, eax
-xor eax, eax
-repe cmpsb  ; repe cmpsb byte [esi], byte ptr es:[edi]
-je short loc_004585b7  ; je 0x4585b7
-sbb eax, eax
-sbb eax, 0xffffffff
-
-loc_004585b7:
-pop es
-pop edi
-pop esi
-ret
-
-endloc_004585bb:
-db 0x00
 
 fcn_004585bc:
 jmp near fcn_00459dc7  ; jmp 0x459dc7
