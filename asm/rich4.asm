@@ -126,6 +126,8 @@ extern __imp__DirectDrawCreate@12
 ; link flag and libs: -e fcn_0045709c -lgdi32 -luser32 -lkernel32 -lwinmm -ldsound -lddraw
 global fcn_0045709c
 
+extern _memcpy
+
 section .text
 db 0xcc
 db 0xeb
@@ -615,7 +617,7 @@ push 0x96000
 push ebx
 mov ecx, dword [ref_0048a08c]  ; mov ecx, dword [0x48a08c]
 push ecx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
 mov edx, dword [eax]
@@ -5414,7 +5416,7 @@ sub eax, edx
 shl eax, 2
 add eax, ref_0048a35c  ; add eax, 0x48a35c
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0xc
 push 0
@@ -5540,7 +5542,7 @@ mov esi, dword [ref_0048a354]  ; mov esi, dword [0x48a354]
 push esi
 mov edi, dword [ref_0048a08c]  ; mov edi, dword [0x48a08c]
 push edi
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
 mov eax, dword [eax]
@@ -8357,7 +8359,7 @@ imul eax, eax, 0x68
 add eax, ref_0047e80c  ; add eax, 0x47e80c
 push eax
 push ebp
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov eax, dword [edi + ref_0048a35c]  ; mov eax, dword [edi + 0x48a35c]
 sar eax, 0x1f
@@ -8375,7 +8377,7 @@ loc_00407319:
 push 0x50
 push ref_0047ecec  ; push 0x47ecec
 push ref_00498e28  ; push 0x498e28
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 8
 push 0
@@ -8453,7 +8455,7 @@ add eax, edx
 add eax, ref_0047f072  ; add eax, 0x47f072
 push eax
 push ref_00496980  ; push 0x496980
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 xor ebx, ebx
 mov dword [esp + 8], esi
@@ -8723,7 +8725,7 @@ mov edx, dword [ref_0048a354]  ; mov edx, dword [0x48a354]
 push edx
 mov ecx, dword [ref_0048a08c]  ; mov ecx, dword [0x48a08c]
 push ecx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
 mov edx, dword [eax]
@@ -9089,7 +9091,7 @@ mov eax, dword [ref_00474945]  ; mov eax, dword [0x474945]
 add eax, 0x10
 push eax
 push ref_0048b6b4  ; push 0x48b6b4
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov eax, dword [ref_00474945]  ; mov eax, dword [0x474945]
 lea edx, [eax + 0x210]
@@ -18057,7 +18059,7 @@ lea eax, [esp + 0x14]
 push eax
 lea eax, [esp + 8]
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x3c
 call fcn_0045285e  ; call 0x45285e
@@ -18393,7 +18395,7 @@ lea eax, [esp + 0x24]
 push eax
 lea eax, [esp + 0x18]
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 
 loc_0040e914:
 add esp, 0xc
@@ -18432,7 +18434,7 @@ lea eax, [esp + 0x24]
 push eax
 lea eax, [esp + 8]
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 call dword [cs:__imp__timeGetTime@0]  ; ucall: call dword cs:[0x46246c]
 sub eax, esi
@@ -20722,7 +20724,7 @@ mov dword [ref_00474d74], 0xffffffff  ; mov dword [0x474d74], 0xffffffff
 push 0x10
 push ref_00497158  ; push 0x497158
 push ref_0048bb48  ; push 0x48bb48
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 xor eax, eax
 mov ax, si
@@ -21173,7 +21175,7 @@ movzx esi, byte [ref_0049715d]  ; movzx esi, byte [0x49715d]
 push 0x10
 push ref_0048bb48  ; push 0x48bb48
 push ref_00497158  ; push 0x497158
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 call fcn_00411f80  ; call 0x411f80
 cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
@@ -21908,7 +21910,7 @@ mov dword [ref_0048bbae], eax  ; mov dword [0x48bbae], eax
 push 0x38
 push ref_00497168  ; push 0x497168
 push ref_0048bb10  ; push 0x48bb10
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edi, dword [ref_0048bb92]  ; mov edi, dword [0x48bb92]
 push edi
@@ -22272,7 +22274,7 @@ jne near loc_00411804  ; jne 0x411804
 push 0x38
 push ref_0047edc2  ; push 0x47edc2
 push ref_0048bb10  ; push 0x48bb10
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov ebp, dword [ref_0048bb92]  ; mov ebp, dword [0x48bb92]
 push ebp
@@ -22318,7 +22320,7 @@ add esp, 4
 push 0x38
 push ref_0048bb10  ; push 0x48bb10
 push ref_00497168  ; push 0x497168
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 call fcn_00411f80  ; call 0x411f80
 mov edi, dword [ref_0048bb92]  ; mov edi, dword [0x48bb92]
@@ -22960,7 +22962,7 @@ mov byte [ref_00497164], ch  ; mov byte [0x497164], ch
 push 0x38
 push ref_0047edc2  ; push 0x47edc2
 push ref_00497168  ; push 0x497168
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 
 loc_00411f1e:
@@ -24313,7 +24315,7 @@ push 0x10
 lea eax, [esp + 4]
 push eax
 push ref_0048bd5c  ; push 0x48bd5c
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 cmp dword [esp + 0x10], 0
 jge short loc_00412efd  ; jge 0x412efd
@@ -48239,7 +48241,7 @@ sub eax, ecx
 shl eax, 2
 add eax, ebx
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0xc
 push 0
@@ -54572,7 +54574,7 @@ add eax, edx
 push eax
 add edx, ecx
 push edx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov byte [ebx + 0x1f], 0
 
@@ -61299,7 +61301,7 @@ push 0x1e
 push ref_00499198  ; push 0x499198
 lea eax, [esp + 0x108]
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 call fcn_00456f2d  ; call 0x456f2d
 mov edx, eax
@@ -84938,7 +84940,7 @@ add eax, edx
 push eax
 add edx, ebx
 push edx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 add ebx, ebp
 xor ah, ah
@@ -94489,7 +94491,7 @@ push ref_00496b68  ; push 0x496b68
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 8
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x50
 push ref_00498e28  ; push 0x498e28
@@ -94508,7 +94510,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x1a8
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x450
 push ref_00496d08  ; push 0x496d08
@@ -94527,7 +94529,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x1f8
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x3c
 push ref_00499120  ; push 0x499120
@@ -94546,7 +94548,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x648
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x3c
 push ref_0049915c  ; push 0x49915c
@@ -94565,7 +94567,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x684
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x1e
 push ref_00499198  ; push 0x499198
@@ -94584,7 +94586,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x6c0
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 8
 push ref_00497320  ; push 0x497320
@@ -94603,7 +94605,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x6de
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
 mov eax, edx
@@ -94624,7 +94626,7 @@ push ref_00497328  ; push 0x497328
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x6ec
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x180
 push ref_004971a0  ; push 0x4971a0
@@ -94643,7 +94645,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x21ec
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x1b0
 push ref_00496980  ; push 0x496980
@@ -94662,7 +94664,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x236c
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x150
 push ref_004967e0  ; push 0x4967e0
@@ -94681,7 +94683,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x251c
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
 mov eax, edx
@@ -94716,7 +94718,7 @@ push ref_004990b8  ; push 0x4990b8
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x268c
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 8
 push ref_00496b30  ; push 0x496b30
@@ -94735,7 +94737,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26b0
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 8
 push ref_00496b60  ; push 0x496b60
@@ -94754,7 +94756,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26b8
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
 mov eax, edx
@@ -94777,7 +94779,7 @@ push ref_00499090  ; push 0x499090
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26c8
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x25
 push ref_00496b38  ; push 0x496b38
@@ -94796,7 +94798,7 @@ add eax, edx
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26ec
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edi, dword [ref_00498e94]  ; mov edi, dword [0x498e94]
 push edi
@@ -94814,7 +94816,7 @@ shl eax, 3
 mov edx, eax
 mov ecx, dword [edx + eax*8 + ref_0048f294]  ; mov ecx, dword [edx + eax*8 + 0x48f294]
 push ecx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 
 loc_00448541:
@@ -94854,7 +94856,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 8
 push eax
 push ref_00496b68  ; push 0x496b68
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 xor ebx, ebx
 mov ecx, dword [ref_00499114]  ; mov ecx, dword [0x499114]
@@ -94889,7 +94891,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x1a8
 push eax
 push ref_00498e28  ; push 0x498e28
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x450
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -94908,7 +94910,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x1f8
 push eax
 push ref_00496d08  ; push 0x496d08
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x3c
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -94927,7 +94929,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x648
 push eax
 push ref_00499120  ; push 0x499120
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x3c
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -94946,7 +94948,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x684
 push eax
 push ref_0049915c  ; push 0x49915c
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x1e
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -94965,7 +94967,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x6c0
 push eax
 push ref_00499198  ; push 0x499198
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 8
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -94984,7 +94986,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x6de
 push eax
 push ref_00497320  ; push 0x497320
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
 mov eax, edx
@@ -95005,7 +95007,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x6ec
 push eax
 push ref_00497328  ; push 0x497328
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x180
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -95024,7 +95026,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x21ec
 push eax
 push ref_004971a0  ; push 0x4971a0
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x1b0
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -95043,7 +95045,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x236c
 push eax
 push ref_00496980  ; push 0x496980
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 xor ebx, ebx
 
@@ -95086,7 +95088,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x251c
 push eax
 push ref_004967e0  ; push 0x4967e0
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
 mov eax, edx
@@ -95121,7 +95123,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x268c
 push eax
 push ref_004990b8  ; push 0x4990b8
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 8
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -95140,7 +95142,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26b0
 push eax
 push ref_00496b30  ; push 0x496b30
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 8
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -95159,7 +95161,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26b8
 push eax
 push ref_00496b60  ; push 0x496b60
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
 mov eax, edx
@@ -95182,7 +95184,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26c8
 push eax
 push ref_00499090  ; push 0x499090
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 push 0x25
 mov edx, dword [ref_0049910c]  ; mov edx, dword [0x49910c]
@@ -95201,7 +95203,7 @@ add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 0x26ec
 push eax
 push ref_00496b38  ; push 0x496b38
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov ebx, dword [ref_00498e94]  ; mov ebx, dword [0x498e94]
 push ebx
@@ -95219,7 +95221,7 @@ mov esi, dword [edx + eax*8 + ref_0048f294]  ; mov esi, dword [edx + eax*8 + 0x4
 push esi
 mov edi, dword [ref_0047493c]  ; mov edi, dword [0x47493c]
 push edi
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 call fcn_0040c03b  ; call 0x40c03b
 xor ebx, ebx
@@ -108339,7 +108341,7 @@ push eax
 lea eax, [edi + edi]
 add eax, ref_0048c898  ; add eax, 0x48c898
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 xor esi, esi
 mov eax, dword [ref_0048a08c]  ; mov eax, dword [0x48a08c]
@@ -108357,7 +108359,7 @@ push eax
 push ebx
 lea eax, [ebx + 0x502]
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 inc esi
 sub ebx, 0x500
@@ -108470,7 +108472,7 @@ push eax
 push ebx
 lea eax, [ebx - 0x502]
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 inc esi
 add ebx, 0x500
@@ -108505,7 +108507,7 @@ add eax, eax
 mov ebx, dword [ref_0048a08c]  ; mov ebx, dword [0x48a08c]
 add eax, ebx
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
 mov ebx, dword [eax]
@@ -109479,7 +109481,7 @@ je short loc_00452828  ; je 0x452828
 push 0x10
 push edi
 push esi
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 
 loc_00452828:
@@ -111399,7 +111401,7 @@ push 0x10
 lea eax, [esi + 0x14]
 push eax
 push ref_0048cb3c  ; push 0x48cb3c
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 xor edx, edx
 mov word [ref_0048cb4c], dx  ; mov word [0x48cb4c], dx
@@ -111495,7 +111497,7 @@ lea eax, [ebx + 8]
 push eax
 mov esi, dword [esp + 0xc]
 push esi
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov ebp, dword [esp + 0xc]
 cmp edi, ebp
@@ -111507,7 +111509,7 @@ add ebx, 8
 push ebx
 mov ecx, dword [esp + 0x10]
 push ecx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 
 loc_00453f40:
@@ -111579,7 +111581,7 @@ push 0x10
 lea eax, [ebx + 0x14]
 push eax
 push ref_0048cb3c  ; push 0x48cb3c
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 xor edx, edx
 mov word [ref_0048cb4c], dx  ; mov word [0x48cb4c], dx
@@ -111653,7 +111655,7 @@ lea eax, [ebx + 8]
 push eax
 mov edx, dword [esp + 8]
 push edx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov ecx, dword [esp + 8]
 cmp edi, ecx
@@ -111665,7 +111667,7 @@ add ebx, 8
 push ebx
 mov edx, dword [esp + 0xc]
 push edx
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 
 loc_004540a7:
@@ -116228,29 +116230,6 @@ pop edi
 pop esi
 pop ecx
 pop ebp
-ret
-
-fcn_00456de8:
-push esi
-push edi
-mov ecx, dword [esp + 0x14]
-mov esi, dword [esp + 0x10]
-mov edi, dword [esp + 0xc]
-push es
-mov eax, ds
-mov es, eax
-push edi
-mov eax, ecx
-shr ecx, 2
-repne movsd
-mov cl, al
-and cl, 3
-repne movsb  ; repne movsb byte es:[edi], byte ptr [esi]
-pop edi
-pop es
-mov eax, edi
-pop edi
-pop esi
 ret
 
 fcn_00456e11:
@@ -122610,7 +122589,7 @@ je short loc_0045a660  ; je 0x45a660
 push esi
 push dword [ebp + 0x10]
 push eax
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 
 loc_0045a660:
@@ -133541,7 +133520,7 @@ push ecx
 mov eax, dword [ref_00499948]  ; mov eax, dword [0x499948]
 push eax
 push edi
-call fcn_00456de8  ; call 0x456de8
+call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov edx, dword [esp + 4]
 push edx
