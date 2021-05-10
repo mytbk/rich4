@@ -127,6 +127,7 @@ extern __imp__DirectDrawCreate@12
 global fcn_0045709c
 
 extern _memcpy
+extern _strlen
 
 section .text
 db 0xcc
@@ -11408,7 +11409,7 @@ call fcn_00457110  ; call 0x457110
 add esp, 0xc
 lea eax, [esp + 0x18]
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 mov dword [esp + 0x58], eax
 imul edx, eax, 0x32
@@ -24220,7 +24221,7 @@ call fcn_00457110  ; call 0x457110
 add esp, 0xc
 lea eax, [esp + 0x30]
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 mov edi, eax
 mov ebx, eax
@@ -26340,7 +26341,7 @@ call fcn_00457110  ; call 0x457110
 add esp, 0xc
 mov eax, esp
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 mov edi, eax
 shl eax, 5
@@ -62156,7 +62157,7 @@ jmp short loc_0042f4e8  ; jmp 0x42f4e8
 loc_0042f52c:
 mov eax, esp
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 mov edi, eax
 test eax, eax
@@ -62893,7 +62894,7 @@ call fcn_004563f5  ; call 0x4563f5
 add esp, 0x10
 lea eax, [esp + 0x50]
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 lea ebx, [eax - 1]
 mov esi, 0xb8
@@ -71733,7 +71734,7 @@ push eax
 call dword [edx + 0x64]  ; ucall
 xor edi, edi
 push ref_0048c3f8  ; push 0x48c3f8
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 lea ebx, [eax - 1]
 jmp short loc_00436ded  ; jmp 0x436ded
@@ -72547,7 +72548,7 @@ jmp near loc_004378f4  ; jmp 0x4378f4
 
 loc_0043778c:
 push ref_0048c3f8  ; push 0x48c3f8
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 cmp eax, 1
 jle short loc_004377b2  ; jle 0x4377b2
@@ -72621,7 +72622,7 @@ jmp near loc_00437774  ; jmp 0x437774
 
 loc_0043787e:
 push ref_0048c3f8  ; push 0x48c3f8
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 mov ebx, eax
 cmp eax, 0xa
@@ -102473,7 +102474,7 @@ jge short loc_0044debe  ; jge 0x44debe
 mov eax, dword [ref_004762b4]  ; mov eax, dword [0x4762b4]
 add eax, ebx
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 inc eax
 add ebx, eax
@@ -102551,7 +102552,7 @@ add esp, 0x14
 mov eax, dword [ref_004762b4]  ; mov eax, dword [0x4762b4]
 add eax, ebx
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 inc eax
 add ebx, eax
@@ -102761,7 +102762,7 @@ add esp, 0x14
 mov eax, dword [ref_004762b4]  ; mov eax, dword [0x4762b4]
 add eax, esi
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 inc eax
 add esi, eax
@@ -105075,7 +105076,7 @@ push 0x400
 lea eax, [esp + 0x80]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105147,7 +105148,7 @@ push 1
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105160,7 +105161,7 @@ push 0
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105227,7 +105228,7 @@ push esi
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105241,7 +105242,7 @@ push esi
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105255,7 +105256,7 @@ push esi
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105268,7 +105269,7 @@ push esi
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105323,7 +105324,7 @@ push 1
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -105336,7 +105337,7 @@ push 0
 lea eax, [esp + 0x70]
 push eax
 push ebx
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 push eax
 push ebx
@@ -109427,7 +109428,7 @@ call fcn_00457d61  ; call 0x457d61
 add esp, 0xc
 mov eax, esp
 push eax
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 mov dword [esp + 0x28], eax
 mov ecx, eax
@@ -109637,7 +109638,7 @@ xor esi, esi
 
 loc_00452956:
 push edi
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 lea edx, [esi + ebp]
 cmp ebx, eax
@@ -109701,7 +109702,7 @@ push eax
 call dword [ebx + 0x64]  ; ucall
 xor edi, edi
 push ref_0048caac  ; push 0x48caac
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 lea ebx, [eax - 1]
 jmp short loc_00452a32  ; jmp 0x452a32
@@ -110325,7 +110326,7 @@ jmp short loc_00453100  ; jmp 0x453100
 
 loc_00453156:
 push ref_0048caac  ; push 0x48caac
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 cmp eax, 1
 jle short loc_00453172  ; jle 0x453172
@@ -110342,7 +110343,7 @@ jmp near loc_00453100  ; jmp 0x453100
 
 loc_00453189:
 push ref_0048caac  ; push 0x48caac
-call fcn_0045825d  ; call 0x45825d
+call _strlen  ; call 0x45825d
 add esp, 4
 mov dword [esp + 0x68], eax
 cmp eax, 9
@@ -118596,23 +118597,6 @@ jmp near loc_00457eb8  ; jmp 0x457eb8
 loc_00458257:
 leave
 jmp near loc_00457e3d  ; jmp 0x457e3d
-
-fcn_0045825d:
-push edi
-mov edi, dword [esp + 8]
-push es
-mov eax, ds
-mov es, eax
-sub ecx, ecx
-dec ecx
-xor eax, eax
-repne scasb  ; repne scasb al, byte es:[edi]
-not ecx
-dec ecx
-pop es
-mov eax, ecx
-pop edi
-ret
 
 fcn_00458276:
 mov eax, dword [esp + 4]
