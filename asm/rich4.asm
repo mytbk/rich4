@@ -1161,7 +1161,7 @@ dd loc_00401def
 dd loc_00401e25
 dd loc_00401e2f
 
-fcn_00401b9c:
+rich4_main:
 push ebx
 push esi
 push ebp
@@ -119536,7 +119536,7 @@ push 0
 push 0
 call dword [cs:__imp__GetModuleHandleA@4]  ; ucall: call dword cs:[0x4623bc]
 push eax
-call fcn_00401b9c  ; call 0x401b9c
+call rich4_main  ; call 0x401b9c
 push eax
 call fcn_0045ae23  ; call 0x45ae23
 add esp, 4
