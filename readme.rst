@@ -14,6 +14,8 @@
 * asm: rich4.exe 的反汇编，并将部分汇编代码替换为C代码
 * docs: 相关文档
 
+要查看原始的反汇编代码，可以执行 ``git show rich4_asm:asm/rich4.asm`` 查看。
+
 构建
 -------
 
