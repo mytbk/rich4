@@ -99,4 +99,5 @@ stock_info game_stocks[96] = {
 	{ "\xb7\x52\xad\x7d\xb9\x46", 0, 0, 0, 10000, 0, 30.0, 30.0, 30.0, 1.200000, 0.0, 0 }, /* 爱迪达 */
 };
 
+stock_info stocks_on_map[12];
 player_stock_info player_stocks[48];

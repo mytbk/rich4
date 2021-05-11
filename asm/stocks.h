@@ -16,7 +16,7 @@ typedef struct
 	uint32_t f32;
 } stock_info;
 
-extern stock_info stocks[]; /* 0x496980 */
+extern stock_info stocks_on_map[]; /* 0x496980 */
 extern stock_info game_stocks[]; /* 0x47f072 */
 
 typedef struct
