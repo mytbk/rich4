@@ -126,6 +126,8 @@ extern __imp__DirectDrawCreate@12
 ; link flag and libs: -e fcn_0045709c -lgdi32 -luser32 -lkernel32 -lwinmm -ldsound -lddraw
 global fcn_0045709c
 
+extern _abs
+
 extern _memcpy
 extern _strlen
 extern _memcmp
@@ -13016,14 +13018,14 @@ cmp dword [esp + 0x118], 0
 je short loc_0040ab3d  ; je 0x40ab3d
 sub edx, dword [esp + 0x100]
 push edx
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 add esp, 4
 cmp eax, 0x12c
 jge short loc_0040ab3d  ; jge 0x40ab3d
 mov eax, edi
 sub eax, ebp
 push eax
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 add esp, 4
 cmp eax, 0x12c
 jl short loc_0040aadf  ; jl 0x40aadf
@@ -23278,11 +23280,11 @@ movzx ebp, ax
 sub ebx, ebp
 mov ebp, ebx
 push edi
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 mov dword [esp + 4], eax
 add esp, 4
 push ebx
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 add esp, 4
 mov esi, ebx
 shl esi, 0x10
@@ -23291,7 +23293,7 @@ shl ebx, 0x10
 cmp eax, dword [esp]
 jge short loc_00412248  ; jge 0x412248
 push edi
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 mov ebp, eax
 add esp, 4
 mov eax, ebx
@@ -23304,7 +23306,7 @@ jmp short loc_00412262  ; jmp 0x412262
 
 loc_00412248:
 push ebp
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 mov edi, eax
 add esp, 4
 mov eax, ebx
@@ -23315,7 +23317,7 @@ mov dword [ref_0048bcfc], eax  ; mov dword [0x48bcfc], eax
 push ebp
 
 loc_00412262:
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 mov ebx, eax
 add esp, 4
 mov eax, esi
@@ -23359,7 +23361,7 @@ cmp word [edx + eax*8 + ref_00474d7c], 0  ; cmp word [edx + eax*8 + 0x474d7c], 0
 jne near loc_004123aa  ; jne 0x4123aa
 mov edi, dword [ref_0048bcfc]  ; mov edi, dword [0x48bcfc]
 push edi
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 add esp, 4
 cmp eax, 0x10000
 jne short loc_0041234c  ; jne 0x41234c
@@ -23378,7 +23380,7 @@ mov dword [ref_0048bd00], 1  ; mov dword [0x48bd00], 1
 loc_00412327:
 mov edi, dword [ref_0048bd00]  ; mov edi, dword [0x48bd00]
 push edi
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 mov ebx, eax
 add esp, 4
 mov eax, edi
@@ -23405,7 +23407,7 @@ mov dword [ref_0048bcfc], 1  ; mov dword [0x48bcfc], 1
 loc_00412379:
 mov edx, dword [ref_0048bcfc]  ; mov edx, dword [0x48bcfc]
 push edx
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 mov ebx, eax
 add esp, 4
 mov eax, dword [ref_0048bcfc]  ; mov eax, dword [0x48bcfc]
@@ -24962,7 +24964,7 @@ loc_0041364d:
 movsx esi, word [ref_0048bd4e]  ; movsx esi, word [0x48bd4e]
 sub esi, dword [esp + 0x1c]
 push esi
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 add esp, 4
 cmp eax, 8
 jle short loc_004136c1  ; jle 0x4136c1
@@ -93638,7 +93640,7 @@ mov esi, eax
 mov eax, ebp
 sub eax, edi
 push eax
-call fcn_00458276  ; call 0x458276
+call _abs  ; call 0x458276
 add esp, 4
 mov edx, eax
 cmp eax, 4
@@ -118291,15 +118293,6 @@ jmp near loc_00457eb8  ; jmp 0x457eb8
 loc_00458257:
 leave
 jmp near loc_00457e3d  ; jmp 0x457e3d
-
-fcn_00458276:
-mov eax, dword [esp + 4]
-test eax, eax
-jge short loc_00458280  ; jge 0x458280
-neg eax
-
-loc_00458280:
-ret
 
 endloc_00458281:
 db 0x00
