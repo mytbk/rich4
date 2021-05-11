@@ -150,6 +150,10 @@ global ref_00488f60
 global ref_00488f64
 global ref_004991d4
 
+extern clib_rand
+extern clib_srand
+global ref_00488f4c
+
 section .text
 db 0xcc
 db 0xeb
@@ -761,7 +765,7 @@ push eax
 call dword [edx + 0x18]  ; ucall
 call dword [cs:__imp__GetTickCount@0]  ; ucall: call dword cs:[0x4623cc]
 push eax
-call fcn_00456f50  ; call 0x456f50
+call clib_srand  ; call 0x456f50
 add esp, 4
 call fcn_0044f935  ; call 0x44f935
 call fcn_0045175d  ; call 0x45175d
@@ -2839,7 +2843,7 @@ imul eax, dword [ref_0049910c], 0x34  ; imul eax, dword [0x49910c], 0x34
 or byte [eax + ref_00498ea0], 0x80  ; or byte [eax + 0x498ea0], 0x80
 call dword [cs:__imp__GetTickCount@0]  ; ucall: call dword cs:[0x4623cc]
 push eax
-call fcn_00456f50  ; call 0x456f50
+call clib_srand  ; call 0x456f50
 add esp, 4
 mov esi, 1
 
@@ -6658,7 +6662,7 @@ inc esi
 jmp short loc_00405d11  ; jmp 0x405d11
 
 loc_00405d27:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -7083,7 +7087,7 @@ mov dword [ref_0048a415], ebp  ; mov dword [0x48a415], ebp
 loc_00406299:
 cmp dword [ref_0048a41d], 0  ; cmp dword [0x48a41d], 0
 jne short loc_004062e5  ; jne 0x4062e5
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0x168
 sar edx, 0x1f
@@ -9798,7 +9802,7 @@ inc edi
 jmp short loc_0040830c  ; jmp 0x40830c
 
 loc_00408328:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv edi
@@ -12930,7 +12934,7 @@ inc edx
 jmp short loc_0040aa1d  ; jmp 0x40aa1d
 
 loc_0040aa53:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -12988,7 +12992,7 @@ inc edx
 jmp short loc_0040aaa9  ; jmp 0x40aaa9
 
 loc_0040aadf:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -13660,7 +13664,7 @@ mov eax, dword [ref_0049910c]  ; mov eax, dword [0x49910c]
 inc eax
 cmp edx, eax
 jne short loc_0040b1dc  ; jne 0x40b1dc
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 4
 sar edx, 0x1f
@@ -13787,7 +13791,7 @@ mov eax, dword [esp]
 jmp short loc_0040b2df  ; jmp 0x40b2df
 
 loc_0040b2f2:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -13900,7 +13904,7 @@ mov eax, dword [esp]
 jmp short loc_0040b3fd  ; jmp 0x40b3fd
 
 loc_0040b410:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -15039,7 +15043,7 @@ and edi, 0xffff
 jmp short loc_0040c1a9  ; jmp 0x40c1a9
 
 loc_0040c196:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -15290,7 +15294,7 @@ and edi, 0xffff
 jmp short loc_0040c542  ; jmp 0x40c542
 
 loc_0040c52f:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -15514,7 +15518,7 @@ loc_0040c82b:
 imul esi, dword [esp + 0x20], 0x68
 test ebx, ebx
 je short loc_0040c850  ; je 0x40c850
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -15578,7 +15582,7 @@ mov esi, dword [esp + 0x20]
 shl esi, 4
 test ebx, ebx
 je short loc_0040c901  ; je 0x40c901
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -15676,7 +15680,7 @@ loc_0040ca10:
 imul eax, dword [ref_0049910c], 0x68  ; imul eax, dword [0x49910c], 0x68
 cmp byte [eax + ref_00496b9c], 0  ; cmp byte [eax + 0x496b9c], 0
 je short loc_0040ca89  ; je 0x40ca89
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_0040ca59  ; je 0x40ca59
 mov esi, dword [ref_0049910c]  ; mov esi, dword [0x49910c]
@@ -15714,7 +15718,7 @@ loc_0040ca89:
 imul eax, dword [ref_0049910c], 0x68  ; imul eax, dword [0x49910c], 0x68
 cmp byte [eax + ref_00496b9d], 0  ; cmp byte [eax + 0x496b9d], 0
 je short loc_0040cb02  ; je 0x40cb02
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_0040cad2  ; je 0x40cad2
 mov esi, dword [ref_0049910c]  ; mov esi, dword [0x49910c]
@@ -15754,7 +15758,7 @@ cmp byte [eax + ref_00496b9e], 0  ; cmp byte [eax + 0x496b9e], 0
 je short loc_0040cb84  ; je 0x40cb84
 cmp dword [eax + ref_00496b9a], 0  ; cmp dword [eax + 0x496b9a], 0
 jne short loc_0040cb84  ; jne 0x40cb84
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_0040cb54  ; je 0x40cb54
 mov edi, dword [ref_0049910c]  ; mov edi, dword [0x49910c]
@@ -16390,7 +16394,7 @@ cmp ebx, 3
 jge short loc_0040d211  ; jge 0x40d211
 
 loc_0040d1f7:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -16558,7 +16562,7 @@ jmp short loc_0040d329  ; jmp 0x40d329
 loc_0040d351:
 test esi, esi
 je short loc_0040d368  ; je 0x40d368
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -17469,7 +17473,7 @@ mov byte [edx + ref_00498ea2], 1  ; mov byte [edx + 0x498ea2], 1
 jmp short loc_0040de78  ; jmp 0x40de78
 
 loc_0040de50:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 9
 sar edx, 0x1f
@@ -19828,7 +19832,7 @@ shl eax, 2
 mov ebx, eax
 shl eax, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov esi, dword [ebx + eax*4 + ref_0048084a]  ; mov esi, dword [ebx + eax*4 + 0x48084a]
 push esi
@@ -23138,7 +23142,7 @@ mov eax, dword [esp + 0x1c]
 mov edx, dword [esp + 0x14]
 cmp edx, dword [esp + eax*4]
 jge short loc_0041206c  ; jge 0x41206c
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 imul eax, ebp
 sar eax, 0xf
 mov dword [esp + 0x18], eax
@@ -23420,7 +23424,7 @@ pop ebx
 ret
 
 fcn_004123ba:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xa
 sar edx, 0x1f
@@ -23450,7 +23454,7 @@ cmp ebx, 0x10
 je near loc_004124a4  ; je 0x4124a4
 cmp dword [esp + 0x10], 0
 jne short loc_00412439  ; jne 0x412439
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0x14
 sar edx, 0x1f
@@ -24446,7 +24450,7 @@ jmp short loc_0041301c  ; jmp 0x41301c
 loc_00412ff8:
 cmp edx, 0x1e
 jge near loc_00413183  ; jge 0x413183
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xa
 sar edx, 0x1f
@@ -24500,7 +24504,7 @@ push 0
 push ref_0047509f  ; push 0x47509f
 call fcn_004542ce  ; call 0x4542ce
 add esp, 8
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -24592,7 +24596,7 @@ cmp word [eax + ref_0048bc44], 0  ; cmp word [eax + 0x48bc44], 0
 jne near loc_004130b6  ; jne 0x4130b6
 cmp byte [ref_0048bd58], 0  ; cmp byte [0x48bd58], 0
 jne short loc_00413183  ; jne 0x413183
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0x3e8
 sar edx, 0x1f
@@ -25048,7 +25052,7 @@ test eax, eax
 jne near loc_00413849  ; jne 0x413849
 cmp byte [ref_0048bd58], 0  ; cmp byte [0x48bd58], 0
 jne near loc_00413849  ; jne 0x413849
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0x8c
 sar edx, 0x1f
@@ -25133,7 +25137,7 @@ jmp near loc_00413a2b  ; jmp 0x413a2b
 loc_004138c7:
 cmp word [ref_0048bd4c], 0x140  ; cmp word [0x48bd4c], 0x140
 jle short loc_004138e7  ; jle 0x4138e7
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 4
 sar edx, 0x1f
@@ -25150,7 +25154,7 @@ mov word [ref_0048bd44], 2  ; mov word [0x48bd44], 2
 jmp short loc_00413926  ; jmp 0x413926
 
 loc_004138fd:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 5
 sar edx, 0x1f
@@ -25210,7 +25214,7 @@ jmp short loc_00413a2b  ; jmp 0x413a2b
 loc_004139c4:
 cmp word [ref_0048bd4c], 0x140  ; cmp word [0x48bd4c], 0x140
 jge short loc_004139e4  ; jge 0x4139e4
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 4
 sar edx, 0x1f
@@ -25227,7 +25231,7 @@ mov word [ref_0048bd44], 3  ; mov word [0x48bd44], 3
 jmp short loc_00413a22  ; jmp 0x413a22
 
 loc_004139f9:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 5
 sar edx, 0x1f
@@ -26911,7 +26915,7 @@ xor dh, dh
 mov byte [ref_0048bd59], dh  ; mov byte [0x48bd59], dh
 xor ecx, ecx
 mov dword [ref_0048bcc8], ecx  ; mov dword [0x48bcc8], ecx
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 6
 sar edx, 0x1f
@@ -27373,7 +27377,7 @@ jl short loc_0041543c  ; jl 0x41543c
 jmp near loc_004155ec  ; jmp 0x4155ec
 
 loc_00415457:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 0x14
 sar edx, 0x1f
@@ -27401,7 +27405,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov esi, dword [ebx + eax*4 + ref_0048084a]  ; mov esi, dword [ebx + eax*4 + 0x48084a]
 push esi
@@ -32246,7 +32250,7 @@ add esp, 4
 cmp byte [ref_0046caf8], 0  ; cmp byte [0x46caf8], 0
 jne near loc_00418e7a  ; jne 0x418e7a
 call fcn_004284be  ; call 0x4284be
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_00418e28  ; je 0x418e28
 call fcn_00441baa  ; call 0x441baa
@@ -32900,7 +32904,7 @@ xor ebx, ebx
 loc_00419591:
 cmp ebx, esi
 jge short loc_004195b7  ; jge 0x4195b7
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 6
 sar edx, 0x1f
@@ -33978,7 +33982,7 @@ mov byte [edx + 0x18], al
 jmp short loc_0041a25a  ; jmp 0x41a25a
 
 loc_0041a23e:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 4
 sar edx, 0x1f
@@ -35264,7 +35268,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov ecx, dword [ebx + eax*4 + ref_0048084a]  ; mov ecx, dword [ebx + eax*4 + 0x48084a]
 push ecx
@@ -37672,7 +37676,7 @@ jmp short loc_0041cffd  ; jmp 0x41cffd
 loc_0041d066:
 call dword [cs:__imp__GetTickCount@0]  ; ucall: call dword cs:[0x4623cc]
 push eax
-call fcn_00456f50  ; call 0x456f50
+call clib_srand  ; call 0x456f50
 add esp, 4
 call fcn_004291d6  ; call 0x4291d6
 call fcn_00452444  ; call 0x452444
@@ -39670,7 +39674,7 @@ ret
 loc_0041e6c9:
 cmp edx, 1
 jne short loc_0041e6e6  ; jne 0x41e6e6
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 3
 sar edx, 0x1f
@@ -40406,7 +40410,7 @@ cmp byte [eax + 0x18], 0
 jne short loc_0041eede  ; jne 0x41eede
 cmp byte [eax + 0x1a], 1
 jne short loc_0041eede  ; jne 0x41eede
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 4
 sar edx, 0x1f
@@ -40652,7 +40656,7 @@ jmp short loc_0041f143  ; jmp 0x41f143
 loc_0041f16e:
 test esi, esi
 je short loc_0041f1a1  ; je 0x41f1a1
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -41756,7 +41760,7 @@ ret
 fcn_0041fe4e:
 push ebx
 xor ebx, ebx
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 4
 sar edx, 0x1f
@@ -41852,7 +41856,7 @@ mov cl, byte [esp + ebp]
 jmp short loc_0041ff57  ; jmp 0x41ff57
 
 loc_0041ff48:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -43281,7 +43285,7 @@ ret
 loc_00420ec5:
 cmp edx, 1
 jne short loc_00420ee2  ; jne 0x420ee2
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 3
 sar edx, 0x1f
@@ -43830,7 +43834,7 @@ jmp near loc_004213f8  ; jmp 0x4213f8
 loc_0042153a:
 test esi, esi
 je short loc_00421563  ; je 0x421563
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -43932,7 +43936,7 @@ xor ebx, ebx
 imul edx, dword [ref_0049910c], 0x68  ; imul edx, dword [0x49910c], 0x68
 test byte [edx + ref_00496b79], 3  ; test byte [edx + 0x496b79], 3
 jne short loc_00421671  ; jne 0x421671
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 4
 sar edx, 0x1f
@@ -43954,7 +43958,7 @@ mov dl, byte [edx + ref_00496b79]  ; mov dl, byte [edx + 0x496b79]
 and dl, 3
 cmp dl, 2
 jae short loc_004216a7  ; jae 0x4216a7
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 4
 sar edx, 0x1f
@@ -44639,7 +44643,7 @@ ret
 
 loc_00421e3c:
 movzx esi, byte [edx + ref_00496b7f]  ; movzx esi, byte [edx + 0x496b7f]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xf
 sar edx, 0x1f
@@ -44870,7 +44874,7 @@ jge short loc_004221ae  ; jge 0x4221ae
 loc_00422165:
 cmp dword [esp + 0x410], 0
 jne short loc_004221ae  ; jne 0x4221ae
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv dword [esp + 0x41c]
@@ -44998,7 +45002,7 @@ test ebx, ebx
 jne short loc_004222fb  ; jne 0x4222fb
 cmp esi, 2
 jle short loc_004222fb  ; jle 0x4222fb
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov dl, al
 and dl, 1
 add dl, 2
@@ -53466,7 +53470,7 @@ pop ebx
 ret
 
 loc_0042886e:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 0xf
 sar edx, 0x1f
@@ -53523,7 +53527,7 @@ jmp short loc_004288a9  ; jmp 0x4288a9
 loc_004288f4:
 cmp dword [esp + 0x10], 0
 je short loc_00428958  ; je 0x428958
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv dword [esp + 0x10]
@@ -53601,7 +53605,7 @@ loc_004289cb:
 mov ebp, dword [esp + 0x10]
 test ebp, ebp
 je short loc_00428a37  ; je 0x428a37
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebp
@@ -53636,7 +53640,7 @@ call fcn_004246c5  ; call 0x4246c5
 add esp, 0x14
 
 loc_00428a37:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 3
 sar edx, 0x1f
@@ -53691,7 +53695,7 @@ mov dword [edx + ref_004967e4], eax  ; mov dword [edx + 0x4967e4], eax
 jmp short loc_00428a8c  ; jmp 0x428a8c
 
 loc_00428ae8:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 4
 sar edx, 0x1f
@@ -54295,7 +54299,7 @@ shl ebx, 2
 mov dx, word [ebx + ref_00496988]  ; mov dx, word [ebx + 0x496988]
 cmp dx, 0x3e8
 jbe short loc_00429163  ; jbe 0x429163
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0x7d0
 sar edx, 0x1f
@@ -54332,7 +54336,7 @@ mov dword [esp], edx
 call fcn_00428d01  ; call 0x428d01
 cmp eax, 1
 je near loc_004294cd  ; je 0x4294cd
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 sub eax, 0x4000
 mov dword [esp + 8], eax
 fild dword [esp + 8]
@@ -54357,7 +54361,7 @@ mov dword [ebx + ref_0049699c], ebp  ; mov dword [ebx + 0x49699c], ebp
 jmp near loc_00429413  ; jmp 0x429413
 
 loc_00429248:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 sub eax, 0x4000
 mov dword [esp + 8], eax
 fild dword [esp + 8]
@@ -58020,7 +58024,7 @@ push edi
 push ebp
 sub esp, 0xe8
 mov edi, dword [esp + 0xfc]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 3
 sar edx, 0x1f
@@ -58561,7 +58565,7 @@ mov ebx, dword [esp + 0xe0]
 shl ebx, 2
 test word [esp + ebx + 0x80], 0xffff
 je short loc_0042c666  ; je 0x42c666
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0x18
 sar edx, 0x1f
@@ -58669,7 +58673,7 @@ jmp short loc_0042c81b  ; jmp 0x42c81b
 loc_0042c7f8:
 cmp dword [esp + 0xd0], 0
 jne short loc_0042c81b  ; jne 0x42c81b
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 3
 sar edx, 0x1f
@@ -59965,7 +59969,7 @@ ja near loc_0042dbac  ; ja 0x42dbac
 jmp dword [eax*4 + ref_0042d36b]  ; ujmp: jmp dword [eax*4 + 0x42d36b]
 
 loc_0042d8ab:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xa
 test esi, esi
@@ -60082,7 +60086,7 @@ push ebx
 jmp near loc_0042d977  ; jmp 0x42d977
 
 loc_0042da31:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 shl eax, 2
 sub eax, edx
@@ -60138,7 +60142,7 @@ push edi
 jmp near loc_0042dba5  ; jmp 0x42dba5
 
 loc_0042daf1:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea esi, [eax + 1]
 mov ebp, dword [ref_0048c32f]  ; mov ebp, dword [0x48c32f]
@@ -60300,7 +60304,7 @@ add esp, 0x10
 jmp near loc_0042dde5  ; jmp 0x42dde5
 
 loc_0042dd03:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xb
 cmp esi, 4
@@ -60315,7 +60319,7 @@ mov dword [esp + 0x48], 0x1c7
 mov dword [esp + 0x4c], 0x6e
 push eax
 push ebp
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea edx, [eax + 0xa]
 mov eax, edx
@@ -60340,7 +60344,7 @@ mov dword [esp + 0x48], 0x1e7
 mov dword [esp + 0x4c], 0x6e
 push edx
 push eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea edx, [eax + 0x1a]
 mov eax, edx
@@ -60358,7 +60362,7 @@ push esi
 loc_0042ddbb:
 call fcn_004563f5  ; call 0x4563f5
 add esp, 0x10
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 7
 mov esi, dword [ref_0048c314]  ; mov esi, dword [0x48c314]
 or esi, eax
@@ -61210,7 +61214,7 @@ mov eax, dword [ref_0049910c]  ; mov eax, dword [0x49910c]
 inc eax
 cmp edx, eax
 jne near loc_0042ea2b  ; jne 0x42ea2b
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_0042e9b9  ; je 0x42e9b9
 mov edi, dword [ref_0049910c]  ; mov edi, dword [0x49910c]
@@ -61325,7 +61329,7 @@ lea eax, [esp + 0x108]
 push eax
 call _memcpy  ; call 0x456de8
 add esp, 0xc
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 0xa
 sar edx, 0x1f
@@ -61363,7 +61367,7 @@ inc esi
 jmp short loc_0042eb40  ; jmp 0x42eb40
 
 loc_0042eb61:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -62698,7 +62702,7 @@ call fcn_00401966  ; call 0x401966
 jmp near loc_0042fa9b  ; jmp 0x42fa9b
 
 loc_0042fb2a:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xa
 test esi, esi
@@ -62827,7 +62831,7 @@ call dword [edx + 0x80]  ; ucall
 jmp near loc_0042fd50  ; jmp 0x42fd50
 
 loc_0042fcc3:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xb
 cmp esi, 4
@@ -62844,7 +62848,7 @@ mov ebx, dword [esp + 0x44]
 push ebx
 mov esi, dword [esp + 0x44]
 push esi
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea edx, [eax + 5]
 mov eax, edx
@@ -62865,7 +62869,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 7
 mov dword [ref_0048c34c], eax  ; mov dword [0x48c34c], eax
 jne short loc_0042fd50  ; jne 0x42fd50
@@ -63972,7 +63976,7 @@ cmp byte [esp + 0x83], 0xa
 jbe short loc_00430b66  ; jbe 0x430b66
 
 loc_00430b52:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -63981,7 +63985,7 @@ mov bl, byte [esp + edx + 0x40]
 jmp short loc_00430b7a  ; jmp 0x430b7a
 
 loc_00430b66:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 0x24
 sar edx, 0x1f
@@ -64405,7 +64409,7 @@ ja near loc_00431431  ; ja 0x431431
 jmp dword [eax*4 + ref_004300f8]  ; ujmp: jmp dword [eax*4 + 0x4300f8]
 
 loc_00431117:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 9
 mov eax, dword [ref_0048c350]  ; mov eax, dword [0x48c350]
@@ -64542,7 +64546,7 @@ and byte [ref_0048c350], 0xf0  ; and byte [0x48c350], 0xf0
 jmp near loc_004311fe  ; jmp 0x4311fe
 
 loc_004312d8:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 and ebx, 1
 mov eax, dword [ref_0048c350]  ; mov eax, dword [0x48c350]
@@ -64592,7 +64596,7 @@ call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 jmp near loc_0043142a  ; jmp 0x43142a
 
 loc_00431383:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 and ebx, 1
 mov eax, dword [ref_0048c350]  ; mov eax, dword [0x48c350]
@@ -64696,7 +64700,7 @@ call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 jmp near loc_004301db  ; jmp 0x4301db
 
 loc_004314da:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xb
 cmp ebx, 4
@@ -64713,7 +64717,7 @@ mov edx, dword [esp + 0x68]
 push edx
 mov ecx, dword [esp + 0x68]
 push ecx
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea edx, [eax + 0xc]
 mov eax, edx
@@ -64734,7 +64738,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 0xf
 mov dword [ref_0048c34c], eax  ; mov dword [0x48c34c], eax
 jne near loc_004314c6  ; jne 0x4314c6
@@ -64861,7 +64865,7 @@ je short loc_0043170a  ; je 0x43170a
 mov al, byte [ref_0049910c]  ; mov al, byte [0x49910c]
 inc al
 mov byte [esp + 0x24], al
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -66274,7 +66278,7 @@ mov byte [ref_0048c3a1], al  ; mov byte [0x48c3a1], al
 jne near loc_00432828  ; jne 0x432828
 
 loc_00432719:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xc
 sar edx, 0x1f
@@ -66536,7 +66540,7 @@ call fcn_00401966  ; call 0x401966
 jmp near loc_0043286e  ; jmp 0x43286e
 
 loc_00432a85:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 sar eax, 0xb
 cmp eax, 4
 jge near loc_004326ad  ; jge 0x4326ad
@@ -66552,7 +66556,7 @@ mov dword [esp + 0x40], 0x11e
 mov dword [esp + 0x44], 0xd9
 mov dword [esp + 0x48], 0x15a
 mov dword [esp + 0x4c], 0xee
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_00432b00  ; je 0x432b00
 push 0x15
@@ -66591,7 +66595,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 mov byte [ref_0048c3a0], al  ; mov byte [0x48c3a0], al
 jne near loc_0043291a  ; jne 0x43291a
@@ -67225,7 +67229,7 @@ call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 jmp near loc_0043316d  ; jmp 0x43316d
 
 loc_00433389:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edi, eax
 sar edi, 0xb
 cmp edi, 4
@@ -67242,7 +67246,7 @@ mov dword [esp + 0x40], 0x11e
 mov dword [esp + 0x44], 0xd9
 mov dword [esp + 0x48], 0x15a
 mov dword [esp + 0x4c], 0xee
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_00433407  ; je 0x433407
 push 0x15
@@ -67281,7 +67285,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 mov byte [ref_0048c3ab], al  ; mov byte [0x48c3ab], al
 jne near loc_00433375  ; jne 0x433375
@@ -67647,7 +67651,7 @@ loc_0043390b:
 mov esi, 0xffffffff
 
 loc_00433910:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xc
 sar edx, 0x1f
@@ -67683,7 +67687,7 @@ jmp short loc_0043393e  ; jmp 0x43393e
 loc_00433961:
 cmp esi, 0xffffffff
 jne short loc_00433981  ; jne 0x433981
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xb
 sar edx, 0x1f
@@ -68993,7 +68997,7 @@ call fcn_00401966  ; call 0x401966
 jmp near loc_0043479f  ; jmp 0x43479f
 
 loc_0043493a:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xa
 test esi, esi
@@ -69124,7 +69128,7 @@ add esp, 0x20
 jmp near loc_00434cdc  ; jmp 0x434cdc
 
 loc_00434ad9:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xb
 cmp esi, 4
@@ -69141,7 +69145,7 @@ mov edx, dword [esp + 0x44]
 push edx
 mov ecx, dword [esp + 0x44]
 push ecx
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea edx, [eax + 0xd]
 mov eax, edx
@@ -69161,7 +69165,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 inc al
 mov byte [ref_0048c3cd], al  ; mov byte [0x48c3cd], al
@@ -70188,7 +70192,7 @@ jmp near loc_00435ac0  ; jmp 0x435ac0
 loc_004358c3:
 test al, al
 jne near loc_00435ac0  ; jne 0x435ac0
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 sar eax, 0xa
 mov dword [esp + 0xd0], eax
 test eax, eax
@@ -70257,7 +70261,7 @@ mov byte [ref_0048c3df], 0x80  ; mov byte [0x48c3df], 0x80
 jmp near loc_00435aae  ; jmp 0x435aae
 
 loc_004359da:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 3
 sar edx, 0x1f
@@ -70372,7 +70376,7 @@ call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 jmp near loc_0043518a  ; jmp 0x43518a
 
 loc_00435b81:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 sar eax, 0xb
 mov dword [esp + 0xd0], eax
 cmp eax, 4
@@ -70389,7 +70393,7 @@ mov ecx, dword [esp + 0xc4]
 push ecx
 mov ebx, dword [esp + 0xc4]
 push ebx
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea edx, [eax + 9]
 mov eax, edx
@@ -70409,7 +70413,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 inc al
 mov byte [ref_0048c3de], al  ; mov byte [0x48c3de], al
@@ -70897,7 +70901,7 @@ jmp near loc_00436448  ; jmp 0x436448
 loc_00436277:
 test al, al
 jne near loc_00436448  ; jne 0x436448
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xa
 test ebx, ebx
@@ -70965,7 +70969,7 @@ mov byte [ref_0048c3e9], 0x80  ; mov byte [0x48c3e9], 0x80
 jmp near loc_00436436  ; jmp 0x436436
 
 loc_00436378:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 3
 sar edx, 0x1f
@@ -71075,7 +71079,7 @@ call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 jmp near loc_00436162  ; jmp 0x436162
 
 loc_00436509:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xb
 cmp ebx, 4
@@ -71092,7 +71096,7 @@ mov ecx, dword [esp + 0xd8]
 push ecx
 mov ebx, dword [esp + 0xd8]
 push ebx
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 lea edx, [eax + 9]
 mov eax, edx
@@ -71113,7 +71117,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 inc al
 mov byte [ref_0048c3e8], al  ; mov byte [0x48c3e8], al
@@ -71340,7 +71344,7 @@ mov dword [eax + ref_00496b8c], edi  ; mov dword [eax + 0x496b8c], edi
 jmp near loc_00436953  ; jmp 0x436953
 
 loc_00436893:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xa
 sar edx, 0x1f
@@ -74609,7 +74613,7 @@ add esp, 4
 loc_00439196:
 test byte [ref_0048c42c], 0xf  ; test byte [0x48c42c], 0xf
 jne short loc_004391c2  ; jne 0x4391c2
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xa
 test ebx, ebx
@@ -74792,7 +74796,7 @@ push edx
 jmp near loc_004392cc  ; jmp 0x4392cc
 
 loc_004393fd:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 and ebx, 1
 xor eax, eax
@@ -75040,7 +75044,7 @@ call dword [edx + 0x80]  ; ucall
 jmp near loc_0043981c  ; jmp 0x43981c
 
 loc_00439776:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xb
 cmp ebx, 4
@@ -75057,7 +75061,7 @@ push ref_0048a068  ; push 0x48a068
 push 0
 push eax
 call dword [edx + 0x64]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_00439833  ; je 0x439833
 mov ebp, dword [esp + 0xc4]
@@ -75080,7 +75084,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 inc al
 mov byte [ref_0048c42b], al  ; mov byte [0x48c42b], al
@@ -75143,7 +75147,7 @@ push ebx
 jmp near loc_00439759  ; jmp 0x439759
 
 loc_004398ea:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xb
 cmp ebx, 4
@@ -75203,7 +75207,7 @@ push edx
 jmp near loc_00439759  ; jmp 0x439759
 
 loc_004399e8:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xb
 cmp ebx, 4
@@ -75263,7 +75267,7 @@ push ebp
 jmp near loc_00439759  ; jmp 0x439759
 
 loc_00439ae6:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 sar ebx, 0xb
 cmp ebx, 4
@@ -75608,7 +75612,7 @@ sub esp, 0x1c
 mov ebx, dword [esp + 0x34]
 xor edi, edi
 xor ebp, ebp
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov dword [esp + 0x18], eax
 fild dword [esp + 0x18]
 fdiv dword [ref_00465014]  ; fdiv dword [0x465014]
@@ -75683,7 +75687,7 @@ imul eax, ecx
 mov dword [esp + 0x18], eax
 fild dword [esp + 0x18]
 fstp dword [esp + 4]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov dword [esp + 0x18], eax
 fild dword [esp + 0x18]
 fmul dword [ref_00465030]  ; fmul dword [0x465030]
@@ -75753,7 +75757,7 @@ imul eax, ebx
 mov dword [esp + 0x18], eax
 fild dword [esp + 0x18]
 fstp dword [esp + 4]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov dword [esp + 0x18], eax
 fild dword [esp + 0x18]
 fmul dword [ref_00465030]  ; fmul dword [0x465030]
@@ -77393,7 +77397,7 @@ jmp near loc_0043b853  ; jmp 0x43b853
 loc_0043b5f7:
 test al, al
 jne near loc_0043b853  ; jne 0x43b853
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edi, eax
 sar edi, 0xa
 test edi, edi
@@ -77630,7 +77634,7 @@ call dword [edx + 0x80]  ; ucall
 jmp near loc_0043b9e4  ; jmp 0x43b9e4
 
 loc_0043b945:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edi, eax
 sar edi, 0xb
 cmp edi, 4
@@ -77676,7 +77680,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 inc al
 mov byte [ref_0048c4ad], al  ; mov byte [0x48c4ad], al
@@ -77734,7 +77738,7 @@ push ebx
 jmp near loc_0043b928  ; jmp 0x43b928
 
 loc_0043baa7:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edi, eax
 sar edi, 0xb
 cmp edi, 4
@@ -79705,7 +79709,7 @@ call fcn_00456e11  ; call 0x456e11
 jmp near loc_0043d585  ; jmp 0x43d585
 
 loc_0043d3d8:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je near loc_0043d588  ; je 0x43d588
 xor esi, esi
@@ -79753,7 +79757,7 @@ inc esi
 jmp short loc_0043d436  ; jmp 0x43d436
 
 loc_0043d44f:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 3
 sar edx, 0x1f
@@ -79794,7 +79798,7 @@ jmp short loc_0043d48b  ; jmp 0x43d48b
 loc_0043d4a4:
 test esi, esi
 je near loc_0043d588  ; je 0x43d588
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -80687,7 +80691,7 @@ je short loc_0043dfbd  ; je 0x43dfbd
 jmp near loc_0043e0fb  ; jmp 0x43e0fb
 
 loc_0043df9f:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xa
 test esi, esi
@@ -80854,7 +80858,7 @@ call dword [edx + 0x80]  ; ucall
 jmp near loc_0043e25a  ; jmp 0x43e25a
 
 loc_0043e1b5:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xb
 cmp esi, 4
@@ -80867,7 +80871,7 @@ push ref_0048a068  ; push 0x48a068
 push 0
 push eax
 call dword [edx + 0x64]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_0043e20b  ; je 0x43e20b
 mov ecx, dword [esp + 0x6c]
@@ -80908,7 +80912,7 @@ mov edx, dword [eax]
 push 0
 push eax
 call dword [edx + 0x80]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and al, 7
 mov byte [ref_0048c4f1], al  ; mov byte [0x48c4f1], al
 jne short loc_0043e25a  ; jne 0x43e25a
@@ -80952,7 +80956,7 @@ push eax
 jmp near loc_0043e198  ; jmp 0x43e198
 
 loc_0043e2da:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov esi, eax
 sar esi, 0xb
 cmp esi, 4
@@ -80965,7 +80969,7 @@ push ref_0048a068  ; push 0x48a068
 push 0
 push eax
 call dword [edx + 0x64]  ; ucall
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_0043e335  ; je 0x43e335
 mov edx, dword [esp + 0x6c]
@@ -81571,7 +81575,7 @@ call fcn_00456e11  ; call 0x456e11
 jmp near loc_0043ec31  ; jmp 0x43ec31
 
 loc_0043ea84:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je near loc_0043ec34  ; je 0x43ec34
 xor esi, esi
@@ -81619,7 +81623,7 @@ inc esi
 jmp short loc_0043eae2  ; jmp 0x43eae2
 
 loc_0043eafb:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 3
 sar edx, 0x1f
@@ -81660,7 +81664,7 @@ jmp short loc_0043eb37  ; jmp 0x43eb37
 loc_0043eb50:
 test esi, esi
 je near loc_0043ec34  ; je 0x43ec34
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -82281,7 +82285,7 @@ jne short loc_0043f2f8  ; jne 0x43f2f8
 xor ebx, ebx
 
 loc_0043f2d7:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ecx, 0xa
 sar edx, 0x1f
@@ -82675,7 +82679,7 @@ mov edx, 1
 mov dword [esp + 0x34], edx
 mov ebx, edx
 xor ebp, ebp
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov esi, 0xc
 sar edx, 0x1f
@@ -85810,7 +85814,7 @@ call fcn_00456f60  ; call 0x456f60
 add esp, 0xc
 cmp esi, 8
 jle short loc_00441d5a  ; jle 0x441d5a
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -85928,7 +85932,7 @@ jmp short loc_00441e33  ; jmp 0x441e33
 loc_00441e46:
 test ebx, ebx
 je short loc_00441e6c  ; je 0x441e6c
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -85958,7 +85962,7 @@ mov esi, eax
 add esp, 4
 test eax, eax
 je short loc_00441ec9  ; je 0x441ec9
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -89711,7 +89715,7 @@ jne near loc_00444973  ; jne 0x444973
 jmp near loc_00444971  ; jmp 0x444971
 
 loc_004448fc:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov esi, 0xfa0
 sar edx, 0x1f
@@ -89854,7 +89858,7 @@ call fcn_0041d476  ; call 0x41d476
 add esp, 0xc
 cmp byte [ebx + ref_00496b7d], 1  ; cmp byte [ebx + 0x496b7d], 1
 je short loc_00444ad8  ; je 0x444ad8
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov esi, 0xbb8
 sar edx, 0x1f
@@ -91287,7 +91291,7 @@ jmp short loc_00445afb  ; jmp 0x445afb
 loc_00445b0e:
 test ebx, ebx
 je short loc_00445b34  ; je 0x445b34
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -94423,7 +94427,7 @@ test esi, esi
 je short loc_00447f7a  ; je 0x447f7a
 cmp esi, 4
 jle short loc_00448005  ; jle 0x448005
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -95382,7 +95386,7 @@ cmp ebx, 0x24
 jge short loc_00448bd4  ; jge 0x448bd4
 
 loc_00448bb1:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -96002,7 +96006,7 @@ inc ebx
 jmp short loc_004491af  ; jmp 0x4491af
 
 loc_004491dd:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -96126,7 +96130,7 @@ inc eax
 jmp short loc_004492f2  ; jmp 0x4492f2
 
 loc_0044931f:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -96249,7 +96253,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edx, dword [ebx + eax*4 + ref_00480856]  ; mov edx, dword [ebx + eax*4 + 0x480856]
 push edx
@@ -96278,7 +96282,7 @@ cmp dword [esp + 0xac], 0
 jne near loc_004495b5  ; jne 0x4495b5
 mov ebx, dword [ref_00498e98]  ; mov ebx, dword [0x498e98]
 add ebx, dword [ref_00498e8c]  ; add ebx, dword [0x498e8c]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -96497,7 +96501,7 @@ inc eax
 jmp short loc_00449788  ; jmp 0x449788
 
 loc_004497b7:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -97396,7 +97400,7 @@ cmp dword [esp + 0xac], 0
 jne near loc_0044a2f5  ; jne 0x44a2f5
 mov ebx, dword [ref_00498e98]  ; mov ebx, dword [0x498e98]
 add ebx, dword [ref_00498e8c]  ; add ebx, dword [0x498e8c]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -97573,7 +97577,7 @@ inc ebx
 jmp short loc_0044a47d  ; jmp 0x44a47d
 
 loc_0044a493:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -97661,7 +97665,7 @@ shl eax, 2
 mov esi, eax
 shl esi, 3
 add esi, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edi, dword [esi + eax*4 + ref_00480856]  ; mov edi, dword [esi + eax*4 + 0x480856]
 push edi
@@ -97782,7 +97786,7 @@ cmp dword [esp + 0xa8], 0
 jne near loc_0044a7b5  ; jne 0x44a7b5
 mov ebx, dword [ref_00498e98]  ; mov ebx, dword [0x498e98]
 add ebx, dword [ref_00498e8c]  ; add ebx, dword [0x498e8c]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -97966,7 +97970,7 @@ jne near loc_0044aa44  ; jne 0x44aa44
 mov eax, dword [ref_00498e98]  ; mov eax, dword [0x498e98]
 mov ebx, dword [ref_00498e8c]  ; mov ebx, dword [0x498e8c]
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -98096,7 +98100,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov ecx, dword [ebx + eax*4 + ref_00480856]  ; mov ecx, dword [ebx + eax*4 + 0x480856]
 push ecx
@@ -98126,7 +98130,7 @@ cmp dword [esp + 0xac], 0
 jne near loc_0044ac02  ; jne 0x44ac02
 mov ebx, dword [ref_00498e98]  ; mov ebx, dword [0x498e98]
 add ebx, dword [ref_00498e8c]  ; add ebx, dword [0x498e8c]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -98244,7 +98248,7 @@ cmp dword [esp + 0xb0], 0
 jne near loc_0044adbc  ; jne 0x44adbc
 mov ebx, dword [ref_00498e98]  ; mov ebx, dword [0x498e98]
 add ebx, dword [ref_00498e8c]  ; add ebx, dword [0x498e8c]
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -98375,7 +98379,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edx, dword [ebx + eax*4 + ref_00480856]  ; mov edx, dword [ebx + eax*4 + 0x480856]
 push edx
@@ -98591,7 +98595,7 @@ push esi
 sub esp, 0x94
 cmp dword [esp + 0xa0], 0
 jne near loc_0044b19a  ; jne 0x44b19a
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 0xc
 sar edx, 0x1f
@@ -98676,7 +98680,7 @@ inc ebx
 jmp short loc_0044b1bd  ; jmp 0x44b1bd
 
 loc_0044b1de:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -98742,7 +98746,7 @@ inc eax
 jmp short loc_0044b285  ; jmp 0x44b285
 
 loc_0044b29e:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -98818,7 +98822,7 @@ push ebx
 sub esp, 0x80
 cmp dword [esp + 0x88], 0
 jne near loc_0044b411  ; jne 0x44b411
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv dword [ref_00498e90]  ; idiv dword [0x498e90]
@@ -98877,7 +98881,7 @@ push ebx
 sub esp, 0x80
 cmp dword [esp + 0x88], 0
 jne short loc_0044b411  ; jne 0x44b411
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv dword [ref_00498e90]  ; idiv dword [0x498e90]
@@ -98920,7 +98924,7 @@ push ebx
 sub esp, 0x80
 cmp dword [esp + 0x88], 0
 jne near loc_0044b411  ; jne 0x44b411
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv dword [ref_00498e90]  ; idiv dword [0x498e90]
@@ -98963,7 +98967,7 @@ push ebx
 sub esp, 0x80
 cmp dword [esp + 0x88], 0
 jne near loc_0044b411  ; jne 0x44b411
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv dword [ref_00498e90]  ; idiv dword [0x498e90]
@@ -98981,7 +98985,7 @@ push ebx
 sub esp, 0x80
 cmp dword [esp + 0x88], 0
 jne near loc_0044b411  ; jne 0x44b411
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv dword [ref_00498e90]  ; idiv dword [0x498e90]
@@ -99034,7 +99038,7 @@ inc eax
 jmp short loc_0044b618  ; jmp 0x44b618
 
 loc_0044b639:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -99258,7 +99262,7 @@ jmp short loc_0044b8fa  ; jmp 0x44b8fa
 loc_0044b8d5:
 cmp si, 0x32
 jle short loc_0044b8e9  ; jle 0x44b8e9
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 and ebx, 1
 add ebx, ebx
@@ -99306,7 +99310,7 @@ jmp short loc_0044b9af  ; jmp 0x44b9af
 loc_0044b95f:
 cmp di, 0x32
 jle short loc_0044b971  ; jle 0x44b971
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 and ebx, 1
 jmp short loc_0044b97d  ; jmp 0x44b97d
@@ -99353,7 +99357,7 @@ jmp short loc_0044ba30  ; jmp 0x44ba30
 loc_0044b9e7:
 cmp dx, 0x32
 jle short loc_0044b9f9  ; jle 0x44b9f9
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov ebx, eax
 and ebx, 1
 jmp short loc_0044ba05  ; jmp 0x44ba05
@@ -99474,7 +99478,7 @@ cmp ebx, 0x25
 jge short loc_0044bb3d  ; jge 0x44bb3d
 
 loc_0044bb1a:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv esi
@@ -99805,7 +99809,7 @@ inc eax
 jmp short loc_0044be34  ; jmp 0x44be34
 
 loc_0044be65:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -99891,7 +99895,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edx, dword [ebx + eax*4 + ref_00480856]  ; mov edx, dword [ebx + eax*4 + 0x480856]
 push edx
@@ -99940,7 +99944,7 @@ inc eax
 jmp short loc_0044bfcf  ; jmp 0x44bfcf
 
 loc_0044c000:
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 sar edx, 0x1f
 idiv ebx
@@ -100399,7 +100403,7 @@ shl eax, 2
 mov ebx, eax
 shl eax, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov ebp, dword [ebx + eax*4 + ref_0048084a]  ; mov ebp, dword [ebx + eax*4 + 0x48084a]
 push ebp
@@ -100868,7 +100872,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edi, dword [ebx + eax*4 + ref_00480856]  ; mov edi, dword [ebx + eax*4 + 0x480856]
 push edi
@@ -104184,7 +104188,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edi, dword [ebx + eax*4 + ref_0048084a]  ; mov edi, dword [ebx + eax*4 + 0x48084a]
 push edi
@@ -104249,7 +104253,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edi, dword [ebx + eax*4 + ref_00480856]  ; mov edi, dword [ebx + eax*4 + 0x480856]
 push edi
@@ -104324,7 +104328,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edi, dword [ebx + eax*4 + ref_00480862]  ; mov edi, dword [ebx + eax*4 + 0x480862]
 push edi
@@ -104408,7 +104412,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edi, dword [ebx + eax*4 + ref_0048086e]  ; mov edi, dword [ebx + eax*4 + 0x48086e]
 push edi
@@ -104462,7 +104466,7 @@ add eax, edx
 shl eax, 3
 cmp eax, dword [esp + 0x18]
 jg short loc_0044f561  ; jg 0x44f561
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_0044f561  ; je 0x44f561
 mov edi, dword [esp + 0x10]
@@ -104532,7 +104536,7 @@ shl eax, 2
 mov ebx, eax
 shl ebx, 3
 add ebx, eax
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 and eax, 1
 mov edi, dword [ebx + eax*4 + ref_0048087a]  ; mov edi, dword [ebx + eax*4 + 0x48087a]
 push edi
@@ -104602,7 +104606,7 @@ jl near loc_0044f6e7  ; jl 0x44f6e7
 mov ecx, dword [esp + 0x18]
 test ecx, ecx
 je short loc_0044f6b8  ; je 0x44f6b8
-call fcn_00456f2d  ; call 0x456f2d
+call clib_rand  ; call 0x456f2d
 mov edx, eax
 mov ebx, 3
 sar edx, 0x1f
@@ -116384,36 +116388,6 @@ loc_00456f1f:
 pop edi
 pop esi
 pop ebx
-ret
-
-fcn_00456f23:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
-add eax, 0xc
-ret
-
-fcn_00456f2d:
-call fcn_00456f23  ; call 0x456f23
-test eax, eax
-jne short loc_00456f37  ; jne 0x456f37
-ret
-
-loc_00456f37:
-imul edx, dword [eax], 0x41c64e6d
-add edx, 0x3039
-mov dword [eax], edx
-mov eax, edx
-shr eax, 0x10
-and eax, 0x7fff
-ret
-
-fcn_00456f50:
-call fcn_00456f23  ; call 0x456f23
-test eax, eax
-je short loc_00456f5f  ; je 0x456f5f
-mov edx, dword [esp + 4]
-mov dword [eax], edx
-
-loc_00456f5f:
 ret
 
 fcn_00456f60:

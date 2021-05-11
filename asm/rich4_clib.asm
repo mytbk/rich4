@@ -8,6 +8,10 @@ extern ref_00488f60
 extern ref_00488f64
 extern ref_004991d4
 
+global clib_rand
+global clib_srand
+extern ref_00488f4c
+
 section .text
 
 fcn_00457366:
@@ -95,6 +99,36 @@ push ebx
 call fcn_00457902  ; call 0x457902
 add esp, 8
 pop ebx
+ret
+
+fcn_00456f23:
+call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+add eax, 0xc
+ret
+
+clib_rand:
+call fcn_00456f23  ; call 0x456f23
+test eax, eax
+jne short loc_00456f37  ; jne 0x456f37
+ret
+
+loc_00456f37:
+imul edx, dword [eax], 0x41c64e6d
+add edx, 0x3039
+mov dword [eax], edx
+mov eax, edx
+shr eax, 0x10
+and eax, 0x7fff
+ret
+
+clib_srand:
+call fcn_00456f23  ; call 0x456f23
+test eax, eax
+je short loc_00456f5f  ; je 0x456f5f
+mov edx, dword [esp + 4]
+mov dword [eax], edx
+
+loc_00456f5f:
 ret
 
 section .data
