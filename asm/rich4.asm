@@ -141,9 +141,14 @@ extern _player_stocks
 extern _tool_strings
 
 extern clib_fopen
+extern clib_fclose
 global fcn_00457135
 global fcn_004590b9
 global fcn_00457254
+global fcn_00457902
+global ref_00488f60
+global ref_00488f64
+global ref_004991d4
 
 section .text
 db 0xcc
@@ -2846,7 +2851,7 @@ jb short loc_00402fae  ; jb 0x402fae
 
 loc_00402fbe:
 push edi
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 mov eax, esi
 add esp, 0x28
@@ -3180,7 +3185,7 @@ jmp short loc_00403330  ; jmp 0x403330
 
 loc_00403386:
 push edi
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 add esp, 0x2c
 pop edi
@@ -3251,7 +3256,7 @@ push ref_0048a188  ; push 0x48a188
 call fcn_004576d0  ; call 0x4576d0
 add esp, 0x10
 push ebx
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 push 1
 push 3
@@ -3418,7 +3423,7 @@ add esp, 0x10
 cmp dword [esp + 0x34], 0x26
 je near loc_004033e9  ; je 0x4033e9
 push ebx
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 jmp short loc_004035d9  ; jmp 0x4035d9
 
@@ -4091,7 +4096,7 @@ je short loc_00403e67  ; je 0x403e67
 push ebx
 
 loc_00403e5d:
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 jmp short loc_00403dfe  ; jmp 0x403dfe
 
@@ -22961,7 +22966,7 @@ push ref_00497168  ; push 0x497168
 call fcn_004576d0  ; call 0x4576d0
 add esp, 0x10
 push ebx
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 jmp short loc_00411f1e  ; jmp 0x411f1e
 
@@ -23040,7 +23045,7 @@ push ref_00497168  ; push 0x497168
 call fcn_00457ada  ; call 0x457ada
 add esp, 0x10
 push ebx
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 
 loc_00411fc6:
@@ -105692,7 +105697,7 @@ je short loc_004501fc  ; je 0x4501fc
 mov dl, byte [esp + ebx + 0x20]
 mov byte [ref_00476374], dl  ; mov byte [0x476374], dl
 push eax
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 mov dword [esp + 0x40], 1
 
@@ -105719,7 +105724,7 @@ jmp near loc_004502f1  ; jmp 0x4502f1
 
 loc_00450234:
 push eax
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 xor esi, esi
 mov dword [esp + 0x40], esi
@@ -105758,7 +105763,7 @@ call fcn_00458532  ; call 0x458532
 mov edi, eax
 add esp, 4
 push esi
-call fcn_004578c5  ; call 0x4578c5
+call clib_fclose  ; call 0x4578c5
 add esp, 4
 cmp edi, 0x2625a00
 nop
@@ -117412,35 +117417,6 @@ add esp, 4
 pop ebp
 pop edi
 pop esi
-pop ebx
-ret
-
-fcn_004578c5:
-push ebx
-mov ebx, dword [esp + 8]
-call dword [ref_00488f60]  ; ucall: call dword [0x488f60]
-mov eax, dword [ref_004991d4]  ; mov eax, dword [0x4991d4]
-
-loc_004578d5:
-test eax, eax
-jne short loc_004578e6  ; jne 0x4578e6
-call dword [ref_00488f64]  ; ucall: call dword [0x488f64]
-mov eax, 0xffffffff
-pop ebx
-ret
-
-loc_004578e6:
-cmp ebx, dword [eax + 4]
-je short loc_004578ef  ; je 0x4578ef
-mov eax, dword [eax]
-jmp short loc_004578d5  ; jmp 0x4578d5
-
-loc_004578ef:
-call dword [ref_00488f64]  ; ucall: call dword [0x488f64]
-push 1
-push ebx
-call fcn_00457902  ; call 0x457902
-add esp, 8
 pop ebx
 ret
 

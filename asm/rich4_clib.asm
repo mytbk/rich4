@@ -1,7 +1,12 @@
 global clib_fopen
+global clib_fclose
 extern fcn_00457135
 extern fcn_004590b9
 extern fcn_00457254
+extern fcn_00457902
+extern ref_00488f60
+extern ref_00488f64
+extern ref_004991d4
 
 section .text
 
@@ -60,6 +65,35 @@ mov ebx, dword [esp + 0x10]
 push ebx
 call fcn_00457366  ; call 0x457366
 add esp, 0xc
+pop ebx
+ret
+
+clib_fclose:
+push ebx
+mov ebx, dword [esp + 8]
+call dword [ref_00488f60]  ; ucall: call dword [0x488f60]
+mov eax, dword [ref_004991d4]  ; mov eax, dword [0x4991d4]
+
+loc_004578d5:
+test eax, eax
+jne short loc_004578e6  ; jne 0x4578e6
+call dword [ref_00488f64]  ; ucall: call dword [0x488f64]
+mov eax, 0xffffffff
+pop ebx
+ret
+
+loc_004578e6:
+cmp ebx, dword [eax + 4]
+je short loc_004578ef  ; je 0x4578ef
+mov eax, dword [eax]
+jmp short loc_004578d5  ; jmp 0x4578d5
+
+loc_004578ef:
+call dword [ref_00488f64]  ; ucall: call dword [0x488f64]
+push 1
+push ebx
+call fcn_00457902  ; call 0x457902
+add esp, 8
 pop ebx
 ret
 
