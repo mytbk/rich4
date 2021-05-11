@@ -1,3 +1,5 @@
 r2
 *.o
 csrc/mkf/test/*.data
+*.obj
+*.exe
