@@ -2,6 +2,7 @@ global clib_fopen
 global clib_fclose
 global clib_fseek
 global clib_fread
+global clib_fwrite
 extern fcn_00457135
 extern fcn_004590b9
 extern fcn_00457254
@@ -559,6 +560,244 @@ pop esi
 pop ebx
 ret
 ; ===================================== end of fread ======================
+
+; ===================================== fwrite ============================
+extern fcn_004599bb
+extern fcn_00459aab
+
+clib_fwrite:
+push ebx
+push esi
+push edi
+push ebp
+sub esp, 0x10
+mov edi, dword [esp + 0x2c]
+mov ebx, dword [esp + 0x30]
+mov edx, dword [ebx + 0x10]
+push edx
+call dword [ref_00488f50]  ; ucall: call dword [0x488f50]
+mov ah, byte [ebx + 0xc]
+add esp, 4
+test ah, 2
+jne short loc_00457b25  ; jne 0x457b25
+push 4
+call fcn_00458de7  ; call 0x458de7
+add esp, 4
+mov ah, byte [ebx + 0xc]
+mov edx, dword [ebx + 0x10]
+or ah, 0x20
+push edx
+mov byte [ebx + 0xc], ah
+call dword [ref_00488f54]  ; ucall: call dword [0x488f54]
+add esp, 4
+xor eax, eax
+jmp near loc_00457d08  ; jmp 0x457d08
+
+loc_00457b25:
+imul edi, dword [esp + 0x28]
+test edi, edi
+jne short loc_00457b42  ; jne 0x457b42
+mov eax, dword [ebx + 0x10]
+push eax
+call dword [ref_00488f54]  ; ucall: call dword [0x488f54]
+add esp, 4
+mov eax, edi
+jmp near loc_00457d08  ; jmp 0x457d08
+
+loc_00457b42:
+mov eax, dword [ebx + 8]
+cmp dword [eax + 8], 0
+jne short loc_00457b54  ; jne 0x457b54
+push ebx
+call fcn_0045940b  ; call 0x45940b
+add esp, 4
+
+loc_00457b54:
+mov eax, dword [ebx + 0xc]
+mov dl, byte [ebx + 0xc]
+xor ebp, ebp
+and eax, 0x30
+and dl, 0xcf
+mov dword [esp + 8], ebp
+mov dword [esp], eax
+mov byte [ebx + 0xc], dl
+test dl, 0x40
+je near loc_00457c5a  ; je 0x457c5a
+mov dword [esp + 0xc], edi
+
+loc_00457b79:
+cmp dword [ebx + 4], 0
+jne short loc_00457bc9  ; jne 0x457bc9
+mov eax, dword [esp + 0xc]
+cmp eax, dword [ebx + 0x14]
+jb short loc_00457bc9  ; jb 0x457bc9
+xor al, al
+and ah, 0xfe
+test eax, eax
+jne short loc_00457b95  ; jne 0x457b95
+mov eax, dword [esp + 0xc]
+
+loc_00457b95:
+push eax
+mov esi, dword [esp + 0x28]
+push esi
+mov edi, dword [ebx + 0x10]
+push edi
+call fcn_004599bb  ; call 0x4599bb
+add esp, 0xc
+mov ebp, eax
+cmp eax, 0xffffffff
+je short loc_00457bc3  ; je 0x457bc3
+test eax, eax
+jne near loc_00457c27  ; jne 0x457c27
+call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+mov dword [eax + 4], 0xc
+
+loc_00457bc3:
+or byte [ebx + 0xc], 0x20
+jmp short loc_00457c27  ; jmp 0x457c27
+
+loc_00457bc9:
+mov ebp, dword [ebx + 0x14]
+mov esi, dword [ebx + 4]
+mov edi, dword [esp + 0xc]
+sub ebp, esi
+cmp ebp, edi
+jbe short loc_00457bdb  ; jbe 0x457bdb
+mov ebp, edi
+
+loc_00457bdb:
+mov esi, dword [esp + 0x24]
+mov ecx, ebp
+mov edi, dword [ebx]
+push es
+mov eax, ds
+mov es, eax
+push edi
+mov eax, ecx
+shr ecx, 2
+repne movsd
+mov cl, al
+and cl, 3
+repne movsb  ; repne movsb byte es:[edi], byte ptr [esi]
+pop edi
+pop es
+mov eax, dword [ebx]
+mov edx, dword [ebx + 4]
+mov ch, byte [ebx + 0xd]
+add eax, ebp
+add edx, ebp
+mov dword [ebx], eax
+or ch, 0x10
+mov dword [ebx + 4], edx
+mov byte [ebx + 0xd], ch
+mov eax, dword [ebx + 4]
+cmp eax, dword [ebx + 0x14]
+je short loc_00457c1e  ; je 0x457c1e
+test byte [ebx + 0xd], 4
+je short loc_00457c27  ; je 0x457c27
+
+loc_00457c1e:
+push ebx
+call fcn_004591f9  ; call 0x4591f9
+add esp, 4
+
+loc_00457c27:
+mov eax, dword [esp + 0x24]
+mov edx, dword [esp + 8]
+mov ecx, dword [esp + 0xc]
+add eax, ebp
+add edx, ebp
+mov dword [esp + 0x24], eax
+mov dword [esp + 8], edx
+sub ecx, ebp
+mov dword [esp + 0xc], ecx
+je near loc_00457cda  ; je 0x457cda
+test byte [ebx + 0xc], 0x20
+je near loc_00457b79  ; je 0x457b79
+jmp near loc_00457cda  ; jmp 0x457cda
+
+loc_00457c5a:
+mov cl, byte [ebx + 0xd]
+xor esi, esi
+test cl, 4
+je short loc_00457c78  ; je 0x457c78
+mov ch, cl
+and ch, 0xfa
+mov al, ch
+mov byte [ebx + 0xd], ch
+or al, 1
+mov esi, 1
+mov byte [ebx + 0xd], al
+
+loc_00457c78:
+mov eax, dword [ebx + 8]
+mov ebp, dword [eax + 0xc]
+mov dword [esp + 4], ebp
+mov dword [eax + 0xc], 1
+mov ebp, dword [esp + 0x24]
+
+loc_00457c8d:
+xor eax, eax
+push ebx
+mov al, byte [ebp]
+push eax
+inc ebp
+call fcn_00459aab  ; call 0x459aab
+mov dl, byte [ebx + 0xc]
+add esp, 8
+test dl, 0x30
+jne short loc_00457cb2  ; jne 0x457cb2
+mov ecx, dword [esp + 8]
+inc ecx
+mov dword [esp + 8], ecx
+cmp edi, ecx
+jne short loc_00457c8d  ; jne 0x457c8d
+
+loc_00457cb2:
+mov eax, dword [ebx + 8]
+mov edi, dword [esp + 4]
+mov dword [eax + 0xc], edi
+test esi, esi
+je short loc_00457cda  ; je 0x457cda
+mov dh, byte [ebx + 0xd]
+and dh, 0xfa
+mov cl, dh
+mov byte [ebx + 0xd], dh
+or cl, 4
+push ebx
+mov byte [ebx + 0xd], cl
+call fcn_004591f9  ; call 0x4591f9
+add esp, 4
+
+loc_00457cda:
+test byte [ebx + 0xc], 0x20
+je short loc_00457ce6  ; je 0x457ce6
+xor edi, edi
+mov dword [esp + 8], edi
+
+loc_00457ce6:
+mov eax, dword [esp]
+mov ebp, dword [ebx + 0xc]
+or ebp, eax
+mov eax, dword [ebx + 0x10]
+push eax
+mov dword [ebx + 0xc], ebp
+call dword [ref_00488f54]  ; ucall: call dword [0x488f54]
+add esp, 4
+xor edx, edx
+mov eax, dword [esp + 8]
+div dword [esp + 0x28]
+
+loc_00457d08:
+add esp, 0x10
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
+
+; ===================================== end of fwrite =====================
 
 fcn_00456f23:
 call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
