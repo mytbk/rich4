@@ -142,10 +142,17 @@ extern _tool_strings
 
 extern clib_fopen
 extern clib_fclose
+extern clib_fseek
 global fcn_00457135
-global fcn_004590b9
 global fcn_00457254
 global fcn_00457902
+global fcn_00458de7
+global fcn_004590b9
+global fcn_004591f9
+global fcn_0045931e
+global fcn_004593a9
+global ref_00488f50
+global ref_00488f54
 global ref_00488f60
 global ref_00488f64
 global ref_004991d4
@@ -2465,7 +2472,7 @@ call fcn_004080f5  ; call 0x4080f5
 push esi
 push 4
 push ebx
-call fcn_0045753a  ; call 0x45753a
+call clib_fseek  ; call 0x45753a
 add esp, 0xc
 push ebx
 push 1
@@ -105760,7 +105767,7 @@ je short loc_004502be  ; je 0x4502be
 push 2
 push 0
 push eax
-call fcn_0045753a  ; call 0x45753a
+call clib_fseek  ; call 0x45753a
 add esp, 0xc
 push esi
 call fcn_00458532  ; call 0x458532
@@ -116834,7 +116841,7 @@ je short loc_00457356  ; je 0x457356
 push 2
 push 0
 push ebx
-call fcn_0045753a  ; call 0x45753a
+call clib_fseek  ; call 0x45753a
 add esp, 0xc
 
 loc_00457356:
@@ -116952,227 +116959,6 @@ dd 0x8904c483
 dd 0xfd6ee9f0
 db 0xff
 db 0xff
-
-fcn_004574de:
-push ebx
-push esi
-push edi
-mov ebx, dword [esp + 0x10]
-mov eax, dword [esp + 0x14]
-cmp ebx, dword [eax + 4]
-jg short loc_00457519  ; jg 0x457519
-mov edx, dword [eax + 8]
-mov ecx, dword [eax]
-mov edx, dword [edx + 8]
-sub edx, ecx
-cmp ebx, edx
-jl short loc_00457519  ; jl 0x457519
-mov dl, byte [eax + 0xc]
-mov esi, dword [eax]
-mov edi, dword [eax + 4]
-and dl, 0xef
-add esi, ebx
-mov byte [eax + 0xc], dl
-sub edi, ebx
-mov dword [eax], esi
-mov dword [eax + 4], edi
-xor eax, eax
-pop edi
-pop esi
-pop ebx
-ret
-
-loc_00457519:
-mov eax, 1
-pop edi
-pop esi
-pop ebx
-ret
-
-fcn_00457522:
-mov eax, dword [esp + 4]
-and byte [eax + 0xc], 0xef
-mov edx, dword [eax + 8]
-mov edx, dword [edx + 8]
-mov dword [eax + 4], 0
-mov dword [eax], edx
-ret
-
-fcn_0045753a:
-push ebx
-push esi
-push edi
-push ebp
-mov ebx, dword [esp + 0x14]
-mov esi, dword [esp + 0x18]
-mov edi, dword [esp + 0x1c]
-mov edx, dword [ebx + 0x10]
-push edx
-call dword [ref_00488f50]  ; ucall: call dword [0x488f50]
-mov ah, byte [ebx + 0xc]
-add esp, 4
-test ah, 6
-je near loc_004575dc  ; je 0x4575dc
-test byte [ebx + 0xd], 0x10
-je short loc_0045759f  ; je 0x45759f
-push ebx
-call fcn_004591f9  ; call 0x4591f9
-add esp, 4
-test eax, eax
-je short loc_004575b6  ; je 0x4575b6
-test edi, edi
-jne short loc_00457588  ; jne 0x457588
-test esi, esi
-jge short loc_00457588  ; jge 0x457588
-push 9
-call fcn_00458de7  ; call 0x458de7
-add esp, 4
-
-loc_00457588:
-mov esi, dword [ebx + 0x10]
-push esi
-
-loc_0045758c:
-call dword [ref_00488f54]  ; ucall: call dword [0x488f54]
-mov eax, 0xffffffff
-add esp, 4
-pop ebp
-pop edi
-pop esi
-pop ebx
-ret
-
-loc_0045759f:
-cmp edi, 1
-jne short loc_004575a7  ; jne 0x4575a7
-sub esi, dword [ebx + 4]
-
-loc_004575a7:
-mov eax, dword [ebx + 8]
-mov eax, dword [eax + 8]
-mov dword [ebx + 4], 0
-mov dword [ebx], eax
-
-loc_004575b6:
-push edi
-mov cl, byte [ebx + 0xc]
-push esi
-mov eax, dword [ebx + 0x10]
-and cl, 0xeb
-push eax
-mov byte [ebx + 0xc], cl
-call fcn_0045931e  ; call 0x45931e
-add esp, 0xc
-cmp eax, 0xffffffff
-jne near loc_004576bc  ; jne 0x4576bc
-mov ecx, dword [ebx + 0x10]
-push ecx
-jmp short loc_0045758c  ; jmp 0x45758c
-
-loc_004575dc:
-cmp edi, 1
-jb short loc_004575f1  ; jb 0x4575f1
-jbe short loc_004575fa  ; jbe 0x4575fa
-cmp edi, 2
-je near loc_0045767a  ; je 0x45767a
-jmp near loc_004576a9  ; jmp 0x4576a9
-
-loc_004575f1:
-test edi, edi
-je short loc_0045763b  ; je 0x45763b
-jmp near loc_004576a9  ; jmp 0x4576a9
-
-loc_004575fa:
-push ebx
-push esi
-mov ebp, dword [ebx + 4]
-call fcn_004574de  ; call 0x4574de
-add esp, 8
-test eax, eax
-je near loc_004576bc  ; je 0x4576bc
-push edi
-sub esi, ebp
-push esi
-mov edi, dword [ebx + 0x10]
-push edi
-call fcn_0045931e  ; call 0x45931e
-add esp, 0xc
-cmp eax, 0xffffffff
-jne short loc_0045762d  ; jne 0x45762d
-mov ebp, dword [ebx + 0x10]
-push ebp
-jmp near loc_0045758c  ; jmp 0x45758c
-
-loc_0045762d:
-push ebx
-call fcn_00457522  ; call 0x457522
-add esp, 4
-jmp near loc_004576bc  ; jmp 0x4576bc
-
-loc_0045763b:
-mov edx, dword [ebx + 0x10]
-push edx
-call fcn_004593a9  ; call 0x4593a9
-add esp, 4
-mov ecx, dword [ebx + 4]
-mov ebp, esi
-sub eax, ecx
-push ebx
-sub ebp, eax
-push ebp
-call fcn_004574de  ; call 0x4574de
-add esp, 8
-test eax, eax
-je short loc_004576bc  ; je 0x4576bc
-push edi
-push esi
-mov esi, dword [ebx + 0x10]
-push esi
-call fcn_0045931e  ; call 0x45931e
-add esp, 0xc
-cmp eax, 0xffffffff
-jne short loc_0045762d  ; jne 0x45762d
-mov edi, dword [ebx + 0x10]
-push edi
-jmp near loc_0045758c  ; jmp 0x45758c
-
-loc_0045767a:
-mov dl, ah
-push edi
-mov ecx, dword [ebx + 0x10]
-and dl, 0xef
-mov eax, dword [ebx + 8]
-mov byte [ebx + 0xc], dl
-push esi
-mov eax, dword [eax + 8]
-mov dword [ebx + 4], 0
-push ecx
-mov dword [ebx], eax
-call fcn_0045931e  ; call 0x45931e
-add esp, 0xc
-cmp eax, 0xffffffff
-jne short loc_004576bc  ; jne 0x4576bc
-jmp near loc_00457588  ; jmp 0x457588
-
-loc_004576a9:
-push 9
-call fcn_00458de7  ; call 0x458de7
-add esp, 4
-mov eax, dword [ebx + 0x10]
-push eax
-jmp near loc_0045758c  ; jmp 0x45758c
-
-loc_004576bc:
-mov edx, dword [ebx + 0x10]
-push edx
-call dword [ref_00488f54]  ; ucall: call dword [0x488f54]
-add esp, 4
-xor eax, eax
-pop ebp
-pop edi
-pop esi
-pop ebx
-ret
 
 fcn_004576d0:
 push ebx
