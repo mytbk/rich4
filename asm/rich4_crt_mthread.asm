@@ -10,13 +10,12 @@ extern __imp__TlsAlloc@0
 extern __imp__TlsFree@4
 extern __imp__TlsGetValue@4
 extern __imp__TlsSetValue@8
+extern __imp__GetCurrentThreadId@0
 extern clib_free
 extern fcn_0045c836
 extern fcn_0045e8ca
-extern __GetThreadData
 extern __InitThreadData
 extern lib_calloc
-extern __ReallocThreadData
 extern ref_00488f78
 extern ref_00488f7c
 extern ref_00499954
@@ -24,7 +23,11 @@ extern _RWD_osbuild
 extern _RWD_osmajor
 extern __ThreadDataSize
 extern __TlsIndex
-
+extern __fatal_runtime_error
+extern fcn_0045c585
+extern ref_0046c97c
+extern ref_0046c9a1
+extern ref_0046c9c9
 
 section .text
 
@@ -200,6 +203,120 @@ loc_0045a39f:
 ret
 
 	;; trdlist.c
+
+__GetThreadData:
+push ebx
+xor ebx, ebx
+push ebx
+call __NTAddThread  ; call 0x45a2cb
+add esp, 4
+test eax, eax
+je short loc_0045c6de  ; je 0x45c6de
+mov edx, dword [__TlsIndex]  ; mov edx, dword [0x488f48]
+push edx
+call dword [cs:__imp__TlsGetValue@4]  ; ucall: call dword cs:[0x46241c]
+mov ebx, eax
+
+loc_0045c6de:
+test ebx, ebx
+jne short loc_0045c6f1  ; jne 0x45c6f1
+push 1
+push ref_0046c97c  ; push 0x46c97c
+call __fatal_runtime_error  ; call 0x45c690
+add esp, 8
+
+loc_0045c6f1:
+mov eax, ebx
+pop ebx
+ret
+
+__ReallocThreadData:
+push ebx
+push esi
+push edi
+push ebp
+call dword [ref_00488f78]  ; ucall: call dword [0x488f78]
+call dword [cs:__imp__GetCurrentThreadId@0]  ; ucall: call dword cs:[0x46238c]
+mov ebx, dword [ref_00499954]  ; mov ebx, dword [0x499954]
+mov ebp, eax
+jmp short loc_0045c717  ; jmp 0x45c717
+
+loc_0045c710:
+cmp ebp, dword [ebx + 4]
+je short loc_0045c71b  ; je 0x45c71b
+mov ebx, dword [ebx]
+
+loc_0045c717:
+test ebx, ebx
+jne short loc_0045c710  ; jne 0x45c710
+
+loc_0045c71b:
+cmp dword [ebx + 0xc], 0
+je short loc_0045c74b  ; je 0x45c74b
+mov edi, dword [__ThreadDataSize]  ; mov edi, dword [0x4894b0]
+push edi
+mov ebp, dword [ebx + 8]
+push ebp
+call fcn_0045c585  ; call 0x45c585
+add esp, 8
+mov ebp, eax
+test eax, eax
+jne short loc_0045c799  ; jne 0x45c799
+push 1
+push ref_0046c9a1  ; push 0x46c9a1
+call __fatal_runtime_error  ; call 0x45c690
+add esp, 8
+jmp short loc_0045c799  ; jmp 0x45c799
+
+loc_0045c74b:
+mov esi, dword [__ThreadDataSize]  ; mov esi, dword [0x4894b0]
+push esi
+push 1
+call lib_calloc  ; call 0x45c62e
+add esp, 8
+mov ebp, eax
+test eax, eax
+jne short loc_0045c771  ; jne 0x45c771
+push 1
+push ref_0046c9c9  ; push 0x46c9c9
+call __fatal_runtime_error  ; call 0x45c690
+add esp, 8
+
+loc_0045c771:
+mov esi, dword [ebx + 8]
+mov edi, ebp
+mov ecx, dword [esi + 0xf0]
+push es
+mov eax, ds
+mov es, eax
+push edi
+mov eax, ecx
+shr ecx, 2
+repne movsd
+mov cl, al
+and cl, 3
+repne movsb  ; repne movsb byte es:[edi], byte ptr [esi]
+pop edi
+pop es
+mov dword [ebx + 0xc], 1
+
+loc_0045c799:
+mov dword [ebx + 8], ebp
+mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
+push ebp
+mov dword [ebp + 0xf0], eax
+mov eax, dword [__TlsIndex]  ; mov eax, dword [0x488f48]
+mov byte [ebp + 0x52], 1
+push eax
+mov byte [ebp + 0x53], 0
+call dword [cs:__imp__TlsSetValue@8]  ; ucall: call dword cs:[0x462420]
+call dword [ref_00488f7c]  ; ucall: call dword [0x488f7c]
+mov eax, ebp
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
 
 __AddThreadData:
 push ebx
