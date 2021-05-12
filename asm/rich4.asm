@@ -121533,71 +121533,6 @@ mov dword [__TlsIndex], 0xffffffff  ; mov dword [0x488f48], 0xffffffff
 loc_0045a39f:
 ret
 
-__InitMultipleThread:
-push ebx
-push esi
-push edi
-push ebp
-mov edx, fcn_0045a15e  ; mov edx, 0x45a15e
-mov ebx, fcn_0045a170  ; mov ebx, 0x45a170
-mov ecx, fcn_0045a182  ; mov ecx, 0x45a182
-mov esi, fcn_0045a190  ; mov esi, 0x45a190
-mov edi, fcn_0045a142  ; mov edi, 0x45a142
-mov ebp, fcn_0045a150  ; mov ebp, 0x45a150
-mov eax, fcn_0045a1d5  ; mov eax, 0x45a1d5
-mov dword [ref_00488f50], edx  ; mov dword [0x488f50], edx
-mov dword [ref_00488f54], ebx  ; mov dword [0x488f54], ebx
-mov dword [ref_00488f58], ecx  ; mov dword [0x488f58], ecx
-mov dword [ref_00488f5c], esi  ; mov dword [0x488f5c], esi
-mov dword [ref_00488f60], edi  ; mov dword [0x488f60], edi
-mov dword [ref_00488f64], ebp  ; mov dword [0x488f64], ebp
-mov dword [ref_00488f78], eax  ; mov dword [0x488f78], eax
-mov edx, fcn_0045a1df  ; mov edx, 0x45a1df
-mov ebx, __AccessSemaphore  ; mov ebx, 0x45a0b3
-mov ecx, __ReleaseSemaphore  ; mov ecx, 0x45a11b
-mov esi, __CloseSemaphore  ; mov esi, 0x45a087
-mov edi, fcn_0045a1b6  ; mov edi, 0x45a1b6
-mov ebp, fcn_0045a1c4  ; mov ebp, 0x45a1c4
-mov eax, fcn_0045a1bd  ; mov eax, 0x45a1bd
-mov dword [ref_00488f7c], edx  ; mov dword [0x488f7c], edx
-mov dword [ref_00489480], ebx  ; mov dword [0x489480], ebx
-mov dword [ref_00489484], ecx  ; mov dword [0x489484], ecx
-mov dword [ref_00489488], esi  ; mov dword [0x489488], esi
-mov dword [ref_00488f68], edi  ; mov dword [0x488f68], edi
-mov dword [ref_00488f6c], ebp  ; mov dword [0x488f6c], ebp
-mov dword [ref_00488f70], eax  ; mov dword [0x488f70], eax
-mov edx, fcn_0045a1ce  ; mov edx, 0x45a1ce
-mov ebx, 1
-mov esi, fcn_0045a1f3  ; mov esi, 0x45a1f3
-mov dword [ref_00488f74], edx  ; mov dword [0x488f74], edx
-call __NTGetCriticalSection  ; call 0x45a038
-push eax
-mov edi, __ThreadExit  ; mov edi, 0x45a378
-mov dword [InitSemaphore], eax  ; mov dword [0x49930c], eax
-call dword [cs:__imp__InitializeCriticalSection@4]  ; ucall: call dword cs:[0x4623d4]
-mov ecx, fcn_0045a1e9  ; mov ecx, 0x45a1e9
-mov ebp, dword [ref_004991c4]  ; mov ebp, dword [0x4991c4]
-mov dword [ref_00499310], ebx  ; mov dword [0x499310], ebx
-push ebp
-mov edx, dword [ebp + 0xda]
-mov dword [ref_00488f84], esi  ; mov dword [0x488f84], esi
-push edx
-mov dword [ref_00488f88], edi  ; mov dword [0x488f88], edi
-mov dword [ref_00488f80], ecx  ; mov dword [0x488f80], ecx
-call fcn_0045c7ca  ; call 0x45c7ca
-add esp, 8
-mov ebx, dword [ref_004991c4]  ; mov ebx, dword [0x4991c4]
-push ebx
-mov ecx, dword [__TlsIndex]  ; mov ecx, dword [0x488f48]
-push ecx
-mov esi, fcn_0045a1fd  ; mov esi, 0x45a1fd
-call dword [cs:__imp__TlsSetValue@8]  ; ucall: call dword cs:[0x462420]
-mov dword [ref_00488f4c], esi  ; mov dword [0x488f4c], esi
-pop ebp
-pop edi
-pop esi
-pop ebx
-ret
 
 fcn_0045a4c0:
 push ebx
@@ -129642,23 +129577,6 @@ fcn_0045e89e:
 xor eax, eax
 ret
 
-endloc_0045e8a1:
-db 0x53
-db 0x56
-db 0x8b
-dd 0x52182454
-dd 0x18245c8b
-dd 0x244c8b53
-dd 0x748b5118
-dd 0xff561824
-db 0x15
-dd ref_00489728
-db 0x83
-db 0xc4
-db 0x10
-db 0x5e
-db 0x5b
-db 0xc3
 
 fcn_0045e8c3:
 call dword [ref_0048972c]  ; ucall: call dword [0x48972c]
@@ -129671,40 +129589,6 @@ call dword [ref_00489730]  ; ucall: call dword [0x489730]
 add esp, 4
 ret
 
-endloc_0045e8d9:
-db 0x53
-db 0x56
-db 0x8b
-dd 0x8b0c2444
-dd 0x8b10245c
-dd 0x85142454
-dd 0x8b1074c0
-db 0x08
-db 0x8b
-db 0x35
-dd ref_00489728
-db 0x89
-db 0x0d
-dd ref_00489728
-db 0x89
-db 0x30
-db 0x85
-dd 0x8b0f74db
-db 0x03
-db 0x8b
-db 0x0d
-dd ref_0048972c
-db 0xa3
-dd ref_0048972c
-dd 0xd2850b89
-dd 0x028b0f74
-db 0x8b
-db 0x1d
-dd ref_00489730
-db 0xa3
-dd ref_00489730
-db 0x89
-dd 0xc35b5e1a
 
 fcn_0045e924:
 push ebx
@@ -131396,90 +131280,6 @@ mov esp, ebp
 pop ebp
 pop gs
 pop fs
-pop es
-pop edi
-pop esi
-pop ebx
-ret
-
-fcn_0045f7e8:
-push ebx
-push esi
-push edi
-push es
-sub esp, 0x3c
-cmp dword [__TlsIndex], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
-jne short loc_0045f80a  ; jne 0x45f80a
-call __NTThreadInit  ; call 0x45a27a
-test eax, eax
-je near loc_0045f8c7  ; je 0x45f8c7
-call __InitMultipleThread  ; call 0x45a3a0
-
-loc_0045f80a:
-mov eax, dword [esp + 0x54]
-add eax, 0xfff
-xor al, al
-and ah, 0xf0
-mov dword [esp + 0x54], eax
-mov eax, dword [esp + 0x50]
-mov dword [esp + 0x20], eax
-mov eax, dword [esp + 0x58]
-mov edi, esp
-mov dword [esp + 0x24], eax
-call dword [cs:__imp__GetCurrentThread@0]  ; ucall: call dword cs:[0x462390]
-mov dword [esp + 0x28], eax
-mov eax, ds
-push 0x10
-mov es, eax
-lea eax, [esp + 0xc]
-mov esi, ref_0046cac4  ; mov esi, 0x46cac4
-push eax
-movsd  ; movsd dword es:[edi], dword ptr [esi]
-movsd  ; movsd dword es:[edi], dword ptr [esi]
-movsb  ; movsb byte es:[edi], byte ptr [esi]
-call dword [cs:__imp__GetCurrentThreadId@0]  ; ucall: call dword cs:[0x46238c]
-push eax
-call fcn_00457d61  ; call 0x457d61
-add esp, 0xc
-mov eax, esp
-push eax
-push 0
-push 0
-push 0
-call dword [cs:__imp__CreateEventA@16]  ; ucall: call dword cs:[0x46234c]
-mov dword [esp + 0x2c], eax
-lea eax, [esp + 0x34]
-mov dword [esp + 0x30], eax
-lea eax, [esp + 0x38]
-push eax
-push 0
-lea eax, [esp + 0x28]
-push eax
-push fcn_0045f738  ; push 0x45f738
-mov ebx, dword [esp + 0x64]
-push ebx
-push 0
-call dword [cs:__imp__CreateThread@24]  ; ucall: call dword cs:[0x462354]
-mov dword [esp + 0x34], eax
-test eax, eax
-jne short loc_0045f8a9  ; jne 0x45f8a9
-mov dword [esp + 0x38], 0xffffffff
-jmp short loc_0045f8b7  ; jmp 0x45f8b7
-
-loc_0045f8a9:
-push 0xffffffffffffffff
-mov ecx, dword [esp + 0x30]
-push ecx
-call dword [cs:__imp__WaitForSingleObject@8]  ; ucall: call dword cs:[0x462434]
-
-loc_0045f8b7:
-mov edi, dword [esp + 0x2c]
-push edi
-call dword [cs:__imp__CloseHandle@4]  ; ucall: call dword cs:[0x462348]
-mov eax, dword [esp + 0x34]
-
-loc_0045f8c7:
-add esp, 0x3c
 pop es
 pop edi
 pop esi
@@ -173968,8 +173768,6 @@ dd 0x7fff8000
 ref_00489724:
 dd 0x00000000
 
-ref_00489728:
-dd fcn_0045f7e8
 
 ref_0048972c:  ; may contain a jump table
 dd fcn_0045f8cf
