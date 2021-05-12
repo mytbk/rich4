@@ -121163,7 +121163,7 @@ ret
 fcn_0045a037:
 ret
 
-fcn_0045a038:
+__NTGetCriticalSection:
 push ebx
 mov edx, dword [ref_0049933c]  ; mov edx, dword [0x49933c]
 cmp edx, 0x40
@@ -121183,14 +121183,14 @@ ret
 loc_0045a062:
 push 0x18
 push 1
-call fcn_0045c62e  ; call 0x45c62e
+call lib_calloc  ; call 0x45c62e
 add esp, 8
 mov ebx, eax
 test eax, eax
 jne short loc_0045a083  ; jne 0x45a083
 push 1
 push ref_0046c438  ; push 0x46c438
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 add esp, 8
 
 loc_0045a083:
@@ -121198,7 +121198,7 @@ mov eax, ebx
 pop ebx
 ret
 
-fcn_0045a087:
+__CloseSemaphore:
 push ebx
 mov ebx, dword [esp + 8]
 cmp dword [ebx + 4], 0
@@ -121214,7 +121214,7 @@ mov dword [ebx + 0xc], 0
 pop ebx
 ret
 
-fcn_0045a0b3:
+__AccessSemaphore:
 push ebx
 push esi
 push edi
@@ -121226,21 +121226,21 @@ cmp eax, edx
 je short loc_0045a114  ; je 0x45a114
 cmp dword [ebx + 4], 0
 jne short loc_0045a107  ; jne 0x45a107
-push ref_0049930c  ; push 0x49930c
-call fcn_0045a0b3  ; call 0x45a0b3
+push InitSemaphore  ; push 0x49930c
+call __AccessSemaphore  ; call 0x45a0b3
 mov edi, dword [ebx + 4]
 add esp, 4
 test edi, edi
 jne short loc_0045a0fa  ; jne 0x45a0fa
-call fcn_0045a038  ; call 0x45a038
+call __NTGetCriticalSection  ; call 0x45a038
 push eax
 mov dword [ebx], eax
 call dword [cs:__imp__InitializeCriticalSection@4]  ; ucall: call dword cs:[0x4623d4]
 mov dword [ebx + 4], 1
 
 loc_0045a0fa:
-push ref_0049930c  ; push 0x49930c
-call fcn_0045a11b  ; call 0x45a11b
+push InitSemaphore  ; push 0x49930c
+call __ReleaseSemaphore  ; call 0x45a11b
 add esp, 4
 
 loc_0045a107:
@@ -121256,7 +121256,7 @@ pop esi
 pop ebx
 ret
 
-fcn_0045a11b:
+__ReleaseSemaphore:
 push ebx
 push esi
 mov eax, dword [esp + 0xc]
@@ -121281,7 +121281,7 @@ fcn_0045a142:
 push ref_004991dc  ; push 0x4991dc
 
 loc_0045a147:
-call fcn_0045a0b3  ; call 0x45a0b3
+call __AccessSemaphore  ; call 0x45a0b3
 add esp, 4
 ret
 
@@ -121289,7 +121289,7 @@ fcn_0045a150:
 push ref_004991dc  ; push 0x4991dc
 
 loc_0045a155:
-call fcn_0045a11b  ; call 0x45a11b
+call __ReleaseSemaphore  ; call 0x45a11b
 add esp, 4
 ret
 
@@ -121322,7 +121322,7 @@ and eax, 0xf
 shl eax, 4
 add eax, ref_004991fc  ; add eax, 0x4991fc
 push eax
-call fcn_0045a087  ; call 0x45a087
+call __CloseSemaphore  ; call 0x45a087
 add esp, 4
 mov edx, dword [esp + 4]
 push edx
@@ -121400,7 +121400,7 @@ jne short loc_0045a26d  ; jne 0x45a26d
 mov edx, dword [__ThreadDataSize]  ; mov edx, dword [0x4894b0]
 push edx
 push 1
-call fcn_0045c62e  ; call 0x45c62e
+call lib_calloc  ; call 0x45c62e
 add esp, 8
 mov ebx, eax
 test eax, eax
@@ -121417,7 +121417,7 @@ mov eax, ebx
 pop ebx
 ret
 
-fcn_0045a27a:
+__NTThreadInit:
 call dword [cs:__imp__TlsAlloc@0]  ; ucall: call dword cs:[0x462414]
 mov dx, word [_RWD_osbuild]  ; mov dx, word [0x489355]
 mov dword [__TlsIndex], eax  ; mov dword [0x488f48], eax
@@ -121533,7 +121533,7 @@ mov dword [__TlsIndex], 0xffffffff  ; mov dword [0x488f48], 0xffffffff
 loc_0045a39f:
 ret
 
-fcn_0045a3a0:
+__InitMultipleThread:
 push ebx
 push esi
 push edi
@@ -121553,9 +121553,9 @@ mov dword [ref_00488f60], edi  ; mov dword [0x488f60], edi
 mov dword [ref_00488f64], ebp  ; mov dword [0x488f64], ebp
 mov dword [ref_00488f78], eax  ; mov dword [0x488f78], eax
 mov edx, fcn_0045a1df  ; mov edx, 0x45a1df
-mov ebx, fcn_0045a0b3  ; mov ebx, 0x45a0b3
-mov ecx, fcn_0045a11b  ; mov ecx, 0x45a11b
-mov esi, fcn_0045a087  ; mov esi, 0x45a087
+mov ebx, __AccessSemaphore  ; mov ebx, 0x45a0b3
+mov ecx, __ReleaseSemaphore  ; mov ecx, 0x45a11b
+mov esi, __CloseSemaphore  ; mov esi, 0x45a087
 mov edi, fcn_0045a1b6  ; mov edi, 0x45a1b6
 mov ebp, fcn_0045a1c4  ; mov ebp, 0x45a1c4
 mov eax, fcn_0045a1bd  ; mov eax, 0x45a1bd
@@ -121570,10 +121570,10 @@ mov edx, fcn_0045a1ce  ; mov edx, 0x45a1ce
 mov ebx, 1
 mov esi, fcn_0045a1f3  ; mov esi, 0x45a1f3
 mov dword [ref_00488f74], edx  ; mov dword [0x488f74], edx
-call fcn_0045a038  ; call 0x45a038
+call __NTGetCriticalSection  ; call 0x45a038
 push eax
 mov edi, __ThreadExit  ; mov edi, 0x45a378
-mov dword [ref_0049930c], eax  ; mov dword [0x49930c], eax
+mov dword [InitSemaphore], eax  ; mov dword [0x49930c], eax
 call dword [cs:__imp__InitializeCriticalSection@4]  ; ucall: call dword cs:[0x4623d4]
 mov ecx, fcn_0045a1e9  ; mov ecx, 0x45a1e9
 mov ebp, dword [ref_004991c4]  ; mov ebp, dword [0x4991c4]
@@ -121628,7 +121628,7 @@ add esp, 4
 push ref_0049931c  ; push 0x49931c
 call dword [ref_00489488]  ; ucall: call dword [0x489488]
 add esp, 4
-push ref_0049930c  ; push 0x49930c
+push InitSemaphore  ; push 0x49930c
 call dword [ref_00489488]  ; ucall: call dword [0x489488]
 add esp, 4
 call __NTThreadFini  ; call 0x45a382
@@ -122642,7 +122642,7 @@ loc_0045ade0:
 pop eax
 push 1
 push ref_004894b4  ; push 0x4894b4
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 
 fcn_0045aded:
 push eax
@@ -124361,7 +124361,7 @@ test eax, eax
 jne short loc_0045bc73  ; jne 0x45bc73
 push 1
 push ref_0046c8b8  ; push 0x46c8b8
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 add esp, 8
 
 loc_0045bc73:
@@ -125416,7 +125416,7 @@ ret
 fcn_0045c4fb:
 push 1
 push ref_0046c958  ; push 0x46c958
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 add esp, 8
 ret
 
@@ -125547,7 +125547,7 @@ pop esi
 pop ebx
 ret
 
-fcn_0045c62e:
+lib_calloc:
 push ebx
 mov ebx, dword [esp + 8]
 imul ebx, dword [esp + 0xc]
@@ -125596,7 +125596,7 @@ mov ecx, dword [esp + 0x10]
 push ecx
 jmp near loc_004588b0  ; jmp 0x4588b0
 
-fcn_0045c690:
+__fatal_runtime_error:
 push ebx
 mov eax, ds
 and eax, 0xffff
@@ -125636,7 +125636,7 @@ test ebx, ebx
 jne short loc_0045c6f1  ; jne 0x45c6f1
 push 1
 push ref_0046c97c  ; push 0x46c97c
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 add esp, 8
 
 loc_0045c6f1:
@@ -125678,7 +125678,7 @@ test eax, eax
 jne short loc_0045c799  ; jne 0x45c799
 push 1
 push ref_0046c9a1  ; push 0x46c9a1
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 add esp, 8
 jmp short loc_0045c799  ; jmp 0x45c799
 
@@ -125686,14 +125686,14 @@ loc_0045c74b:
 mov esi, dword [__ThreadDataSize]  ; mov esi, dword [0x4894b0]
 push esi
 push 1
-call fcn_0045c62e  ; call 0x45c62e
+call lib_calloc  ; call 0x45c62e
 add esp, 8
 mov ebp, eax
 test eax, eax
 jne short loc_0045c771  ; jne 0x45c771
 push 1
 push ref_0046c9c9  ; push 0x46c9c9
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 add esp, 8
 
 loc_0045c771:
@@ -125741,7 +125741,7 @@ call dword [ref_00488f78]  ; ucall: call dword [0x488f78]
 push 0x10
 mov esi, 1
 push esi
-call fcn_0045c62e  ; call 0x45c62e
+call lib_calloc  ; call 0x45c62e
 mov ebx, eax
 add esp, 8
 test eax, eax
@@ -129872,7 +129872,7 @@ dd ref_00489734
 fcn_0045ea68:
 push 0xff
 push ref_0046caac  ; push 0x46caac
-call fcn_0045c690  ; call 0x45c690
+call __fatal_runtime_error  ; call 0x45c690
 add esp, 8
 ret
 
@@ -131410,10 +131410,10 @@ push es
 sub esp, 0x3c
 cmp dword [__TlsIndex], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
 jne short loc_0045f80a  ; jne 0x45f80a
-call fcn_0045a27a  ; call 0x45a27a
+call __NTThreadInit  ; call 0x45a27a
 test eax, eax
 je near loc_0045f8c7  ; je 0x45f8c7
-call fcn_0045a3a0  ; call 0x45a3a0
+call __InitMultipleThread  ; call 0x45a3a0
 
 loc_0045f80a:
 mov eax, dword [esp + 0x54]
@@ -176885,7 +176885,7 @@ resb 256
 ref_004992fc:
 resb 16
 
-ref_0049930c:
+InitSemaphore:
 resb 4
 
 ref_00499310:
