@@ -14,7 +14,6 @@ extern __imp__GetCurrentThreadId@0
 extern clib_free
 extern fcn_0045c836
 extern fcn_0045e8ca
-extern __InitThreadData
 extern lib_calloc
 extern ref_00488f78
 extern ref_00488f7c
@@ -28,6 +27,7 @@ extern fcn_0045c585
 extern ref_0046c97c
 extern ref_0046c9a1
 extern ref_0046c9c9
+extern __init_stack_limits
 
 section .text
 
@@ -363,5 +363,24 @@ call dword [ref_00488f7c]  ; ucall: call dword [0x488f7c]
 mov eax, esi
 pop edi
 pop esi
+pop ebx
+ret
+
+	;; mthrdini.c
+
+__InitThreadData:
+push ebx
+mov ebx, dword [esp + 8]
+test ebx, ebx
+je short loc_0045c8ff  ; je 0x45c8ff
+push 0
+push ebx
+mov dword [ebx + 0xc], 1
+call __init_stack_limits  ; call 0x45a666
+add esp, 8
+call dword [cs:__imp__GetCurrentThreadId@0]  ; ucall: call dword cs:[0x46238c]
+mov dword [ebx + 0xda], eax
+
+loc_0045c8ff:
 pop ebx
 ret

@@ -182,7 +182,6 @@ extern __NTThreadFini
 global clib_free
 global fcn_0045c836
 global fcn_0045e8ca
-global __InitThreadData
 global lib_calloc
 global ref_00488f78
 global ref_00488f7c
@@ -196,6 +195,7 @@ global fcn_0045c585
 global ref_0046c97c
 global ref_0046c9a1
 global ref_0046c9c9
+global __init_stack_limits
 
 section .text
 db 0xcc
@@ -125402,23 +125402,6 @@ call clib_free  ; call 0x456e11
 add esp, 4
 mov ebx, esi
 jmp short loc_0045c8b1  ; jmp 0x45c8b1
-
-__InitThreadData:
-push ebx
-mov ebx, dword [esp + 8]
-test ebx, ebx
-je short loc_0045c8ff  ; je 0x45c8ff
-push 0
-push ebx
-mov dword [ebx + 0xc], 1
-call __init_stack_limits  ; call 0x45a666
-add esp, 8
-call dword [cs:__imp__GetCurrentThreadId@0]  ; ucall: call dword cs:[0x46238c]
-mov dword [ebx + 0xda], eax
-
-loc_0045c8ff:
-pop ebx
-ret
 
 fcn_0045c901:
 jmp near loc_0045c8a9  ; jmp 0x45c8a9
