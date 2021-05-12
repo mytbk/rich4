@@ -177,7 +177,6 @@ extern clib_srand
 global _GetThreadPtr
 
 extern __AllocInitThreadData
-extern __NTAddThread
 extern __NTRemoveThread
 extern __NTThreadFini
 global clib_free
@@ -130862,118 +130861,6 @@ loc_0045f698:
 fdiv qword [esp + 8]
 pop eax
 ret 8
-
-endloc_0045f6a0:
-dd 0x24448b50
-dd 0x00002508
-dd 0x003d7f80
-dd 0x747f8000
-dd 0x25e0df33
-dd 0x00003800
-dd 0x44d90d74
-dd 0x1fe80824
-dd 0x58ffffff
-dd 0xd90004c2
-dd 0x0cec83c9
-dd 0xd9243cdb
-dd 0xe8142444
-dd 0xffffff0a
-dd 0xd9242cdb
-dd 0x0cc483c9
-dd 0x0004c258
-dd 0x08247cd8
-dd 0x0004c258
-dd 0x24448b50
-dd 0x0000250c
-dd 0x003d7ff0
-dd 0x747ff000
-dd 0x25e0df33
-dd 0x00003800
-dd 0x44dd0d74
-dd 0xd3e80824
-dd 0x58fffffe
-dd 0xd90008c2
-dd 0x0cec83c9
-dd 0xdd243cdb
-dd 0xe8142444
-dd 0xfffffebe
-dd 0xd9242cdb
-dd 0x0cc483c9
-dd 0x0008c258
-dd 0x08247cdc
-dd 0x0008c258
-
-fcn_0045f738:
-push ebx
-push esi
-push edi
-push es
-push fs
-push gs
-
-fcn_0045f740:
-push ebp
-mov ebp, esp
-sub esp, 0x10
-mov esi, dword [ebp + 0x20]
-mov eax, dword [esi]
-mov dword [ebp - 4], eax
-mov eax, dword [esi + 4]
-mov dword [ebp - 8], eax
-mov eax, dword [esi + 0x10]
-mov edx, dword [ref_004991c0]  ; mov edx, dword [0x4991c0]
-mov edi, dword [eax]
-test edx, edx
-jne short loc_0045f7a4  ; jne 0x45f7a4
-mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
-add eax, 3
-and al, 0xfc
-sub esp, eax
-mov ebx, esp
-mov ecx, dword [__ThreadDataSize]  ; mov ecx, dword [0x4894b0]
-push ecx
-push edx
-push ebx
-call memset  ; call 0x456f60
-add esp, 0xc
-mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
-push ebx
-mov dword [ebx + 0xf0], eax
-call __NTAddThread  ; call 0x45a2cb
-add esp, 4
-test eax, eax
-jne short loc_0045f7a4  ; jne 0x45f7a4
-push edi
-call dword [cs:__imp__CloseHandle@4]  ; ucall: call dword cs:[0x462348]
-jmp short loc_0045f7dc  ; jmp 0x45f7dc
-
-loc_0045f7a4:
-call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
-mov dword [eax + 0xde], edi
-mov edi, dword [esi + 0xc]
-push edi
-call dword [cs:__imp__SetEvent@4]  ; ucall: call dword cs:[0x462400]
-lea eax, [ebp - 0x10]
-push eax
-call __NewExceptionFilter  ; call 0x45ab58
-add esp, 4
-call dword [ref_00488f8c]  ; ucall: call dword [0x488f8c]
-mov eax, dword [ebp - 8]
-push eax
-call dword [ebp - 4]  ; ucall
-add esp, 4
-call fcn_0045e8c3  ; call 0x45e8c3
-
-loc_0045f7dc:
-mov esp, ebp
-pop ebp
-pop gs
-pop fs
-pop es
-pop edi
-pop esi
-pop ebx
-ret
 
 fcn_0045f8cf:
 call dword [ref_00488f90]  ; ucall: call dword [0x488f90]
