@@ -50,9 +50,7 @@ extern __imp__CloseHandle@4
 extern __imp__CreateEventA@16
 extern __imp__CreateFileA@28
 extern __imp__CreateThread@24
-extern __imp__DeleteCriticalSection@4
 extern __imp__DeleteFileA@4
-extern __imp__EnterCriticalSection@4
 extern __imp__ExitProcess@4
 extern __imp__ExitThread@4
 extern __imp__FlushFileBuffers@4
@@ -81,8 +79,6 @@ extern __imp__GetProcAddress@8
 extern __imp__GetStdHandle@4
 extern __imp__GetTickCount@0
 extern __imp__GetVersion@0
-extern __imp__InitializeCriticalSection@4
-extern __imp__LeaveCriticalSection@4
 extern __imp__LoadLibraryA@4
 extern __imp__MoveFileA@8
 extern __imp__MultiByteToWideChar@24
@@ -121179,22 +121175,6 @@ ret
 fcn_0045a037:
 ret
 
-__NTGetCriticalSection:
-push ebx
-mov edx, dword [ref_0049933c]  ; mov edx, dword [0x49933c]
-cmp edx, 0x40
-jge short loc_0045a062  ; jge 0x45a062
-mov eax, edx
-shl eax, 2
-mov ebx, ref_00499340  ; mov ebx, 0x499340
-sub eax, edx
-lea ecx, [edx + 1]
-shl eax, 3
-mov dword [ref_0049933c], ecx  ; mov dword [0x49933c], ecx
-add ebx, eax
-mov eax, ebx
-pop ebx
-ret
 
 loc_0045a062:
 push 0x18
@@ -121213,86 +121193,6 @@ loc_0045a083:
 mov eax, ebx
 pop ebx
 ret
-
-__CloseSemaphore:
-push ebx
-mov ebx, dword [esp + 8]
-cmp dword [ebx + 4], 0
-je short loc_0045a09c  ; je 0x45a09c
-mov ecx, dword [ebx]
-push ecx
-call dword [cs:__imp__DeleteCriticalSection@4]  ; ucall: call dword cs:[0x462358]
-
-loc_0045a09c:
-mov dword [ebx + 4], 0
-mov dword [ebx + 8], 0
-mov dword [ebx + 0xc], 0
-pop ebx
-ret
-
-__AccessSemaphore:
-push ebx
-push esi
-push edi
-mov ebx, dword [esp + 0x10]
-call dword [cs:__imp__GetCurrentThreadId@0]  ; ucall: call dword cs:[0x46238c]
-mov edx, dword [ebx + 8]
-mov esi, eax
-cmp eax, edx
-je short loc_0045a114  ; je 0x45a114
-cmp dword [ebx + 4], 0
-jne short loc_0045a107  ; jne 0x45a107
-push InitSemaphore  ; push 0x49930c
-call __AccessSemaphore  ; call 0x45a0b3
-mov edi, dword [ebx + 4]
-add esp, 4
-test edi, edi
-jne short loc_0045a0fa  ; jne 0x45a0fa
-call __NTGetCriticalSection  ; call 0x45a038
-push eax
-mov dword [ebx], eax
-call dword [cs:__imp__InitializeCriticalSection@4]  ; ucall: call dword cs:[0x4623d4]
-mov dword [ebx + 4], 1
-
-loc_0045a0fa:
-push InitSemaphore  ; push 0x49930c
-call __ReleaseSemaphore  ; call 0x45a11b
-add esp, 4
-
-loc_0045a107:
-mov eax, dword [ebx]
-push eax
-call dword [cs:__imp__EnterCriticalSection@4]  ; ucall: call dword cs:[0x462360]
-mov dword [ebx + 8], esi
-
-loc_0045a114:
-inc dword [ebx + 0xc]
-pop edi
-pop esi
-pop ebx
-ret
-
-__ReleaseSemaphore:
-push ebx
-push esi
-mov eax, dword [esp + 0xc]
-mov edx, dword [eax + 0xc]
-test edx, edx
-jbe short loc_0045a13f  ; jbe 0x45a13f
-lea ebx, [edx - 1]
-mov dword [eax + 0xc], ebx
-test ebx, ebx
-jne short loc_0045a13f  ; jne 0x45a13f
-mov esi, dword [eax]
-push esi
-mov dword [eax + 8], ebx
-call dword [cs:__imp__LeaveCriticalSection@4]  ; ucall: call dword cs:[0x4623d8]
-
-loc_0045a13f:
-pop esi
-pop ebx
-ret
-
 
 fcn_0045a4c0:
 push ebx
