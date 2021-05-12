@@ -384,3 +384,8 @@ mov dword [ebx + 0xda], eax
 loc_0045c8ff:
 pop ebx
 ret
+
+section .data
+
+__TlsIndex:
+dd 0xffffffff

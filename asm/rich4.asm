@@ -97,10 +97,6 @@ extern __imp__SetFilePointer@16
 extern __imp__SetLastError@4
 extern __imp__SetStdHandle@8
 extern __imp__SetUnhandledExceptionFilter@4
-extern __imp__TlsAlloc@0
-extern __imp__TlsFree@4
-extern __imp__TlsGetValue@4
-extern __imp__TlsSetValue@8
 extern __imp__UnhandledExceptionFilter@4
 extern __imp__VirtualAlloc@16
 extern __imp__VirtualFree@12
@@ -189,7 +185,6 @@ global ref_00499954
 global _RWD_osbuild
 global _RWD_osmajor
 global __ThreadDataSize
-global __TlsIndex
 global __fatal_runtime_error
 global fcn_0045c585
 global ref_0046c97c
@@ -172536,9 +172531,6 @@ ref_00488f3c:
 dd 0x2168c235
 dd 0xc90fdaa2
 dd 0x00004001
-
-__TlsIndex:
-dd 0xffffffff
 
 _GetThreadPtr:  ; may contain a jump table
 dd fcn_004585cd
