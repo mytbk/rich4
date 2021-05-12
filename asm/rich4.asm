@@ -833,7 +833,7 @@ mov byte [ref_0046cb05], ah  ; mov byte [0x46cb05], ah
 push 4
 push 0
 push ref_004990f0  ; push 0x4990f0
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0x5e880
 call fcn_00456f80  ; call 0x456f80
@@ -5469,7 +5469,7 @@ add esp, 0xc
 push 0xc
 push 0
 push esi
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 
 loc_00404dbf:
@@ -5493,7 +5493,7 @@ add esp, 4
 push 0xc
 push 0
 push esi
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov edi, 1
 jmp short loc_00404dbf  ; jmp 0x404dbf
@@ -6340,7 +6340,7 @@ push 0x18
 push 0
 mov eax, ref_0048a3cc  ; mov eax, 0x48a3cc
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov ebx, 0xa
 mov dword [ref_0048a3cc], ebx  ; mov dword [0x48a3cc], ebx
@@ -8083,19 +8083,19 @@ mov word [ref_004991b8], dx  ; mov word [0x4991b8], dx
 push 0xc
 push ebp
 push ref_004990f4  ; push 0x4990f4
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0x1c
 push ebp
 push ref_0046cb3c  ; push 0x46cb3c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov dword [ref_0046cb3c], 2  ; mov dword [0x46cb3c], 2
 mov dword [ref_0046cb40], 1  ; mov dword [0x46cb40], 1
 push 0x30
 push ebp
 push ref_0048a35c  ; push 0x48a35c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 jmp near loc_00406ff6  ; jmp 0x406ff6
 
@@ -8160,7 +8160,7 @@ loc_00406fcc:
 push 0x30
 push 0
 push ref_0048a35c  ; push 0x48a35c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor eax, eax
 mov al, byte [(_players+19)]  ; mov al, byte [0x496b7b]
@@ -8291,12 +8291,12 @@ mov dword [ref_0049908c], eax  ; mov dword [0x49908c], eax
 push 0x3c
 push edi
 push ref_00499120  ; push 0x499120
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0x3c
 push edi
 push ref_0049915c  ; push 0x49915c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 
@@ -8358,7 +8358,7 @@ loc_00407258:
 push 0x68
 push 0
 push ebp
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 
 loc_00407265:
@@ -8430,12 +8430,12 @@ add esp, 0xc
 push 8
 push 0
 push ref_00496b30  ; push 0x496b30
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 8
 push 0
 push ref_00496b60  ; push 0x496b60
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov dh, 1
 mov byte [ref_00496b34], dh  ; mov byte [0x496b34], dh
@@ -8525,17 +8525,17 @@ fistp dword [ref_0049907c]  ; fistp dword [0x49907c]
 push 0x150
 push 0
 push ref_004967e0  ; push 0x4967e0
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0x180
 push 0
 push _player_stocks  ; push 0x4971a0
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0x24
 push 0
 push ref_004990b8  ; push 0x4990b8
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebp, ebp
 mov dword [ref_00499080], ebp  ; mov dword [0x499080], ebp
@@ -9257,7 +9257,7 @@ add esi, eax
 mov eax, ref_0048cb80  ; mov eax, 0x48cb80
 add eax, esi
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov ebp, dword [ref_00498e94]  ; mov ebp, dword [0x498e94]
 push ebp
@@ -9269,7 +9269,7 @@ push eax
 push 0
 mov edx, dword [esi + ref_0048f294]  ; mov edx, dword [esi + 0x48f294]
 push edx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 inc ebx
 jmp short loc_00407cd1  ; jmp 0x407cd1
@@ -9278,7 +9278,7 @@ loc_00407d3a:
 push 0x450
 push 0
 push ref_00496d08  ; push 0x496d08
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 
@@ -9497,7 +9497,7 @@ mov dword [ref_0048aea8], eax  ; mov dword [0x48aea8], eax
 push 0x1d4
 push 0
 push ref_00498ea0  ; push 0x498ea0
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 jmp short loc_00407f9e  ; jmp 0x407f9e
@@ -9720,7 +9720,7 @@ push 0x2718
 push edi
 add esi, ref_0048cb80  ; add esi, 0x48cb80
 push esi
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 inc ebx
 jmp short loc_004081a8  ; jmp 0x4081a8
@@ -11634,7 +11634,7 @@ mov esi, dword [ref_00474938]  ; mov esi, dword [0x474938]
 push esi
 add dword [esp + 0xc], 0xdc
 add dword [esp + 0x10], 0xdc
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov esi, 1
 mov ebx, dword [ref_00498e80]  ; mov ebx, dword [0x498e80]
@@ -11825,7 +11825,7 @@ push 0x5e880
 push 0
 mov edx, dword [ref_00474938]  ; mov edx, dword [0x474938]
 push edx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 cmp dword [ref_0048bac8], 0  ; cmp dword [0x48bac8], 0
 je near loc_00409ef5  ; je 0x409ef5
@@ -11937,7 +11937,7 @@ mov edx, dword [ref_00474938]  ; mov edx, dword [0x474938]
 push edx
 add dword [esp + 0xc], 0xdc
 add dword [esp + 0x10], 0xdc
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov edi, 1
 mov esi, dword [ref_00498e80]  ; mov esi, dword [0x498e80]
@@ -12081,7 +12081,7 @@ mov ebx, dword [ref_00474938]  ; mov ebx, dword [0x474938]
 push ebx
 add dword [esp + 0xc], 0xdc
 add dword [esp + 0x10], 0xdc
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 imul eax, dword [_current_player], 0x68  ; imul eax, dword [0x49910c], 0x68
 mov edx, dword [eax + (_players+50)]  ; mov edx, dword [eax + 0x496b9a]
@@ -13740,7 +13740,7 @@ mov dword [esp + 8], edx
 push 0x10
 push edx
 push ref_0048b8b4  ; push 0x48b8b4
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 cmp dword [esp + 0x30], 8
 jle short loc_0040b24d  ; jle 0x40b24d
@@ -13853,7 +13853,7 @@ mov dword [esp + 8], edx
 push 0x10
 push edx
 push ref_0048b8b4  ; push 0x48b8b4
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 cmp dword [esp + 0x30], 8
 jle short loc_0040b36f  ; jle 0x40b36f
@@ -16137,7 +16137,7 @@ sub edx, ebx
 push edx
 push 0
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor eax, eax
 mov al, byte [esi + (_players+19)]  ; mov al, byte [esi + 0x496b7b]
@@ -27336,7 +27336,7 @@ mov dword [ref_0048bcc4], ebx  ; mov dword [0x48bcc4], ebx
 push 0x10
 push ebx
 push ref_0048bbb4  ; push 0x48bbb4
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor bl, bl
 mov byte [ref_0048bd58], bl  ; mov byte [0x48bd58], bl
@@ -27479,7 +27479,7 @@ mov dword [ref_0048bd34], eax  ; mov dword [0x48bd34], eax
 push 0x80
 push 0
 push ref_0048bc44  ; push 0x48bc44
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ecx, ecx
 mov dword [ref_0048bcec], ecx  ; mov dword [0x48bcec], ecx
@@ -27618,7 +27618,7 @@ mov dword [ref_0047504b], eax  ; mov dword [0x47504b], eax
 push 0x10
 push 0
 push ref_0048bbb4  ; push 0x48bbb4
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor bl, bl
 mov byte [ref_0048bd5a], bl  ; mov byte [0x48bd5a], bl
@@ -27644,7 +27644,7 @@ mov word [ref_0048bd52], ax  ; mov word [0x48bd52], ax
 push 0x80
 push 0
 push ref_0048bbc4  ; push 0x48bbc4
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0xa
 call fcn_004549cf  ; call 0x4549cf
@@ -27723,7 +27723,7 @@ mov dword [ref_0048bdb4], eax  ; mov dword [0x48bdb4], eax
 push 0x20
 push 0
 push ref_0048bd90  ; push 0x48bd90
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor esi, esi
 jmp short loc_004158cd  ; jmp 0x4158cd
@@ -38624,7 +38624,7 @@ sub esi, ebx
 push esi
 push 0
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov edi, dword [_current_player]  ; mov edi, dword [0x49910c]
 push edi
@@ -39591,7 +39591,7 @@ add esp, 0x14
 push 0x18
 push 0
 push ref_0048be34  ; push 0x48be34
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ecx, ecx
 mov dword [esp], ecx
@@ -40708,7 +40708,7 @@ push 0x100
 push 0
 lea eax, [esp + 8]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov edx, dword [_current_player]  ; mov edx, dword [0x49910c]
 push edx
@@ -40899,7 +40899,7 @@ push 0x40
 push edx
 lea eax, [esp + 8]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov ecx, dword [_current_player]  ; mov ecx, dword [0x49910c]
 push ecx
@@ -41637,7 +41637,7 @@ push 8
 push esi
 lea eax, [esp + 8]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0xffffffffffffffff
 call fcn_0040a45c  ; call 0x40a45c
@@ -45257,7 +45257,7 @@ jl short loc_00422525  ; jl 0x422525
 push 4
 push 0xff
 push ref_0048c278  ; push 0x48c278
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 xor esi, esi
@@ -48295,7 +48295,7 @@ push 0xc
 push 0
 add ebx, 0x48
 push ebx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 pop ebx
 ret
@@ -49874,7 +49874,7 @@ add esp, 0x10
 push 0xc
 push 0
 push ref_0048c29c  ; push 0x48c29c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 xor ebp, ebp
@@ -50993,7 +50993,7 @@ add esp, 0x14
 push 0x10
 push 0
 push ref_0048c548  ; push 0x48c548
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 xor ebp, ebp
@@ -57160,7 +57160,7 @@ push 0x96000
 push 0
 mov edx, dword [ref_0048a08c]  ; mov edx, dword [0x48a08c]
 push edx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0x18
 push 0x18
@@ -57680,7 +57680,7 @@ push 0x10
 push 0
 lea eax, [esp + 0x98]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 1
 push 3
@@ -61331,12 +61331,12 @@ mov dword [ref_0048c304], eax  ; mov dword [0x48c304], eax
 push 0xf
 push 0
 push ref_0048c31c  ; push 0x48c31c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 8
 push 0
 push ref_0048c2f8  ; push 0x48c2f8
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0
 push 3
@@ -63961,7 +63961,7 @@ mov dword [ref_00499080], ebp  ; mov dword [0x499080], ebp
 push 0x24
 push ebp
 push ref_004990b8  ; push 0x4990b8
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 
 loc_00430afb:
@@ -78222,7 +78222,7 @@ loc_0043c0d5:
 push 0x50
 push 0
 push ref_0048c434  ; push 0x48c434
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0
 push 0
@@ -85832,7 +85832,7 @@ push 8
 push 0
 lea eax, [esp + 0x98]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 cmp esi, 8
 jle short loc_00441d5a  ; jle 0x441d5a
@@ -94131,7 +94131,7 @@ sub esp, 0x2c
 push 0x10
 push 0
 push ref_0048c548  ; push 0x48c548
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0
 push 3
@@ -94411,7 +94411,7 @@ push 0xd
 push 0
 lea eax, [esp + 0x40]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ecx, ecx
 mov dword [esp + 0x48], ecx
@@ -95393,7 +95393,7 @@ push 0x24
 push 0
 lea eax, [esp + 8]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 mov esi, 0x24
@@ -96620,7 +96620,7 @@ push 0x10
 push edx
 lea eax, [esp + 0x9c]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov eax, 1
 
@@ -96784,7 +96784,7 @@ push 0x10
 push edx
 lea eax, [esp + 0x9c]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov eax, 1
 
@@ -96884,7 +96884,7 @@ push 0x10
 push edx
 lea eax, [esp + 0x9c]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor esi, esi
 mov edx, dword [_nplayers]  ; mov edx, dword [0x499114]
@@ -97082,7 +97082,7 @@ push 0x10
 push edx
 lea eax, [esp + 0x9c]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 push 0
 push 0x136
@@ -99485,7 +99485,7 @@ push 0x25
 push 0
 lea eax, [esp + 8]
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ebx, ebx
 mov esi, 0x25
@@ -104924,7 +104924,7 @@ push 0x32000
 push 0
 mov edi, dword [ref_0048a08c]  ; mov edi, dword [0x48a08c]
 push edi
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov eax, dword [ref_004762cc]  ; mov eax, dword [0x4762cc]
 mov edx, dword [eax]
@@ -105841,7 +105841,7 @@ jne short loc_00450323  ; jne 0x450323
 push 0x80
 push esi
 push ref_004762f4  ; push 0x4762f4
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 
 loc_00450323:
@@ -107027,7 +107027,7 @@ mov dword [ref_0048c868], eax  ; mov dword [0x48c868], eax
 push 0x5e880
 push 0
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 lea edx, [esi - 0x28]
 mov eax, edx
@@ -108293,7 +108293,7 @@ push 0x96000
 push 0
 mov edx, dword [ref_0048a08c]  ; mov edx, dword [0x48a08c]
 push edx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
 mov edx, dword [eax]
@@ -111323,7 +111323,7 @@ loc_00453cfb:
 push 0x40
 push ebx
 push ref_0048cae8  ; push 0x48cae8
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 
 loc_00453d0b:
@@ -116412,7 +116412,7 @@ pop esi
 pop ebx
 ret
 
-fcn_00456f60:
+memset:
 mov ecx, dword [esp + 0xc]
 mov edx, dword [esp + 8]
 mov eax, dword [esp + 4]
@@ -118270,7 +118270,8 @@ add esp, 4
 fcn_004585ee:
 ret
 
-fcn_004585ef:
+; __NTInit(int is_dll, thread_data *tdata, HANDLE hdll)
+__NTInit:
 push ebx
 push esi
 push edi
@@ -118293,28 +118294,28 @@ loc_00458634:
 call fcn_00459fab  ; call 0x459fab
 call dword [cs:__imp__GetEnvironmentStrings@0]  ; ucall: call dword cs:[0x462398]
 xor ecx, ecx
-mov dword [ref_0048934d], eax  ; mov dword [0x48934d], eax
+mov dword [_RWD_EnvPtr], eax  ; mov dword [0x48934d], eax
 mov dword [ref_00499944], ecx  ; mov dword [0x499944], ecx
 call dword [cs:__imp__GetVersion@0]  ; ucall: call dword cs:[0x4623d0]
 mov edx, eax
 mov ebx, eax
-mov byte [ref_00489353], al  ; mov byte [0x489353], al
+mov byte [_RWD_osmajor], al  ; mov byte [0x489353], al
 shr eax, 0x10
 and eax, 0xffff
-mov word [ref_00489355], ax  ; mov word [0x489355], ax
+mov word [_RWD_osbuild], ax  ; mov word [0x489355], ax
 xor eax, eax
-mov ax, word [ref_00489355]  ; mov ax, word [0x489355]
+mov ax, word [_RWD_osbuild]  ; mov ax, word [0x489355]
 and edx, 0xffff
-mov dword [ref_00489357], eax  ; mov dword [0x489357], eax
+mov dword [_RWD_osver], eax  ; mov dword [0x489357], eax
 xor eax, eax
 sar edx, 8
 mov al, bl
 and edx, 0xff
-mov dword [ref_0048935b], eax  ; mov dword [0x48935b], eax
+mov dword [_RWD_winmajor], eax  ; mov dword [0x48935b], eax
 xor eax, eax
-mov byte [ref_00489354], dl  ; mov byte [0x489354], dl
+mov byte [_RWD_osminor], dl  ; mov byte [0x489354], dl
 mov al, dl
-mov edx, dword [ref_0048935b]  ; mov edx, dword [0x48935b]
+mov edx, dword [_RWD_winmajor]  ; mov edx, dword [0x48935b]
 push 0x104
 shl edx, 8
 mov dword [ref_0048935f], eax  ; mov dword [0x48935f], eax
@@ -118322,14 +118323,14 @@ or edx, eax
 lea eax, [esp + 0x414]
 push eax
 push 0
-mov dword [ref_00489363], edx  ; mov dword [0x489363], edx
+mov dword [_RWD_winver], edx  ; mov dword [0x489363], edx
 call dword [cs:__imp__GetModuleFileNameA@12]  ; ucall: call dword cs:[0x4623b4]
 lea eax, [esp + 0x410]
 push eax
-call fcn_0045a53f  ; call 0x45a53f
+call clib_strdup  ; call 0x45a53f
 add esp, 4
 push 0x208
-mov dword [ref_00489314], eax  ; mov dword [0x489314], eax
+mov dword [_LpPgmName], eax  ; mov dword [0x489314], eax
 lea eax, [esp + 0x20c]
 push eax
 push 0
@@ -118342,7 +118343,7 @@ add esp, 4
 mov dword [ref_00489320], eax  ; mov dword [0x489320], eax
 call dword [cs:__imp__GetCommandLineA@0]  ; ucall: call dword cs:[0x462378]
 push eax
-call fcn_0045a53f  ; call 0x45a53f
+call clib_strdup  ; call 0x45a53f
 mov edx, eax
 mov bl, byte [eax]
 add esp, 4
@@ -118382,7 +118383,7 @@ inc dl
 and edx, 0xff
 test byte [edx + ref_00489370], 2  ; test byte [edx + 0x489370], 2
 jne short loc_00458731  ; jne 0x458731
-mov dword [ref_00489310], eax  ; mov dword [0x489310], eax
+mov dword [_LpCmdLine], eax  ; mov dword [0x489310], eax
 call dword [cs:__imp__GetCommandLineW@0]  ; ucall: call dword cs:[0x46237c]
 test eax, eax
 je near loc_004587d9  ; je 0x4587d9
@@ -118447,7 +118448,7 @@ push edi
 call dword [cs:__imp__GetModuleFileNameA@12]  ; ucall: call dword cs:[0x4623b4]
 lea eax, [esp + 0x514]
 push eax
-call fcn_0045a53f  ; call 0x45a53f
+call clib_strdup  ; call 0x45a53f
 add esp, 4
 push 0x208
 mov dword [ref_00489318], eax  ; mov dword [0x489318], eax
@@ -118472,7 +118473,8 @@ pop esi
 pop ebx
 ret
 
-fcn_00458859:
+; __NTMainInit(REGISTRATION_RECORD *rr, thread_data *tdata)
+__NTMainInit:
 push ebx
 push 0
 call dword [cs:__imp__GetModuleHandleA@4]  ; ucall: call dword cs:[0x4623bc]
@@ -118480,22 +118482,22 @@ push eax
 mov edx, dword [esp + 0x10]
 push edx
 push 0
-call fcn_004585ef  ; call 0x4585ef
+call __NTInit  ; call 0x4585ef
 add esp, 0xc
 push ref_00489330  ; push 0x489330
 call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
 push eax
-call fcn_0045a666  ; call 0x45a666
+call __init_stack_limits  ; call 0x45a666
 add esp, 8
 mov ebx, dword [esp + 8]
 push ebx
-call fcn_0045ab58  ; call 0x45ab58
+call __NewExceptionFilter  ; call 0x45ab58
 add esp, 4
 mov eax, 0x21
-call fcn_0045abd6  ; call 0x45abd6
+call __InitRtns  ; call 0x45abd6
 call dword [ref_00488f8c]  ; ucall: call dword [0x488f8c]
 mov eax, 0xff
-call fcn_0045abd6  ; call 0x45abd6
+call __InitRtns  ; call 0x45abd6
 pop ebx
 ret
 
@@ -119043,30 +119045,28 @@ ret
 
 loc_00458ced:
 push ebx
-
-fcn_00458cee:  ; not directly referenced
 push ebp
 mov ebp, esp
 sub esp, 8
-mov eax, 1
-call fcn_0045abd6  ; call 0x45abd6
-mov eax, dword [ref_004894b0]  ; mov eax, dword [0x4894b0]
+mov eax, 1 ; INIT_PRIORITY_THREAD
+call __InitRtns  ; call 0x45abd6
+mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
 add eax, 3
 and al, 0xfc
 sub esp, eax
 mov ebx, esp
-mov edx, dword [ref_004894b0]  ; mov edx, dword [0x4894b0]
+mov edx, dword [__ThreadDataSize]  ; mov edx, dword [0x4894b0]
 push edx
 push 0
 push ebx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
-mov eax, dword [ref_004894b0]  ; mov eax, dword [0x4894b0]
+mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
 push ebx
 mov dword [ebx + 0xf0], eax
 lea eax, [ebp - 8]
 push eax
-call fcn_00458859  ; call 0x458859
+call __NTMainInit  ; call 0x458859
 mov ebx, dword [ref_00489334]  ; mov ebx, dword [0x489334]
 add ebx, 3
 add esp, 8
@@ -119092,7 +119092,7 @@ add eax, ebx
 mov dword [ref_00489338], eax  ; mov dword [0x489338], eax
 call fcn_0045ae21  ; call 0x45ae21
 push 0xa
-mov ebx, dword [ref_00489310]  ; mov ebx, dword [0x489310]
+mov ebx, dword [_LpCmdLine]  ; mov ebx, dword [0x489310]
 push ebx
 push 0
 push 0
@@ -119502,7 +119502,7 @@ loc_0045912c:
 push 0x1a
 push 0
 push ebx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 mov dword [ebx + 0xc], edi
 mov eax, dword [ref_004991d4]  ; mov eax, dword [0x4991d4]
 mov dword [esi + 4], ebx
@@ -121366,7 +121366,7 @@ fcn_0045a1fd:
 push ebx
 push esi
 call dword [cs:__imp__GetLastError@0]  ; ucall: call dword cs:[0x4623ac]
-mov edx, dword [ref_00488f48]  ; mov edx, dword [0x488f48]
+mov edx, dword [__TlsIndex]  ; mov edx, dword [0x488f48]
 push edx
 mov esi, eax
 call dword [cs:__imp__TlsGetValue@4]  ; ucall: call dword cs:[0x46241c]
@@ -121397,7 +121397,7 @@ push ebx
 mov ebx, dword [esp + 8]
 test ebx, ebx
 jne short loc_0045a26d  ; jne 0x45a26d
-mov edx, dword [ref_004894b0]  ; mov edx, dword [0x4894b0]
+mov edx, dword [__ThreadDataSize]  ; mov edx, dword [0x4894b0]
 push edx
 push 1
 call fcn_0045c62e  ; call 0x45c62e
@@ -121405,7 +121405,7 @@ add esp, 8
 mov ebx, eax
 test eax, eax
 je short loc_0045a26d  ; je 0x45a26d
-mov edx, dword [ref_004894b0]  ; mov edx, dword [0x4894b0]
+mov edx, dword [__ThreadDataSize]  ; mov edx, dword [0x4894b0]
 mov byte [eax + 0x52], 1
 mov dword [eax + 0xf0], edx
 
@@ -121419,25 +121419,25 @@ ret
 
 fcn_0045a27a:
 call dword [cs:__imp__TlsAlloc@0]  ; ucall: call dword cs:[0x462414]
-mov dx, word [ref_00489355]  ; mov dx, word [0x489355]
-mov dword [ref_00488f48], eax  ; mov dword [0x488f48], eax
+mov dx, word [_RWD_osbuild]  ; mov dx, word [0x489355]
+mov dword [__TlsIndex], eax  ; mov dword [0x488f48], eax
 cmp dx, 0x8000
 jb short loc_0045a2bb  ; jb 0x45a2bb
-cmp byte [ref_00489353], 4  ; cmp byte [0x489353], 4
+cmp byte [_RWD_osmajor], 4  ; cmp byte [0x489353], 4
 jae short loc_0045a2bb  ; jae 0x45a2bb
 
 loc_0045a29d:
-mov edx, dword [ref_00488f48]  ; mov edx, dword [0x488f48]
+mov edx, dword [__TlsIndex]  ; mov edx, dword [0x488f48]
 cmp edx, 0xffffffff
 je short loc_0045a2bb  ; je 0x45a2bb
 cmp edx, 2
 ja short loc_0045a2bb  ; ja 0x45a2bb
 call dword [cs:__imp__TlsAlloc@0]  ; ucall: call dword cs:[0x462414]
-mov dword [ref_00488f48], eax  ; mov dword [0x488f48], eax
+mov dword [__TlsIndex], eax  ; mov dword [0x488f48], eax
 jmp short loc_0045a29d  ; jmp 0x45a29d
 
 loc_0045a2bb:
-cmp dword [ref_00488f48], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
+cmp dword [__TlsIndex], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
 setne al
 and eax, 0xff
 ret
@@ -121445,7 +121445,7 @@ ret
 fcn_0045a2cb:
 push ebx
 push esi
-cmp dword [ref_00488f48], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
+cmp dword [__TlsIndex], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
 jne short loc_0045a2db  ; jne 0x45a2db
 
 loc_0045a2d6:
@@ -121476,7 +121476,7 @@ jmp short loc_0045a2d6  ; jmp 0x45a2d6
 
 loc_0045a30d:
 push ebx
-mov esi, dword [ref_00488f48]  ; mov esi, dword [0x488f48]
+mov esi, dword [__TlsIndex]  ; mov esi, dword [0x488f48]
 push esi
 call dword [cs:__imp__TlsSetValue@8]  ; ucall: call dword cs:[0x462420]
 mov eax, 1
@@ -121486,10 +121486,10 @@ pop esi
 pop ebx
 ret
 
-fcn_0045a324:
+__NTRemoveThread:
 push ebx
 push esi
-mov edx, dword [ref_00488f48]  ; mov edx, dword [0x488f48]
+mov edx, dword [__TlsIndex]  ; mov edx, dword [0x488f48]
 cmp edx, 0xffffffff
 je short loc_0045a375  ; je 0x45a375
 push edx
@@ -121502,7 +121502,7 @@ mov ebx, dword [eax + 0xde]
 call fcn_0045c836  ; call 0x45c836
 add esp, 4
 push 0
-mov esi, dword [ref_00488f48]  ; mov esi, dword [0x488f48]
+mov esi, dword [__TlsIndex]  ; mov esi, dword [0x488f48]
 push esi
 call dword [cs:__imp__TlsSetValue@8]  ; ucall: call dword cs:[0x462420]
 test ebx, ebx
@@ -121517,18 +121517,18 @@ pop esi
 pop ebx
 ret
 
-fcn_0045a378:
+__ThreadExit:
 push 1
-call fcn_0045a324  ; call 0x45a324
+call __NTRemoveThread  ; call 0x45a324
 add esp, 4
 
-fcn_0045a382:
-mov edx, dword [ref_00488f48]  ; mov edx, dword [0x488f48]
+__NTThreadFini:
+mov edx, dword [__TlsIndex]  ; mov edx, dword [0x488f48]
 cmp edx, 0xffffffff
 je short loc_0045a39f  ; je 0x45a39f
 push edx
 call dword [cs:__imp__TlsFree@4]  ; ucall: call dword cs:[0x462418]
-mov dword [ref_00488f48], 0xffffffff  ; mov dword [0x488f48], 0xffffffff
+mov dword [__TlsIndex], 0xffffffff  ; mov dword [0x488f48], 0xffffffff
 
 loc_0045a39f:
 ret
@@ -121572,7 +121572,7 @@ mov esi, fcn_0045a1f3  ; mov esi, 0x45a1f3
 mov dword [ref_00488f74], edx  ; mov dword [0x488f74], edx
 call fcn_0045a038  ; call 0x45a038
 push eax
-mov edi, fcn_0045a378  ; mov edi, 0x45a378
+mov edi, __ThreadExit  ; mov edi, 0x45a378
 mov dword [ref_0049930c], eax  ; mov dword [0x49930c], eax
 call dword [cs:__imp__InitializeCriticalSection@4]  ; ucall: call dword cs:[0x4623d4]
 mov ecx, fcn_0045a1e9  ; mov ecx, 0x45a1e9
@@ -121588,7 +121588,7 @@ call fcn_0045c7ca  ; call 0x45c7ca
 add esp, 8
 mov ebx, dword [ref_004991c4]  ; mov ebx, dword [0x4991c4]
 push ebx
-mov ecx, dword [ref_00488f48]  ; mov ecx, dword [0x488f48]
+mov ecx, dword [__TlsIndex]  ; mov ecx, dword [0x488f48]
 push ecx
 mov esi, fcn_0045a1fd  ; mov esi, 0x45a1fd
 call dword [cs:__imp__TlsSetValue@8]  ; ucall: call dword cs:[0x462420]
@@ -121631,12 +121631,12 @@ add esp, 4
 push ref_0049930c  ; push 0x49930c
 call dword [ref_00489488]  ; ucall: call dword [0x489488]
 add esp, 4
-call fcn_0045a382  ; call 0x45a382
+call __NTThreadFini  ; call 0x45a382
 pop esi
 pop ebx
 ret
 
-fcn_0045a53f:
+clib_strdup:
 push ebx
 push esi
 push edi
@@ -121783,7 +121783,7 @@ pop esi
 pop ebx
 ret
 
-fcn_0045a666:
+__init_stack_limits:
 push ebx
 push esi
 sub esp, 0x20
@@ -121796,7 +121796,7 @@ push eax
 call dword [cs:__imp__VirtualQuery@12]  ; ucall: call dword cs:[0x462430]
 mov edx, dword [esp]
 add edx, dword [esp + 0xc]
-mov cx, word [ref_00489355]  ; mov cx, word [0x489355]
+mov cx, word [_RWD_osbuild]  ; mov cx, word [0x489355]
 mov eax, dword [esp + 4]
 cmp cx, 0x8000
 jae short loc_0045a6a2  ; jae 0x45a6a2
@@ -121805,7 +121805,7 @@ jmp short loc_0045a6b9  ; jmp 0x45a6b9
 
 loc_0045a6a2:
 jb short loc_0045a6b4  ; jb 0x45a6b4
-cmp byte [ref_00489353], 4  ; cmp byte [0x489353], 4
+cmp byte [_RWD_osmajor], 4  ; cmp byte [0x489353], 4
 jae short loc_0045a6b4  ; jae 0x45a6b4
 add eax, 0x12000
 jmp short loc_0045a6b9  ; jmp 0x45a6b9
@@ -122310,7 +122310,7 @@ pop esi
 pop ebx
 ret
 
-fcn_0045ab58:
+__NewExceptionFilter:
 push ebx
 mov ebx, dword [esp + 8]
 call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
@@ -122360,7 +122360,7 @@ loc_0045abd4:
 pop es
 ret
 
-fcn_0045abd6:
+__InitRtns:
 push ebx
 push esi
 push es
@@ -122585,11 +122585,11 @@ dd ref_00488f78
 dd 0x0824448b
 db 0x8b
 db 0x1d
-dd ref_004894b0
+dd __ThreadDataSize
 db 0x01
 db 0xd8
 db 0xa3
-dd ref_004894b0
+dd __ThreadDataSize
 db 0xe8
 db 0xf2
 db 0x1a
@@ -125559,7 +125559,7 @@ je short loc_0045c651  ; je 0x45c651
 push ebx
 push 0
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 
 loc_0045c651:
@@ -125626,7 +125626,7 @@ call fcn_0045a2cb  ; call 0x45a2cb
 add esp, 4
 test eax, eax
 je short loc_0045c6de  ; je 0x45c6de
-mov edx, dword [ref_00488f48]  ; mov edx, dword [0x488f48]
+mov edx, dword [__TlsIndex]  ; mov edx, dword [0x488f48]
 push edx
 call dword [cs:__imp__TlsGetValue@4]  ; ucall: call dword cs:[0x46241c]
 mov ebx, eax
@@ -125667,7 +125667,7 @@ jne short loc_0045c710  ; jne 0x45c710
 loc_0045c71b:
 cmp dword [ebx + 0xc], 0
 je short loc_0045c74b  ; je 0x45c74b
-mov edi, dword [ref_004894b0]  ; mov edi, dword [0x4894b0]
+mov edi, dword [__ThreadDataSize]  ; mov edi, dword [0x4894b0]
 push edi
 mov ebp, dword [ebx + 8]
 push ebp
@@ -125683,7 +125683,7 @@ add esp, 8
 jmp short loc_0045c799  ; jmp 0x45c799
 
 loc_0045c74b:
-mov esi, dword [ref_004894b0]  ; mov esi, dword [0x4894b0]
+mov esi, dword [__ThreadDataSize]  ; mov esi, dword [0x4894b0]
 push esi
 push 1
 call fcn_0045c62e  ; call 0x45c62e
@@ -125716,10 +125716,10 @@ mov dword [ebx + 0xc], 1
 
 loc_0045c799:
 mov dword [ebx + 8], ebp
-mov eax, dword [ref_004894b0]  ; mov eax, dword [0x4894b0]
+mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
 push ebp
 mov dword [ebp + 0xf0], eax
-mov eax, dword [ref_00488f48]  ; mov eax, dword [0x488f48]
+mov eax, dword [__TlsIndex]  ; mov eax, dword [0x488f48]
 mov byte [ebp + 0x52], 1
 push eax
 mov byte [ebp + 0x53], 0
@@ -125873,7 +125873,7 @@ je short loc_0045c8ff  ; je 0x45c8ff
 push 0
 push ebx
 mov dword [ebx + 0xc], 1
-call fcn_0045a666  ; call 0x45a666
+call __init_stack_limits  ; call 0x45a666
 add esp, 8
 call dword [cs:__imp__GetCurrentThreadId@0]  ; ucall: call dword cs:[0x46238c]
 mov dword [ebx + 0xda], eax
@@ -125899,7 +125899,7 @@ push edi
 push ebp
 cmp dword [ref_00499944], 0  ; cmp dword [0x499944], 0
 jne near loc_0045c9d9  ; jne 0x45c9d9
-mov ebp, dword [ref_0048934d]  ; mov ebp, dword [0x48934d]
+mov ebp, dword [_RWD_EnvPtr]  ; mov ebp, dword [0x48934d]
 xor esi, esi
 xor dl, dl
 mov eax, ebp
@@ -125974,7 +125974,7 @@ push 0
 add edx, ecx
 push edx
 mov dword [ref_00499940], edx  ; mov dword [0x499940], edx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 jmp short loc_0045c9d4  ; jmp 0x45c9d4
 
@@ -128087,7 +128087,7 @@ mov eax, dword [ebp + 0x18]
 push 0x30
 add eax, ebx
 push eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 mov edx, dword [ebp - 0x10]
 add esp, 0xc
 add ebx, edx
@@ -128126,7 +128126,7 @@ mov esi, ecx
 push eax
 mov dword [ebp - 0x10], ecx
 mov edi, esi
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add ebx, edi
 add esp, 0xc
 
@@ -129940,7 +129940,7 @@ jne short loc_0045eb27  ; jne 0x45eb27
 push 0x101
 push 0
 push ref_0049995c  ; push 0x49995c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor edx, edx
 xor eax, eax
@@ -129954,7 +129954,7 @@ jne short loc_0045eb7f  ; jne 0x45eb7f
 push 0x101
 push 0
 push ref_0049995c  ; push 0x49995c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 mov eax, 0x81
 mov dl, 1
 add esp, 0xc
@@ -129996,7 +129996,7 @@ loc_0045eba1:
 push 0x101
 push 0
 push ref_0049995c  ; push 0x49995c
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 xor ecx, ecx
 mov ah, byte [esp + 6]
@@ -131352,18 +131352,18 @@ mov edx, dword [ref_004991c0]  ; mov edx, dword [0x4991c0]
 mov edi, dword [eax]
 test edx, edx
 jne short loc_0045f7a4  ; jne 0x45f7a4
-mov eax, dword [ref_004894b0]  ; mov eax, dword [0x4894b0]
+mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
 add eax, 3
 and al, 0xfc
 sub esp, eax
 mov ebx, esp
-mov ecx, dword [ref_004894b0]  ; mov ecx, dword [0x4894b0]
+mov ecx, dword [__ThreadDataSize]  ; mov ecx, dword [0x4894b0]
 push ecx
 push edx
 push ebx
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
-mov eax, dword [ref_004894b0]  ; mov eax, dword [0x4894b0]
+mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
 push ebx
 mov dword [ebx + 0xf0], eax
 call fcn_0045a2cb  ; call 0x45a2cb
@@ -131382,7 +131382,7 @@ push edi
 call dword [cs:__imp__SetEvent@4]  ; ucall: call dword cs:[0x462400]
 lea eax, [ebp - 0x10]
 push eax
-call fcn_0045ab58  ; call 0x45ab58
+call __NewExceptionFilter  ; call 0x45ab58
 add esp, 4
 call dword [ref_00488f8c]  ; ucall: call dword [0x488f8c]
 mov eax, dword [ebp - 8]
@@ -131408,7 +131408,7 @@ push esi
 push edi
 push es
 sub esp, 0x3c
-cmp dword [ref_00488f48], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
+cmp dword [__TlsIndex], 0xffffffff  ; cmp dword [0x488f48], 0xffffffff
 jne short loc_0045f80a  ; jne 0x45f80a
 call fcn_0045a27a  ; call 0x45a27a
 test eax, eax
@@ -131492,7 +131492,7 @@ call fcn_0045aba4  ; call 0x45aba4
 cmp dword [ref_004991c0], 0  ; cmp dword [0x4991c0], 0
 jne short loc_0045f8ed  ; jne 0x45f8ed
 push 1
-call fcn_0045a324  ; call 0x45a324
+call __NTRemoveThread  ; call 0x45a324
 add esp, 4
 
 loc_0045f8ed:
@@ -132055,7 +132055,7 @@ push 0
 add eax, edx
 push eax
 mov dword [ref_00499940], eax  ; mov dword [0x499940], eax
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 jmp short loc_0045fdb5  ; jmp 0x45fdb5
 
@@ -132712,7 +132712,7 @@ push 0
 add edi, ebp
 push edi
 mov dword [ref_00499940], edi  ; mov dword [0x499940], edi
-call fcn_00456f60  ; call 0x456f60
+call memset  ; call 0x456f60
 add esp, 0xc
 jmp short loc_004603bf  ; jmp 0x4603bf
 
@@ -133137,7 +133137,7 @@ push ebx
 push esi
 push edi
 push ebp
-cmp word [ref_00489355], 0x8000  ; cmp word [0x489355], 0x8000
+cmp word [_RWD_osbuild], 0x8000  ; cmp word [0x489355], 0x8000
 jae short loc_00460703  ; jae 0x460703
 mov edx, dword [esp + 0x18]
 push edx
@@ -173263,7 +173263,7 @@ dd 0x2168c235
 dd 0xc90fdaa2
 dd 0x00004001
 
-ref_00488f48:
+__TlsIndex:
 dd 0xffffffff
 
 ref_00488f4c:  ; may contain a jump table
@@ -173590,10 +173590,10 @@ dd 0x00000000
 ref_0048930c:
 dd 0x00000000
 
-ref_00489310:
+_LpCmdLine:
 dd 0x00000000
 
-ref_00489314:
+_LpPgmName:
 dd 0x00000000
 
 ref_00489318:
@@ -173628,7 +173628,7 @@ ref_00489348:
 dd 0x00000000
 db 0x00
 
-ref_0048934d:
+_RWD_EnvPtr:
 db 0x00
 db 0x00
 db 0x00
@@ -173636,23 +173636,23 @@ db 0x00
 db 0x00
 db 0x00
 
-ref_00489353:
+_RWD_osmajor:
 db 0x00
 
-ref_00489354:
+_RWD_osminor:
 db 0x00
 
-ref_00489355:
-db 0x00
-db 0x00
-
-ref_00489357:
-db 0x00
-db 0x00
+_RWD_osbuild:
 db 0x00
 db 0x00
 
-ref_0048935b:
+_RWD_osver:
+db 0x00
+db 0x00
+db 0x00
+db 0x00
+
+_RWD_winmajor:
 db 0x00
 db 0x00
 db 0x00
@@ -173664,7 +173664,7 @@ db 0x00
 db 0x00
 db 0x00
 
-ref_00489363:
+_RWD_winver:
 db 0x00
 db 0x00
 db 0x00
@@ -173777,7 +173777,7 @@ dd 0x00000001
 ref_004894ac:
 dd 0x00010000
 
-ref_004894b0:
+__ThreadDataSize:
 dd 0x000000f4
 
 ref_004894b4:
