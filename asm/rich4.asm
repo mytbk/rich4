@@ -174,7 +174,7 @@ global ref_004991d4
 
 extern clib_rand
 extern clib_srand
-global ref_00488f4c
+global _GetThreadPtr
 
 section .text
 db 0xcc
@@ -118243,7 +118243,7 @@ jmp near fcn_00459dc7  ; jmp 0x459dc7
 endloc_004585c1:
 db 0xff
 db 0x15
-dd ref_00488f4c
+dd _GetThreadPtr
 db 0x05
 dd 0x000000da
 db 0xc3
@@ -118485,7 +118485,7 @@ push 0
 call __NTInit  ; call 0x4585ef
 add esp, 0xc
 push ref_00489330  ; push 0x489330
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 push eax
 call __init_stack_limits  ; call 0x45a666
 add esp, 8
@@ -119075,7 +119075,7 @@ call fcn_0045ada0  ; call 0x45ada0
 cmp ebx, eax
 jae short loc_00458d61  ; jae 0x458d61
 push ebx
-call fcn_0045aded  ; call 0x45aded
+call __GRO  ; call 0x45aded
 mov eax, dword [ref_00489334]  ; mov eax, dword [0x489334]
 add eax, 3
 and al, 0xfc
@@ -119149,7 +119149,7 @@ db 0x00
 db 0xc3
 
 fcn_00458de7:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov edx, dword [esp + 4]
 mov dword [eax + 4], edx
 ret
@@ -119173,7 +119173,7 @@ dd 0xffffffff
 dd 0xc304c483
 
 fcn_00458e14:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov edx, dword [esp + 4]
 mov dword [eax + 8], edx
 ret
@@ -120144,7 +120144,7 @@ endloc_00459720:
 dd 0x55575653
 dd 0x0228ec81
 dd 0x15ff0000
-dd ref_00488f4c
+dd _GetThreadPtr
 dd 0x3104688b
 dd 0x848d57ff
 dd 0x00011824
@@ -122248,18 +122248,18 @@ ret
 __NewExceptionFilter:
 push ebx
 mov ebx, dword [esp + 8]
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov dword [eax + 0x54], ebx
 xor eax, eax
 mov eax, dword [fs:eax]
 mov ebx, eax
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov eax, dword [eax + 0x54]
 mov dword [eax], ebx
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov eax, dword [eax + 0x54]
 mov dword [eax + 4], fcn_0045a98b  ; mov dword [eax + 4], 0x45a98b
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov eax, dword [eax + 0x54]
 xor edx, edx
 mov dword [fs:edx], eax
@@ -122269,7 +122269,7 @@ pop ebx
 ret
 
 fcn_0045aba4:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov eax, dword [eax + 0x54]
 test eax, eax
 je short loc_0045abb8  ; je 0x45abb8
@@ -122278,7 +122278,7 @@ xor edx, edx
 mov dword [fs:edx], eax
 
 loc_0045abb8:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov dword [eax + 0x54], 0
 ret
 
@@ -122534,7 +122534,7 @@ dd 0xc35bd889
 
 fcn_0045ada0:
 push ebx
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov ebx, eax
 mov eax, esp
 sub eax, dword [ebx]
@@ -122556,7 +122556,7 @@ dd 0x448b0000
 dd 0x04c20424
 db 0x00
 
-fcn_0045adc1:
+__STK:
 push eax
 cmp eax, esp
 jae short loc_0045ade0  ; jae 0x45ade0
@@ -122564,13 +122564,13 @@ sub eax, esp
 neg eax
 push esi
 push eax
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov esi, eax
 pop eax
 cmp eax, dword [esi]
 pop esi
 jbe short loc_0045ade0  ; jbe 0x45ade0
-call fcn_0045aded  ; call 0x45aded
+call __GRO  ; call 0x45aded
 ret
 
 loc_0045ade0:
@@ -122579,7 +122579,7 @@ push 1
 push ref_004894b4  ; push 0x4894b4
 call __fatal_runtime_error  ; call 0x45c690
 
-fcn_0045aded:
+__GRO:
 push eax
 push ebx
 mov eax, dword [esp + 0xc]
@@ -124779,14 +124779,14 @@ xor eax, eax
 ret
 
 fcn_0045c07f:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 add eax, 4
 ret
 
 endloc_0045c089:
 db 0xff
 db 0x15
-dd ref_00488f4c
+dd _GetThreadPtr
 db 0x83
 db 0xc0
 db 0x08
@@ -126038,9 +126038,9 @@ ret
 loc_0045cad1:
 mov esi, ebx
 shl esi, 3
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov ebx, dword [esi + eax + 0x58]
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 add esi, eax
 mov eax, dword [esp + 0x10]
 mov dword [esi + 0x58], eax
@@ -126063,7 +126063,7 @@ pop ebx
 ret
 
 loc_0045cb0c:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov eax, dword [eax + ebx*8 + 0x58]
 pop ebx
 ret
@@ -126082,7 +126082,7 @@ pop ebx
 ret
 
 loc_0045cb30:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov eax, dword [eax + ebx*8 + 0x5c]
 pop ebx
 ret
@@ -126379,7 +126379,7 @@ push es
 mov ebx, 8
 
 loc_0045cdb5:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 lea esi, [eax + ebx]
 mov eax, ds
 mov es, eax
@@ -131259,7 +131259,7 @@ call dword [cs:__imp__CloseHandle@4]  ; ucall: call dword cs:[0x462348]
 jmp short loc_0045f7dc  ; jmp 0x45f7dc
 
 loc_0045f7a4:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov dword [eax + 0xde], edi
 mov edi, dword [esi + 0xc]
 push edi
@@ -173066,7 +173066,7 @@ dd 0x00004001
 __TlsIndex:
 dd 0xffffffff
 
-ref_00488f4c:  ; may contain a jump table
+_GetThreadPtr:  ; may contain a jump table
 dd fcn_004585cd
 
 ref_00488f50:  ; may contain a jump table

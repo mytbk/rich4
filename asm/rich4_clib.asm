@@ -13,7 +13,7 @@ extern ref_004991d4
 
 global clib_rand
 global clib_srand
-extern ref_00488f4c
+extern _GetThreadPtr
 
 section .text
 
@@ -650,7 +650,7 @@ cmp eax, 0xffffffff
 je short loc_00457bc3  ; je 0x457bc3
 test eax, eax
 jne near loc_00457c27  ; jne 0x457c27
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov dword [eax + 4], 0xc
 
 loc_00457bc3:
@@ -800,7 +800,7 @@ ret
 ; ===================================== end of fwrite =====================
 
 fcn_00456f23:
-call dword [ref_00488f4c]  ; ucall: call dword [0x488f4c]
+call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 add eax, 0xc
 ret
 
