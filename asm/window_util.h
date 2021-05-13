@@ -5,10 +5,10 @@
 
 #include <windows.h>
 
-extern int cb_top;
-
 typedef LRESULT (CALLBACK *wProc)(HWND, UINT, WPARAM, LPARAM);
-extern wProc windowCallbacks[100]; // 48a010
 
-int register_wait_callback(wProc a1, int a2);
+extern wProc windowCallbacks[];
+extern int callbackSize;
+
+int Wait_0402_Message(wProc, int);
 void Post_0402_Message(LPARAM lp);

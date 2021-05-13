@@ -5,22 +5,22 @@
 
 #include "window_util.h"
 
-wProc windowCallbacks[100]; // 48a010
-int cb_top = 0; // 0x46cad8
+wProc windowCallbacks[16]; // 48a010
+int callbackSize = 0; // 0x46cad8
 
-extern HWND gwindowHandle;
+extern HWND gWindowHandle;
 
-int register_wait_callback(wProc a1, int a2)
+int Wait_0402_Message(wProc cb, int a2)
 {
-	cb_top++;
-	windowCallbacks[cb_top] = a1;
-	PostMessageA(gwindowHandle, 0x401, 0, a2);
+	callbackSize++;
+	windowCallbacks[callbackSize] = cb;
+	PostMessageA(gWindowHandle, 0x401, 0, a2);
 	while (1) {
 		MSG msg;
 		if (PeekMessageA(&msg, 0, 0, 0, 1) == 0)
 			continue;
 		if (msg.message == 0x402) {
-			cb_top--;
+			callbackSize--;
 			return msg.lParam;
 		}
 		TranslateMessage(&msg);
@@ -30,5 +30,5 @@ int register_wait_callback(wProc a1, int a2)
 
 void Post_0402_Message(LPARAM lp)
 {
-	PostMessageA(gwindowHandle, 0x402, 0, lp);
+	PostMessageA(gWindowHandle, 0x402, 0, lp);
 }

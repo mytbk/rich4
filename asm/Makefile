@@ -7,6 +7,7 @@ LIBS+=-lmsvcrt
 
 OBJS = rich4.obj rich4_time.obj card_strings.obj stocks_data.obj card_table.obj tool_strings.obj \
        players.obj \
+       window_util.obj \
        rich4_crt_mthread.obj rich4_clib.obj
 
 rich4.exe: $(OBJS)
