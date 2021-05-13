@@ -5,7 +5,12 @@
 
 本逆向项目从2018年开始，做了3个月的逆向，发现了大富翁4的数据文件解压算法、存档格式等有用的信息，但是由于时间关系，没能继续此项目。在2021年5月，我采用逐步修改程序的思路进行逆向，用 `r2dumpbin <https://github.com/mytbk/r2dumpbin>`__ 将 rich4.exe 转为汇编，使得逆向，修改，测试可以同步进行，提高逆向效率。
 
-本项目主仓库位于 https://git.wehack.space/rich4/, GitHub 只用于接收 issue 和 pull request，可能不会及时更新。
+参与项目
+-----------
+
+本 GitHub 项目用于接收 issue 和 pull request 和进行项目管理。
+
+可以加入 Matrix 聊天室 #rich4re:matrixim.cc 进行讨论。
 
 项目文件
 --------
