@@ -91438,7 +91438,7 @@ pop esi
 pop ebx
 ret
 
-fcn_00445c14:
+tools_ui_callback:
 push ebx
 push esi
 push edi
@@ -94348,7 +94348,7 @@ push 0
 push eax
 call dword [edx + 0x80]  ; ucall
 push 0
-push fcn_00445c14  ; push 0x445c14
+push tools_ui_callback  ; push 0x445c14
 call fcn_004018e7  ; call 0x4018e7
 mov esi, eax
 add esp, 8
