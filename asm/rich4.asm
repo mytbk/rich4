@@ -1396,7 +1396,7 @@ jmp near loc_00401c8c  ; jmp 0x401c8c
 
 loc_00401e2f:
 push 0
-call fcn_00403d74  ; call 0x403d74
+call game_load_ui  ; call 0x403d74
 add esp, 4
 cmp eax, 0xffffffff
 je near loc_00401c8c  ; je 0x401c8c
@@ -2089,7 +2089,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00403d74  ; call 0x403d74
+call game_load_ui  ; call 0x403d74
 add esp, 4
 cmp eax, 0xffffffff
 je short loc_0040267a  ; je 0x40267a
@@ -2154,7 +2154,7 @@ call fcn_00402460  ; call 0x402460
 add esp, 4
 call fcn_00454acb  ; call 0x454acb
 push 0
-call fcn_00411b53  ; call 0x411b53
+call options_ui  ; call 0x411b53
 add esp, 4
 push 0
 call fcn_004549cf  ; call 0x4549cf
@@ -4052,7 +4052,7 @@ mov edi, dword [esp + 0x70]
 push edi
 jmp near loc_004039af  ; jmp 0x4039af
 
-fcn_00403d74:
+game_load_ui:
 push ebx
 push esi
 push edi
@@ -4403,7 +4403,7 @@ pop esi
 pop ebx
 ret
 
-fcn_00404165:
+game_save_ui:
 push ebx
 push esi
 push edi
@@ -12907,7 +12907,7 @@ push esi
 call dword [cs:__imp__DefWindowProcA@16]  ; ucall: call dword cs:[0x4622d8]
 jmp short loc_0040a99a  ; jmp 0x40a99a
 
-fcn_0040a9bd:
+map_ui:
 push 0
 push fcn_0040a801  ; push 0x40a801
 call fcn_004018e7  ; call 0x4018e7
@@ -22623,7 +22623,7 @@ ret
 fcn_00411a96:
 push 0xffffffffffffffff
 push 0xffffffffffffffff
-call fcn_0044eb39  ; call 0x44eb39
+call help_ui  ; call 0x44eb39
 add esp, 8
 ret
 
@@ -22692,7 +22692,7 @@ call fcn_00411f80  ; call 0x411f80
 mov byte [ref_0046caf9], 1  ; mov byte [0x46caf9], 1
 ret
 
-fcn_00411b53:
+options_ui:
 push ebx
 push esi
 push edi
@@ -30950,53 +30950,53 @@ jmp dword [eax*4 + ref_00417d39]  ; ujmp: jmp dword [eax*4 + 0x417d39]
 loc_00417d9f:
 push 0x3c
 push 0x14
-call fcn_0044eb39  ; call 0x44eb39
+call help_ui  ; call 0x44eb39
 add esp, 8
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417dad:
 push 1
-call fcn_00411b53  ; call 0x411b53
+call options_ui  ; call 0x411b53
 jmp short loc_00417dfc  ; jmp 0x417dfc
 
 loc_00417db6:
-call fcn_0041e345  ; call 0x41e345
+call hosted_ai_ui  ; call 0x41e345
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417dbd:
 push 1
-call fcn_00403d74  ; call 0x403d74
+call game_load_ui  ; call 0x403d74
 add esp, 4
 mov ebx, eax
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417dcb:
-call fcn_00404165  ; call 0x404165
+call game_save_ui  ; call 0x404165
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417dd2:
-call fcn_0040a9bd  ; call 0x40a9bd
+call map_ui  ; call 0x40a9bd
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417dd9:
-call fcn_00424492  ; call 0x424492
+call query_user_ui  ; call 0x424492
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417de0:
-call fcn_00447d97  ; call 0x447d97
+call tools_ui  ; call 0x447d97
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417de7:
-call fcn_00441baa  ; call 0x441baa
+call cards_ui  ; call 0x441baa
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417dee:
-call fcn_004284be  ; call 0x4284be
+call sales_ui  ; call 0x4284be
 jmp short loc_00417dff  ; jmp 0x417dff
 
 loc_00417df5:
 push 0
-call fcn_0042b58f  ; call 0x42b58f
+call stocks_ui  ; call 0x42b58f
 
 loc_00417dfc:
 add esp, 4
@@ -32283,15 +32283,15 @@ call fcn_00436b0a  ; call 0x436b0a
 add esp, 4
 cmp byte [ref_0046caf8], 0  ; cmp byte [0x46caf8], 0
 jne near loc_00418e7a  ; jne 0x418e7a
-call fcn_004284be  ; call 0x4284be
+call sales_ui  ; call 0x4284be
 call clib_rand  ; call 0x456f2d
 test al, 1
 je short loc_00418e28  ; je 0x418e28
-call fcn_00441baa  ; call 0x441baa
+call cards_ui  ; call 0x441baa
 jmp short loc_00418e2d  ; jmp 0x418e2d
 
 loc_00418e28:
-call fcn_00447d97  ; call 0x447d97
+call tools_ui  ; call 0x447d97
 
 loc_00418e2d:
 mov edx, dword [_current_player]  ; mov edx, dword [0x49910c]
@@ -39440,7 +39440,7 @@ push ebp
 call dword [cs:__imp__DefWindowProcA@16]  ; ucall: call dword cs:[0x4622d8]
 jmp near loc_0041de8b  ; jmp 0x41de8b
 
-fcn_0041e345:
+hosted_ai_ui:
 push ebx
 push esi
 push edi
@@ -47987,7 +47987,7 @@ push edi
 call dword [cs:__imp__DefWindowProcA@16]  ; ucall: call dword cs:[0x4622d8]
 jmp near loc_00423dc7  ; jmp 0x423dc7
 
-fcn_00424492:
+query_user_ui:
 push ebx
 push esi
 push 0
@@ -53201,7 +53201,7 @@ loc_004284bb:
 inc esi
 jmp short loc_00428479  ; jmp 0x428479
 
-fcn_004284be:
+sales_ui:
 push ebx
 push esi
 push edi
@@ -57266,7 +57266,7 @@ mov edi, dword [esp + 0x60]
 push edi
 jmp near loc_0042b3d8  ; jmp 0x42b3d8
 
-fcn_0042b58f:
+stocks_ui:
 push ebx
 push esi
 push edi
@@ -85722,7 +85722,7 @@ mov ebx, 0x2d
 add edi, 0x38
 jmp short loc_00441b55  ; jmp 0x441b55
 
-fcn_00441baa:
+cards_ui:
 push ebx
 push esi
 push edi
@@ -90358,7 +90358,7 @@ push 0xc
 call fcn_004021f8  ; call 0x4021f8
 add esp, 0xc
 push 1
-call fcn_0042b58f  ; call 0x42b58f
+call stocks_ui  ; call 0x42b58f
 mov esi, eax
 add esp, 4
 mov ebx, eax
@@ -90432,7 +90432,7 @@ push 0xc
 call fcn_004021f8  ; call 0x4021f8
 add esp, 0xc
 push 2
-call fcn_0042b58f  ; call 0x42b58f
+call stocks_ui  ; call 0x42b58f
 add esp, 4
 mov ebx, eax
 push 0
@@ -94248,7 +94248,7 @@ pop esi
 pop ebx
 ret
 
-fcn_00447d97:
+tools_ui:
 push ebx
 push esi
 push edi
@@ -103592,7 +103592,7 @@ push edi
 call dword [cs:__imp__DefWindowProcA@16]  ; ucall: call dword cs:[0x4622d8]
 jmp near loc_0044e588  ; jmp 0x44e588
 
-fcn_0044eb39:
+help_ui:
 push ebx
 push edi
 push ebp
