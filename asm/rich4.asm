@@ -1138,9 +1138,6 @@ pop esi
 pop ebx
 ret 0x10
 
-endloc_00401b77:
-db 0x90
-
 ref_00401b78:  ; may contain a jump table
 dd loc_00401cc8
 dd loc_00401d08
@@ -4927,10 +4924,6 @@ pop esi
 pop ebx
 ret
 
-endloc_00404812:
-db 0x8b
-db 0xc0
-
 ref_00404814:  ; may contain a jump table
 dd loc_004048cb
 dd loc_00404950
@@ -5486,10 +5479,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_00404e0e:
-db 0x8b
-db 0xc0
 
 ref_00404e10:  ; may contain a jump table
 dd loc_00405339
@@ -9741,10 +9730,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_00408287:
-db 0x8b
-db 0xc0
 
 ref_00408289:  ; may contain a jump table
 dd fcn_00409419
@@ -16948,11 +16933,6 @@ mov dword [ebx + (_players+50)], edx  ; mov dword [ebx + 0x496b9a], edx
 pop ebx
 ret
 
-endloc_0040d7b1:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_0040d7b4:  ; may contain a jump table
 dd loc_0040d808
 dd loc_0040d8d3
@@ -18582,9 +18562,6 @@ mov edx, 1
 loc_0040ea97:
 mov eax, edx
 ret
-
-endloc_0040ea9a:
-db 0x90
 
 ref_0040ea9b:  ; may contain a jump table
 dd fcn_0040ec14
@@ -20682,11 +20659,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_00410348:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_0041034b:  ; may contain a jump table
 dd fcn_00410537
@@ -23511,11 +23483,6 @@ add esp, 4
 pop ebx
 ret
 
-endloc_004124a9:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_004124ac:  ; may contain a jump table
 dd loc_004125a3
 dd loc_004125e0
@@ -24647,11 +24614,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_00413231:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_00413234:  ; may contain a jump table
 dd loc_00413886
@@ -28311,9 +28273,6 @@ loc_00415f4f:
 or byte [ref_00475110], 2  ; or byte [0x475110], 2
 jmp short loc_00415f47  ; jmp 0x415f47
 
-endloc_00415f58:
-db 0x90
-
 ref_00415f59:  ; may contain a jump table
 dd loc_004162d4
 dd loc_00416355
@@ -30881,11 +30840,6 @@ push 1
 call fcn_00417191  ; call 0x417191
 jmp near loc_00415f44  ; jmp 0x415f44
 
-endloc_00417d36:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_00417d39:  ; may contain a jump table
 dd loc_00417d9f
 dd loc_00417dad
@@ -32098,9 +32052,6 @@ pop esi
 pop ebx
 ret 0x10
 
-endloc_00418c3c:
-db 0x90
-
 ref_00418c3d:  ; may contain a jump table
 dd loc_00418d88
 dd loc_00418d99
@@ -33147,9 +33098,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_004197e8:
-db 0x90
 
 ref_004197e9:  ; may contain a jump table
 dd loc_004198b9
@@ -35428,9 +35376,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_0041b3e4:
-db 0x90
 
 ref_0041b3e5:  ; may contain a jump table
 dd loc_0041b807
@@ -38893,11 +38838,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_0041dd7a:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_0041dd7d:  ; may contain a jump table
 dd loc_0041e0d7
@@ -45263,9 +45203,6 @@ pop esi
 pop ebx
 ret
 
-endloc_0042258e:
-db 0x90
-
 ref_0042258f:  ; may contain a jump table
 dd loc_004226df
 dd loc_00422a15
@@ -47142,11 +47079,6 @@ pop esi
 pop ebx
 ret
 
-endloc_00423b24:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_00423b27:  ; may contain a jump table
 dd loc_00423b5b
 dd loc_00423bd1
@@ -47314,11 +47246,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_00423cd8:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_00423cdb:  ; may contain a jump table
 dd loc_004241f2
@@ -48537,11 +48464,6 @@ pop esi
 pop ebx
 ret
 
-endloc_00424ad3:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_00424ad6:  ; may contain a jump table
 dd loc_00424c62
 dd loc_00424f5f
@@ -49516,9 +49438,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_004255c9:
-db 0x90
 
 ref_004255ca:  ; may contain a jump table
 dd loc_0042565c
@@ -51574,11 +51493,6 @@ push edi
 push eax
 push ebp
 jmp near loc_00426790  ; jmp 0x426790
-
-endloc_0042703b:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_0042703e:  ; may contain a jump table
 dd loc_0042728e
@@ -54853,10 +54767,6 @@ mov eax, dword [esp + 4]
 mov dword [ref_0048c2e0], eax  ; mov dword [0x48c2e0], eax
 ret
 
-endloc_004297cd:
-db 0x8b
-db 0xc0
-
 ref_004297cf:  ; may contain a jump table
 dd loc_004298b9
 dd loc_004298cc
@@ -56297,10 +56207,6 @@ mov ebp, dword [esp + 0x12c]
 push ebp
 call dword [cs:__imp__DefWindowProcA@16]  ; ucall: call dword cs:[0x4622d8]
 jmp near loc_0042a9fd  ; jmp 0x42a9fd
-
-endloc_0042aad5:
-db 0x8b
-db 0xc0
 
 ref_0042aad7:  ; may contain a jump table
 dd loc_0042adf3
@@ -59584,9 +59490,6 @@ pop esi
 pop ebx
 ret
 
-endloc_0042d36a:
-db 0x90
-
 ref_0042d36b:  ; may contain a jump table
 dd loc_0042d8ab
 dd loc_0042d8ee
@@ -62429,9 +62332,6 @@ add esp, 0x4c
 pop esi
 pop ebx
 ret
-
-endloc_0042f7e7:
-db 0x90
 
 ref_0042f7e8:  ; may contain a jump table
 dd loc_0042fa88
@@ -65468,9 +65368,6 @@ pop esi
 pop ebx
 ret
 
-endloc_00431c79:
-db 0x90
-
 ref_00431c7a:  ; may contain a jump table
 dd loc_00431cd6
 dd loc_00431d65
@@ -66158,11 +66055,6 @@ push eax
 call fcn_0044ec30  ; call 0x44ec30
 add esp, 0x1c
 ret
-
-endloc_0043259f:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_004325a2:  ; may contain a jump table
 dd loc_0043285b
@@ -69579,11 +69471,6 @@ push edi
 call dword [cs:__imp__DefWindowProcA@16]  ; ucall: call dword cs:[0x4622d8]
 jmp near loc_00434643  ; jmp 0x434643
 
-endloc_0043504f:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_00435052:  ; may contain a jump table
 dd loc_00435cca
 dd loc_00435d48
@@ -71478,10 +71365,6 @@ pop esi
 pop ebx
 ret
 
-endloc_00436a48:
-db 0x8b
-db 0xc0
-
 ref_00436a4a:  ; may contain a jump table
 dd loc_00436a9b
 dd loc_00436adf
@@ -73149,9 +73032,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_00437e34:
-db 0x90
 
 ref_00437e35:  ; may contain a jump table
 dd loc_004391ee
@@ -77968,9 +77848,6 @@ push ebp
 call dword [cs:__imp__DefWindowProcA@16]  ; ucall: call dword cs:[0x4622d8]
 jmp near loc_0043a3d9  ; jmp 0x43a3d9
 
-endloc_0043bdd0:
-db 0x90
-
 ref_0043bdd1:  ; may contain a jump table
 dd loc_0043c064
 dd loc_0043c08d
@@ -80247,10 +80124,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_0043da09:
-db 0x8b
-db 0xc0
 
 ref_0043da0b:  ; may contain a jump table
 dd loc_0043dba7
@@ -83875,11 +83748,6 @@ push edx
 push eax
 push edi
 jmp near loc_0043ff45  ; jmp 0x43ff45
-
-endloc_004406eb:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_004406ee:  ; may contain a jump table
 dd loc_00440830
@@ -91591,9 +91459,6 @@ pop edi
 pop esi
 pop ebx
 ret 0x10
-
-endloc_00445e2c:
-db 0x90
 
 ref_00445e2d:  ; may contain a jump table
 dd loc_00446337
@@ -102950,11 +102815,6 @@ mov eax, dword [ref_0047601c]  ; mov eax, dword [0x47601c]
 mov dword [ref_00476024], eax  ; mov dword [0x476024], eax
 jmp near loc_0044dfad  ; jmp 0x44dfad
 
-endloc_0044e3e0:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_0044e3e3:  ; may contain a jump table
 dd loc_0044e621
 dd loc_0044e668
@@ -104809,76 +104669,6 @@ pop esi
 pop ebx
 ret
 
-endloc_0044f82e:
-db 0x53
-db 0x56
-dd 0xec835557
-dd 0x24448b0c
-dd 0x08408b24
-dd 0x24244c8b
-dd 0xd029118b
-dd 0x24448940
-dd 0x0c418b08
-dd 0x8d04412b
-dd 0x748b0178
-dd 0x048d0824
-dd 0x00c83d32
-dd 0x0b7e0000
-dd 0x0000c8b8
-dd 0x89d02900
-dd 0x8b082444
-dd 0x0f082444
-dd 0xc001c7af
-dd 0x7706e850
-dd 0xc4830000
-dd 0x89c68904
-dd 0x8b042444
-dd 0x8b242444
-dd 0xe0c10c40
-dd 0x244c8b09
-dd 0x8d118b24
-dd 0xc901100c
-dd 0x20244c03
-dd 0x6c3bed31
-dd 0x257d0824
-dd 0xc031cb89
-dd 0x177df839
-dd 0x66138b66
-dd 0xc7661689
-dd 0x83000003
-dd 0xeb8102c6
-dd 0x00000400
-dd 0x83e5eb40
-dd 0xeb4502c1
-dd 0x24448bd5
-dd 0x04408b24
-dd 0x8b09e0c1
-dd 0x0324244c
-dd 0x8bc00101
-dd 0x0120245c
-dd 0x24748bc3
-dd 0x3bed3104
-dd 0x7d08246c
-dd 0x3f048d1d
-dd 0x50240489
-dd 0xede85356
-dd 0x83000074
-dd 0xc3810cc4
-dd 0x00000400
-dd 0x45243403
-dd 0x448bddeb
-dd 0x38032424
-dd 0x0878894f
-dd 0x0304408b
-dd 0x48082444
-dd 0x24244c8b
-dd 0x8b0c4189
-dd 0x56042474
-dd 0x0074e4e8
-dd 0x04c48300
-dd 0xfffe8ae9
-db 0xff
-
 fcn_0044f935:
 push edi
 mov dword [ref_0048a06c], 7  ; mov dword [0x48a06c], 7
@@ -105001,11 +104791,6 @@ call dword [cs:__imp__CreateFontA@56]  ; ucall: call dword cs:[0x46228c]
 mov dword [ref_004762d0], eax  ; mov dword [0x4762d0], eax
 pop ebx
 ret
-
-endloc_0044fa9d:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_0044faa0:  ; may contain a jump table
 dd loc_0044ff21
@@ -107930,11 +107715,6 @@ add esp, 0x20
 pop esi
 ret
 
-endloc_004517ee:
-db 0x8d
-db 0x40
-db 0x00
-
 ref_004517f1:  ; may contain a jump table
 dd loc_0045197d
 dd loc_00451832
@@ -109887,9 +109667,6 @@ add esp, 4
 pop ebx
 ret
 
-endloc_00452bc9:
-db 0x90
-
 ref_00452bca:  ; may contain a jump table
 dd loc_004530e9
 dd loc_00453116
@@ -111778,21 +111555,6 @@ pop esi
 pop ebx
 ret
 
-endloc_00454154:
-dd 0x24548b53
-db 0x08
-db 0x83
-db 0x3d
-dd ref_0047e748
-db 0x00
-dd 0xd2851274
-dd 0x028b0e74
-dd 0x4850ff52
-dd 0x1d89db31
-dd ref_0048cae4
-db 0x5b
-db 0xc3
-
 fcn_00454176:
 push ebx
 push esi
@@ -113124,9 +112886,6 @@ add esp, 0x28
 pop ebx
 ret
 
-endloc_00454fb3:
-db 0x00
-
 fcn_00454fb4:
 push ebp
 mov ebp, esp
@@ -113200,11 +112959,6 @@ ret
 loc_00455038:
 add ax, 0x8000
 ret
-
-endloc_0045503d:
-db 0x00
-db 0x00
-db 0x00
 
 fcn_00455040:
 push ebp
@@ -113367,9 +113121,6 @@ pop ecx
 pop ebx
 shr bx, 1
 ret
-
-endloc_004551ef:
-db 0x00
 
 fcn_004551f0:
 push ebp
@@ -113993,11 +113744,6 @@ pop ecx
 pop ebx
 pop ebp
 ret
-
-endloc_00455779:
-db 0x00
-db 0x00
-db 0x00
 
 fcn_0045577c:
 push ebp
@@ -116873,54 +116619,6 @@ xor eax, eax
 pop ebx
 ret
 
-endloc_0045744b:
-db 0x53
-dd 0x83555756
-dd 0x748b04ec
-dd 0xe0892024
-dd 0x24548b50
-dd 0xd2e85220
-dd 0x83fffffc
-dd 0xc78908c4
-dd 0x840fc085
-dd 0xfffffddc
-dd 0x53105e8b
-db 0xff
-db 0x15
-dd ref_00488f50
-db 0x8b
-db 0x0d
-dd ref_004891b0
-dd 0x8504c483
-dd 0x530a74c9
-db 0xff
-db 0x15
-dd ref_004891b0
-db 0x83
-db 0xc4
-dd 0x3fe85604
-dd 0x83ffffff
-dd 0xc68904c4
-dd 0x2d74c085
-dd 0x810c708b
-dd 0x004000e6
-dd 0x70895000
-dd 0x8b006a0c
-dd 0x5508246c
-dd 0x2824748b
-dd 0x8a57c031
-dd 0x448b5006
-dd 0xe8502c24
-dd 0xfffffd8c
-dd 0x8918c483
-dd 0x15ff53c6
-dd ref_00488f54
-dd 0x8904c483
-dd 0xfd6ee9f0
-db 0xff
-db 0xff
-
-
 fcn_00457902:
 push ebx
 mov edx, dword [esp + 0xc]
@@ -117214,9 +116912,6 @@ loc_00457db9:
 pop eax
 ret
 
-endloc_00457dbb:
-db 0x00
-
 fcn_00457dbc:
 push eax
 wait
@@ -117230,9 +116925,6 @@ fldcw word [esp + 4]
 wait
 lea esp, [esp + 8]
 ret
-
-endloc_00457dd9:
-db 0x00
 
 fcn_00457dda:
 ret
@@ -117801,25 +117493,6 @@ loc_00458257:
 leave
 jmp near loc_00457e3d  ; jmp 0x457e3d
 
-endloc_00458281:
-db 0x00
-db 0xf6
-db 0x44
-dd 0x74800b24
-dd 0x24448b23
-dd 0xffff2508
-dd 0x440b7fff
-dd 0x14740424
-dd 0x74ff036a
-dd 0x74ff0c24
-dd 0xaae80c24
-dd 0x83000019
-dd 0x0feb0cc4
-dd 0x042444dd
-dd 0xec83fad9
-dd 0x241cdd08
-dd 0xc35a589b
-
 fcn_004582bc:
 mov al, 3
 push ebp
@@ -117991,17 +117664,6 @@ jp short fcn_0045841c  ; jp 0x45841c
 fstp st1  ; fstp st(1)
 ret
 
-endloc_00458436:
-db 0xdd
-db 0x44
-dd 0x44dd0c24
-dd 0xd9e80424
-dd 0x83ffffff
-dd 0x1cdd08ec
-dd 0x5a589b24
-db 0xc3
-db 0x00
-
 fcn_0045844e:
 fcos
 call fcn_00458462  ; call 0x458462
@@ -118042,22 +117704,6 @@ pop eax
 pop ebp
 ret
 
-endloc_0045848d:
-db 0xdd
-db 0x44
-db 0x24
-dd 0xffb8e804
-dd 0xec83ffff
-dd 0x241cdd08
-dd 0xc35a589b
-dd 0x042444dd
-dd 0xffffafe8
-dd 0x08ec83ff
-dd 0x9b241cdd
-db 0x58
-db 0x5a
-db 0xc3
-
 fcn_004584b3:
 test byte [ref_0048936c], 1  ; test byte [0x48936c], 1
 jne short loc_004584c0  ; jne 0x4584c0
@@ -118070,15 +117716,6 @@ call fcn_00459cfc  ; call 0x459cfc
 loc_004584c5:
 fstp st0  ; fstp st(0)
 ret
-
-endloc_004584c8:
-dd 0x042444dd
-dd 0xffffe2e8
-dd 0x08ec83ff
-dd 0x9b241cdd
-db 0x58
-db 0x5a
-db 0xc3
 
 fcn_004584db:
 push ebx
@@ -118184,14 +117821,6 @@ ret
 
 fcn_004585bc:
 jmp near fcn_00459dc7  ; jmp 0x459dc7
-
-endloc_004585c1:
-db 0xff
-db 0x15
-dd _GetThreadPtr
-db 0x05
-dd 0x000000da
-db 0xc3
 
 fcn_004585cd:
 mov eax, dword [ref_004991c4]  ; mov eax, dword [0x4991c4]
@@ -118532,11 +118161,6 @@ pop edi
 pop esi
 ret
 
-endloc_004589ad:
-db 0x8d
-db 0x40
-db 0x00
-
 fcn_004589b0:
 push esi
 push edi
@@ -118685,10 +118309,6 @@ pop edi
 pop esi
 ret
 
-endloc_00458ade:
-db 0x00
-db 0x00
-
 fcn_00458ae0:
 or ecx, ecx
 je short loc_00458b10  ; je 0x458b10
@@ -118720,14 +118340,6 @@ mov byte [eax + 2], dl
 
 loc_00458b10:
 ret
-
-endloc_00458b11:
-db 0x90
-db 0x90
-db 0x90
-db 0x90
-db 0x90
-db 0x90
 
 fcn_00458b17:
 or ecx, ecx
@@ -118988,16 +118600,6 @@ mov byte [edx + eax], 0
 pop ebx
 ret
 
-endloc_00458ddc:
-db 0xc7
-db 0x05
-dd ref_00488f98
-db 0x01
-db 0x00
-db 0x00
-db 0x00
-db 0xc3
-
 fcn_00458de7:
 call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov edx, dword [esp + 4]
@@ -119016,12 +118618,6 @@ fcn_00458e00:
 push 0xe
 jmp short loc_00458df7  ; jmp 0x458df7
 
-endloc_00458e04:
-dd 0xdce8096a
-dd 0xb8ffffff
-dd 0xffffffff
-dd 0xc304c483
-
 fcn_00458e14:
 call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 mov edx, dword [esp + 4]
@@ -119038,18 +118634,6 @@ add eax, 0x20
 
 loc_00458e33:
 ret
-
-endloc_00458e34:
-dd 0x24448d53
-dd 0x04c08310
-dd 0x50fc408b
-dd 0x548b006a
-dd 0x8b521424
-dd 0x5314245c
-dd 0x000005e8
-dd 0x10c48300
-db 0x5b
-db 0xc3
 
 fcn_00458e56:
 push ebx
@@ -119814,66 +119398,6 @@ pop esi
 pop ebx
 ret
 
-endloc_0045955b:
-db 0x53
-dd 0x8b555756
-dd 0x8b14245c
-dd 0xff521053
-db 0x15
-dd ref_00488f50
-db 0x8b
-db 0x43
-db 0x08
-dd 0x830c488b
-dd 0xf98304c4
-dd 0x85197401
-dd 0x8b0e74c9
-dd 0xbe57107b
-dd 0xffffffff
-dd 0x00008be9
-dd 0x0c40c700
-dd 0x00000001
-dd 0x010c43f6
-dd 0x046a1a75
-dd 0xfff846e8
-dd 0x0c538aff
-dd 0xffffffbe
-dd 0x20ca80ff
-dd 0x8804c483
-dd 0x20eb0c53
-dd 0x4d046b8b
-dd 0x85046b89
-dd 0x530d7ded
-dd 0x000063e8
-dd 0x04c48300
-dd 0x08ebc689
-dd 0xb60f038b
-dd 0x03894030
-dd 0x400c43f6
-dd 0xfe833a75
-dd 0x8b22750d
-dd 0x894a0453
-dd 0xd2850453
-dd 0xe8530d7d
-dd 0x00000038
-dd 0x8904c483
-dd 0x8b0aebc6
-dd 0x40108a03
-dd 0x89f2b60f
-dd 0x1afe8303
-dd 0x4b8a0e75
-dd 0x10c9800c
-dd 0xffffffbe
-dd 0x0c4b88ff
-dd 0x57107b8b
-db 0xff
-db 0x15
-dd ref_00488f54
-db 0x83
-db 0xc4
-dd 0x5df08904
-dd 0xc35b5e5f
-
 fcn_00459628:
 push ebx
 mov ebx, dword [esp + 8]
@@ -119989,89 +119513,6 @@ ret
 fcn_00459718:
 call dword [cs:__imp__GetCurrentProcessId@0]  ; ucall: call dword cs:[0x462388]
 ret
-
-endloc_00459720:
-dd 0x55575653
-dd 0x0228ec81
-dd 0x15ff0000
-dd _GetThreadPtr
-dd 0x3104688b
-dd 0x848d57ff
-dd 0x00011824
-dd 0xf5e85000
-dd 0x83ffffe1
-dd 0x026a08c4
-dd 0x1824848d
-dd 0x50000001
-dd 0x28fbe847
-dd 0xc4830000
-dd 0x74c08508
-db 0xd8
-db 0x68
-dd ref_0046c431
-db 0x8d
-db 0x84
-dd 0x00011824
-dd 0x50e85000
-dd 0x83ffffdc
-dd 0xc08508c4
-dd 0x04e81b75
-dd 0x83000029
-dd 0x0a740b38
-dd 0x0028fae8
-dd 0x06388300
-dd 0xc031ab75
-dd 0x00009ee9
-dd 0xdb315000
-dd 0xffe12ce8
-db 0xff
-db 0x8a
-db 0x1d
-dd ref_004891a4
-db 0x83
-dd 0x8d5304c4
-dd 0x50042444
-dd 0xffe18be8
-dd 0x08c483ff
-dd 0x8d50e089
-dd 0x01182484
-dd 0xe8500000
-dd 0x000028d3
-dd 0x8508c483
-dd 0x684875c0
-dd ref_0046c431
-dd 0x0424448d
-dd 0xdbe9e850
-dd 0xc689ffff
-dd 0x8508c483
-dd 0x8a2274c0
-dd 0xcc800d60
-dd 0x0d668808
-dd 0x5508468b
-db 0x88
-db 0x1d
-dd ref_004891a4
-db 0x88
-db 0x58
-dd 0xf5ede814
-dd 0xc483ffff
-dd 0xebf08904
-dd 0x2879e82e
-dd 0x38830000
-dd 0x7b840f0b
-dd 0x6affffff
-dd 0x24848d02
-dd 0x00000118
-dd 0x32e84350
-dd 0x83000028
-dd 0xc08508c4
-dd 0xff0b850f
-dd 0x73e9ffff
-dd 0x81ffffff
-dd 0x000228c4
-dd 0x5e5f5d00
-db 0x5b
-db 0xc3
 
 fcn_0045983a:
 push ebx
@@ -120510,12 +119951,6 @@ call fcn_0045c25a  ; call 0x45c25a
 pop ebx
 ret
 
-endloc_00459c02:
-db 0x80
-db 0x3d
-dd ref_00488f35
-dd 0xc3c87500
-
 fcn_00459c0c:
 push ebx
 mov ah, byte [ref_00488f34]  ; mov ah, byte [0x488f34]
@@ -120633,10 +120068,6 @@ mov dword [ref_004895a8], edx  ; mov dword [0x4895a8], edx
 mov dword [ref_004895ac], ebx  ; mov dword [0x4895ac], ebx
 pop ebx
 ret
-
-endloc_00459cfa:
-db 0x00
-db 0x00
 
 fcn_00459cfc:
 push eax
@@ -121555,9 +120986,6 @@ pop esi
 pop ebx
 ret 4
 
-endloc_0045a96e:
-db 0x90
-
 ref_0045a96f:  ; may contain a jump table
 dd loc_0045a9d5
 dd loc_0045a9df
@@ -121843,25 +121271,6 @@ pop es
 pop esi
 pop ebx
 ret
-
-endloc_0045ac8b:
-db 0x53
-db 0xff
-db 0x15
-dd ref_00488f68
-db 0x8b
-db 0x44
-dd 0x1d8b0824
-dd ref_004894a8
-db 0xa3
-dd ref_004894a8
-db 0xff
-db 0x15
-dd ref_00488f70
-db 0x89
-db 0xd8
-db 0x5b
-db 0xc3
 
 fcn_0045acab:
 push ebx
@@ -123654,13 +123063,6 @@ call fcn_0045bccb  ; call 0x45bccb
 add esp, 4
 jmp near loc_004591a8  ; jmp 0x4591a8
 
-endloc_0045bcc0:
-dd 0x04e8036a
-dd 0x83000000
-db 0xc4
-db 0x04
-db 0xc3
-
 fcn_0045bccb:
 push ebx
 push esi
@@ -123711,25 +123113,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_0045bd2b:
-db 0x8b
-dd 0x8b082454
-dd 0xf60c2444
-dd 0x01042444
-dd 0x02c70e74
-dd 0x80000000
-dd 0x000100c7
-dd 0x0ceb0000
-dd 0x000002c7
-dd 0x00c7c000
-dd 0x00000080
-dd 0x042444f6
-dd 0x80037402
-dd 0x44f60208
-dd 0x74040424
-dd 0x04088003
-db 0xc3
 
 fcn_0045bd69:
 push ebx
@@ -123812,16 +123195,6 @@ mov dword [eax], 3
 loc_0045be04:
 pop ebx
 ret
-
-endloc_0045be06:
-db 0x8b
-db 0x54
-dd 0xd2850824
-dd 0xc0310375
-dd 0x4c8b52c3
-dd 0xe8510824
-dd 0x00000004
-dd 0xc308c483
 
 fcn_0045be20:
 push ebx
@@ -124109,15 +123482,6 @@ fcn_0045c07f:
 call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
 add eax, 4
 ret
-
-endloc_0045c089:
-db 0xff
-db 0x15
-dd _GetThreadPtr
-db 0x83
-db 0xc0
-db 0x08
-db 0xc3
 
 fcn_0045c093:
 push ebx
@@ -125402,52 +124766,6 @@ mov eax, 0xffffffff
 pop ebx
 ret
 
-endloc_0045cc98:
-dd 0x8b575653
-dd 0x8310245c
-dd 0x057c01fb
-dd 0x7e0cfb83
-dd 0xe8096a13
-dd 0xffffc137
-dd 0x000003b8
-dd 0x04c48300
-dd 0xc35b5e5f
-db 0xba
-dd ref_0045cc4e
-db 0x8b
-db 0x4c
-db 0x24
-db 0x14
-db 0x89
-db 0x15
-dd ref_00489734
-db 0x83
-dd 0x267402f9
-dd 0x7403f983
-dd 0x3de85321
-dd 0x83fffffe
-dd 0xc08504c4
-dd 0xfb831474
-dd 0x680f7502
-dd 0x0000009f
-dd 0x88e8006a
-dd 0x8300001d
-dd 0xe85308c4
-dd 0xfffffdf8
-dd 0x8b04c483
-dd 0x5714247c
-dd 0xe8c68953
-dd 0xfffffd9c
-dd 0xe808c483
-dd 0xfffffea5
-dd 0x0774c085
-dd 0xfffed2e8
-dd 0xe805ebff
-dd 0xfffffef5
-dd 0x5e5ff089
-db 0x5b
-db 0xc3
-
 fcn_0045cd2a:
 push ebx
 push esi
@@ -125666,37 +124984,6 @@ pop esi
 pop ebx
 ret
 
-endloc_0045cf04:
-dd 0x06575653
-dd 0x08ec8355
-dd 0x24245c8b
-dd 0xd88ce789
-dd 0x2024748b
-dd 0x4c8bc08e
-dd 0xda892824
-dd 0xf983a5a5
-dd 0xf634750a
-dd 0x80072444
-dd 0x03c62d74
-dd 0x01538d2d
-dd 0x8b24348b
-dd 0xf704247c
-dd 0x89d7f7d6
-dd 0x6e8d2434
-dd 0x247c8901
-dd 0x242c8904
-dd 0x0575ed85
-dd 0xeb01478d
-dd 0x89f88902
-dd 0x8b042444
-dd 0x5128244c
-dd 0x24448d52
-dd 0xfce85008
-dd 0x83fffffe
-dd 0xd8890cc4
-dd 0xeb08c483
-db 0x89
-
 fcn_0045cf75:
 push ebx
 push esi
@@ -125735,31 +125022,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_0045cfc4:
-dd 0x548b5653
-dd 0x5c8b0c24
-dd 0x4c8b1024
-dd 0xd8891424
-dd 0x750af983
-dd 0x7dd2850c
-dd 0x8ddaf708
-dd 0x03c60143
-dd 0x24748b2d
-dd 0x52505614
-dd 0xffff84e8
-dd 0x0cc483ff
-dd 0x5b5ed889
-dd 0x24448bc3
-db 0x04
-db 0x8a
-db 0x80
-dd ref_0049995d
-db 0x24
-dd 0x00ff2501
-db 0x00
-db 0x00
-db 0xc3
 
 fcn_0045d00b:
 push 0
@@ -126045,12 +125307,6 @@ pop esi
 pop ebx
 ret
 
-endloc_0045d2b7:
-db 0x8b
-dd 0xa3042444
-dd ref_00489694
-db 0xc3
-
 fcn_0045d2c1:
 push ebp
 mov ebp, esp
@@ -126269,11 +125525,6 @@ pop esi
 pop ebx
 pop ebp
 ret
-
-endloc_0045d49f:
-db 0x8d
-db 0x40
-db 0x00
 
 ref_0045d4a2:  ; may contain a jump table
 dd loc_0045d54c
@@ -127059,10 +126310,6 @@ pop ebx
 pop ebp
 ret
 
-endloc_0045db54:
-db 0x8b
-db 0xc0
-
 ref_0045db56:  ; may contain a jump table
 dd loc_0045dd31
 dd loc_0045dd41
@@ -127724,9 +126971,6 @@ lea esp, [ebp - 4]
 pop ebx
 pop ebp
 ret
-
-endloc_0045e0b5:
-db 0x00
 
 fcn_0045e0b6:
 or ebx, ebx
@@ -128460,17 +127704,6 @@ and al, 0xfe
 sub eax, 4
 ret
 
-endloc_0045e65d:
-db 0x53
-db 0x8b
-db 0x54
-dd 0x8b520c24
-dd 0x530c245c
-dd 0x0001bce8
-dd 0x08c48300
-db 0x5b
-db 0xc3
-
 fcn_0045e672:
 push ebx
 push esi
@@ -128707,11 +127940,6 @@ push edx
 int3
 jmp short loc_0045e892  ; jmp 0x45e892
 
-endloc_0045e88c:
-dd 0x44495657
-db 0x45
-db 0x4f
-
 loc_0045e892:
 mov eax, 1
 add esp, 8
@@ -128896,11 +128124,6 @@ pop esi
 pop ebx
 ret
 
-endloc_0045ea62:
-db 0xff
-db 0x15
-dd ref_00489734
-
 fcn_0045ea68:
 push 0xff
 push ref_0046caac  ; push 0x46caac
@@ -129083,34 +128306,6 @@ pop ebp
 pop esi
 pop ebx
 ret
-
-endloc_0045ec21:
-db 0x00
-db 0x09
-db 0xd2
-dd 0xc9091e78
-dd 0x48e80678
-dd 0xc3000000
-dd 0xdbf7d9f7
-dd 0xe800d983
-dd 0x0000003b
-dd 0xd8f7daf7
-dd 0xc300da83
-dd 0xd8f7daf7
-dd 0x0900da83
-dd 0xf71479c9
-dd 0x83dbf7d9
-dd 0x1ce800d9
-dd 0xf7000000
-dd 0x83dbf7d9
-dd 0xe8c300d9
-dd 0x0000000f
-dd 0xdbf7d9f7
-dd 0xf700d983
-dd 0x83d8f7da
-db 0xda
-db 0x00
-db 0xc3
 
 fcn_0045ec77:
 or ecx, ecx
@@ -129307,9 +128502,6 @@ ret
 loc_0045ede9:
 inc eax
 ret
-
-endloc_0045edeb:
-db 0x00
 
 fcn_0045edec:
 jmp near loc_00460007  ; jmp 0x460007
@@ -129553,21 +128745,10 @@ mov esi, edi
 loc_0045efb4:
 ret
 
-endloc_0045efb5:
-db 0x00
-
 fcn_0045efb6:
 sub edx, edx
 sub eax, eax
 ret
-
-endloc_0045efbb:
-db 0xb8
-dd 0x00000083
-dd 0x001045e8
-db 0x00
-db 0xeb
-db 0x1d
 
 loc_0045efc7:
 mov eax, 0x83
@@ -129587,19 +128768,6 @@ or eax, 0x7ff00000
 mov edx, eax
 sub eax, eax
 ret
-
-endloc_0045eff3:
-db 0xb8
-dd 0x00000083
-dd 0x00100de8
-dd 0x5011eb00
-dd 0xff9dfbe8
-dd 0x0084b8ff
-dd 0xfbe80000
-dd 0x5800000f
-dd 0x00000025
-dd 0x00000d80
-dd 0x00c37f80
 
 fcn_0045f01c:
 fld tword [esp + 0x10]  ; fld xword [esp + 0x10]
@@ -130263,34 +129431,6 @@ call fcn_0045f01c  ; call 0x45f01c
 add esp, 0x2c
 ret
 
-endloc_0045f5f5:
-db 0x83
-db 0xec
-db 0x2c
-dd 0x0c247cdb
-dd 0xe8243cdb
-dd 0xfffffa18
-dd 0xc32cc483
-dd 0x24448b50
-dd 0x00002508
-dd 0x003d7f80
-dd 0x747f8000
-dd 0x25e0df33
-dd 0x00003800
-dd 0x44d90d74
-dd 0xa4e80824
-dd 0x58ffffff
-dd 0xd90004c2
-dd 0x0cec83c9
-dd 0xd9243cdb
-dd 0xe8142444
-dd 0xffffff8f
-dd 0xd9242cdb
-dd 0x0cc483c9
-dd 0x0004c258
-dd 0x082474d8
-dd 0x0004c258
-
 fcn_0045f654:
 push eax
 mov eax, dword [esp + 0xc]
@@ -130553,11 +129693,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_0045fa82:
-db 0x53
-db 0x6a
-db 0x00
 
 loc_0045fa85:
 mov edx, dword [esp + 0x14]
@@ -131352,104 +130487,6 @@ pop edi
 pop esi
 pop ebx
 ret
-
-endloc_00460126:
-db 0x53
-db 0x56
-dd 0xec835557
-dd 0x247c8b14
-dd 0xba3d6a28
-dd 0x00000002
-dd 0x24548957
-dd 0x24548908
-dd 0x0575e80c
-dd 0xc6890000
-dd 0x8508c483
-dd 0xb80a75c0
-dd 0xffffffff
-dd 0x00012de9
-dd 0x74f83900
-dd 0x29c589f2
-dd 0x01fdd1fd
-dd 0x02458ded
-dd 0x6e12e850
-dd 0xc483ffff
-dd 0x89c38904
-dd 0x85082444
-dd 0x55d474c0
-dd 0x65e85057
-dd 0x83ffff6c
-dd 0xc6830cc4
-dd 0xc7665602
-dd 0x00002b04
-dd 0x10247489
-dd 0xffc845e8
-dd 0x04c483ff
-dd 0x4874c085
-dd 0x4489c001
-dd 0xc0831024
-dd 0xd1e85002
-dd 0x89ffff6d
-dd 0x04c483c6
-dd 0xc085c589
-dd 0xe8531075
-dd 0xffff6c51
-dd 0xffffffb8
-dd 0x00b9e9ff
-dd 0x448b0000
-dd 0x8b501024
-dd 0x52102454
-dd 0x6c0ee856
-dd 0xc483ffff
-dd 0x2474030c
-dd 0x06c76610
-dd 0x02eb0000
-dd 0x8b55ed31
-dd 0x510c244c
-dd 0x0004e9e8
-dd 0x08c48300
-dd 0x0824748b
-dd 0xe8c38956
-dd 0xffff6c0d
-dd 0x5504c483
-dd 0xff6c04e8
-dd 0x04c483ff
-dd 0x840fdb85
-dd 0xffffff37
-db 0x83
-db 0x3d
-dd ref_00499948
-db 0x00
-db 0x75
-dd 0x059de805
-dd 0xe8570000
-dd 0x00000062
-dd 0x8504c483
-dd 0x18850fc0
-dd 0x57ffffff
-dd 0xffc7a1e8
-dd 0x04c483ff
-dd 0x8b01708d
-dd 0xaf0f2404
-dd 0x31e850c6
-dd 0x89ffff6d
-dd 0x04c483c3
-dd 0x0c75c085
-dd 0xdee8056a
-dd 0xe9ffffbb
-dd 0xffffff5c
-dd 0x2474af0f
-dd 0x53575604
-dd 0x0005b0e8
-dd 0x0cc48300
-dd 0x0ffff883
-dd 0xffff3d84
-dd 0xf7e853ff
-dd 0x83fffff9
-dd 0xc48304c4
-dd 0x5e5f5d14
-db 0x5b
-db 0xc3
 
 fcn_0046028e:
 push ebx
@@ -132717,424 +131754,6 @@ pop ecx
 pop ebx
 pop eax
 ret
-
-endloc_00460e96:
-db 0x52
-db 0x83
-dd 0x7cdb30ec
-dd 0x3cdb1824
-dd 0x0000ba24
-dd 0x448b0000
-dd 0x00a90624
-dd 0x747fff00
-dd 0xfddae80a
-dd 0xc483ffff
-dd 0xdbc35a30
-dd 0x6cdb242c
-dd 0x048b1824
-dd 0x24440b24
-dd 0xd9797404
-dd 0x247cdbc9
-dd 0x242cdb0c
-dd 0xca83c9d9
-dd 0x247cd902
-dd 0x24448b24
-dd 0x033f0d24
-dd 0x44890000
-dd 0x6cd92824
-dd 0x448b2824
-dd 0xff252024
-dd 0x3d00007f
-dd 0x00007fbe
-dd 0xca831877
-db 0x01
-db 0xdc
-db 0x0d
-dd ref_0048992c
-db 0xdb
-dd 0xdc18247c
-db 0x0d
-dd ref_0048992c
-db 0xdb
-db 0x3c
-db 0x24
-dd 0x7cd920eb
-dd 0x448b2424
-dd 0x000d2424
-dd 0x89000003
-dd 0xd9282444
-dd 0xdd28246c
-db 0xd8
-db 0xdc
-db 0x0d
-dd ref_0048992c
-db 0xdb
-dd 0x6cd9243c
-dd 0x51e82424
-dd 0x83fffffd
-dd 0xc35a30c4
-dd 0xc483f8d9
-dd 0x00c35a30
-db 0xff
-db 0x25
-db 0x28
-db 0x24
-dd 0x25ff0046
-dd 0x004623bc
-db 0xff
-db 0x25
-db 0x7c
-db 0x23
-dd 0x25ff0046
-dd 0x00462378
-db 0xff
-db 0x25
-db 0xb4
-db 0x23
-dd 0x25ff0046
-dd 0x004623d0
-db 0xff
-db 0x25
-db 0x98
-db 0x23
-dd 0x25ff0046
-dd 0x00462364
-db 0xff
-db 0x25
-db 0xb0
-db 0x23
-dd 0x25ff0046
-dd 0x00462348
-db 0xff
-db 0x25
-db 0x04
-db 0x24
-dd 0x25ff0046
-dd 0x004623a0
-db 0xff
-db 0x25
-db 0xec
-db 0x23
-dd 0x25ff0046
-dd 0x00462350
-db 0xff
-db 0x25
-db 0x94
-db 0x23
-dd 0x25ff0046
-dd 0x004622c0
-db 0xff
-db 0x25
-db 0xe4
-db 0x22
-dd 0x25ff0046
-dd 0x004622bc
-db 0xff
-db 0x25
-db 0xb8
-db 0x22
-dd 0x25ff0046
-dd 0x0046228c
-db 0xff
-db 0x25
-db 0x98
-db 0x22
-dd 0x25ff0046
-dd 0x004622c4
-db 0xff
-db 0x25
-db 0xa0
-db 0x22
-dd 0x25ff0046
-dd 0x004622b0
-db 0xff
-db 0x25
-db 0x9c
-db 0x22
-dd 0x25ff0046
-dd 0x00462294
-db 0xff
-db 0x25
-db 0xa8
-db 0x22
-dd 0x25ff0046
-dd 0x004622ac
-db 0xff
-db 0x25
-db 0xb4
-db 0x22
-dd 0x25ff0046
-dd 0x00462290
-db 0xff
-db 0x25
-db 0xf4
-db 0x22
-dd 0x25ff0046
-dd 0x00462340
-db 0xff
-db 0x25
-db 0xfc
-db 0x22
-dd 0x25ff0046
-dd 0x00462324
-db 0xff
-db 0x25
-db 0xe8
-db 0x22
-dd 0x25ff0046
-dd 0x004622cc
-db 0xff
-db 0x25
-db 0xf8
-db 0x22
-dd 0x25ff0046
-dd 0x0046232c
-db 0xff
-db 0x25
-db 0xdc
-db 0x22
-dd 0x25ff0046
-dd 0x0046233c
-db 0xff
-db 0x25
-db 0x30
-db 0x23
-dd 0x25ff0046
-dd 0x004622d4
-db 0xff
-db 0x25
-db 0xf0
-db 0x22
-dd 0x25ff0046
-dd 0x00462318
-db 0xff
-db 0x25
-db 0xa4
-db 0x22
-dd 0x25ff0046
-dd 0x00462300
-db 0xff
-db 0x25
-db 0x04
-db 0x23
-dd 0x25ff0046
-dd 0x004622d8
-db 0xff
-db 0x25
-db 0x14
-db 0x23
-dd 0x25ff0046
-dd 0x00462320
-db 0xff
-db 0x25
-db 0xe0
-db 0x22
-dd 0x25ff0046
-dd 0x00462334
-db 0xff
-db 0x25
-db 0x0c
-db 0x23
-dd 0x25ff0046
-dd 0x00462338
-db 0xff
-db 0x25
-db 0x28
-db 0x23
-dd 0x25ff0046
-dd 0x004623cc
-db 0xff
-db 0x25
-db 0x08
-db 0x23
-dd 0x25ff0046
-dd 0x00462310
-db 0xff
-db 0x25
-db 0x1c
-db 0x23
-dd 0x25ff0046
-dd 0x004622ec
-db 0xff
-db 0x25
-db 0xfc
-db 0x23
-dd 0x25ff0046
-dd 0x004622d0
-db 0xff
-db 0x25
-db 0xf8
-db 0x23
-dd 0x25ff0046
-dd 0x00462368
-db 0xff
-db 0x25
-db 0x34
-db 0x24
-dd 0x25ff0046
-dd 0x00462354
-db 0xff
-db 0x25
-db 0x90
-db 0x23
-dd 0x25ff0046
-dd 0x00462400
-db 0xff
-db 0x25
-db 0x74
-db 0x23
-dd 0x25ff0046
-dd 0x004623c0
-db 0xff
-db 0x25
-db 0x70
-db 0x23
-dd 0x25ff0046
-dd 0x0046243c
-db 0xff
-db 0x25
-db 0xf4
-db 0x23
-dd 0x25ff0046
-dd 0x00462380
-db 0xff
-db 0x25
-db 0xe8
-db 0x23
-dd 0x25ff0046
-dd 0x00462438
-db 0xff
-db 0x25
-db 0xf0
-db 0x23
-dd 0x25ff0046
-dd 0x0046235c
-db 0xff
-db 0x25
-db 0x84
-db 0x23
-dd 0x25ff0046
-dd 0x004623a8
-db 0xff
-db 0x25
-db 0xe0
-db 0x23
-dd 0x25ff0046
-dd 0x0046239c
-db 0xff
-db 0x25
-db 0x6c
-db 0x23
-dd 0x25ff0046
-dd 0x004623a4
-db 0xff
-db 0x25
-db 0x2c
-db 0x24
-dd 0x25ff0046
-dd 0x00462410
-db 0xff
-db 0x25
-db 0x24
-db 0x24
-dd 0x25ff0046
-dd 0x004623c4
-db 0xff
-db 0x25
-db 0xdc
-db 0x23
-dd 0x25ff0046
-dd 0x00462430
-db 0xff
-db 0x25
-db 0xe4
-db 0x23
-dd 0x25ff0046
-dd 0x004623b8
-db 0xff
-db 0x25
-db 0x18
-db 0x24
-dd 0x25ff0046
-dd 0x00462420
-db 0xff
-db 0x25
-db 0x14
-db 0x24
-dd 0x25ff0046
-dd 0x00462408
-db 0xff
-db 0x25
-db 0x1c
-db 0x24
-dd 0x25ff0046
-dd 0x004623ac
-db 0xff
-db 0x25
-db 0xd8
-db 0x23
-dd 0x25ff0046
-dd 0x00462360
-db 0xff
-db 0x25
-db 0xd4
-db 0x23
-dd 0x25ff0046
-dd 0x0046238c
-db 0xff
-db 0x25
-db 0x58
-db 0x23
-dd 0x25ff0046
-dd 0x0046234c
-db 0xff
-db 0x25
-db 0xc8
-db 0x23
-dd 0x25ff0046
-dd 0x0046240c
-db 0xff
-db 0x25
-db 0x40
-db 0x24
-dd 0x25ff0046
-dd 0x00462388
-db 0xff
-db 0x25
-db 0x54
-db 0x24
-dd 0x25ff0046
-dd 0x00462468
-db 0xff
-db 0x25
-db 0x64
-db 0x24
-dd 0x25ff0046
-dd 0x00462460
-db 0xff
-db 0x25
-db 0x58
-db 0x24
-dd 0x25ff0046
-dd 0x00462450
-db 0xff
-db 0x25
-db 0x48
-db 0x24
-dd 0x25ff0046
-dd 0x0046244c
-db 0xff
-db 0x25
-db 0x6c
-db 0x24
-dd 0x25ff0046
-dd 0x00462470
-db 0xff
-db 0x25
-db 0x74
-db 0x24
-dd 0x25ff0046
-dd 0x0046245c
 
 fcn_0046121c:
 jmp dword [__imp__DirectSoundCreate@12]  ; jmp dword [0x46247c]
