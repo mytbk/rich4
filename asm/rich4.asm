@@ -115,8 +115,24 @@ extern __imp__timeKillEvent@4
 extern __imp__timeSetEvent@20
 extern __imp__DirectSoundCreate@12
 extern __imp__DirectDrawCreate@12
-; link flag and libs: -e fcn_0045709c -lgdi32 -luser32 -lkernel32 -lwinmm -ldsound -lddraw
-global fcn_0045709c
+
+global loc_004588b0
+global __imp__GetModuleHandleA@4
+global _LpCmdLine
+global memset
+global rich4_main
+global __ThreadDataSize
+global fcn_0045abc6
+global _GetThreadPtr
+global __init_stack_limits
+global __NewExceptionFilter
+global __NTInit
+global ref_00488f8c
+global ref_00489330
+global ref_004898ca
+global ref_00489900
+global ref_004991c0
+global fcn_0045ac2a
 
 extern _abs
 
@@ -116513,41 +116529,6 @@ pop esi
 pop ebx
 ret
 
-fcn_0045709c:
-jmp near loc_00458ced  ; jmp 0x458ced
-
-endloc_004570a1:
-dd ref_00401003
-db 0x57
-db 0x41
-db 0x54
-dd 0x204d4f43
-dd 0x2b432f43
-dd 0x2032332b
-dd 0x2d6e7552
-dd 0x656d6954
-dd 0x73797320
-dd 0x2e6d6574
-dd 0x29632820
-dd 0x706f4320
-dd 0x67697279
-dd 0x62207468
-dd 0x41572079
-dd 0x4d4f4354
-dd 0x746e4920
-dd 0x616e7265
-dd 0x6e6f6974
-dd 0x43206c61
-dd 0x2e70726f
-dd 0x38393120
-dd 0x39312d38
-dd 0x202e3539
-dd 0x206c6c41
-dd 0x68676972
-dd 0x72207374
-dd 0x72657365
-dd 0x2e646576
-
 fcn_00457110:
 push ebx
 sub esp, 4
@@ -118437,34 +118418,6 @@ pop esi
 pop ebx
 ret
 
-; __NTMainInit(REGISTRATION_RECORD *rr, thread_data *tdata)
-__NTMainInit:
-push ebx
-push 0
-call dword [cs:__imp__GetModuleHandleA@4]  ; ucall: call dword cs:[0x4623bc]
-push eax
-mov edx, dword [esp + 0x10]
-push edx
-push 0
-call __NTInit  ; call 0x4585ef
-add esp, 0xc
-push ref_00489330  ; push 0x489330
-call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
-push eax
-call __init_stack_limits  ; call 0x45a666
-add esp, 8
-mov ebx, dword [esp + 8]
-push ebx
-call __NewExceptionFilter  ; call 0x45ab58
-add esp, 4
-mov eax, 0x21
-call __InitRtns  ; call 0x45abd6
-call dword [ref_00488f8c]  ; ucall: call dword [0x488f8c]
-mov eax, 0xff
-call __InitRtns  ; call 0x45abd6
-pop ebx
-ret
-
 loc_004588b0:
 cmp dword [ref_004991c0], 0  ; cmp dword [0x4991c0], 0
 je short loc_004588d4  ; je 0x4588d4
@@ -119006,73 +118959,6 @@ ret
 fcn_00458cea:
 xor eax, eax
 ret
-
-loc_00458ced:
-push ebx
-push ebp
-mov ebp, esp
-sub esp, 8
-mov eax, 1 ; INIT_PRIORITY_THREAD
-call __InitRtns  ; call 0x45abd6
-mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
-add eax, 3
-and al, 0xfc
-sub esp, eax
-mov ebx, esp
-mov edx, dword [__ThreadDataSize]  ; mov edx, dword [0x4894b0]
-push edx
-push 0
-push ebx
-call memset  ; call 0x456f60
-add esp, 0xc
-mov eax, dword [__ThreadDataSize]  ; mov eax, dword [0x4894b0]
-push ebx
-mov dword [ebx + 0xf0], eax
-lea eax, [ebp - 8]
-push eax
-call __NTMainInit  ; call 0x458859
-mov ebx, dword [ref_00489334]  ; mov ebx, dword [0x489334]
-add ebx, 3
-add esp, 8
-and bl, 0xfc
-call fcn_0045ada0  ; call 0x45ada0
-cmp ebx, eax
-jae short loc_00458d61  ; jae 0x458d61
-push ebx
-call __GRO  ; call 0x45aded
-mov eax, dword [ref_00489334]  ; mov eax, dword [0x489334]
-add eax, 3
-and al, 0xfc
-sub esp, eax
-mov eax, esp
-jmp short loc_00458d63  ; jmp 0x458d63
-
-loc_00458d61:
-xor eax, eax
-
-loc_00458d63:
-mov ebx, dword [ref_00489334]  ; mov ebx, dword [0x489334]
-add eax, ebx
-mov dword [ref_00489338], eax  ; mov dword [0x489338], eax
-call fcn_0045ae21  ; call 0x45ae21
-push 0xa
-mov ebx, dword [_LpCmdLine]  ; mov ebx, dword [0x489310]
-push ebx
-push 0
-push 0
-call dword [cs:__imp__GetModuleHandleA@4]  ; ucall: call dword cs:[0x4623bc]
-push eax
-call rich4_main  ; call 0x401b9c
-push eax
-call fcn_0045ae23  ; call 0x45ae23
-add esp, 4
-mov esp, ebp
-pop ebp
-pop ebx
-ret
-
-endloc_00458d9d:
-db 0x00
 
 fcn_00458d9e:
 push ebx
@@ -121907,51 +121793,6 @@ loc_0045abd4:
 pop es
 ret
 
-__InitRtns:
-push ebx
-push esi
-push es
-sub esp, 4
-mov esi, ref_00489900  ; mov esi, 0x489900
-mov byte [esp], al
-
-loc_0045abe4:
-mov eax, ref_004898ca  ; mov eax, 0x4898ca
-mov dl, byte [esp]
-mov ebx, esi
-
-loc_0045abee:
-cmp eax, ref_00489900  ; cmp eax, 0x489900
-jae short loc_0045ac0a  ; jae 0x45ac0a
-cmp byte [eax], 2
-je short loc_0045ac05  ; je 0x45ac05
-mov cl, byte [eax + 1]
-cmp dl, cl
-jb short loc_0045ac05  ; jb 0x45ac05
-mov ebx, eax
-mov dl, cl
-
-loc_0045ac05:
-add eax, 6
-jmp short loc_0045abee  ; jmp 0x45abee
-
-loc_0045ac0a:
-cmp ebx, ref_00489900  ; cmp ebx, 0x489900
-je short loc_0045ac23  ; je 0x45ac23
-lea eax, [ebx + 2]
-push eax
-call fcn_0045abc6  ; call 0x45abc6
-add esp, 4
-mov byte [ebx], 2
-jmp short loc_0045abe4  ; jmp 0x45abe4
-
-loc_0045ac23:
-add esp, 4
-pop es
-pop esi
-pop ebx
-ret
-
 fcn_0045ac2a:
 push ebx
 push esi
@@ -122124,134 +121965,8 @@ pop esi
 pop ebx
 ret
 
-endloc_0045ad79:
-db 0x53
-db 0xff
-db 0x15
-dd ref_00488f78
-dd 0x0824448b
-db 0x8b
-db 0x1d
-dd __ThreadDataSize
-db 0x01
-db 0xd8
-db 0xa3
-dd __ThreadDataSize
-db 0xe8
-db 0xf2
-db 0x1a
-dd 0x15ff0000
-dd ref_00488f7c
-dd 0xc35bd889
-
-fcn_0045ada0:
-push ebx
-call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
-mov ebx, eax
-mov eax, esp
-sub eax, dword [ebx]
-pop ebx
-ret
-
-endloc_0045adaf:
-db 0x00
-
 fcn_0045adb0:
 ret
-
-endloc_0045adb1:
-db 0x87
-db 0x44
-db 0x24
-dd 0x0007e804
-dd 0x448b0000
-dd 0x04c20424
-db 0x00
-
-__STK:
-push eax
-cmp eax, esp
-jae short loc_0045ade0  ; jae 0x45ade0
-sub eax, esp
-neg eax
-push esi
-push eax
-call dword [_GetThreadPtr]  ; ucall: call dword [0x488f4c]
-mov esi, eax
-pop eax
-cmp eax, dword [esi]
-pop esi
-jbe short loc_0045ade0  ; jbe 0x45ade0
-call __GRO  ; call 0x45aded
-ret
-
-loc_0045ade0:
-pop eax
-push 1
-push ref_004894b4  ; push 0x4894b4
-call __fatal_runtime_error  ; call 0x45c690
-
-__GRO:
-push eax
-push ebx
-mov eax, dword [esp + 0xc]
-mov ebx, 0xfffffffc
-
-loc_0045adf8:
-mov dword [esp + ebx], ebx
-sub ebx, 0x1000
-sub eax, 0x1000
-jg short loc_0045adf8  ; jg 0x45adf8
-pop ebx
-pop eax
-ret 4
-
-endloc_0045ae0d:
-db 0x50
-db 0xe8
-db 0xda
-dd 0x50ffffff
-dd 0x0824448d
-dd 0x9424042b
-dd 0xff04408b
-db 0xe0
-
-fcn_0045ae21:
-ret
-
-fcn_0045ae22:
-ret
-
-fcn_0045ae23:
-call dword [ref_004894c8]  ; ucall: call dword [0x4894c8]
-cmp byte [ref_004991c0], 0  ; cmp byte [0x4991c0], 0
-jne short loc_0045ae41  ; jne 0x45ae41
-mov edx, 0xff
-mov eax, 0x10
-call fcn_0045ac2a  ; call 0x45ac2a
-
-loc_0045ae41:
-mov edx, dword [esp + 4]
-push edx
-call fcn_0045ae4f  ; call 0x45ae4f
-add esp, 4
-ret
-
-fcn_0045ae4f:
-push ebx
-call dword [ref_004894c8]  ; ucall: call dword [0x4894c8]
-call dword [ref_004894cc]  ; ucall: call dword [0x4894cc]
-cmp dword [ref_004891ec], 0  ; cmp dword [0x4891ec], 0
-je short loc_0045ae6b  ; je 0x45ae6b
-call dword [ref_004891ec]  ; ucall: call dword [0x4891ec]
-
-loc_0045ae6b:
-mov ebx, dword [esp + 8]
-push ebx
-jmp near loc_004588b0  ; jmp 0x4588b0
-
-endloc_0045ae75:
-db 0x00
 
 fcn_0045ae76:
 push ebx
@@ -172624,9 +172339,6 @@ dd 0x00000000
 ref_004891e8:  ; may contain a jump table
 dd 0x00000000
 
-ref_004891ec:  ; may contain a jump table
-dd 0x00000000
-
 ref_004891f0:
 dd ref_0046c418
 dd ref_0046c41c
@@ -172726,12 +172438,6 @@ dd 0x00000000
 dd 0x00000000
 
 ref_00489330:
-dd 0x00000000
-
-ref_00489334:
-dd 0x00000000
-
-ref_00489338:
 dd 0x00000000
 
 ref_0048933c:
@@ -172897,12 +172603,6 @@ dd 0x000000f4
 
 ref_004894b4:
 db 'Stack Overflow!',0x0d,0x0a,0x00,0x00,0x00
-
-ref_004894c8:  ; may contain a jump table
-dd fcn_0045ae22
-
-ref_004894cc:  ; may contain a jump table
-dd fcn_0045ae22
 
 ref_004894d0:
 db 0x00

@@ -1,11 +1,12 @@
 CROSS=i686-w64-mingw32-
 CC=$(CROSS)gcc
 LD=$(CROSS)ld
-LDFLAGS=-e fcn_0045709c
+LDFLAGS=-e entry
 LIBS=-lgdi32 -luser32 -lkernel32 -lwinmm -ldsound -lddraw
 LIBS+=-lmsvcrt
 
-OBJS = rich4.obj rich4_time.obj card_strings.obj stocks_data.obj card_table.obj tool_strings.obj \
+OBJS = entry.obj \
+       rich4.obj rich4_time.obj card_strings.obj stocks_data.obj card_table.obj tool_strings.obj \
        players.obj \
        window_util.obj \
        rich4_crt_mthread.obj rich4_clib.obj
