@@ -870,7 +870,7 @@ push ref_004990f0  ; push 0x4990f0
 call memset  ; call 0x456f60
 add esp, 0xc
 push 0x5e880
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [ref_00474938], eax  ; mov dword [0x474938], eax
 xor esi, esi
@@ -2763,7 +2763,7 @@ call clib_fread  ; call 0x4576d0
 add esp, 0x10
 mov ebx, dword [ref_00498e94]  ; mov ebx, dword [0x498e94]
 push ebx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [ref_0047493c], eax  ; mov dword [0x47493c], eax
 push edi
@@ -2825,7 +2825,7 @@ call clib_fread  ; call 0x4576d0
 add esp, 0x10
 mov ecx, dword [ref_00498e94]  ; mov ecx, dword [0x498e94]
 push ecx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [esi + ref_0048f294], eax  ; mov dword [esi + 0x48f294], eax
 push edi
@@ -7994,11 +7994,11 @@ push ref_0046ccd0  ; push 0x46ccd0
 call fcn_00454176  ; call 0x454176
 add esp, 4
 push 0x96000
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [ref_0048a354], eax  ; mov dword [0x48a354], eax
 push 0x96000
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [ref_0048a358], eax  ; mov dword [0x48a358], eax
 push ref_00463187  ; push 0x463187
@@ -9241,7 +9241,7 @@ call memset  ; call 0x456f60
 add esp, 0xc
 mov ebp, dword [ref_00498e94]  ; mov ebp, dword [0x498e94]
 push ebp
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [esi + ref_0048f294], eax  ; mov dword [esi + 0x48f294], eax
 mov eax, dword [ref_00498e94]  ; mov eax, dword [0x498e94]
@@ -105889,7 +105889,7 @@ push edx
 push edi
 call dword [cs:__imp__SetFilePointer@16]  ; ucall: call dword cs:[0x462404]
 push ebp
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [ebx + ref_004762f8], eax  ; mov dword [ebx + 0x4762f8], eax
 push 0
@@ -105970,7 +105970,7 @@ test ebx, ebx
 jne short loc_004504a5  ; jne 0x4504a5
 mov ecx, dword [esp]
 push ecx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebx, eax
 
@@ -105990,7 +105990,7 @@ jmp short loc_004504f6  ; jmp 0x4504f6
 
 loc_004504c3:
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov edi, eax
 add esp, 4
 push 0
@@ -107001,7 +107001,7 @@ jmp near loc_00450d08  ; jmp 0x450d08
 
 loc_00450dfd:
 push 0x5e880
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov dword [ref_0048c868], eax  ; mov dword [0x48c868], eax
 push 0x5e880
@@ -108180,7 +108180,7 @@ imul eax, dword [esp + 8]
 add eax, eax
 add eax, 0xc
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov edx, dword [esp + 4]
 mov word [eax], dx
@@ -108209,7 +108209,7 @@ mov ecx, dword [esp + 0x20]
 test ecx, ecx
 jne short loc_00451ac5  ; jne 0x451ac5
 push ebx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov ebp, eax
 add esp, 4
 jmp short loc_00451ac7  ; jmp 0x451ac7
@@ -116406,7 +116406,7 @@ call fcn_00458ae0  ; call 0x458ae0
 pop eax
 ret
 
-fcn_00456f80:
+clib_malloc:
 mov edx, dword [esp + 4]
 push edx
 call fcn_00456f8e  ; call 0x456f8e
@@ -119325,7 +119325,7 @@ loc_004590ec:
 test byte [ebx + 0xc], 3
 jne short loc_00459109  ; jne 0x459109
 push 0x1d
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov esi, eax
 test eax, eax
@@ -119341,7 +119341,7 @@ cmp ebx, ref_004891a4  ; cmp ebx, 0x4891a4
 jb short loc_004590ec  ; jb 0x4590ec
 push 0x37
 mov edi, 0x4003
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov esi, eax
 test eax, eax
@@ -119702,7 +119702,7 @@ mov dword [ebx + 0x14], 0x1000
 loc_00459447:
 mov ecx, dword [ebx + 0x14]
 push ecx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov edx, dword [ebx + 8]
 mov dword [edx + 8], eax
 mov eax, dword [ebx + 8]
@@ -121087,7 +121087,7 @@ dec ecx
 pop es
 lea ebx, [ecx + 1]
 push ebx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov edx, eax
 test eax, eax
@@ -121137,7 +121137,7 @@ ret
 
 loc_0045a5bc:
 push 0x208
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov ebx, eax
 add esp, 4
 test eax, eax
@@ -121198,7 +121198,7 @@ lea esi, [eax + 1]
 add esp, 4
 add esi, esi
 push esi
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebx, eax
 test eax, eax
@@ -123616,7 +123616,7 @@ add esp, 4
 test eax, eax
 jne short loc_0045bc73  ; jne 0x45bc73
 push 0x1d
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov esi, eax
 test eax, eax
@@ -124209,7 +124209,7 @@ test ebx, ebx
 jne short loc_0045c14d  ; jne 0x45c14d
 mov edi, 0x104
 push edi
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebp, eax
 test eax, eax
@@ -124310,7 +124310,7 @@ mov eax, ebx
 
 loc_0045c1ef:
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebx, eax
 test eax, eax
@@ -124814,7 +124814,7 @@ push ebx
 mov ebx, dword [esp + 8]
 imul ebx, dword [esp + 0xc]
 push ebx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 test eax, eax
 je short loc_0045c651  ; je 0x45c651
@@ -124971,7 +124971,7 @@ jmp near loc_0045c8a9  ; jmp 0x45c8a9
 fcn_0045c906:
 mov edx, dword [esp + 4]
 push edx
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 ret
 
@@ -130653,7 +130653,7 @@ sub eax, esi
 mov dword [esp + 0x10], eax
 add eax, ebx
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebx, eax
 mov dword [esp + 8], eax
@@ -130684,7 +130684,7 @@ test eax, eax
 je short loc_0045fbcc  ; je 0x45fbcc
 inc eax
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov edx, eax
 mov dword [esp + 0xc], eax
@@ -130752,7 +130752,7 @@ lea esi, [eax + 1]
 mov eax, dword [esp + 4]
 imul eax, esi
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov ebx, eax
 add esp, 4
 test eax, eax
@@ -130826,7 +130826,7 @@ jne short loc_0045fcf1  ; jne 0x45fcf1
 test ebp, ebp
 jne near loc_0045fde0  ; jne 0x45fde0
 push 9
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebx, eax
 test eax, eax
@@ -130862,7 +130862,7 @@ add eax, edi
 test edx, edx
 jne short loc_0045fd84  ; jne 0x45fd84
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov edx, eax
 add esp, 4
 mov ebx, eax
@@ -131493,7 +131493,7 @@ jne short loc_0046030e  ; jne 0x46030e
 test esi, esi
 jne near loc_004603ea  ; jne 0x4603ea
 push 9
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebx, eax
 test eax, eax
@@ -131529,7 +131529,7 @@ add eax, ebp
 test edi, edi
 jne short loc_00460392  ; jne 0x460392
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov edi, eax
 add esp, 4
 mov ebx, eax
@@ -131994,7 +131994,7 @@ add eax, eax
 add esp, 4
 lea esi, [eax + 1]
 push esi
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov edi, eax
 add esp, 4
 mov ebp, eax
@@ -132009,7 +132009,7 @@ add eax, eax
 add esp, 4
 lea esi, [eax + 1]
 push esi
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 add esp, 4
 mov ebx, eax
 test eax, eax
@@ -132103,7 +132103,7 @@ lea ebp, [eax + 1]
 add esp, 4
 lea eax, [ebp + ebp]
 push eax
-call fcn_00456f80  ; call 0x456f80
+call clib_malloc  ; call 0x456f80
 mov ebx, eax
 add esp, 4
 test eax, eax
