@@ -157,11 +157,11 @@ extern _nplayers
 extern _current_player
 extern _players
 
-extern clib_fopen
-extern clib_fclose
+extern _clib_fopen
+extern _clib_fclose
 extern clib_fseek
-extern clib_fread
-extern clib_fwrite
+extern _clib_fread
+extern _clib_fwrite
 global fcn_00457135
 global fcn_00457254
 global fcn_00457902
@@ -211,6 +211,10 @@ extern _Post_0402_Message
 extern _callbackSize
 extern _windowCallbacks
 
+extern _global_rich4_cfg
+extern _rich4_read_config
+extern _rich4_write_config
+
 section .text
 db 0xcc
 db 0xeb
@@ -236,7 +240,7 @@ mov eax, esp
 push eax
 call dword [cs:__imp__GetCursorPos@4]  ; ucall: call dword cs:[0x4622ec]
 xor eax, eax
-mov ax, word [ref_00497168]  ; mov ax, word [0x497168]
+mov ax, word [(_global_rich4_cfg+16)]  ; mov ax, word [0x497168]
 cmp esi, eax
 jne short loc_00401059  ; jne 0x401059
 test ebx, 0x80000000
@@ -250,7 +254,7 @@ jmp short loc_0040107a  ; jmp 0x40107a
 
 loc_00401059:
 xor eax, eax
-mov ax, word [ref_0049716a]  ; mov ax, word [0x49716a]
+mov ax, word [(_global_rich4_cfg+18)]  ; mov ax, word [0x49716a]
 cmp esi, eax
 jne short loc_00401086  ; jne 0x401086
 test ebx, 0x80000000
@@ -269,7 +273,7 @@ jmp near loc_00401537  ; jmp 0x401537
 
 loc_00401086:
 xor eax, eax
-mov ax, word [ref_0049716c]  ; mov ax, word [0x49716c]
+mov ax, word [(_global_rich4_cfg+20)]  ; mov ax, word [0x49716c]
 cmp esi, eax
 jne short loc_004010a9  ; jne 0x4010a9
 test ebx, 0x80000000
@@ -283,7 +287,7 @@ jmp short loc_0040107a  ; jmp 0x40107a
 
 loc_004010a9:
 xor eax, eax
-mov ax, word [ref_0049716e]  ; mov ax, word [0x49716e]
+mov ax, word [(_global_rich4_cfg+22)]  ; mov ax, word [0x49716e]
 cmp esi, eax
 jne short loc_004010cb  ; jne 0x4010cb
 test ebx, 0x80000000
@@ -296,7 +300,7 @@ jmp short loc_00401079  ; jmp 0x401079
 
 loc_004010cb:
 xor eax, eax
-mov ax, word [ref_00497170]  ; mov ax, word [0x497170]
+mov ax, word [(_global_rich4_cfg+24)]  ; mov ax, word [0x497170]
 cmp esi, eax
 jne near loc_00401157  ; jne 0x401157
 test ebx, 0x80000000
@@ -334,7 +338,7 @@ jmp near loc_00401537  ; jmp 0x401537
 
 loc_00401157:
 xor eax, eax
-mov ax, word [ref_00497172]  ; mov ax, word [0x497172]
+mov ax, word [(_global_rich4_cfg+26)]  ; mov ax, word [0x497172]
 cmp esi, eax
 jne near loc_004011df  ; jne 0x4011df
 test ebx, 0x80000000
@@ -395,18 +399,18 @@ or word [ref_0046cb07], si  ; or word [0x46cb07], si
 
 loc_00401219:
 xor edx, edx
-mov dx, word [ref_00497176]  ; mov dx, word [0x497176]
+mov dx, word [(_global_rich4_cfg+30)]  ; mov dx, word [0x497176]
 xor eax, eax
 mov ax, word [ref_0046cb07]  ; mov ax, word [0x46cb07]
 cmp eax, edx
 jne short loc_00401262  ; jne 0x401262
-mov dh, byte [ref_0049715d]  ; mov dh, byte [0x49715d]
+mov dh, byte [(_global_rich4_cfg+5)]  ; mov dh, byte [0x49715d]
 inc dh
-mov byte [ref_0049715d], dh  ; mov byte [0x49715d], dh
+mov byte [(_global_rich4_cfg+5)], dh  ; mov byte [0x49715d], dh
 cmp dh, 3
 jne short loc_00401249  ; jne 0x401249
 xor bh, bh
-mov byte [ref_0049715d], bh  ; mov byte [0x49715d], bh
+mov byte [(_global_rich4_cfg+5)], bh  ; mov byte [0x49715d], bh
 
 loc_00401249:
 call fcn_00419703  ; call 0x419703
@@ -418,7 +422,7 @@ jmp near loc_00401523  ; jmp 0x401523
 
 loc_00401262:
 xor edx, edx
-mov dx, word [ref_0049717c]  ; mov dx, word [0x49717c]
+mov dx, word [(_global_rich4_cfg+36)]  ; mov dx, word [0x49717c]
 cmp eax, edx
 jne short loc_0040128d  ; jne 0x40128d
 push 0
@@ -431,7 +435,7 @@ jmp near loc_00401523  ; jmp 0x401523
 
 loc_0040128d:
 xor edx, edx
-mov dx, word [ref_0049717e]  ; mov dx, word [0x49717e]
+mov dx, word [(_global_rich4_cfg+38)]  ; mov dx, word [0x49717e]
 cmp eax, edx
 jne near loc_00401312  ; jne 0x401312
 mov ecx, dword [_current_player]  ; mov ecx, dword [0x49910c]
@@ -474,7 +478,7 @@ jmp near loc_00401520  ; jmp 0x401520
 
 loc_00401312:
 xor edx, edx
-mov dx, word [ref_00497180]  ; mov dx, word [0x497180]
+mov dx, word [(_global_rich4_cfg+40)]  ; mov dx, word [0x497180]
 cmp eax, edx
 jne short loc_0040132b  ; jne 0x40132b
 push 0xa
@@ -485,7 +489,7 @@ jmp near loc_00401520  ; jmp 0x401520
 
 loc_0040132b:
 xor edx, edx
-mov dx, word [ref_00497182]  ; mov dx, word [0x497182]
+mov dx, word [(_global_rich4_cfg+42)]  ; mov dx, word [0x497182]
 cmp eax, edx
 jne short loc_0040133c  ; jne 0x40133c
 push 9
@@ -493,7 +497,7 @@ jmp short loc_00401321  ; jmp 0x401321
 
 loc_0040133c:
 xor edx, edx
-mov dx, word [ref_00497184]  ; mov dx, word [0x497184]
+mov dx, word [(_global_rich4_cfg+44)]  ; mov dx, word [0x497184]
 cmp eax, edx
 jne short loc_0040134d  ; jne 0x40134d
 push 8
@@ -501,7 +505,7 @@ jmp short loc_00401321  ; jmp 0x401321
 
 loc_0040134d:
 xor edx, edx
-mov dx, word [ref_00497186]  ; mov dx, word [0x497186]
+mov dx, word [(_global_rich4_cfg+46)]  ; mov dx, word [0x497186]
 cmp eax, edx
 jne short loc_0040135e  ; jne 0x40135e
 push 7
@@ -509,7 +513,7 @@ jmp short loc_00401321  ; jmp 0x401321
 
 loc_0040135e:
 xor edx, edx
-mov dx, word [ref_00497188]  ; mov dx, word [0x497188]
+mov dx, word [(_global_rich4_cfg+48)]  ; mov dx, word [0x497188]
 cmp eax, edx
 jne short loc_0040136f  ; jne 0x40136f
 push 6
@@ -517,7 +521,7 @@ jmp short loc_00401321  ; jmp 0x401321
 
 loc_0040136f:
 xor edx, edx
-mov dx, word [ref_0049718a]  ; mov dx, word [0x49718a]
+mov dx, word [(_global_rich4_cfg+50)]  ; mov dx, word [0x49718a]
 cmp eax, edx
 jne short loc_00401380  ; jne 0x401380
 push 5
@@ -525,7 +529,7 @@ jmp short loc_00401321  ; jmp 0x401321
 
 loc_00401380:
 xor edx, edx
-mov dx, word [ref_0049718c]  ; mov dx, word [0x49718c]
+mov dx, word [(_global_rich4_cfg+52)]  ; mov dx, word [0x49718c]
 cmp eax, edx
 jne short loc_004013c0  ; jne 0x4013c0
 mov edi, dword [ref_00499088]  ; mov edi, dword [0x499088]
@@ -545,7 +549,7 @@ jmp near loc_00401520  ; jmp 0x401520
 
 loc_004013c0:
 xor edx, edx
-mov dx, word [ref_0049718e]  ; mov dx, word [0x49718e]
+mov dx, word [(_global_rich4_cfg+54)]  ; mov dx, word [0x49718e]
 cmp eax, edx
 jne short loc_004013f8  ; jne 0x4013f8
 mov edx, dword [ref_00499088]  ; mov edx, dword [0x499088]
@@ -561,7 +565,7 @@ jmp short loc_004013b4  ; jmp 0x4013b4
 
 loc_004013f8:
 xor edx, edx
-mov dx, word [ref_00497190]  ; mov dx, word [0x497190]
+mov dx, word [(_global_rich4_cfg+56)]  ; mov dx, word [0x497190]
 cmp eax, edx
 jne short loc_0040140c  ; jne 0x40140c
 push 2
@@ -569,7 +573,7 @@ jmp near loc_00401321  ; jmp 0x401321
 
 loc_0040140c:
 xor edx, edx
-mov dx, word [ref_00497192]  ; mov dx, word [0x497192]
+mov dx, word [(_global_rich4_cfg+58)]  ; mov dx, word [0x497192]
 cmp eax, edx
 jne short loc_00401420  ; jne 0x401420
 push 1
@@ -577,7 +581,7 @@ jmp near loc_00401321  ; jmp 0x401321
 
 loc_00401420:
 xor edx, edx
-mov dx, word [ref_00497194]  ; mov dx, word [0x497194]
+mov dx, word [(_global_rich4_cfg+60)]  ; mov dx, word [0x497194]
 cmp eax, edx
 jne short loc_00401434  ; jne 0x401434
 push 4
@@ -585,7 +589,7 @@ jmp near loc_00401321  ; jmp 0x401321
 
 loc_00401434:
 xor edx, edx
-mov dx, word [ref_00497196]  ; mov dx, word [0x497196]
+mov dx, word [(_global_rich4_cfg+62)]  ; mov dx, word [0x497196]
 cmp eax, edx
 jne short loc_00401448  ; jne 0x401448
 push 3
@@ -593,7 +597,7 @@ jmp near loc_00401321  ; jmp 0x401321
 
 loc_00401448:
 xor edx, edx
-mov dx, word [ref_00497198]  ; mov dx, word [0x497198]
+mov dx, word [(_global_rich4_cfg+64)]  ; mov dx, word [0x497198]
 cmp eax, edx
 jne short loc_0040145c  ; jne 0x40145c
 push 0
@@ -601,7 +605,7 @@ jmp near loc_00401321  ; jmp 0x401321
 
 loc_0040145c:
 xor edx, edx
-mov dx, word [ref_0049719e]  ; mov dx, word [0x49719e]
+mov dx, word [(_global_rich4_cfg+70)]  ; mov dx, word [0x49719e]
 cmp eax, edx
 jne short loc_004014b1  ; jne 0x4014b1
 push 0
@@ -614,7 +618,7 @@ call fcn_00453a32  ; call 0x453a32
 add esp, 8
 cmp eax, 1
 jne short loc_004014a0  ; jne 0x4014a0
-call fcn_00411f80  ; call 0x411f80
+call _rich4_write_config  ; call 0x411f80
 mov byte [ref_0046caf9], 1  ; mov byte [0x46caf9], 1
 jmp near loc_00401523  ; jmp 0x401523
 
@@ -625,10 +629,10 @@ call fcn_00402460  ; call 0x402460
 jmp near loc_00401520  ; jmp 0x401520
 
 loc_004014b1:
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 je short loc_00401523  ; je 0x401523
 xor edx, edx
-mov dx, word [ref_0049719a]  ; mov dx, word [0x49719a]
+mov dx, word [(_global_rich4_cfg+66)]  ; mov dx, word [0x49719a]
 cmp eax, edx
 jne short loc_004014ee  ; jne 0x4014ee
 mov eax, dword [_current_player]  ; mov eax, dword [0x49910c]
@@ -644,7 +648,7 @@ jmp short loc_00401520  ; jmp 0x401520
 
 loc_004014ee:
 xor edx, edx
-mov dx, word [ref_0049719c]  ; mov dx, word [0x49719c]
+mov dx, word [(_global_rich4_cfg+68)]  ; mov dx, word [0x49719c]
 cmp eax, edx
 jne short loc_00401523  ; jne 0x401523
 mov eax, dword [_current_player]  ; mov eax, dword [0x49910c]
@@ -845,7 +849,7 @@ mov dword [ref_0048a058], eax  ; mov dword [0x48a058], eax
 push ref_0048231a  ; push 0x48231a
 call fcn_00454176  ; call 0x454176
 add esp, 4
-call fcn_00411e8f  ; call 0x411e8f
+call _rich4_read_config  ; call 0x411e8f
 push 0
 mov ebx, dword [ref_0048a064]  ; mov ebx, dword [0x48a064]
 push ebx
@@ -1498,7 +1502,7 @@ xor ebx, ebx
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_004020f1  ; je 0x4020f1
 xor eax, eax
-mov al, byte [ref_00497158]  ; mov al, byte [0x497158]
+mov al, byte [(_global_rich4_cfg+0)]  ; mov al, byte [0x497158]
 mov al, byte [eax + ref_0046cb20]  ; mov al, byte [eax + 0x46cb20]
 and eax, 0xff
 mov edx, dword [ref_0046cb23]  ; mov edx, dword [0x46cb23]
@@ -2452,7 +2456,7 @@ add esp, 0xc
 push ref_004630e3  ; push 0x4630e3
 lea eax, [esp + 4]
 push eax
-call clib_fopen  ; call 0x4573bf
+call _clib_fopen  ; call 0x4573bf
 mov ebx, eax
 add esp, 8
 mov edi, eax
@@ -2470,38 +2474,38 @@ add esp, 0xc
 push ebx
 push 1
 push 4
-push ref_00497160  ; push 0x497160
-call clib_fread  ; call 0x4576d0
+push (_global_rich4_cfg+8)  ; push 0x497160
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 1
 push 2
 push ref_004991b8  ; push 0x4991b8
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 1
 push 2
 push ref_004991b6  ; push 0x4991b6
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 1
 push 4
 push _nplayers  ; push 0x499114
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 4
 push 0x68
 push (_players+0)  ; push 0x496b68
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499104  ; push 0x499104
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 xor ebx, ebx
 mov ecx, dword [_nplayers]  ; mov ecx, dword [0x499114]
@@ -2523,61 +2527,61 @@ push edi
 push 5
 push 0x10
 push ref_00498e28  ; push 0x498e28
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x2e
 push 0x18
 push ref_00496d08  ; push 0x496d08
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x3c
 push 1
 push ref_00499120  ; push 0x499120
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x3c
 push 1
 push ref_0049915c  ; push 0x49915c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x1e
 push 1
 push ref_00499198  ; push 0x499198
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 8
 push 1
 push ref_00497320  ; push 0x497320
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499100  ; push 0x499100
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x6c0
 push 4
 push ref_00497328  ; push 0x497328
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x30
 push 8
 push _player_stocks  ; push 0x4971a0
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0xc
 push 0x24
 push (_stocks_on_map+0)  ; push 0x496980
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 xor ebx, ebx
 
@@ -2607,157 +2611,157 @@ push edi
 push 0x1c
 push 0xc
 push ref_004967e0  ; push 0x4967e0
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push _current_player  ; push 0x49910c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499118  ; push 0x499118
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499110  ; push 0x499110
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_0049911c  ; push 0x49911c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499108  ; push 0x499108
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_0049908c  ; push 0x49908c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_004990e8  ; push 0x4990e8
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_004990e4  ; push 0x4990e4
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499084  ; push 0x499084
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_004990dc  ; push 0x4990dc
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_0049907c  ; push 0x49907c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499078  ; push 0x499078
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_004990ec  ; push 0x4990ec
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 4
 push 1
 push ref_004990f0  ; push 0x4990f0
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0xc
 push 1
 push ref_004990f4  ; push 0x4990f4
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499080  ; push 0x499080
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x24
 push 1
 push ref_004990b8  ; push 0x4990b8
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 8
 push 1
 push ref_00496b30  ; push 0x496b30
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 8
 push 1
 push ref_00496b60  ; push 0x496b60
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_004990e0  ; push 0x4990e0
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_004990b4  ; push 0x4990b4
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x24
 push 1
 push ref_00499090  ; push 0x499090
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 0x25
 push 1
 push ref_00496b38  ; push 0x496b38
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00499088  ; push 0x499088
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push edi
 push 1
 push 4
 push ref_00498e94  ; push 0x498e94
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 mov ebx, dword [ref_00498e94]  ; mov ebx, dword [0x498e94]
 push ebx
@@ -2769,7 +2773,7 @@ mov esi, dword [ref_00498e94]  ; mov esi, dword [0x498e94]
 push esi
 push 1
 push eax
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 mov eax, dword [ref_0047493c]  ; mov eax, dword [0x47493c]
 mov edx, dword [eax]
@@ -2819,7 +2823,7 @@ add esi, eax
 mov eax, ref_0048cb80  ; mov eax, 0x48cb80
 add eax, esi
 push eax
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 mov ecx, dword [ref_00498e94]  ; mov ecx, dword [0x498e94]
 push ecx
@@ -2832,7 +2836,7 @@ push eax
 push 1
 mov edx, dword [esi + ref_0048f294]  ; mov edx, dword [esi + 0x48f294]
 push edx
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 inc ebx
 jmp short loc_00402f1b  ; jmp 0x402f1b
@@ -2855,7 +2859,7 @@ jb short loc_00402fae  ; jb 0x402fae
 
 loc_00402fbe:
 push edi
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 mov eax, esi
 add esp, 0x28
@@ -2881,7 +2885,7 @@ add esp, 0xc
 push ref_004630e6  ; push 0x4630e6
 lea eax, [esp + 4]
 push eax
-call clib_fopen  ; call 0x4573bf
+call _clib_fopen  ; call 0x4573bf
 mov ebx, eax
 add esp, 8
 mov edi, eax
@@ -2890,259 +2894,259 @@ push 1
 push 4
 lea eax, [esp + 0x34]
 push eax
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
-push ref_00497160  ; push 0x497160
-call clib_fwrite  ; call 0x457ada
+push (_global_rich4_cfg+8)  ; push 0x497160
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 2
 push ref_004991b8  ; push 0x4991b8
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 2
 push ref_004991b6  ; push 0x4991b6
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push _nplayers  ; push 0x499114
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 4
 push 0x68
 push (_players+0)  ; push 0x496b68
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499104  ; push 0x499104
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 5
 push 0x10
 push ref_00498e28  ; push 0x498e28
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x2e
 push 0x18
 push ref_00496d08  ; push 0x496d08
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x3c
 push 1
 push ref_00499120  ; push 0x499120
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x3c
 push 1
 push ref_0049915c  ; push 0x49915c
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x1e
 push 1
 push ref_00499198  ; push 0x499198
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 8
 push 1
 push ref_00497320  ; push 0x497320
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499100  ; push 0x499100
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x6c0
 push 4
 push ref_00497328  ; push 0x497328
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x30
 push 8
 push _player_stocks  ; push 0x4971a0
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0xc
 push 0x24
 push (_stocks_on_map+0)  ; push 0x496980
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x1c
 push 0xc
 push ref_004967e0  ; push 0x4967e0
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push _current_player  ; push 0x49910c
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499118  ; push 0x499118
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499110  ; push 0x499110
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_0049911c  ; push 0x49911c
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499108  ; push 0x499108
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_0049908c  ; push 0x49908c
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_004990e8  ; push 0x4990e8
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_004990e4  ; push 0x4990e4
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499084  ; push 0x499084
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_004990dc  ; push 0x4990dc
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_0049907c  ; push 0x49907c
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499078  ; push 0x499078
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_004990ec  ; push 0x4990ec
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 4
 push 1
 push ref_004990f0  ; push 0x4990f0
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0xc
 push 1
 push ref_004990f4  ; push 0x4990f4
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499080  ; push 0x499080
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x24
 push 1
 push ref_004990b8  ; push 0x4990b8
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 8
 push 1
 push ref_00496b30  ; push 0x496b30
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 8
 push 1
 push ref_00496b60  ; push 0x496b60
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_004990e0  ; push 0x4990e0
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_004990b4  ; push 0x4990b4
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x24
 push 1
 push ref_00499090  ; push 0x499090
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 0x25
 push 1
 push ref_00496b38  ; push 0x496b38
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00499088  ; push 0x499088
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_00498e94  ; push 0x498e94
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push ebx
 mov ebx, dword [ref_00498e94]  ; mov ebx, dword [0x498e94]
@@ -3150,7 +3154,7 @@ push ebx
 push 1
 mov esi, dword [ref_0047493c]  ; mov esi, dword [0x47493c]
 push esi
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 xor ebx, ebx
 
@@ -3174,7 +3178,7 @@ add esi, eax
 mov eax, ref_0048cb80  ; mov eax, 0x48cb80
 add eax, esi
 push eax
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 push edi
 mov eax, dword [ref_00498e94]  ; mov eax, dword [0x498e94]
@@ -3182,14 +3186,14 @@ push eax
 push 1
 mov edx, dword [esi + ref_0048f294]  ; mov edx, dword [esi + 0x48f294]
 push edx
-call clib_fwrite  ; call 0x457ada
+call _clib_fwrite  ; call 0x457ada
 add esp, 0x10
 inc ebx
 jmp short loc_00403330  ; jmp 0x403330
 
 loc_00403386:
 push edi
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 add esp, 0x2c
 pop edi
@@ -3233,34 +3237,34 @@ push ebx
 push 1
 push 4
 push ref_0048a340  ; push 0x48a340
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 1
 push 2
 push ref_0048a33c  ; push 0x48a33c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 1
 push 2
 push ref_0048a330  ; push 0x48a330
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 1
 push 4
 push ref_0048a32c  ; push 0x48a32c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
 push 4
 push 0x68
 push ref_0048a188  ; push 0x48a188
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push ebx
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 push 1
 push 3
@@ -3412,7 +3416,7 @@ add esp, 0xc
 push ref_004630e3  ; push 0x4630e3
 lea eax, [esp + 4]
 push eax
-call clib_fopen  ; call 0x4573bf
+call _clib_fopen  ; call 0x4573bf
 mov ebx, eax
 add esp, 8
 test eax, eax
@@ -3422,12 +3426,12 @@ push 1
 push 4
 lea eax, [esp + 0x40]
 push eax
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 cmp dword [esp + 0x34], 0x26
 je near loc_004033e9  ; je 0x4033e9
 push ebx
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 jmp short loc_004035d9  ; jmp 0x4035d9
 
@@ -4082,7 +4086,7 @@ add esp, 0xc
 push ref_004630e3  ; push 0x4630e3
 lea eax, [esp + 4]
 push eax
-call clib_fopen  ; call 0x4573bf
+call _clib_fopen  ; call 0x4573bf
 mov ebx, eax
 add esp, 8
 mov dword [esp + 0x4c], eax
@@ -4093,14 +4097,14 @@ push 1
 push 4
 lea eax, [esp + 0x50]
 push eax
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 cmp dword [esp + 0x44], 0x26
 je short loc_00403e67  ; je 0x403e67
 push ebx
 
 loc_00403e5d:
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 jmp short loc_00403dfe  ; jmp 0x403dfe
 
@@ -4138,31 +4142,31 @@ push esi
 push 1
 push 4
 push ref_0048a340  ; push 0x48a340
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push esi
 push 1
 push 2
 push ref_0048a33c  ; push 0x48a33c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push esi
 push 1
 push 2
 push ref_0048a330  ; push 0x48a330
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push esi
 push 1
 push 4
 push ref_0048a32c  ; push 0x48a32c
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push esi
 push 4
 push 0x68
 push ref_0048a188  ; push 0x48a188
-call clib_fread  ; call 0x4576d0
+call _clib_fread  ; call 0x4576d0
 add esp, 0x10
 push 1
 push 3
@@ -7914,7 +7918,7 @@ jmp near loc_00406c48  ; jmp 0x406c48
 
 loc_00406d40:
 xor eax, eax
-mov ax, word [ref_00497178]  ; mov ax, word [0x497178]
+mov ax, word [(_global_rich4_cfg+32)]  ; mov ax, word [0x497178]
 cmp edx, eax
 jne near loc_00406c48  ; jne 0x406c48
 
@@ -18665,7 +18669,7 @@ ja near fcn_0040ece6  ; ja 0x40ece6
 jmp dword [edx*4 + ref_0040ea9b]  ; ujmp: jmp dword [edx*4 + 0x40ea9b]
 
 fcn_0040ec14:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040ec5e  ; je 0x40ec5e
 push 0
 push 0
@@ -18750,7 +18754,7 @@ pop ebx
 ret
 
 fcn_0040ecf1:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040ed3b  ; je 0x40ed3b
 push 0
 push 0
@@ -18803,7 +18807,7 @@ call fcn_0044f354  ; call 0x44f354
 jmp near loc_0040f14d  ; jmp 0x40f14d
 
 fcn_0040ed8f:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040ede7  ; je 0x40ede7
 push 0
 push 0
@@ -18866,7 +18870,7 @@ call fcn_0044f230  ; call 0x44f230
 jmp near loc_0040f14d  ; jmp 0x40f14d
 
 fcn_0040ee50:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040eea8  ; je 0x40eea8
 push 0
 push 0
@@ -18946,7 +18950,7 @@ or ah, 0x80
 push eax
 call fcn_0044ef41  ; call 0x44ef41
 add esp, 0xc
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040ef96  ; je 0x40ef96
 push 0
 push 0
@@ -19015,7 +19019,7 @@ or ah, 0x80
 push eax
 call fcn_0044ef41  ; call 0x44ef41
 add esp, 0xc
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040f05f  ; je 0x40f05f
 push 0
 push 0
@@ -19068,7 +19072,7 @@ or ah, 0x80
 push eax
 call fcn_0044ef41  ; call 0x44ef41
 add esp, 0xc
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040f10c  ; je 0x40f10c
 push 0
 push 0
@@ -19138,7 +19142,7 @@ or ah, 0x80
 push eax
 call fcn_0044ef41  ; call 0x44ef41
 add esp, 0xc
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040f1de  ; je 0x40f1de
 push 0
 push 0
@@ -19179,7 +19183,7 @@ push ref_004633d5  ; push 0x4633d5
 jmp near loc_0040f148  ; jmp 0x40f148
 
 fcn_0040f205:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je near fcn_0040ece6  ; je 0x40ece6
 push 0
 push 0
@@ -19209,7 +19213,7 @@ add esp, 4
 jmp near fcn_0040ece6  ; jmp 0x40ece6
 
 fcn_0040f258:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je near fcn_0040ece6  ; je 0x40ece6
 push 0
 push 0
@@ -19233,7 +19237,7 @@ push ref_00463419  ; push 0x463419
 jmp short loc_0040f24b  ; jmp 0x40f24b
 
 fcn_0040f2a0:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je near fcn_0040ece6  ; je 0x40ece6
 push 0
 push 0
@@ -19272,7 +19276,7 @@ or ah, 0x80
 push eax
 call fcn_0044ef41  ; call 0x44ef41
 add esp, 0xc
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0040f366  ; je 0x40f366
 push 0
 push 0
@@ -19575,7 +19579,7 @@ jne near loc_0040f826  ; jne 0x40f826
 mov eax, dword [ref_00499110]  ; mov eax, dword [0x499110]
 mov edx, dword [eax*4 + ref_004751f0]  ; mov edx, dword [eax*4 + 0x4751f0]
 push edx
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 push ecx
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -19633,7 +19637,7 @@ cmp byte [ebx + 0x19], 0
 jne short loc_0040f826  ; jne 0x40f826
 mov edx, dword [eax*4 + ref_004751f0]  ; mov edx, dword [eax*4 + 0x4751f0]
 push edx
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 push ecx
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -20723,7 +20727,7 @@ jmp short loc_004103e1  ; jmp 0x4103e1
 loc_00410402:
 mov dword [ref_00474d74], 0xffffffff  ; mov dword [0x474d74], 0xffffffff
 push 0x10
-push ref_00497158  ; push 0x497158
+push (_global_rich4_cfg+0)  ; push 0x497158
 push ref_0048bb48  ; push 0x48bb48
 call _memcpy  ; call 0x456de8
 add esp, 0xc
@@ -20922,7 +20926,7 @@ call dword [edx + 0x80]  ; ucall
 jmp near fcn_004104a5  ; jmp 0x4104a5
 
 fcn_00410668:
-cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
+cmp byte [(_global_rich4_cfg+2)], 0  ; cmp byte [0x49715a], 0
 je short loc_004106b0  ; je 0x4106b0
 lea edx, [esi - 0xe2]
 mov ebx, 0xf
@@ -21171,15 +21175,15 @@ jmp short loc_0041091a  ; jmp 0x41091a
 
 fcn_00410969:
 xor ebx, ebx
-mov bl, byte [ref_0049715a]  ; mov bl, byte [0x49715a]
-movzx esi, byte [ref_0049715d]  ; movzx esi, byte [0x49715d]
+mov bl, byte [(_global_rich4_cfg+2)]  ; mov bl, byte [0x49715a]
+movzx esi, byte [(_global_rich4_cfg+5)]  ; movzx esi, byte [0x49715d]
 push 0x10
 push ref_0048bb48  ; push 0x48bb48
-push ref_00497158  ; push 0x497158
+push (_global_rich4_cfg+0)  ; push 0x497158
 call _memcpy  ; call 0x456de8
 add esp, 0xc
-call fcn_00411f80  ; call 0x411f80
-cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
+call _rich4_write_config  ; call 0x411f80
+cmp byte [(_global_rich4_cfg+2)], 0  ; cmp byte [0x49715a], 0
 jne short loc_004109b5  ; jne 0x4109b5
 test ebx, ebx
 je short loc_004109b5  ; je 0x4109b5
@@ -21193,7 +21197,7 @@ call fcn_00454acb  ; call 0x454acb
 jmp short loc_004109e2  ; jmp 0x4109e2
 
 loc_004109b5:
-cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
+cmp byte [(_global_rich4_cfg+2)], 0  ; cmp byte [0x49715a], 0
 je short loc_004109e2  ; je 0x4109e2
 test ebx, ebx
 jne short loc_004109e2  ; jne 0x4109e2
@@ -21214,7 +21218,7 @@ loc_004109df:
 add esp, 4
 
 loc_004109e2:
-mov ch, byte [ref_0049715a]  ; mov ch, byte [0x49715a]
+mov ch, byte [(_global_rich4_cfg+2)]  ; mov ch, byte [0x49715a]
 test ch, ch
 je short loc_004109f9  ; je 0x4109f9
 xor eax, eax
@@ -21229,7 +21233,7 @@ call fcn_00402460  ; call 0x402460
 add esp, 4
 xor ebx, ebx
 xor eax, eax
-mov al, byte [ref_0049715d]  ; mov al, byte [0x49715d]
+mov al, byte [(_global_rich4_cfg+5)]  ; mov al, byte [0x49715d]
 cmp eax, esi
 je short loc_00410a15  ; je 0x410a15
 mov ebx, 0x8000
@@ -21909,7 +21913,7 @@ call fcn_00451e7e  ; call 0x451e7e
 add esp, 4
 mov dword [ref_0048bbae], eax  ; mov dword [0x48bbae], eax
 push 0x38
-push ref_00497168  ; push 0x497168
+push (_global_rich4_cfg+16)  ; push 0x497168
 push ref_0048bb10  ; push 0x48bb10
 call _memcpy  ; call 0x456de8
 add esp, 0xc
@@ -22273,7 +22277,7 @@ loc_0041173b:
 cmp eax, 0x64
 jne near loc_00411804  ; jne 0x411804
 push 0x38
-push ref_0047edc2  ; push 0x47edc2
+push _default_hotkeys  ; push 0x47edc2
 push ref_0048bb10  ; push 0x48bb10
 call _memcpy  ; call 0x456de8
 add esp, 0xc
@@ -22320,10 +22324,10 @@ call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0x38
 push ref_0048bb10  ; push 0x48bb10
-push ref_00497168  ; push 0x497168
+push (_global_rich4_cfg+16)  ; push 0x497168
 call _memcpy  ; call 0x456de8
 add esp, 0xc
-call fcn_00411f80  ; call 0x411f80
+call _rich4_write_config  ; call 0x411f80
 mov edi, dword [ref_0048bb92]  ; mov edi, dword [0x48bb92]
 push edi
 mov ebp, dword [ref_0048bb8e]  ; mov ebp, dword [0x48bb8e]
@@ -22547,7 +22551,7 @@ je short loc_00411a81  ; je 0x411a81
 mov dword [ref_0048bb50], eax  ; mov dword [0x48bb50], eax
 
 loc_00411a7c:
-mov dword [ref_00497160], eax  ; mov dword [0x497160], eax
+mov dword [(_global_rich4_cfg+8)], eax  ; mov dword [0x497160], eax
 
 loc_00411a81:
 add esp, 8
@@ -22585,7 +22589,7 @@ add edx, eax
 xor eax, eax
 mov al, byte [esp]
 add edx, eax
-mov dword [ref_00497160], edx  ; mov dword [0x497160], edx
+mov dword [(_global_rich4_cfg+8)], edx  ; mov dword [0x497160], edx
 mov byte [ref_0046caf8], 1  ; mov byte [0x46caf8], 1
 add esp, 8
 ret
@@ -22629,7 +22633,7 @@ pop ebx
 ret
 
 fcn_00411b46:
-call fcn_00411f80  ; call 0x411f80
+call _rich4_write_config  ; call 0x411f80
 mov byte [ref_0046caf9], 1  ; mov byte [0x46caf9], 1
 ret
 
@@ -22922,114 +22926,6 @@ pop esi
 pop ebx
 ret
 
-fcn_00411e8f:
-push ebx
-sub esp, 8
-push ref_00463764  ; push 0x463764
-push ref_00463767  ; push 0x463767
-call clib_fopen  ; call 0x4573bf
-mov ebx, eax
-add esp, 8
-test eax, eax
-je short loc_00411eda  ; je 0x411eda
-push eax
-push 1
-push 0x10
-push ref_00497158  ; push 0x497158
-call clib_fread  ; call 0x4576d0
-add esp, 0x10
-push ebx
-push 0x38
-push 1
-push ref_00497168  ; push 0x497168
-call clib_fread  ; call 0x4576d0
-add esp, 0x10
-push ebx
-call clib_fclose  ; call 0x4578c5
-add esp, 4
-jmp short loc_00411f1e  ; jmp 0x411f1e
-
-loc_00411eda:
-mov ah, 1
-mov byte [ref_00497158], ah  ; mov byte [0x497158], ah
-mov byte [ref_00497159], ah  ; mov byte [0x497159], ah
-mov dh, 4
-mov byte [ref_0049715a], dh  ; mov byte [0x49715a], dh
-mov byte [ref_0049715b], dh  ; mov byte [0x49715b], dh
-mov byte [ref_0049715c], ah  ; mov byte [0x49715c], ah
-mov byte [ref_0049715d], ah  ; mov byte [0x49715d], ah
-xor ch, ch
-mov byte [ref_00497164], ch  ; mov byte [0x497164], ch
-push 0x38
-push ref_0047edc2  ; push 0x47edc2
-push ref_00497168  ; push 0x497168
-call _memcpy  ; call 0x456de8
-add esp, 0xc
-
-loc_00411f1e:
-mov eax, esp
-push eax
-call _get_local_time  ; call 0x458331
-add esp, 4
-mov edx, dword [esp + 2]
-cmp dx, 0x7ce
-jae short loc_00411f46  ; jae 0x411f46
-mov word [esp + 2], 0x7ce
-mov dl, 1
-mov byte [esp + 1], dl
-mov byte [esp], dl
-jmp short loc_00411f5d  ; jmp 0x411f5d
-
-loc_00411f46:
-cmp dx, 0x7da
-jbe short loc_00411f5d  ; jbe 0x411f5d
-mov word [esp + 2], 0x7da
-mov al, 1
-mov byte [esp + 1], al
-mov byte [esp], al
-
-loc_00411f5d:
-xor ebx, ebx
-mov bx, word [esp + 2]
-mov eax, ebx
-shl eax, 0x10
-xor ebx, ebx
-mov bl, byte [esp + 1]
-shl ebx, 8
-add eax, ebx
-xor ebx, ebx
-mov bl, byte [esp]
-add eax, ebx
-jmp near loc_00411a7c  ; jmp 0x411a7c
-
-fcn_00411f80:
-push ebx
-push ref_00463771  ; push 0x463771
-push ref_00463767  ; push 0x463767
-call clib_fopen  ; call 0x4573bf
-mov ebx, eax
-add esp, 8
-test eax, eax
-je short loc_00411fc6  ; je 0x411fc6
-push eax
-push 1
-push 0x10
-push ref_00497158  ; push 0x497158
-call clib_fwrite  ; call 0x457ada
-add esp, 0x10
-push ebx
-push 0x38
-push 1
-push ref_00497168  ; push 0x497168
-call clib_fwrite  ; call 0x457ada
-add esp, 0x10
-push ebx
-call clib_fclose  ; call 0x4578c5
-add esp, 4
-
-loc_00411fc6:
-pop ebx
-ret
 
 ref_00411fc8:
 dd 0x00000003
@@ -27184,7 +27080,7 @@ sub esp, 0x80
 imul eax, dword [_current_player], 0x68  ; imul eax, dword [0x49910c], 0x68
 cmp byte [eax + (_players+21)], 1  ; cmp byte [eax + 0x496b7d], 1
 jne near loc_00415457  ; jne 0x415457
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je near loc_00415457  ; je 0x415457
 push ref_00475057  ; push 0x475057
 call fcn_00454176  ; call 0x454176
@@ -27390,7 +27286,7 @@ sub esp, 0x80
 imul eax, dword [_current_player], 0x68  ; imul eax, dword [0x49910c], 0x68
 cmp byte [eax + (_players+21)], 1  ; cmp byte [eax + 0x496b7d], 1
 jne near loc_00415457  ; jne 0x415457
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je near loc_00415457  ; je 0x415457
 push ref_0047509f  ; push 0x47509f
 call fcn_00454176  ; call 0x454176
@@ -27476,7 +27372,7 @@ sub esp, 0x80
 imul eax, dword [_current_player], 0x68  ; imul eax, dword [0x49910c], 0x68
 cmp byte [eax + (_players+21)], 1  ; cmp byte [eax + 0x496b7d], 1
 jne near loc_00415457  ; jne 0x415457
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je near loc_00415457  ; je 0x415457
 push ref_004750bf  ; push 0x4750bf
 call fcn_00454176  ; call 0x454176
@@ -28292,7 +28188,7 @@ movsd  ; movsd dword es:[edi], dword ptr [esi]
 movsd  ; movsd dword es:[edi], dword ptr [esi]
 movsd  ; movsd dword es:[edi], dword ptr [esi]
 movsd  ; movsd dword es:[edi], dword ptr [esi]
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 je near loc_004166ed  ; je 0x4166ed
 mov eax, dword [ref_00475110]  ; mov eax, dword [0x475110]
 and eax, 0xc
@@ -28855,7 +28751,7 @@ cmp dword [ebx + (_players+36)], 0  ; cmp dword [ebx + 0x496b8c], 0
 je near loc_00416064  ; je 0x416064
 mov ebp, dword [ebx + (_players+44)]  ; mov ebp, dword [ebx + 0x496b94]
 push ebp
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 push eax
 call fcn_004521aa  ; call 0x4521aa
 mov ebx, eax
@@ -28901,7 +28797,7 @@ mov ecx, 5
 mov edi, esp
 mov esi, ref_00415d1d  ; mov esi, 0x415d1d
 rep movsd  ; rep movsd dword es:[edi], dword ptr [esi]
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 jne near loc_004169b4  ; jne 0x4169b4
 test byte [ref_00475110], 4  ; test byte [0x475110], 4
 jne near loc_004169b4  ; jne 0x4169b4
@@ -29123,7 +29019,7 @@ push esi
 push edi
 push ebp
 sub esp, 0x44
-cmp byte [ref_0049715d], 1  ; cmp byte [0x49715d], 1
+cmp byte [(_global_rich4_cfg+5)], 1  ; cmp byte [0x49715d], 1
 je near loc_00416e65  ; je 0x416e65
 test byte [ref_00475110], 0x10  ; test byte [0x475110], 0x10
 jne near loc_00416e65  ; jne 0x416e65
@@ -29137,11 +29033,11 @@ push eax
 call dword [ebx + 0x64]  ; ucall
 mov eax, dword [ref_0048a08c]  ; mov eax, dword [0x48a08c]
 mov dword [ref_0046caf4], eax  ; mov dword [0x46caf4], eax
-cmp byte [ref_00497164], 0  ; cmp byte [0x497164], 0
+cmp byte [(_global_rich4_cfg+12)], 0  ; cmp byte [0x497164], 0
 je near loc_00416b4c  ; je 0x416b4c
-mov ebp, dword [ref_00497160]  ; mov ebp, dword [0x497160]
+mov ebp, dword [(_global_rich4_cfg+8)]  ; mov ebp, dword [0x497160]
 and ebp, 0xffffff00
-mov ebx, dword [ref_00497160]  ; mov ebx, dword [0x497160]
+mov ebx, dword [(_global_rich4_cfg+8)]  ; mov ebx, dword [0x497160]
 shr ebx, 8
 and ebx, 0xff
 dec ebx
@@ -29162,9 +29058,9 @@ mov ecx, dword [ref_0048a08c]  ; mov ecx, dword [0x48a08c]
 push ecx
 call fcn_004563f5  ; call 0x4563f5
 add esp, 0x10
-mov ebx, dword [ref_00497160]  ; mov ebx, dword [0x497160]
+mov ebx, dword [(_global_rich4_cfg+8)]  ; mov ebx, dword [0x497160]
 xor bl, bl
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 and eax, 0xff
 mov dword [esp + 0x40], eax
 or bl, 1
@@ -29251,13 +29147,13 @@ jmp near loc_00416aac  ; jmp 0x416aac
 
 loc_00416b4c:
 xor esi, esi
-mov edx, dword [ref_00497160]  ; mov edx, dword [0x497160]
+mov edx, dword [(_global_rich4_cfg+8)]  ; mov edx, dword [0x497160]
 push edx
 call fcn_004521f0  ; call 0x4521f0
 add esp, 4
 cmp eax, 0xffffffff
 jne short loc_00416baf  ; jne 0x416baf
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 shr eax, 8
 and eax, 0xff
 lea ebx, [eax - 1]
@@ -29334,7 +29230,7 @@ lea eax, [esp + 0x3c]
 push eax
 lea eax, [esp + 0x3c]
 push eax
-mov edi, dword [ref_00497160]  ; mov edi, dword [0x497160]
+mov edi, dword [(_global_rich4_cfg+8)]  ; mov edi, dword [0x497160]
 push edi
 call fcn_004520a6  ; call 0x4520a6
 add esp, 0xc
@@ -29394,7 +29290,7 @@ add esp, 0x14
 push 0xa
 lea eax, [esp + 4]
 push eax
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 and eax, 0xff
 push eax
 call fcn_00457d61  ; call 0x457d61
@@ -29419,7 +29315,7 @@ add esp, 0x14
 push 0xa
 lea eax, [esp + 4]
 push eax
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 shr eax, 0x10
 push eax
 call fcn_00457d61  ; call 0x457d61
@@ -29439,7 +29335,7 @@ push 0x101010
 push 0x1c
 call fcn_0044f9d8  ; call 0x44f9d8
 add esp, 0x14
-mov ebx, dword [ref_00497160]  ; mov ebx, dword [0x497160]
+mov ebx, dword [(_global_rich4_cfg+8)]  ; mov ebx, dword [0x497160]
 shr ebx, 8
 and ebx, 0xff
 push ebx
@@ -29511,7 +29407,7 @@ push esi
 push edi
 push ebp
 sub esp, 0x18
-movzx ebp, byte [ref_0049715d]  ; movzx ebp, byte [0x49715d]
+movzx ebp, byte [(_global_rich4_cfg+5)]  ; movzx ebp, byte [0x49715d]
 mov ebp, dword [ebp*4 + ref_004752aa]  ; mov ebp, dword [ebp*4 + 0x4752aa]
 test ebp, ebp
 je near loc_00417179  ; je 0x417179
@@ -31331,7 +31227,7 @@ call fcn_0040dd1f  ; call 0x40dd1f
 jmp near loc_00418c30  ; jmp 0x418c30
 
 loc_004182fa:
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 je short loc_0041835f  ; je 0x41835f
 cmp esi, 0x268
 jl short loc_0041835f  ; jl 0x41835f
@@ -31358,7 +31254,7 @@ call fcn_00415f69  ; call 0x415f69
 jmp near loc_004182ad  ; jmp 0x4182ad
 
 loc_0041835f:
-cmp byte [ref_0049715d], 1  ; cmp byte [0x49715d], 1
+cmp byte [(_global_rich4_cfg+5)], 1  ; cmp byte [0x49715d], 1
 je near loc_00418415  ; je 0x418415
 cmp esi, 0x1b8
 jle near loc_00418415  ; jle 0x418415
@@ -31372,14 +31268,14 @@ cmp esi, 0x1c0
 jl short loc_004183d8  ; jl 0x4183d8
 cmp esi, 0x1da
 jg short loc_004183d8  ; jg 0x4183d8
-cmp byte [ref_00497164], 0  ; cmp byte [0x497164], 0
+cmp byte [(_global_rich4_cfg+12)], 0  ; cmp byte [0x497164], 0
 je short loc_004183d8  ; je 0x4183d8
 push 0
 push ref_00482322  ; push 0x482322
 call fcn_004542ce  ; call 0x4542ce
 add esp, 8
 xor bl, bl
-mov byte [ref_00497164], bl  ; mov byte [0x497164], bl
+mov byte [(_global_rich4_cfg+12)], bl  ; mov byte [0x497164], bl
 
 loc_004183cc:
 push 1
@@ -31391,17 +31287,17 @@ cmp esi, 0x1de
 jl near loc_00418c30  ; jl 0x418c30
 cmp esi, 0x1f8
 jg near loc_00418c30  ; jg 0x418c30
-cmp byte [ref_00497164], 0  ; cmp byte [0x497164], 0
+cmp byte [(_global_rich4_cfg+12)], 0  ; cmp byte [0x497164], 0
 jne near loc_00418c30  ; jne 0x418c30
 push 0
 push ref_00482322  ; push 0x482322
 call fcn_004542ce  ; call 0x4542ce
 add esp, 8
-mov byte [ref_00497164], 1  ; mov byte [0x497164], 1
+mov byte [(_global_rich4_cfg+12)], 1  ; mov byte [0x497164], 1
 jmp short loc_004183cc  ; jmp 0x4183cc
 
 loc_00418415:
-mov ch, byte [ref_0049715d]  ; mov ch, byte [0x49715d]
+mov ch, byte [(_global_rich4_cfg+5)]  ; mov ch, byte [0x49715d]
 test ch, ch
 je near loc_00418670  ; je 0x418670
 cmp esi, 0x1b8
@@ -31450,7 +31346,7 @@ mov dword [esp + 0x14], edx
 add eax, 0x1d4
 mov dword [esp + 0x1c], eax
 xor edx, edx
-mov dl, byte [ref_0049715d]  ; mov dl, byte [0x49715d]
+mov dl, byte [(_global_rich4_cfg+5)]  ; mov dl, byte [0x49715d]
 mov eax, dword [edx*4 + ref_004752aa]  ; mov eax, dword [edx*4 + 0x4752aa]
 add eax, 3
 mov dword [esp + 0x18], eax
@@ -31664,7 +31560,7 @@ mov dword [esp + 0x14], edx
 add eax, 0x1d4
 mov dword [esp + 0x1c], eax
 xor edx, edx
-mov dl, byte [ref_0049715d]  ; mov dl, byte [0x49715d]
+mov dl, byte [(_global_rich4_cfg+5)]  ; mov dl, byte [0x49715d]
 mov eax, dword [edx*4 + ref_004752aa]  ; mov eax, dword [edx*4 + 0x4752aa]
 add eax, 3
 mov dword [esp + 0x18], eax
@@ -31767,7 +31663,7 @@ cmp byte [ref_0046cafd], 0  ; cmp byte [0x46cafd], 0
 je near loc_00418c30  ; je 0x418c30
 cmp dword [ref_0048be18], 0  ; cmp dword [0x48be18], 0
 je near loc_00418c30  ; je 0x418c30
-mov cl, byte [ref_0049715d]  ; mov cl, byte [0x49715d]
+mov cl, byte [(_global_rich4_cfg+5)]  ; mov cl, byte [0x49715d]
 test cl, cl
 je near loc_00418c30  ; je 0x418c30
 cmp esi, 0x1b8
@@ -31780,7 +31676,7 @@ jle short loc_004188e5  ; jle 0x4188e5
 mov ebx, 1
 
 loc_004188e5:
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 jne short loc_004188fb  ; jne 0x4188fb
 cmp edx, 0x50
 jle short loc_004188fb  ; jle 0x4188fb
@@ -31805,7 +31701,7 @@ xor edx, edx
 mov dx, bx
 cmp byte [ref_0048be29], 0  ; cmp byte [0x48be29], 0
 je near loc_00418a73  ; je 0x418a73
-cmp byte [ref_0049715d], 1  ; cmp byte [0x49715d], 1
+cmp byte [(_global_rich4_cfg+5)], 1  ; cmp byte [0x49715d], 1
 jne short loc_0041895b  ; jne 0x41895b
 cmp esi, 0x1b8
 jle short loc_0041895b  ; jle 0x41895b
@@ -31816,7 +31712,7 @@ lea esi, [edx - 0x118]
 jmp short loc_0041899b  ; jmp 0x41899b
 
 loc_0041895b:
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 jne short loc_00418984  ; jne 0x418984
 cmp esi, 0x1b8
 jle short loc_00418984  ; jle 0x418984
@@ -31998,7 +31894,7 @@ add esp, 4
 push 0
 call fcn_00415e70  ; call 0x415e70
 add esp, 4
-mov al, byte [ref_0049715d]  ; mov al, byte [0x49715d]
+mov al, byte [(_global_rich4_cfg+5)]  ; mov al, byte [0x49715d]
 cmp al, 1
 jb short loc_00418bde  ; jb 0x418bde
 jbe short loc_00418bf5  ; jbe 0x418bf5
@@ -32398,7 +32294,7 @@ call fcn_0041c84f  ; call 0x41c84f
 add esp, 4
 test ebx, ebx
 je short loc_00419058  ; je 0x419058
-cmp byte [ref_0049715c], 0  ; cmp byte [0x49715c], 0
+cmp byte [(_global_rich4_cfg+4)], 0  ; cmp byte [0x49715c], 0
 je short loc_00419058  ; je 0x419058
 push 0
 call fcn_00402fd1  ; call 0x402fd1
@@ -32890,7 +32786,7 @@ call fcn_00450cda  ; call 0x450cda
 add esp, 8
 push 0xffffffffffffffff
 xor eax, eax
-mov al, byte [ref_00497158]  ; mov al, byte [0x497158]
+mov al, byte [(_global_rich4_cfg+0)]  ; mov al, byte [0x497158]
 mov eax, dword [eax*4 + ref_00475264]  ; mov eax, dword [eax*4 + 0x475264]
 shl eax, 4
 inc eax
@@ -33858,7 +33754,7 @@ test eax, eax
 je short loc_0041a12b  ; je 0x41a12b
 mov edx, dword [eax*4 + ref_004751f0]  ; mov edx, dword [eax*4 + 0x4751f0]
 push edx
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 push ecx
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -34509,7 +34405,7 @@ test ebx, ebx
 je short loc_0041a97b  ; je 0x41a97b
 mov esi, dword [ebx*4 + ref_004751f0]  ; mov esi, dword [ebx*4 + 0x4751f0]
 push esi
-mov edi, dword [ref_00497160]  ; mov edi, dword [0x497160]
+mov edi, dword [(_global_rich4_cfg+8)]  ; mov edi, dword [0x497160]
 push edi
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -37547,7 +37443,7 @@ call fcn_00454d91  ; call 0x454d91
 add esp, 4
 
 loc_0041cf9c:
-push ref_00497160  ; push 0x497160
+push (_global_rich4_cfg+8)  ; push 0x497160
 call fcn_00452117  ; call 0x452117
 add esp, 4
 mov edi, eax
@@ -37628,7 +37524,7 @@ call clib_srand  ; call 0x456f50
 add esp, 4
 call fcn_004291d6  ; call 0x4291d6
 call fcn_00452444  ; call 0x452444
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 and eax, 0xff
 cmp eax, 0xf
 jne short loc_0041d099  ; jne 0x41d099
@@ -37689,7 +37585,7 @@ mov byte [eax + 0x17], 0
 
 loc_0041d12d:
 mov edx, dword [eax + 0x30]
-cmp edx, dword [ref_00497160]  ; cmp edx, dword [0x497160]
+cmp edx, dword [(_global_rich4_cfg+8)]  ; cmp edx, dword [0x497160]
 jne short loc_0041d148  ; jne 0x41d148
 mov byte [eax + 0x19], 0
 mov dword [eax + 0x30], 0
@@ -37719,7 +37615,7 @@ mov byte [eax + 0x1c], 0
 
 loc_0041d179:
 mov edx, dword [eax + 0x34]
-cmp edx, dword [ref_00497160]  ; cmp edx, dword [0x497160]
+cmp edx, dword [(_global_rich4_cfg+8)]  ; cmp edx, dword [0x497160]
 jne short loc_0041d194  ; jne 0x41d194
 mov byte [eax + 0x19], 0
 mov dword [eax + 0x34], 0
@@ -38003,7 +37899,7 @@ cmp dword [_callbackSize], 1  ; cmp dword [0x46cad8], 1
 jg short loc_0041d474  ; jg 0x41d474
 mov ebx, dword [_current_player]  ; mov ebx, dword [0x49910c]
 mov dword [_current_player], edx  ; mov dword [0x49910c], edx
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 je short loc_0041d464  ; je 0x41d464
 push 1
 call fcn_00415f69  ; call 0x415f69
@@ -47797,7 +47693,7 @@ or word [ref_0048c285], dx  ; or word [0x48c285], dx
 
 loc_00424398:
 xor edx, edx
-mov dx, word [ref_0049719a]  ; mov dx, word [0x49719a]
+mov dx, word [(_global_rich4_cfg+66)]  ; mov dx, word [0x49719a]
 xor eax, eax
 mov ax, word [ref_0048c285]  ; mov ax, word [0x48c285]
 cmp eax, edx
@@ -47812,7 +47708,7 @@ jmp short loc_004243e6  ; jmp 0x4243e6
 
 loc_004243c4:
 xor edx, edx
-mov dx, word [ref_0049719c]  ; mov dx, word [0x49719c]
+mov dx, word [(_global_rich4_cfg+68)]  ; mov dx, word [0x49719c]
 cmp eax, edx
 jne short loc_004243ed  ; jne 0x4243ed
 mov byte [ref_0048c284], 6  ; mov byte [0x48c284], 6
@@ -50137,7 +50033,7 @@ mov eax, edx
 shl eax, 2
 sub eax, edx
 shl eax, 5
-mov esi, dword [eax + ebx*8 + ref_00497198]  ; mov esi, dword [eax + ebx*8 + 0x497198]
+mov esi, dword [eax + ebx*8 + (_global_rich4_cfg+64)]  ; mov esi, dword [eax + ebx*8 + 0x497198]
 push esi
 call fcn_00453544  ; call 0x453544
 mov ebx, eax
@@ -50750,7 +50646,7 @@ or word [ref_0048c2bd], dx  ; or word [0x48c2bd], dx
 
 loc_004266c1:
 xor edx, edx
-mov dx, word [ref_0049719a]  ; mov dx, word [0x49719a]
+mov dx, word [(_global_rich4_cfg+66)]  ; mov dx, word [0x49719a]
 xor eax, eax
 mov ax, word [ref_0048c2bd]  ; mov ax, word [0x48c2bd]
 cmp eax, edx
@@ -50760,7 +50656,7 @@ jmp short loc_004266e9  ; jmp 0x4266e9
 
 loc_004266da:
 xor edx, edx
-mov dx, word [ref_0049719c]  ; mov dx, word [0x49719c]
+mov dx, word [(_global_rich4_cfg+68)]  ; mov dx, word [0x49719c]
 cmp eax, edx
 jne short loc_004266f9  ; jne 0x4266f9
 push 1
@@ -53804,7 +53700,7 @@ push ebx
 xor ebx, ebx
 cmp dword [ref_004990dc], 0  ; cmp dword [0x4990dc], 0
 jne short loc_00428d21  ; jne 0x428d21
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 push ecx
 call fcn_004523d5  ; call 0x4523d5
 add esp, 4
@@ -56643,7 +56539,7 @@ mov eax, ecx
 shl eax, 2
 sub eax, ecx
 shl eax, 5
-cmp dword [eax + ebx*8 + ref_00497198], 0  ; cmp dword [eax + ebx*8 + 0x497198], 0
+cmp dword [eax + ebx*8 + (_global_rich4_cfg+64)], 0  ; cmp dword [eax + ebx*8 + 0x497198], 0
 je near loc_0042b0d3  ; je 0x42b0d3
 dec edx
 mov eax, edx
@@ -56670,7 +56566,7 @@ mov eax, edx
 shl eax, 2
 sub eax, edx
 shl eax, 5
-mov ebp, dword [ecx + eax + ref_00497198]  ; mov ebp, dword [ecx + eax + 0x497198]
+mov ebp, dword [ecx + eax + (_global_rich4_cfg+64)]  ; mov ebp, dword [ecx + eax + 0x497198]
 push ebp
 call fcn_00453544  ; call 0x453544
 mov ebx, eax
@@ -57950,7 +57846,7 @@ mov edx, dword [ebx + (_players+44)]  ; mov edx, dword [ebx + 0x496b94]
 test edx, edx
 je short loc_0042bf6e  ; je 0x42bf6e
 push edx
-mov ebx, dword [ref_00497160]  ; mov ebx, dword [0x497160]
+mov ebx, dword [(_global_rich4_cfg+8)]  ; mov ebx, dword [0x497160]
 push ebx
 call fcn_004521aa  ; call 0x4521aa
 add esp, 8
@@ -58566,7 +58462,7 @@ mov dword [esp + 0xd0], edx
 imul ebx, ebp, 0x68
 mov ecx, dword [ebx + (_players+44)]  ; mov ecx, dword [ebx + 0x496b94]
 push ecx
-mov esi, dword [ref_00497160]  ; mov esi, dword [0x497160]
+mov esi, dword [(_global_rich4_cfg+8)]  ; mov esi, dword [0x497160]
 push esi
 call fcn_004521aa  ; call 0x4521aa
 add esp, 8
@@ -58643,7 +58539,7 @@ mov dword [esp + 0xf8], eax
 fild dword [esp + 0xf8]
 fdivrp st1  ; fdivrp st(1)
 fstp dword [esp + 0xd8]
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 and ecx, 0xff
 mov edx, dword [ref_004990e8]  ; mov edx, dword [0x4990e8]
 mov eax, edx
@@ -59552,7 +59448,7 @@ mov byte [ref_0048c347], bl  ; mov byte [0x48c347], bl
 xor bh, bh
 mov byte [ref_0048c348], bh  ; mov byte [0x48c348], bh
 mov dword [ref_0048c343], ebp  ; mov dword [0x48c343], ebp
-mov al, byte [ref_00497159]  ; mov al, byte [0x497159]
+mov al, byte [(_global_rich4_cfg+1)]  ; mov al, byte [0x497159]
 xor al, 1
 mov byte [ref_0048c349], al  ; mov byte [0x48c349], al
 mov byte [ref_0048c34a], al  ; mov byte [0x48c34a], al
@@ -62416,7 +62312,7 @@ call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
 jmp short loc_0042f90c  ; jmp 0x42f90c
 
 loc_0042f8f6:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0042f905  ; je 0x42f905
 push 0
 push 1
@@ -63136,7 +63032,7 @@ call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
 jmp near loc_004301db  ; jmp 0x4301db
 
 loc_004301b0:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_004301d4  ; je 0x4301d4
 mov byte [ref_0048c37b], 1  ; mov byte [0x48c37b], 1
 mov edx, dword [ref_00475610]  ; mov edx, dword [0x475610]
@@ -66114,7 +66010,7 @@ mov byte [ref_0048c3a1], cl  ; mov byte [0x48c3a1], cl
 mov byte [ref_0048c3a2], cl  ; mov byte [0x48c3a2], cl
 mov byte [ref_0048c3a3], cl  ; mov byte [0x48c3a3], cl
 mov byte [ref_0048c3a4], cl  ; mov byte [0x48c3a4], cl
-mov al, byte [ref_00497159]  ; mov al, byte [0x497159]
+mov al, byte [(_global_rich4_cfg+1)]  ; mov al, byte [0x497159]
 xor al, 1
 mov byte [ref_0048c3a5], al  ; mov byte [0x48c3a5], al
 call fcn_00432511  ; call 0x432511
@@ -67796,7 +67692,7 @@ imul ebx, esi, 0x68
 cmp dword [ebx + (_players+44)], 0  ; cmp dword [ebx + 0x496b94], 0
 jne short loc_00433bd4  ; jne 0x433bd4
 push 0x5a
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 push ecx
 call fcn_0045218f  ; call 0x45218f
 add esp, 8
@@ -68094,13 +67990,13 @@ push esi
 push edi
 push ebp
 sub esp, 0x88
-mov edx, dword [ref_00497160]  ; mov edx, dword [0x497160]
+mov edx, dword [(_global_rich4_cfg+8)]  ; mov edx, dword [0x497160]
 push edx
 call fcn_004521f0  ; call 0x4521f0
 add esp, 4
 cmp eax, 0xffffffff
 jne short loc_00433f81  ; jne 0x433f81
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 shr eax, 8
 and eax, 0xff
 dec eax
@@ -68151,7 +68047,7 @@ add esp, 0x14
 push 0xa
 lea eax, [esp + 4]
 push eax
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 and eax, 0xff
 push eax
 call fcn_00457d61  ; call 0x457d61
@@ -68176,7 +68072,7 @@ lea eax, [esp + 0x80]
 push eax
 lea eax, [esp + 0x88]
 push eax
-mov ebp, dword [ref_00497160]  ; mov ebp, dword [0x497160]
+mov ebp, dword [(_global_rich4_cfg+8)]  ; mov ebp, dword [0x497160]
 push ebp
 call fcn_004520a6  ; call 0x4520a6
 add esp, 0xc
@@ -68200,7 +68096,7 @@ add esp, 0x14
 push 0xa
 lea eax, [esp + 4]
 push eax
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 shr eax, 0x10
 push eax
 call fcn_00457d61  ; call 0x457d61
@@ -68221,7 +68117,7 @@ push 0x101010
 push 0x1c
 call fcn_0044f9d8  ; call 0x44f9d8
 add esp, 0x14
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 shr eax, 8
 and eax, 0xff
 push eax
@@ -68252,7 +68148,7 @@ add esp, 0x14
 imul eax, dword [_current_player], 0x68  ; imul eax, dword [0x49910c], 0x68
 mov ecx, dword [eax + (_players+44)]  ; mov ecx, dword [eax + 0x496b94]
 push ecx
-mov ebx, dword [ref_00497160]  ; mov ebx, dword [0x497160]
+mov ebx, dword [(_global_rich4_cfg+8)]  ; mov ebx, dword [0x497160]
 push ebx
 call fcn_004521aa  ; call 0x4521aa
 add esp, 8
@@ -69598,7 +69494,7 @@ call fcn_00440cac  ; call 0x440cac
 add esp, 8
 
 loc_00435200:
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0043521c  ; je 0x43521c
 mov byte [ref_0048c3dd], 1  ; mov byte [0x48c3dd], 1
 mov esi, dword [ref_00475830]  ; mov esi, dword [0x475830]
@@ -71176,7 +71072,7 @@ cmp dword [eax + (_players+36)], 0  ; cmp dword [eax + 0x496b8c], 0
 je near loc_00436893  ; je 0x436893
 mov esi, dword [eax + (_players+44)]  ; mov esi, dword [eax + 0x496b94]
 push esi
-mov edi, dword [ref_00497160]  ; mov edi, dword [0x497160]
+mov edi, dword [(_global_rich4_cfg+8)]  ; mov edi, dword [0x497160]
 push edi
 call fcn_004521aa  ; call 0x4521aa
 add esp, 8
@@ -71379,7 +71275,7 @@ push edi
 imul ebx, dword [_current_player], 0x68  ; imul ebx, dword [0x49910c], 0x68
 mov ecx, dword [ebx + (_players+44)]  ; mov ecx, dword [ebx + 0x496b94]
 push ecx
-mov ebx, dword [ref_00497160]  ; mov ebx, dword [0x497160]
+mov ebx, dword [(_global_rich4_cfg+8)]  ; mov ebx, dword [0x497160]
 push ebx
 call fcn_004521aa  ; call 0x4521aa
 mov ebx, eax
@@ -72678,7 +72574,7 @@ push eax
 call fcn_00450441  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c3f4], eax  ; mov dword [0x48c3f4], eax
-cmp byte [ref_0049715d], 2  ; cmp byte [0x49715d], 2
+cmp byte [(_global_rich4_cfg+5)], 2  ; cmp byte [0x49715d], 2
 je short loc_00437a6f  ; je 0x437a6f
 mov eax, dword [_current_player]  ; mov eax, dword [0x49910c]
 mov dl, byte [eax + ref_0048be24]  ; mov dl, byte [eax + 0x48be24]
@@ -72722,7 +72618,7 @@ mov byte [ref_0046cb00], bl  ; mov byte [0x46cb00], bl
 jmp near loc_00437c1c  ; jmp 0x437c1c
 
 loc_00437acd:
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 and ecx, 0xff
 mov ebx, dword [edx + (_players+28)]  ; mov ebx, dword [edx + 0x496b84]
 add ebx, dword [edx + (_players+32)]  ; add ebx, dword [edx + 0x496b88]
@@ -73117,7 +73013,7 @@ ret 0x10
 
 loc_00437f32:
 mov byte [ref_0048c42a], 1  ; mov byte [0x48c42a], 1
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_00437f23  ; je 0x437f23
 push ref_00464d60  ; push 0x464d60
 call fcn_0044ecb6  ; call 0x44ecb6
@@ -73341,7 +73237,7 @@ call fcn_00437d1a  ; call 0x437d1a
 mov byte [ref_0048c42f], al  ; mov byte [0x48c42f], al
 call fcn_00437dfe  ; call 0x437dfe
 mov byte [ref_0048c430], al  ; mov byte [0x48c430], al
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0043827e  ; je 0x43827e
 mov ch, byte [ref_0048c42f]  ; mov ch, byte [0x48c42f]
 cmp al, ch
@@ -78600,7 +78496,7 @@ cmp byte [edx + 0x19], 0
 jne short loc_0043c7cc  ; jne 0x43c7cc
 mov ebp, dword [eax + ref_004751f0]  ; mov ebp, dword [eax + 0x4751f0]
 push ebp
-mov eax, dword [ref_00497160]  ; mov eax, dword [0x497160]
+mov eax, dword [(_global_rich4_cfg+8)]  ; mov eax, dword [0x497160]
 push eax
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -78619,7 +78515,7 @@ cmp byte [edx + 0x19], 0
 jne short loc_0043c807  ; jne 0x43c807
 mov ebx, dword [eax + ref_004751f0]  ; mov ebx, dword [eax + 0x4751f0]
 push ebx
-mov esi, dword [ref_00497160]  ; mov esi, dword [0x497160]
+mov esi, dword [(_global_rich4_cfg+8)]  ; mov esi, dword [0x497160]
 push esi
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -79816,7 +79712,7 @@ call fcn_0040fc00  ; call 0x40fc00
 add esp, 4
 mov eax, dword [esp + 0x14]
 mov byte [eax + ref_00496b30], 1  ; mov byte [eax + 0x496b30], 1
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0043d6d6  ; je 0x43d6d6
 push 0
 push 0
@@ -81678,7 +81574,7 @@ call fcn_0040fc00  ; call 0x40fc00
 add esp, 4
 mov eax, dword [esp + 0x14]
 mov byte [eax + ref_00496b60], 1  ; mov byte [eax + 0x496b60], 1
-cmp byte [ref_00497159], 0  ; cmp byte [0x497159], 0
+cmp byte [(_global_rich4_cfg+1)], 0  ; cmp byte [0x497159], 0
 je short loc_0043ed85  ; je 0x43ed85
 push 0
 push 0
@@ -86363,7 +86259,7 @@ test edx, edx
 je short loc_0044246f  ; je 0x44246f
 mov ecx, dword [edx*4 + ref_004751f0]  ; mov ecx, dword [edx*4 + 0x4751f0]
 push ecx
-mov ebp, dword [ref_00497160]  ; mov ebp, dword [0x497160]
+mov ebp, dword [(_global_rich4_cfg+8)]  ; mov ebp, dword [0x497160]
 push ebp
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -86476,7 +86372,7 @@ test edx, edx
 je near loc_0044246f  ; je 0x44246f
 mov ecx, dword [edx*4 + ref_004751f0]  ; mov ecx, dword [edx*4 + 0x4751f0]
 push ecx
-mov ebp, dword [ref_00497160]  ; mov ebp, dword [0x497160]
+mov ebp, dword [(_global_rich4_cfg+8)]  ; mov ebp, dword [0x497160]
 push ebp
 call fcn_004521cb  ; call 0x4521cb
 add esp, 8
@@ -90342,9 +90238,9 @@ shl eax, 5
 mov edx, ebx
 shl edx, 3
 add eax, edx
-cmp dword [eax + ref_00497198], 0  ; cmp dword [eax + 0x497198], 0
+cmp dword [eax + (_global_rich4_cfg+64)], 0  ; cmp dword [eax + 0x497198], 0
 je short loc_004451cf  ; je 0x4451cf
-fild dword [eax + ref_00497198]  ; fild dword [eax + 0x497198]
+fild dword [eax + (_global_rich4_cfg+64)]  ; fild dword [eax + 0x497198]
 fmul dword [esp + 0xc4]
 fdiv dword [ref_004653bc]  ; fdiv dword [0x4653bc]
 sub esp, 8
@@ -94378,7 +94274,7 @@ mov edx, eax
 shl eax, 3
 add eax, edx
 mov dword [eax + ref_0048cb80], 1  ; mov dword [eax + 0x48cb80], 1
-mov edx, dword [ref_00497160]  ; mov edx, dword [0x497160]
+mov edx, dword [(_global_rich4_cfg+8)]  ; mov edx, dword [0x497160]
 mov dword [eax + ref_0048cb84], edx  ; mov dword [eax + 0x48cb84], edx
 push 0x1a0
 push (_players+0)  ; push 0x496b68
@@ -94744,7 +94640,7 @@ ret
 
 loc_00448577:
 mov edx, dword [eax + ref_0048cb84]  ; mov edx, dword [eax + 0x48cb84]
-mov dword [ref_00497160], edx  ; mov dword [0x497160], edx
+mov dword [(_global_rich4_cfg+8)], edx  ; mov dword [0x497160], edx
 push 0x1a0
 add eax, ref_0048cb80  ; add eax, 0x48cb80
 add eax, 8
@@ -103356,7 +103252,7 @@ or word [ref_0048c600], cx  ; or word [0x48c600], cx
 
 loc_0044ea7c:
 xor edx, edx
-mov dx, word [ref_0049719a]  ; mov dx, word [0x49719a]
+mov dx, word [(_global_rich4_cfg+66)]  ; mov dx, word [0x49719a]
 xor eax, eax
 mov ax, word [ref_0048c600]  ; mov ax, word [0x48c600]
 cmp eax, edx
@@ -103370,7 +103266,7 @@ jmp short loc_0044ea31  ; jmp 0x44ea31
 
 loc_0044eaa4:
 xor edx, edx
-mov dx, word [ref_0049719c]  ; mov dx, word [0x49719c]
+mov dx, word [(_global_rich4_cfg+68)]  ; mov dx, word [0x49719c]
 cmp eax, edx
 jne near loc_0044e586  ; jne 0x44e586
 push 0
@@ -103687,7 +103583,7 @@ test ecx, ecx
 jne short loc_0044ee76  ; jne 0x44ee76
 
 loc_0044ee63:
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je short loc_0044ee76  ; je 0x44ee76
 call fcn_004544b9  ; call 0x4544b9
 mov dword [ref_004762c4], eax  ; mov dword [0x4762c4], eax
@@ -105457,7 +105353,7 @@ jmp near loc_004502f6  ; jmp 0x4502f6
 loc_00450187:
 push ref_004660c4  ; push 0x4660c4
 push ref_004660c7  ; push 0x4660c7
-call clib_fopen  ; call 0x4573bf
+call _clib_fopen  ; call 0x4573bf
 add esp, 8
 test eax, eax
 jne near loc_00450234  ; jne 0x450234
@@ -105482,14 +105378,14 @@ add esp, 0xc
 push ref_004660c4  ; push 0x4660c4
 lea eax, [esp + 4]
 push eax
-call clib_fopen  ; call 0x4573bf
+call _clib_fopen  ; call 0x4573bf
 add esp, 8
 test eax, eax
 je short loc_004501fc  ; je 0x4501fc
 mov dl, byte [esp + ebx + 0x20]
 mov byte [ref_00476374], dl  ; mov byte [0x476374], dl
 push eax
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 mov dword [esp + 0x40], 1
 
@@ -105516,7 +105412,7 @@ jmp near loc_004502f1  ; jmp 0x4502f1
 
 loc_00450234:
 push eax
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 xor esi, esi
 mov dword [esp + 0x40], esi
@@ -105540,7 +105436,7 @@ add esp, 0xc
 push ref_004660c4  ; push 0x4660c4
 lea eax, [esp + 4]
 push eax
-call clib_fopen  ; call 0x4573bf
+call _clib_fopen  ; call 0x4573bf
 mov esi, eax
 add esp, 8
 test eax, eax
@@ -105555,7 +105451,7 @@ call fcn_00458532  ; call 0x458532
 mov edi, eax
 add esp, 4
 push esi
-call clib_fclose  ; call 0x4578c5
+call _clib_fclose  ; call 0x4578c5
 add esp, 4
 cmp edi, 0x2625a00
 nop
@@ -108957,7 +108853,7 @@ push ebp
 sub esp, 0x9c
 mov dword [esp + 0x94], 0xffffffff
 xor ebx, ebx
-mov ecx, dword [ref_00497160]  ; mov ecx, dword [0x497160]
+mov ecx, dword [(_global_rich4_cfg+8)]  ; mov ecx, dword [0x497160]
 push ecx
 call fcn_004521f0  ; call 0x4521f0
 mov edi, eax
@@ -108979,12 +108875,12 @@ sub eax, edi
 cmp byte [ebp + eax*4 + ref_0047ff4f], 0  ; cmp byte [ebp + eax*4 + 0x47ff4f], 0
 je near loc_00452788  ; je 0x452788
 xor eax, eax
-mov al, byte [ref_0049715d]  ; mov al, byte [0x49715d]
+mov al, byte [(_global_rich4_cfg+5)]  ; mov al, byte [0x49715d]
 mov dword [esp + 0x98], eax
 cmp al, 1
 jne short loc_004524c3  ; jne 0x4524c3
 xor cl, cl
-mov byte [ref_0049715d], cl  ; mov byte [0x49715d], cl
+mov byte [(_global_rich4_cfg+5)], cl  ; mov byte [0x49715d], cl
 
 loc_004524c3:
 push 1
@@ -109202,7 +109098,7 @@ loc_00452761:
 cmp dword [esp + 0x98], 1
 jne short loc_00452777  ; jne 0x452777
 mov al, byte [esp + 0x98]
-mov byte [ref_0049715d], al  ; mov byte [0x49715d], al
+mov byte [(_global_rich4_cfg+5)], al  ; mov byte [0x49715d], al
 
 loc_00452777:
 xor eax, eax
@@ -110775,7 +110671,7 @@ or word [ref_0048cadc], dx  ; or word [0x48cadc], dx
 
 loc_0045395f:
 xor edx, edx
-mov dx, word [ref_00497178]  ; mov dx, word [0x497178]
+mov dx, word [(_global_rich4_cfg+32)]  ; mov dx, word [0x497178]
 xor eax, eax
 mov ax, word [ref_0048cadc]  ; mov ax, word [0x48cadc]
 cmp eax, edx
@@ -110792,7 +110688,7 @@ jmp short loc_004539bd  ; jmp 0x4539bd
 
 loc_00453991:
 xor edx, edx
-mov dx, word [ref_0049717a]  ; mov dx, word [0x49717a]
+mov dx, word [(_global_rich4_cfg+34)]  ; mov dx, word [0x49717a]
 cmp eax, edx
 jne near loc_00453739  ; jne 0x453739
 
@@ -111508,7 +111404,7 @@ push edi
 mov ebx, dword [esp + 0x10]
 test ebx, ebx
 je short loc_00454150  ; je 0x454150
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je short loc_00454150  ; je 0x454150
 mov eax, dword [ebx]
 push 0
@@ -111541,7 +111437,7 @@ call dword [eax + 0x30]  ; ucall
 loc_0045412c:
 mov edx, dword [ebx]
 xor eax, eax
-mov al, byte [ref_0049715b]  ; mov al, byte [0x49715b]
+mov al, byte [(_global_rich4_cfg+3)]  ; mov al, byte [0x49715b]
 mov edi, dword [eax*4 + ref_0047e758]  ; mov edi, dword [eax*4 + 0x47e758]
 push edi
 push ebx
@@ -111759,7 +111655,7 @@ push ebx
 call fcn_00454395  ; call 0x454395
 cmp dword [ref_0047e748], 0  ; cmp dword [0x47e748], 0
 je short loc_0045434d  ; je 0x45434d
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je short loc_0045434d  ; je 0x45434d
 push 0
 push 0
@@ -111786,7 +111682,7 @@ fcn_0045434f:
 push ebx
 cmp dword [ref_0047e748], 0  ; cmp dword [0x47e748], 0
 je short loc_00454393  ; je 0x454393
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je short loc_00454393  ; je 0x454393
 mov ecx, dword [ref_0047e754]  ; mov ecx, dword [0x47e754]
 test ecx, ecx
@@ -111800,7 +111696,7 @@ call dword [edx + 0x30]  ; ucall
 mov eax, dword [ref_0047e754]  ; mov eax, dword [0x47e754]
 mov edx, dword [eax]
 xor ecx, ecx
-mov cl, byte [ref_0049715b]  ; mov cl, byte [0x49715b]
+mov cl, byte [(_global_rich4_cfg+3)]  ; mov cl, byte [0x49715b]
 mov ebx, dword [ecx*4 + ref_0047e758]  ; mov ebx, dword [ecx*4 + 0x47e758]
 push ebx
 push eax
@@ -111841,7 +111737,7 @@ cmp dword [ref_0047e748], 0  ; cmp dword [0x47e748], 0
 je short loc_00454414  ; je 0x454414
 cmp dword [ref_0048cae4], 0  ; cmp dword [0x48cae4], 0
 je short loc_00454414  ; je 0x454414
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je short loc_00454414  ; je 0x454414
 
 loc_004543ed:
@@ -111870,7 +111766,7 @@ push ebx
 push esi
 cmp dword [ref_0047e748], 0  ; cmp dword [0x47e748], 0
 je short loc_00454490  ; je 0x454490
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je short loc_00454490  ; je 0x454490
 call fcn_00454493  ; call 0x454493
 push 0
@@ -111899,7 +111795,7 @@ call dword [edx + 0x30]  ; ucall
 mov eax, dword [ref_0047e750]  ; mov eax, dword [0x47e750]
 mov ebx, dword [eax]
 xor edx, edx
-mov dl, byte [ref_0049715b]  ; mov dl, byte [0x49715b]
+mov dl, byte [(_global_rich4_cfg+3)]  ; mov dl, byte [0x49715b]
 mov esi, dword [edx*4 + ref_0047e758]  ; mov esi, dword [edx*4 + 0x47e758]
 push esi
 push eax
@@ -111935,7 +111831,7 @@ xor ebx, ebx
 mov edx, dword [ref_0047e750]  ; mov edx, dword [0x47e750]
 test edx, edx
 je short loc_004544ef  ; je 0x4544ef
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je short loc_004544ef  ; je 0x4544ef
 mov eax, edx
 mov edx, dword [edx]
@@ -111966,7 +111862,7 @@ call dword [cs:__imp__timeGetTime@0]  ; ucall: call dword cs:[0x46246c]
 mov esi, eax
 cmp dword [ref_0047e750], 0  ; cmp dword [0x47e750], 0
 je near loc_0045458f  ; je 0x45458f
-cmp byte [ref_0049715b], 0  ; cmp byte [0x49715b], 0
+cmp byte [(_global_rich4_cfg+3)], 0  ; cmp byte [0x49715b], 0
 je near loc_0045458f  ; je 0x45458f
 
 loc_00454520:
@@ -112322,7 +112218,7 @@ ret
 fcn_0045497b:
 push ebx
 xor eax, eax
-mov al, byte [ref_0049715a]  ; mov al, byte [0x49715a]
+mov al, byte [(_global_rich4_cfg+2)]  ; mov al, byte [0x49715a]
 mov edx, dword [eax*4 + ref_0047e7e3]  ; mov edx, dword [eax*4 + 0x47e7e3]
 push edx
 push ref_00466447  ; push 0x466447
@@ -112335,7 +112231,7 @@ mov ecx, dword [ref_0047e7df]  ; mov ecx, dword [0x47e7df]
 cmp ecx, 0xffff
 je short loc_004549cd  ; je 0x4549cd
 xor eax, eax
-mov al, byte [ref_0049715a]  ; mov al, byte [0x49715a]
+mov al, byte [(_global_rich4_cfg+2)]  ; mov al, byte [0x49715a]
 mov ebx, dword [eax*4 + ref_0047e7f7]  ; mov ebx, dword [eax*4 + 0x47e7f7]
 push ebx
 push ecx
@@ -112361,7 +112257,7 @@ and dword [esp + 0x3c], 0x7fff
 mov eax, 1
 
 loc_004549fb:
-cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
+cmp byte [(_global_rich4_cfg+2)], 0  ; cmp byte [0x49715a], 0
 je near loc_00454ab8  ; je 0x454ab8
 test byte [ref_0047e772], 0x80  ; test byte [0x47e772], 0x80
 je short loc_00454a1f  ; je 0x454a1f
@@ -112532,7 +112428,7 @@ sub esp, 0x50
 xor ebx, ebx
 cmp byte [ref_0046cb06], 0  ; cmp byte [0x46cb06], 0
 jne near loc_00454d24  ; jne 0x454d24
-cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
+cmp byte [(_global_rich4_cfg+2)], 0  ; cmp byte [0x49715a], 0
 je near loc_00454d24  ; je 0x454d24
 call fcn_00454acb  ; call 0x454acb
 cmp byte [ref_0047e770], 0  ; cmp byte [0x47e770], 0
@@ -112701,7 +112597,7 @@ and dl, 7
 mov byte [ref_0047e771], dl  ; mov byte [0x47e771], dl
 
 loc_00454dc5:
-cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
+cmp byte [(_global_rich4_cfg+2)], 0  ; cmp byte [0x49715a], 0
 je near loc_00454ec8  ; je 0x454ec8
 cmp byte [ref_0047e770], 0  ; cmp byte [0x47e770], 0
 jne near loc_00454e84  ; jne 0x454e84
@@ -112854,7 +112750,7 @@ fcn_00454f5b:
 push ebx
 sub esp, 0x28
 xor ebx, ebx
-cmp byte [ref_0049715a], 0  ; cmp byte [0x49715a], 0
+cmp byte [(_global_rich4_cfg+2)], 0  ; cmp byte [0x49715a], 0
 je short loc_00454fac  ; je 0x454fac
 mov dl, byte [ref_0047e772]  ; mov dl, byte [0x47e772]
 test dl, 0x80
@@ -132971,19 +132867,6 @@ ref_0046375e:
 db 0xa8
 db 0x74
 dd 0x00ceb220
-
-ref_00463764:
-db 0x72
-db 0x62
-db 0x00
-
-ref_00463767:
-db 'RICH4.CFG',0x00
-
-ref_00463771:
-db 0x77
-db 0x62
-db 0x00
 
 ref_00463774:
 dd 0x43520000
@@ -162060,7 +161943,7 @@ dd ref_004666a2
 ref_0047edbe:
 dd ref_004666a7
 
-ref_0047edc2:
+_default_hotkeys:
 db 0x26
 db 0x00
 dd 0x00280027
@@ -173728,111 +173611,6 @@ resb 24
 
 ref_00496e42:
 resb 790
-
-ref_00497158:
-resb 1
-
-ref_00497159:
-resb 1
-
-ref_0049715a:
-resb 1
-
-ref_0049715b:
-resb 1
-
-ref_0049715c:
-resb 1
-
-ref_0049715d:
-resb 3
-
-ref_00497160:
-resb 4
-
-ref_00497164:
-resb 4
-
-ref_00497168:
-resb 2
-
-ref_0049716a:
-resb 2
-
-ref_0049716c:
-resb 2
-
-ref_0049716e:
-resb 2
-
-ref_00497170:
-resb 2
-
-ref_00497172:
-resb 4
-
-ref_00497176:
-resb 2
-
-ref_00497178:
-resb 2
-
-ref_0049717a:
-resb 2
-
-ref_0049717c:
-resb 2
-
-ref_0049717e:
-resb 2
-
-ref_00497180:
-resb 2
-
-ref_00497182:
-resb 2
-
-ref_00497184:
-resb 2
-
-ref_00497186:
-resb 2
-
-ref_00497188:
-resb 2
-
-ref_0049718a:
-resb 2
-
-ref_0049718c:
-resb 2
-
-ref_0049718e:
-resb 2
-
-ref_00497190:
-resb 2
-
-ref_00497192:
-resb 2
-
-ref_00497194:
-resb 2
-
-ref_00497196:
-resb 2
-
-ref_00497198:
-resb 2
-
-ref_0049719a:
-resb 2
-
-ref_0049719c:
-resb 2
-
-ref_0049719e:
-resb 2
 
 
 ref_00497320:

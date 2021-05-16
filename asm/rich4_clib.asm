@@ -1,8 +1,8 @@
-global clib_fopen
-global clib_fclose
+global _clib_fopen
+global _clib_fclose
 global clib_fseek
-global clib_fread
-global clib_fwrite
+global _clib_fread
+global _clib_fwrite
 extern fcn_00457135
 extern fcn_004590b9
 extern fcn_00457254
@@ -63,7 +63,7 @@ pop esi
 pop ebx
 ret
 
-clib_fopen:
+_clib_fopen:
 push ebx
 push 0
 mov edx, dword [esp + 0x10]
@@ -75,7 +75,7 @@ add esp, 0xc
 pop ebx
 ret
 
-clib_fclose:
+_clib_fclose:
 push ebx
 mov ebx, dword [esp + 8]
 call dword [ref_00488f60]  ; ucall: call dword [0x488f60]
@@ -340,7 +340,7 @@ extern fcn_0045940b
 extern fcn_0045949c
 extern fcn_00459657
 
-clib_fread:
+_clib_fread:
 push ebx
 push esi
 push edi
@@ -565,7 +565,7 @@ ret
 extern fcn_004599bb
 extern fcn_00459aab
 
-clib_fwrite:
+_clib_fwrite:
 push ebx
 push esi
 push edi

@@ -3,18 +3,17 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include <stdint.h>
+#define fopen clib_fopen
+#define fclose clib_fclose
+#define fread clib_fread
+#define fwrite clib_fwrite
+
 #include <stdio.h>
 #include <string.h>
+#include "rich4_config.h"
 #include "rich4_time.h"
 
-typedef struct
-{
-  uint8_t key;
-  uint8_t mod;
-} rich4_key_t;
-
-rich4_key_t default_hotkeys[28] =
+static const rich4_key_t default_hotkeys[28] =
   {
    {0x26, 0}, {0x27, 0}, {0x28, 0}, {0x25, 0}, {0x0d, 0}, {0x1b, 0}, {0x09, 0}, {0x09, 0},
    {0x59, 0}, {0x4e, 0}, {0x20, 0}, {0x44, 0}, {0x57, 0}, {0x58, 0}, {0x43, 0}, {0x45, 0},
@@ -22,30 +21,14 @@ rich4_key_t default_hotkeys[28] =
    {0x48, 0}, {0x21, 0}, {0x22, 0}, {0x51, 0x11}
   };
 
-typedef struct
-{
-  uint8_t game_speed;
-  uint8_t animation;
-  uint8_t music;
-  uint8_t sound_effect;
-  uint8_t auto_save;
-  uint8_t view;
-  uint8_t dummy1[2];
-  uint8_t day; /* offset 8 */
-  uint8_t month;
-  uint16_t year;
-  uint8_t dummy2[4];
-  rich4_key_t hotkeys[28]; /* offset 0x10 */
-} rich4_cfg;
-
 rich4_cfg global_rich4_cfg; // 0x497158
 
-void config_rich4(void)
+void rich4_read_config(void)
 {
-  FILE *fp = fopen("RICH4.CFG", "rb");
+  FILE *fp = clib_fopen("RICH4.CFG", "rb");
   if (fp != NULL) {
-    fread(&global_rich4_cfg, sizeof(global_rich4_cfg), 1, fp);
-    fclose(fp);
+    clib_fread(&global_rich4_cfg, sizeof(global_rich4_cfg), 1, fp);
+    clib_fclose(fp);
   } else {
     global_rich4_cfg.game_speed = 1;
     global_rich4_cfg.animation = 1;
@@ -59,6 +42,7 @@ void config_rich4(void)
   }
   rich4_time t;
   get_local_time(&t);
+#if USE_RICH4_DATE_DEFAULT
   if (t.year < 1998) {
     t.year = 1998;
     t.month = 1;
@@ -68,16 +52,16 @@ void config_rich4(void)
     t.month = 1;
     t.day = 1;
   }
-
+#endif
   global_rich4_cfg.year = t.year;
   global_rich4_cfg.month = t.month;
   global_rich4_cfg.day = t.day;
 }
 
-void write_cfg(void)
+void rich4_write_config(void)
 {
-  FILE *fp = fopen("RICH4.CFG", "wb");
+  FILE *fp = clib_fopen("RICH4.CFG", "wb");
   if (fp == NULL)
     return;
-  fwrite(&global_rich4_cfg, sizeof(global_rich4_cfg), 1, fp);
+  clib_fwrite(&global_rich4_cfg, sizeof(global_rich4_cfg), 1, fp);
 }
