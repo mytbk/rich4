@@ -91,8 +91,6 @@ static void update_spr_smp_ptr(void *s)
 	}
 }
 
-int pixel_fmt;
-
 static void update_pixels(uint16_t *a, int nbytes)
 {
 	int nw = nbytes >> 1;
