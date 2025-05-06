@@ -19,7 +19,7 @@
 * asm: rich4.exe 的反汇编，并将部分汇编代码替换为C代码
 * docs: 相关文档
 
-要查看原始的反汇编代码，可以执行 ``git show rich4_asm:asm/rich4.asm`` 查看。
+如果需要阅读 r2dumpbin 转出来的反汇编代码，以及带注释的反汇编，可以见 https://codeberg.org/vimacs/rich4_asm 版本库。
 
 构建
 -------
