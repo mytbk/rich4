@@ -150990,7 +150990,7 @@ dd ref_00463750
 dd ref_00463757
 
 ref_00474cc8:
-db '^7F',0x00
+dd ref_0046375e
 
 ref_00474ccc:
 dd ref_00463584
@@ -151915,13 +151915,13 @@ ref_004755bc:
 dd 0x17151615
 
 ref_004755c0:
-db '<BF',0x00
+dd ref_0046423c
 
 ref_004755c4:
-db '[BF',0x00
+dd ref_0046425b
 
 ref_004755c8:
-db 'zBF',0x00
+dd ref_0046427a
 
 ref_004755cc:
 dd ref_00464295
@@ -151953,10 +151953,10 @@ dd ref_0046440f
 dd ref_0046442e
 
 ref_00475610:
-db '@DF',0x00
+dd ref_00464440
 
 ref_00475614:
-db 'kDF',0x00
+dd ref_0046446b
 
 ref_00475618:
 dd ref_00464495
@@ -151974,7 +151974,7 @@ ref_00475628:
 dd ref_00464512
 
 ref_0047562c:
-db '0EF',0x00
+dd ref_00464530
 
 ref_00475630:
 dd ref_00464542
@@ -152037,16 +152037,16 @@ ref_00475698:
 dd ref_0046460b
 
 ref_0047569c:
-db '%FF',0x00
+dd ref_00464625
 
 ref_004756a0:
-db '?FF',0x00
+dd ref_0046463f
 
 ref_004756a4:
-db 'SFF',0x00
+dd ref_00464653
 
 ref_004756a8:
-db 'gFF',0x00
+dd ref_00464667
 
 ref_004756ac:
 dd ref_00464688
@@ -152220,7 +152220,7 @@ dd 0x01a3000b
 dd 0x01cb005b
 
 ref_00475830:
-db 'LHF',0x00
+dd ref_0046484c
 
 ref_00475834:
 dd ref_00464867
@@ -152242,13 +152242,13 @@ ref_0047584c:
 dd ref_0046491a
 
 ref_00475850:
-db '9IF',0x00
+dd ref_00464939
 
 ref_00475854:
-db 'VIF',0x00
+dd ref_00464956
 
 ref_00475858:
-db 'qIF',0x00
+dd ref_00464971
 
 ref_0047585c:
 dd ref_00464985
@@ -152270,10 +152270,10 @@ ref_00475874:
 dd 0x00000000
 
 ref_00475878:
-db '-JF',0x00
+dd ref_00464a2d
 
 ref_0047587c:
-db 'KJF',0x00
+dd ref_00464a4b
 
 ref_00475880:
 dd 0x05070607
@@ -153070,10 +153070,10 @@ dd ref_00466040
 dd ref_00466049
 
 ref_004761b4:
-db 'R`F',0x00
+dd ref_00466052
 
 ref_004761b8:
-db '(`G',0x00
+dd ref_00476028
 
 ref_004761bc:
 dd 0x00000001
@@ -161909,7 +161909,7 @@ dd ref_00466631
 dd ref_00466636
 
 ref_0047ed76:
-db ';fF',0x00
+dd ref_0046663b
 
 ref_0047ed7a:
 dd ref_00466640
@@ -162976,14 +162976,14 @@ dd ref_00466c08
 dd ref_00466c14
 
 ref_0048085e:
-db '"lF',0x00
+dd ref_00466c22
 
 ref_00480862:
 dd ref_00466c32
 dd ref_00466c46
 
 ref_0048086a:
-db 'XlF',0x00
+dd ref_00466c58
 
 ref_0048086e:
 dd ref_00466c68
@@ -163017,19 +163017,19 @@ ref_00480896:
 dd ref_00466d1f
 
 ref_0048089a:
-db '/mF',0x00
+dd ref_00466d2f
 
 ref_0048089e:
-db 'CmF',0x00
+dd ref_00466d43
 
 ref_004808a2:
-db 'SmF',0x00
+dd ref_00466d53
 
 ref_004808a6:
-db 'amF',0x00
+dd ref_00466d61
 
 ref_004808aa:
-db 'qmF',0x00
+dd ref_00466d71
 
 ref_004808ae:
 dd ref_00466d95
