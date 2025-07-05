@@ -1,4 +1,4 @@
-#include "stocks.h"
+#include "rich4_stocks.h"
 
 stock_info game_stocks[96] = {
 	{ "\xa4\xa4\xb0\xea\xab\x48\xb0\x55", 1, 0, 0, 10000, 0, 100.0, 100.0, 100.0, 1.000000, 0.0, 0 }, /* 中国信托 */

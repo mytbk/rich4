@@ -22,6 +22,8 @@ typedef struct
   rich4_key_t hotkeys[28]; /* offset 0x10 */
 } rich4_cfg;
 
+extern const rich4_key_t default_hotkeys[28];
 extern rich4_cfg global_rich4_cfg;
+
 void rich4_read_config(void);
 void rich4_write_config(void);

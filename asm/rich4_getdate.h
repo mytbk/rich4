@@ -13,4 +13,4 @@ typedef struct
   uint16_t dayofweek;
 } rich4_time;
 
-void get_local_time(rich4_time *t);
+void libc_getdate(rich4_time *t);

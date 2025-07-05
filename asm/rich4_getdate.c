@@ -4,9 +4,9 @@
  */
 
 #include <windows.h>
-#include "rich4_time.h"
+#include "rich4_getdate.h"
 
-void get_local_time(rich4_time *t)
+void libc_getdate(rich4_time *t)
 {
   SYSTEMTIME st;
   GetLocalTime(&st);

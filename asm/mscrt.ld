@@ -1,0 +1,16 @@
+PROVIDE(_libc_exit = _exit);
+PROVIDE(_libc_fclose = _fclose);
+PROVIDE(_libc_fopen = _fopen);
+PROVIDE(_libc_fread = _fread);
+PROVIDE(_libc_free = _free);
+PROVIDE(_libc_fseek = _fseek);
+PROVIDE(_libc_ftell = _ftell);
+PROVIDE(_libc_fwrite = _fwrite);
+PROVIDE(_libc_getcwd = _getcwd);
+PROVIDE(_libc_itoa = _itoa);
+PROVIDE(_libc_malloc = _malloc);
+PROVIDE(_libc_sprintf = _sprintf);
+PROVIDE(_libc_strdup = _strdup);
+PROVIDE(_libc_wcsdup = _wcsdup);
+PROVIDE(_libc_srand = _srand);
+PROVIDE(_libc_rand = _rand);
