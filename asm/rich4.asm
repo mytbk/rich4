@@ -175,6 +175,12 @@ extern _if_dsin
 extern _if_fmod
 extern _if_sqrt
 
+extern _Wait_0402_Message
+extern _Post_0402_Message
+extern _callbackSize
+extern _windowCallbacks
+global _gWindowHandle
+
 extern _rich4_read_config
 extern _rich4_write_config
 global _global_rich4_cfg
@@ -285,7 +291,7 @@ je short loc_00401134  ; je 0x401134
 push eax
 push 0
 push 0x202
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
 xor ebx, ebx
@@ -296,7 +302,7 @@ loc_00401134:
 push eax
 push 0
 push 0x201
-mov eax, dword [ref_0048a0d4]  ; mov eax, dword [0x48a0d4]
+mov eax, dword [_gWindowHandle]  ; mov eax, dword [0x48a0d4]
 push eax
 call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
 mov word [ref_0046cb09], 1  ; mov word [0x46cb09], 1
@@ -311,7 +317,7 @@ test ebx, 0x80000000
 je near loc_004011df  ; je 0x4011df
 cmp byte [ref_0046cafe], 0  ; cmp byte [0x46cafe], 0
 je short loc_004011c3  ; je 0x4011c3
-cmp dword [ref_0046cad8], 1  ; cmp dword [0x46cad8], 1
+cmp dword [_callbackSize], 1  ; cmp dword [0x46cad8], 1
 jne short loc_004011c3  ; jne 0x4011c3
 xor edx, edx
 xor ebx, ebx
@@ -340,7 +346,7 @@ loc_004011c3:
 push 0
 push 0
 push 0x205
-mov edi, dword [ref_0048a0d4]  ; mov edi, dword [0x48a0d4]
+mov edi, dword [_gWindowHandle]  ; mov edi, dword [0x48a0d4]
 push edi
 call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
 jmp near loc_00401537  ; jmp 0x401537
@@ -730,7 +736,7 @@ loc_0040161b:
 mov eax, dword [ref_0048a0d8]  ; mov eax, dword [0x48a0d8]
 mov edx, dword [eax]
 push 0x11
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 push eax
 call dword [edx + 0x50]  ; ucall
@@ -847,8 +853,8 @@ mov dword [ref_00474938], eax  ; mov dword [0x474938], eax
 xor esi, esi
 mov dword [ref_00474930], esi  ; mov dword [0x474930], esi
 mov dword [ref_00474934], esi  ; mov dword [0x474934], esi
-mov dword [ref_0048a010], esi  ; mov dword [0x48a010], esi
-mov dword [ref_0046cad8], esi  ; mov dword [0x46cad8], esi
+mov dword [_windowCallbacks], esi  ; mov dword [0x48a010], esi
+mov dword [_callbackSize], esi  ; mov dword [0x46cad8], esi
 xor bh, bh
 mov byte [ref_0047e771], bh  ; mov byte [0x47e771], bh
 mov eax, 1
@@ -931,70 +937,17 @@ pop esi
 pop ebx
 ret
 
-fcn_004018e7:			; _Wait_0402_Message
-push ebx
-sub esp, 0x1c
-mov edx, dword [ref_0046cad8]  ; mov edx, dword [0x46cad8]
-inc edx
-mov dword [ref_0046cad8], edx  ; mov dword [0x46cad8], edx
-mov eax, edx
-mov edx, dword [esp + 0x24]
-mov dword [eax*4 + ref_0048a010], edx  ; mov dword [eax*4 + 0x48a010], edx
-mov ecx, dword [esp + 0x28]
-push ecx
-push 0
-push 0x401
-mov ebx, dword [ref_0048a0d4]  ; mov ebx, dword [0x48a0d4]
-push ebx
-call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
-
-loc_0040191f:
-push 1
-push 0
-push 0
-push 0
-lea eax, [esp + 0x10]
-push eax
-call dword [cs:__imp__PeekMessageA@20]  ; ucall: call dword cs:[0x46230c]
-test eax, eax
-je short loc_0040191f  ; je 0x40191f
-cmp dword [esp + 4], 0x402
-je short loc_00401957  ; je 0x401957
-mov eax, esp
-push eax
-call dword [cs:__imp__TranslateMessage@4]  ; ucall: call dword cs:[0x462334]
-mov eax, esp
-push eax
-call dword [cs:__imp__DispatchMessageA@4]  ; ucall: call dword cs:[0x4622e0]
-jmp short loc_0040191f  ; jmp 0x40191f
-
-loc_00401957:
-dec dword [ref_0046cad8]  ; dec dword [0x46cad8]
-mov eax, dword [esp + 0xc]
-add esp, 0x1c
-pop ebx
-ret
-
-fcn_00401966:
-mov edx, dword [esp + 4]
-push edx
-push 0
-push 0x402
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
-push ecx
-call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
-ret
 
 fcn_00401981:
 push ebx
-mov edx, dword [ref_0046cad8]  ; mov edx, dword [0x46cad8]
+mov edx, dword [_callbackSize]  ; mov edx, dword [0x46cad8]
 inc edx
-mov dword [ref_0046cad8], edx  ; mov dword [0x46cad8], edx
-mov dword [edx*4 + ref_0048a010], fcn_00417e26  ; mov dword [edx*4 + 0x48a010], 0x417e26
+mov dword [_callbackSize], edx  ; mov dword [0x46cad8], edx
+mov dword [edx*4 + _windowCallbacks], fcn_00417e26  ; mov dword [edx*4 + 0x48a010], 0x417e26
 push 0
 push 0
 push 0x401
-mov ebx, dword [ref_0048a0d4]  ; mov ebx, dword [0x48a0d4]
+mov ebx, dword [_gWindowHandle]  ; mov ebx, dword [0x48a0d4]
 push ebx
 call dword [cs:__imp__PostMessageA@16]  ; ucall: call dword cs:[0x462310]
 imul eax, dword [ref_0049910c], 0x34  ; imul eax, dword [0x49910c], 0x34
@@ -1010,7 +963,7 @@ pop ebx
 ret
 
 fcn_004019d2:
-dec dword [ref_0046cad8]  ; dec dword [0x46cad8]
+dec dword [_callbackSize]  ; dec dword [0x46cad8]
 jmp near fcn_00454edc  ; jmp 0x454edc
 
 fcn_004019dd:
@@ -1066,7 +1019,7 @@ call dword [cs:__imp__mciSendStringA@16]  ; ucall: call dword cs:[0x46245c]
 loc_00401a67:
 cmp byte [ref_0046cb04], 0  ; cmp byte [0x46cb04], 0
 je short loc_00401a87  ; je 0x401a87
-mov edi, dword [ref_0048a0d4]  ; mov edi, dword [0x48a0d4]
+mov edi, dword [_gWindowHandle]  ; mov edi, dword [0x48a0d4]
 push edi
 push 0
 push 0
@@ -1130,9 +1083,9 @@ call dword [cs:__imp__PostQuitMessage@4]  ; ucall: call dword cs:[0x462314]
 jmp short loc_00401b6e  ; jmp 0x401b6e
 
 loc_00401b33:
-mov ebx, dword [ref_0046cad8]  ; mov ebx, dword [0x46cad8]
+mov ebx, dword [_callbackSize]  ; mov ebx, dword [0x46cad8]
 shl ebx, 2
-cmp dword [ebx + ref_0048a010], 0  ; cmp dword [ebx + 0x48a010], 0
+cmp dword [ebx + _windowCallbacks], 0  ; cmp dword [ebx + 0x48a010], 0
 je short loc_00401b59  ; je 0x401b59
 mov edi, dword [esp + 0x20]
 push edi
@@ -1140,7 +1093,7 @@ push edx
 push eax
 mov ebp, dword [esp + 0x20]
 push ebp
-call dword [ebx + ref_0048a010]  ; ucall: call dword [ebx + 0x48a010]
+call dword [ebx + _windowCallbacks]  ; ucall: call dword [ebx + 0x48a010]
 jmp short loc_00401b6c  ; jmp 0x401b6c
 
 loc_00401b59:
@@ -1234,15 +1187,15 @@ push ebp
 push ebp
 push ebx
 call dword [cs:__imp__CreateWindowExA@48]  ; ucall: call dword cs:[0x4622d4]
-mov dword [ref_0048a0d4], eax  ; mov dword [0x48a0d4], eax
+mov dword [_gWindowHandle], eax  ; mov dword [0x48a0d4], eax
 call fcn_004015d6  ; call 0x4015d6
 test eax, eax
 je near loc_00401e50  ; je 0x401e50
 push 5
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 call dword [cs:__imp__ShowWindow@8]  ; ucall: call dword cs:[0x462330]
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 call dword [cs:__imp__UpdateWindow@4]  ; ucall: call dword cs:[0x46233c]
 push 1
@@ -1301,7 +1254,7 @@ jmp short loc_00401cfe  ; jmp 0x401cfe
 
 loc_00401d18:
 call fcn_00401815  ; call 0x401815
-mov esi, dword [ref_0048a0d4]  ; mov esi, dword [0x48a0d4]
+mov esi, dword [_gWindowHandle]  ; mov esi, dword [0x48a0d4]
 push esi
 
 loc_00401d24:
@@ -1379,7 +1332,7 @@ cmp byte [ref_0046caf9], 0  ; cmp byte [0x46caf9], 0
 je near loc_00401d2b  ; je 0x401d2b
 call fcn_00451b36  ; call 0x451b36
 call fcn_00401815  ; call 0x401815
-mov eax, dword [ref_0048a0d4]  ; mov eax, dword [0x48a0d4]
+mov eax, dword [_gWindowHandle]  ; mov eax, dword [0x48a0d4]
 push eax
 jmp near loc_00401d24  ; jmp 0x401d24
 
@@ -2090,7 +2043,7 @@ mov edx, dword [ref_0048a184]  ; mov edx, dword [0x48a184]
 push edx
 
 loc_0040266d:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_00402672:
 add esp, 4
@@ -2450,7 +2403,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_0040257a  ; push 0x40257a
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 mov ebx, eax
 add esp, 8
 call fcn_00454acb  ; call 0x454acb
@@ -3690,7 +3643,7 @@ mov ebx, dword [ref_0048a34a]  ; mov ebx, dword [0x48a34a]
 push ebx
 
 loc_00403927:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00403865  ; jmp 0x403865
 
@@ -3992,7 +3945,7 @@ mov ebp, dword [ref_0048a34e]  ; mov ebp, dword [0x48a34e]
 push ebp
 
 loc_00403ce7:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00403865  ; jmp 0x403865
 
@@ -4335,7 +4288,7 @@ cmp dword [esp + 0x48], 0
 je short loc_004040dd  ; je 0x4040dd
 push 0
 push fcn_0040363a  ; push 0x40363a
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebp, eax
 cmp eax, 0xffffffff
@@ -4436,7 +4389,7 @@ add esp, 4
 mov dword [ref_0048a334], eax  ; mov dword [0x48a334], eax
 push 0
 push fcn_004039c2  ; push 0x4039c2
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 cmp eax, 0xffffffff
 je short loc_004041fe  ; je 0x4041fe
@@ -5634,7 +5587,7 @@ add esp, 4
 call fcn_00404504  ; call 0x404504
 push 0
 push 0x64
-mov edx, dword [ref_0046cad8]  ; mov edx, dword [0x46cad8]
+mov edx, dword [_callbackSize]  ; mov edx, dword [0x46cad8]
 push edx
 push ebp
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -5673,7 +5626,7 @@ ret 0x10
 loc_00404feb:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_00404fdf  ; je 0x404fdf
-cmp edx, dword [ref_0046cad8]  ; cmp edx, dword [0x46cad8]
+cmp edx, dword [_callbackSize]  ; cmp edx, dword [0x46cad8]
 jne short loc_00404fdf  ; jne 0x404fdf
 mov edx, dword [ref_0048a3c8]  ; mov edx, dword [0x48a3c8]
 add edx, 4
@@ -6453,7 +6406,7 @@ push ebx
 push ebp
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0040591c  ; jmp 0x40591c
 
 loc_00405a49:
@@ -6507,7 +6460,7 @@ call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
 
 loc_00405af7:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_00405afc:
 add esp, 4
@@ -6633,7 +6586,7 @@ cmp eax, 0x113
 jne near loc_00405ee2  ; jne 0x405ee2
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_00404fdf  ; je 0x404fdf
-cmp edx, dword [ref_0046cad8]  ; cmp edx, dword [0x46cad8]
+cmp edx, dword [_callbackSize]  ; cmp edx, dword [0x46cad8]
 jne near loc_00404fdf  ; jne 0x404fdf
 mov eax, dword [ref_0048a3c8]  ; mov eax, dword [0x48a3c8]
 add eax, 4
@@ -6662,7 +6615,7 @@ push ebp
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push ebx
 push 0x32
-mov edi, dword [ref_0046cad8]  ; mov edi, dword [0x46cad8]
+mov edi, dword [_callbackSize]  ; mov edi, dword [0x46cad8]
 push edi
 push ebp
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -6849,7 +6802,7 @@ jmp short loc_00405edc  ; jmp 0x405edc
 loc_00405f04:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_00404fdf  ; je 0x404fdf
-cmp edx, dword [ref_0046cad8]  ; cmp edx, dword [0x46cad8]
+cmp edx, dword [_callbackSize]  ; cmp edx, dword [0x46cad8]
 jne near loc_00404fdf  ; jne 0x404fdf
 add dword [ref_0048a3fc], ecx  ; add dword [0x48a3fc], ecx
 mov ecx, dword [ref_0048a400]  ; mov ecx, dword [0x48a400]
@@ -7072,7 +7025,7 @@ setne al
 mov byte [ref_0048a435], al  ; mov byte [0x48a435], al
 push 0
 push 0x32
-mov ebp, dword [ref_0046cad8]  ; mov ebp, dword [0x46cad8]
+mov ebp, dword [_callbackSize]  ; mov ebp, dword [0x46cad8]
 push ebp
 push esi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -7087,7 +7040,7 @@ loc_0040622c:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0040672c  ; je 0x40672c
 mov eax, dword [esp + 0x7c]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_0040672c  ; jne 0x40672c
 cmp byte [ref_0048a43a], 2  ; cmp byte [0x48a43a], 2
 jne short loc_0040627a  ; jne 0x40627a
@@ -7657,7 +7610,7 @@ push eax
 push esi
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_0040672c  ; jmp 0x40672c
 
@@ -7859,7 +7812,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push 0x3e8
-mov ebp, dword [ref_0046cad8]  ; mov ebp, dword [0x46cad8]
+mov ebp, dword [_callbackSize]  ; mov ebp, dword [0x46cad8]
 push ebp
 push ebx
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -7881,7 +7834,7 @@ jmp near loc_00404fe4  ; jmp 0x404fe4
 loc_00406c52:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_00406c48  ; je 0x406c48
-cmp edx, dword [ref_0046cad8]  ; cmp edx, dword [0x46cad8]
+cmp edx, dword [_callbackSize]  ; cmp edx, dword [0x46cad8]
 jne short loc_00406c48  ; jne 0x406c48
 mov edi, dword [ref_0048a440]  ; mov edi, dword [0x48a440]
 dec edi
@@ -7972,7 +7925,7 @@ call fcn_00451edb  ; call 0x451edb
 add esp, 0xc
 mov ecx, dword [ref_0048a444]  ; mov ecx, dword [0x48a444]
 push ecx
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00406c48  ; jmp 0x406c48
 
@@ -8274,7 +8227,7 @@ add esp, 4
 mov ebx, dword [esp + 0x24]
 push ebx
 push fcn_00404e44  ; push 0x404e44
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 mov ebx, eax
 add esp, 8
 mov dword [esp + 4], eax
@@ -8790,7 +8743,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_004060e9  ; push 0x4060e9
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454acb  ; call 0x454acb
 jmp short loc_004077fe  ; jmp 0x4077fe
@@ -8926,7 +8879,7 @@ add esp, 4
 loc_00407912:
 push 0
 push fcn_00406b14  ; push 0x406b14
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 test eax, eax
 je near loc_004079de  ; je 0x4079de
@@ -12775,7 +12728,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_0040a998  ; jmp 0x40a998
 
@@ -12903,7 +12856,7 @@ jmp short loc_0040a99a  ; jmp 0x40a99a
 fcn_0040a9bd:
 push 0
 push fcn_0040a801  ; push 0x40a801
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 push 1
 call fcn_00415e70  ; call 0x415e70
@@ -20698,7 +20651,7 @@ mov dword [esp + 0x34], edx
 push 0
 lea eax, [esp + 0x2c]
 push eax
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 add esp, 0x38
@@ -21192,7 +21145,7 @@ sub eax, 2
 push eax
 
 loc_0041091a:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_0041091f:
 add esp, 4
@@ -21818,7 +21771,7 @@ add esp, 0xc
 push 0xffffffffffffffff
 
 loc_00411074:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00410ff8  ; jmp 0x410ff8
 
@@ -21973,7 +21926,7 @@ call fcn_00410158  ; call 0x410158
 add esp, 8
 push esi
 push 0xfa
-mov eax, dword [ref_0046cad8]  ; mov eax, dword [0x46cad8]
+mov eax, dword [_callbackSize]  ; mov eax, dword [0x46cad8]
 push eax
 push ebx
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -21987,7 +21940,7 @@ cmp dword [ref_0048bba6], 0  ; cmp dword [0x48bba6], 0
 je near loc_00410ff8  ; je 0x410ff8
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_00410ff8  ; je 0x410ff8
-cmp esi, dword [ref_0046cad8]  ; cmp esi, dword [0x46cad8]
+cmp esi, dword [_callbackSize]  ; cmp esi, dword [0x46cad8]
 jne near loc_00410ff8  ; jne 0x410ff8
 xor byte [ref_0048bbaa], 1  ; xor byte [0x48bbaa], 1
 mov ebp, dword [ref_0048bbaa]  ; mov ebp, dword [0x48bbaa]
@@ -22358,7 +22311,7 @@ loc_004117a8:
 call fcn_00451edb  ; call 0x451edb
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp short loc_0041182e  ; jmp 0x41182e
 
@@ -22503,7 +22456,7 @@ push edi
 call fcn_00451edb  ; call 0x451edb
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0041160f  ; jmp 0x41160f
 
 loc_0041197c:
@@ -22592,7 +22545,7 @@ add edx, eax
 mov dword [ref_0048bb5c], edx  ; mov dword [0x48bb5c], edx
 push 0
 push fcn_00410ac3  ; push 0x410ac3
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 cmp eax, 0xffffffff
 je short loc_00411a81  ; je 0x411a81
@@ -22607,7 +22560,7 @@ ret
 fcn_00411a86:
 push 0
 push fcn_00411122  ; push 0x411122
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 ret
 
@@ -22914,7 +22867,7 @@ shl eax, 0x10
 add eax, dword [esp]
 push eax
 push fcn_004103a3  ; push 0x4103a3
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebx, eax
 mov ebp, dword [esp + 4]
@@ -26391,7 +26344,7 @@ call fcn_0041461b  ; call 0x41461b
 add esp, 4
 push 0
 push 0x64
-mov ebp, dword [ref_0046cad8]  ; mov ebp, dword [0x46cad8]
+mov ebp, dword [_callbackSize]  ; mov ebp, dword [0x46cad8]
 push ebp
 push ebx
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -26406,7 +26359,7 @@ loc_00414900:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_00414a4a  ; je 0x414a4a
 mov eax, dword [esp + 0x1c]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_00414a4a  ; jne 0x414a4a
 mov eax, dword [ref_0048bd2c]  ; mov eax, dword [0x48bd2c]
 dec eax
@@ -26420,7 +26373,7 @@ push esi
 push ebx
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_0041494f:
 add esp, 4
@@ -26658,7 +26611,7 @@ mov dword [ref_0048bd84], 0x63  ; mov dword [0x48bd84], 0x63
 call fcn_004146ee  ; call 0x4146ee
 push 0
 push 0x64
-mov ebp, dword [ref_0046cad8]  ; mov ebp, dword [0x46cad8]
+mov ebp, dword [_callbackSize]  ; mov ebp, dword [0x46cad8]
 push ebp
 push ebx
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -26678,7 +26631,7 @@ loc_00414c69:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_00414a4a  ; je 0x414a4a
 mov eax, dword [esp + 0x1c]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_00414a4a  ; jne 0x414a4a
 mov ecx, dword [ref_0048bd84]  ; mov ecx, dword [0x48bd84]
 test ecx, ecx
@@ -26739,7 +26692,7 @@ push 0x7d0
 call fcn_0045285e  ; call 0x45285e
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_00414c61  ; jmp 0x414c61
 
 loc_00414d51:
@@ -26971,7 +26924,7 @@ mov dword [ref_0048bd8c], 0x63  ; mov dword [0x48bd8c], 0x63
 call fcn_0041473b  ; call 0x41473b
 push 0
 push 0x32
-mov edi, dword [ref_0046cad8]  ; mov edi, dword [0x46cad8]
+mov edi, dword [_callbackSize]  ; mov edi, dword [0x46cad8]
 push edi
 push ebx
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -26986,7 +26939,7 @@ loc_00415051:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0041517f  ; je 0x41517f
 mov eax, dword [esp + 0x20]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_0041517f  ; jne 0x41517f
 mov eax, dword [ref_0048bd8c]  ; mov eax, dword [0x48bd8c]
 test eax, eax
@@ -27055,7 +27008,7 @@ push 0x7d0
 call fcn_0045285e  ; call 0x45285e
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 
 loc_00415156:
@@ -27243,7 +27196,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push edi
 push fcn_00414858  ; push 0x414858
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 push ref_00475057  ; push 0x475057
@@ -27389,7 +27342,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push ebx
 push fcn_00414bbc  ; push 0x414bbc
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 push ref_0047509f  ; push 0x47509f
@@ -27546,7 +27499,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_00414fcd  ; push 0x414fcd
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 push ref_004750bf  ; push 0x4750bf
@@ -31121,7 +31074,7 @@ mov dword [ref_0048bddc], eax  ; mov dword [0x48bddc], eax
 mov dword [ref_0048bdd4], edi  ; mov dword [0x48bdd4], edi
 push edi
 push 0x1f4
-mov eax, dword [ref_0046cad8]  ; mov eax, dword [0x46cad8]
+mov eax, dword [_callbackSize]  ; mov eax, dword [0x46cad8]
 push eax
 push esi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -31940,7 +31893,7 @@ call fcn_00417c67  ; call 0x417c67
 jmp near loc_00418c30  ; jmp 0x418c30
 
 loc_00418b7a:
-cmp ecx, dword [ref_0046cad8]  ; cmp ecx, dword [0x46cad8]
+cmp ecx, dword [_callbackSize]  ; cmp ecx, dword [0x46cad8]
 jne near loc_00418c30  ; jne 0x418c30
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_00418c30  ; je 0x418c30
@@ -32385,7 +32338,7 @@ push ebp
 push 0
 push 0
 push 0xf
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 call fcn_00417e26  ; call 0x417e26
 cmp dword [esp + 0x14], 0
@@ -32583,7 +32536,7 @@ add esp, 4
 call fcn_004080f5  ; call 0x4080f5
 mov esi, dword [ref_0048bdc8]  ; mov esi, dword [0x48bdc8]
 push esi
-mov edi, dword [ref_0048a0d4]  ; mov edi, dword [0x48a0d4]
+mov edi, dword [_gWindowHandle]  ; mov edi, dword [0x48a0d4]
 push edi
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 xor ah, ah
@@ -37968,7 +37921,7 @@ push ebx
 mov edx, dword [esp + 8]
 cmp edx, 7
 jg short loc_0041d474  ; jg 0x41d474
-cmp dword [ref_0046cad8], 1  ; cmp dword [0x46cad8], 1
+cmp dword [_callbackSize], 1  ; cmp dword [0x46cad8], 1
 jg short loc_0041d474  ; jg 0x41d474
 mov ebx, dword [ref_0049910c]  ; mov ebx, dword [0x49910c]
 mov dword [ref_0049910c], edx  ; mov dword [0x49910c], edx
@@ -38056,7 +38009,7 @@ je short loc_0041d53f  ; je 0x41d53f
 push 0
 push 0
 push 0xf
-mov eax, dword [ref_0048a0d4]  ; mov eax, dword [0x48a0d4]
+mov eax, dword [_gWindowHandle]  ; mov eax, dword [0x48a0d4]
 push eax
 call fcn_00417e26  ; call 0x417e26
 
@@ -38642,7 +38595,7 @@ mov dword [esp + 0xc], 0x180
 push 0
 lea eax, [esp + 4]
 push eax
-mov ebp, dword [ref_0048a0d4]  ; mov ebp, dword [0x48a0d4]
+mov ebp, dword [_gWindowHandle]  ; mov ebp, dword [0x48a0d4]
 push ebp
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 add esp, 0x10
@@ -38799,7 +38752,7 @@ mov dword [esp + 0xc], 0x1a1
 push 0
 lea eax, [esp + 4]
 push eax
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 add esp, 0x10
@@ -39277,7 +39230,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_0041de89  ; jmp 0x41de89
 
@@ -39559,7 +39512,7 @@ jmp near loc_0041e594  ; jmp 0x41e594
 loc_0041e66f:
 push 0
 push fcn_0041dda9  ; push 0x41dda9
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 push 1
 call fcn_0041906a  ; call 0x41906a
@@ -46134,7 +46087,7 @@ mov dword [esp + 0x8c], 0x1c0
 push 0
 lea eax, [esp + 0x84]
 push eax
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 
@@ -47646,7 +47599,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00424359  ; jmp 0x424359
 
@@ -47824,7 +47777,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00423dc5  ; jmp 0x423dc5
 
@@ -47891,7 +47844,7 @@ add esp, 0x10
 mov dword [ref_0048c274], eax  ; mov dword [0x48c274], eax
 push 0
 push fcn_00423cf3  ; push 0x423cf3
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 push 1
 call fcn_0041906a  ; call 0x41906a
@@ -48442,7 +48395,7 @@ mov dword [esp + 0xc], 0x19e
 push 0
 lea eax, [esp + 4]
 push eax
-mov edi, dword [ref_0048a0d4]  ; mov edi, dword [0x48a0d4]
+mov edi, dword [_gWindowHandle]  ; mov edi, dword [0x48a0d4]
 push edi
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 add esp, 0x10
@@ -49420,7 +49373,7 @@ mov dword [esp + 0x8c], 0x1bf
 push 0
 lea eax, [esp + 0x84]
 push eax
-mov eax, dword [ref_0048a0d4]  ; mov eax, dword [0x48a0d4]
+mov eax, dword [_gWindowHandle]  ; mov eax, dword [0x48a0d4]
 push eax
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 
@@ -50214,7 +50167,7 @@ push ecx
 call fcn_00451edb  ; call 0x451edb
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00425b0c  ; jmp 0x425b0c
 
@@ -50726,7 +50679,7 @@ push edx
 call fcn_00451edb  ; call 0x451edb
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0042650d  ; jmp 0x42650d
 
 loc_0042669c:
@@ -51129,7 +51082,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_00426a5b  ; jmp 0x426a5b
 
 loc_00426b9f:
@@ -51447,7 +51400,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_00426e7f  ; jmp 0x426e7f
 
 loc_00426fba:
@@ -52352,7 +52305,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_00427ad1  ; jmp 0x427ad1
 
 loc_00427b93:
@@ -52870,7 +52823,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_0042836b  ; jmp 0x42836b
 
@@ -52954,7 +52907,7 @@ push 0
 call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp short loc_004283b0  ; jmp 0x4283b0
 
 loc_0042838b:
@@ -52965,7 +52918,7 @@ push 0
 push fcn_004258c1  ; push 0x4258c1
 
 loc_0042839c:
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_004249c2  ; call 0x4249c2
 push 1
@@ -53361,7 +53314,7 @@ jmp short loc_004287f3  ; jmp 0x4287f3
 loc_00428825:
 push 0
 push fcn_00427c21  ; push 0x427c21
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 push 1
 call fcn_0041906a  ; call 0x41906a
@@ -56164,7 +56117,7 @@ push ebx
 call fcn_00451edb  ; call 0x451edb
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp short loc_0042a9fb  ; jmp 0x42a9fb
 
@@ -56780,7 +56733,7 @@ mov al, byte [ref_0048c2eb]  ; mov al, byte [0x48c2eb]
 push eax
 
 loc_0042b197:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_0042b19c:
 add esp, 4
@@ -56832,7 +56785,7 @@ mov al, byte [ref_0048c2eb]  ; mov al, byte [0x48c2eb]
 dec eax
 push eax
 push fcn_00429d65  ; push 0x429d65
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 push 1
 call fcn_00402460  ; call 0x402460
@@ -56964,7 +56917,7 @@ jmp short loc_0042b3ca  ; jmp 0x42b3ca
 
 loc_0042b385:
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp short loc_0042b3ca  ; jmp 0x42b3ca
 
@@ -57073,7 +57026,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push 0x3e8
-mov esi, dword [ref_0046cad8]  ; mov esi, dword [0x46cad8]
+mov esi, dword [_callbackSize]  ; mov esi, dword [0x46cad8]
 push esi
 push ebx
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -57094,7 +57047,7 @@ loc_0042b4db:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0042b3ca  ; je 0x42b3ca
 mov eax, dword [esp + 0x5c]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_0042b3ca  ; jne 0x42b3ca
 mov ecx, dword [ref_0048c2f2]  ; mov ecx, dword [0x48c2f2]
 inc ecx
@@ -57114,7 +57067,7 @@ push ebp
 push ebx
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_0042b3ca  ; jmp 0x42b3ca
 
@@ -57278,7 +57231,7 @@ call fcn_0044fabc  ; call 0x44fabc
 add esp, 0x14
 push 0
 push fcn_0042b2ec  ; push 0x42b2ec
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebx, eax
 jmp near loc_0042ba6d  ; jmp 0x42ba6d
@@ -57529,7 +57482,7 @@ add esp, 0x14
 mov edx, dword [esp + 0x14]
 push edx
 push fcn_0042aaff  ; push 0x42aaff
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebx, eax
 push ref_00475590  ; push 0x475590
@@ -57863,7 +57816,7 @@ jmp short loc_0042bdf6  ; jmp 0x42bdf6
 loc_0042be43:
 push 0
 push fcn_0042b3eb  ; push 0x42b3eb
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov eax, dword [ref_0048c2dc]  ; mov eax, dword [0x48c2dc]
 push eax
@@ -59570,7 +59523,7 @@ mov byte [ref_0048c34a], al  ; mov byte [0x48c34a], al
 call fcn_0042d299  ; call 0x42d299
 push ebp
 push 0x32
-mov ecx, dword [ref_0046cad8]  ; mov ecx, dword [0x46cad8]
+mov ecx, dword [_callbackSize]  ; mov ecx, dword [0x46cad8]
 push ecx
 push edi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -59864,7 +59817,7 @@ loc_0042d847:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0042d48d  ; je 0x42d48d
 mov eax, dword [esp + 0x7c]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_0042d48d  ; jne 0x42d48d
 cmp dword [ref_0048c318], 1  ; cmp dword [0x48c318], 1
 jne short loc_0042d87e  ; jne 0x42d87e
@@ -60155,7 +60108,7 @@ push edi
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 mov eax, dword [ref_0048c343]  ; mov eax, dword [0x48c343]
 push eax
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_0042dc33:
 add esp, 4
@@ -61065,7 +61018,7 @@ push edi
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 mov esi, dword [ref_0048c343]  ; mov esi, dword [0x48c343]
 push esi
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0042e45e  ; jmp 0x42e45e
 
 loc_0042e8bc:
@@ -61412,7 +61365,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_0042d37f  ; push 0x42d37f
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebp, eax
 call fcn_00454bcc  ; call 0x454bcc
@@ -62408,7 +62361,7 @@ mov byte [ref_0048c372], ch  ; mov byte [0x48c372], ch
 call fcn_0042f32c  ; call 0x42f32c
 push 0
 push 0x64
-mov ecx, dword [ref_0046cad8]  ; mov ecx, dword [0x46cad8]
+mov ecx, dword [_callbackSize]  ; mov ecx, dword [0x46cad8]
 push ecx
 push ebp
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -62547,7 +62500,7 @@ cmp byte [ref_0048c370], 0  ; cmp byte [0x48c370], 0
 je near loc_0042f924  ; je 0x42f924
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0042f924  ; je 0x42f924
-cmp ebx, dword [ref_0046cad8]  ; cmp ebx, dword [0x46cad8]
+cmp ebx, dword [_callbackSize]  ; cmp ebx, dword [0x46cad8]
 jne near loc_0042f924  ; jne 0x42f924
 xor eax, eax
 mov al, byte [ref_0048c372]  ; mov al, byte [0x48c372]
@@ -62615,7 +62568,7 @@ push eax
 push ebp
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0042fa9b  ; jmp 0x42fa9b
 
 loc_0042fb2a:
@@ -63133,7 +63086,7 @@ mov dword [ref_0048c377], ecx  ; mov dword [0x48c377], ecx
 call fcn_0042f6c3  ; call 0x42f6c3
 push ebx
 push 0x32
-mov ebp, dword [ref_0046cad8]  ; mov ebp, dword [0x46cad8]
+mov ebp, dword [_callbackSize]  ; mov ebp, dword [0x46cad8]
 push ebp
 push esi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -63175,7 +63128,7 @@ je short loc_004301db  ; je 0x4301db
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_004301db  ; je 0x4301db
 mov eax, dword [esp + 0xa0]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne short loc_004301db  ; jne 0x4301db
 push 0
 call fcn_0044ee18  ; call 0x44ee18
@@ -63861,7 +63814,7 @@ add esp, 0xc
 
 loc_00430afb:
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_00430249  ; jmp 0x430249
 
 loc_00430b07:
@@ -64737,7 +64690,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_0042f7fc  ; push 0x42f7fc
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 mov ebp, dword [ref_0048c35c]  ; mov ebp, dword [0x48c35c]
@@ -64862,7 +64815,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_0043010c  ; push 0x43010c
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 mov edi, dword [ref_0048c360]  ; mov edi, dword [0x48c360]
@@ -66142,7 +66095,7 @@ mov byte [ref_0048c3a5], al  ; mov byte [0x48c3a5], al
 call fcn_00432511  ; call 0x432511
 push 0
 push 0x64
-mov ecx, dword [ref_0046cad8]  ; mov ecx, dword [0x46cad8]
+mov ecx, dword [_callbackSize]  ; mov ecx, dword [0x46cad8]
 push ecx
 push ebx
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -66185,7 +66138,7 @@ loc_004326e5:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_004326ad  ; je 0x4326ad
 mov eax, dword [esp + 0x78]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne short loc_004326ad  ; jne 0x4326ad
 cmp byte [ref_0048c3a2], 4  ; cmp byte [0x48c3a2], 4
 jne near loc_00432828  ; jne 0x432828
@@ -66453,7 +66406,7 @@ xor eax, eax
 mov al, byte [ref_0048c3a1]  ; mov al, byte [0x48c3a1]
 dec eax
 push eax
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0043286e  ; jmp 0x43286e
 
 loc_00432a85:
@@ -66967,7 +66920,7 @@ mov byte [ref_0048c3af], dh  ; mov byte [0x48c3af], dh
 call fcn_00432511  ; call 0x432511
 push 0
 push 0x64
-mov ecx, dword [ref_0046cad8]  ; mov ecx, dword [0x46cad8]
+mov ecx, dword [_callbackSize]  ; mov ecx, dword [0x46cad8]
 push ecx
 push ebp
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -67002,7 +66955,7 @@ loc_00433196:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_0043316d  ; je 0x43316d
 mov eax, dword [esp + 0x74]
-mov ebx, dword [ref_0046cad8]  ; mov ebx, dword [0x46cad8]
+mov ebx, dword [_callbackSize]  ; mov ebx, dword [0x46cad8]
 cmp eax, ebx
 jne short loc_0043316d  ; jne 0x43316d
 xor eax, ebx
@@ -67086,7 +67039,7 @@ mov al, byte [ref_0048c3ae]  ; mov al, byte [0x48c3ae]
 mov al, byte [eax + ref_004757e3]  ; mov al, byte [eax + 0x4757e3]
 and eax, 0xff
 push eax
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_004332c9:
 add esp, 4
@@ -67447,7 +67400,7 @@ push ebx
 push ebp
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp short loc_0043375b  ; jmp 0x43375b
 
 loc_0043379e:
@@ -67539,7 +67492,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_004325c2  ; push 0x4325c2
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov esi, eax
 call fcn_00454bcc  ; call 0x454bcc
@@ -67782,7 +67735,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push ebp
 push fcn_00433088  ; push 0x433088
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 mov ebx, eax
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
@@ -68595,7 +68548,7 @@ mov byte [ref_0048c3cf], ah  ; mov byte [0x48c3cf], ah
 mov byte [ref_0048c3d0], ah  ; mov byte [0x48c3d0], ah
 push 0
 push 0x64
-mov eax, dword [ref_0046cad8]  ; mov eax, dword [0x46cad8]
+mov eax, dword [_callbackSize]  ; mov eax, dword [0x46cad8]
 push eax
 push edi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -68768,7 +68721,7 @@ je near loc_00434641  ; je 0x434641
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_00434641  ; je 0x434641
 mov eax, dword [esp + 0x70]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_00434641  ; jne 0x434641
 push 0
 call fcn_0044ee18  ; call 0x44ee18
@@ -68910,7 +68863,7 @@ call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 xor eax, eax
 mov al, byte [ref_0048c3d0]  ; mov al, byte [0x48c3d0]
 push eax
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0043479f  ; jmp 0x43479f
 
 loc_0043493a:
@@ -69569,7 +69522,7 @@ call fcn_00434186  ; call 0x434186
 add esp, 4
 push ebp
 push 0x32
-mov eax, dword [ref_0046cad8]  ; mov eax, dword [0x46cad8]
+mov eax, dword [_callbackSize]  ; mov eax, dword [0x46cad8]
 push eax
 push esi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -69816,7 +69769,7 @@ je near loc_0043518a  ; je 0x43518a
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0043518a  ; je 0x43518a
 mov eax, dword [esp + 0xf0]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_0043518a  ; jne 0x43518a
 mov ebp, dword [ref_0048c3d9]  ; mov ebp, dword [0x48c3d9]
 test ebp, ebp
@@ -70084,7 +70037,7 @@ push ebp
 push esi
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_0043588e:
 add esp, 4
@@ -70474,7 +70427,7 @@ call fcn_00402460  ; call 0x402460
 add esp, 4
 push 0
 push fcn_00434492  ; push 0x434492
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov byte [ref_0048c3e2], al  ; mov byte [0x48c3e2], al
 test al, al
@@ -70706,7 +70659,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push 0x32
-mov edx, dword [ref_0046cad8]  ; mov edx, dword [0x46cad8]
+mov edx, dword [_callbackSize]  ; mov edx, dword [0x46cad8]
 push edx
 push esi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -70757,7 +70710,7 @@ je short loc_00436162  ; je 0x436162
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_00436162  ; je 0x436162
 mov eax, dword [esp + 0x100]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_00436162  ; jne 0x436162
 push 0
 call fcn_0044ee18  ; call 0x44ee18
@@ -70795,7 +70748,7 @@ push ebx
 push esi
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_00436245:
 add esp, 4
@@ -71177,7 +71130,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push ebx
 push fcn_00435062  ; push 0x435062
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 mov ebx, dword [ref_0048c3c0]  ; mov ebx, dword [0x48c3c0]
@@ -71363,7 +71316,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_00436034  ; push 0x436034
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 push 1
 call fcn_0041906a  ; call 0x41906a
@@ -71778,7 +71731,7 @@ mov dword [esp + 0xc], 0xec
 push 0
 lea eax, [esp + 4]
 push eax
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 
@@ -72480,7 +72433,7 @@ add esp, 0xc
 
 loc_00437774:
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_004378f4  ; jmp 0x4378f4
 
 loc_00437780:
@@ -72626,7 +72579,7 @@ push 0x29
 call fcn_004021f8  ; call 0x4021f8
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_004373e3  ; jmp 0x4373e3
 
 loc_00437942:
@@ -72725,7 +72678,7 @@ add esp, 4
 loc_00437a6f:
 push 0
 push fcn_00436ef8  ; push 0x436ef8
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 test ebx, ebx
 je short loc_00437aa3  ; je 0x437aa3
@@ -73123,7 +73076,7 @@ mov byte [ref_0048c42d], dh  ; mov byte [0x48c42d], dh
 mov byte [ref_0048c42e], dh  ; mov byte [0x48c42e], dh
 push 0
 push 0x64
-mov edx, dword [ref_0046cad8]  ; mov edx, dword [0x46cad8]
+mov edx, dword [_callbackSize]  ; mov edx, dword [0x46cad8]
 push edx
 push esi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -73164,7 +73117,7 @@ je short loc_00437f23  ; je 0x437f23
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_00437f23  ; je 0x437f23
 mov eax, dword [esp + 0xec]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne short loc_00437f23  ; jne 0x437f23
 push 0
 call fcn_0044ee18  ; call 0x44ee18
@@ -74522,7 +74475,7 @@ push ebp
 push esi
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_00439193:
 add esp, 4
@@ -75484,7 +75437,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_00437e61  ; push 0x437e61
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 mov edi, dword [ref_0048c41c]  ; mov edi, dword [0x48c41c]
@@ -75902,7 +75855,7 @@ mov dword [ref_0048c4a4], ecx  ; mov dword [0x48c4a4], ecx
 mov dword [ref_0048c4a8], 0xffffffff  ; mov dword [0x48c4a8], 0xffffffff
 push ecx
 push 0x64
-mov esi, dword [ref_0046cad8]  ; mov esi, dword [0x46cad8]
+mov esi, dword [_callbackSize]  ; mov esi, dword [0x46cad8]
 push esi
 push ebp
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -76155,7 +76108,7 @@ cmp byte [ref_0048c4ac], 0  ; cmp byte [0x48c4ac], 0
 je near loc_0043a3d7  ; je 0x43a3d7
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0043a3d7  ; je 0x43a3d7
-cmp ebx, dword [ref_0046cad8]  ; cmp ebx, dword [0x46cad8]
+cmp ebx, dword [_callbackSize]  ; cmp ebx, dword [0x46cad8]
 jne near loc_0043a3d7  ; jne 0x43a3d7
 test byte [ref_0048c4a5], 0xff  ; test byte [0x48c4a5], 0xff
 je near loc_0043ab5a  ; je 0x43ab5a
@@ -77296,7 +77249,7 @@ push ebp
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 mov ecx, dword [ref_0048c4a8]  ; mov ecx, dword [0x48c4a8]
 push ecx
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_0043b5da:
 add esp, 4
@@ -78581,7 +78534,7 @@ mov dword [esp + 0x84], eax
 loc_0043c6db:
 push edi
 push fcn_0043a2dd  ; push 0x43a2dd
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov dword [esp + 0x8c], eax
 cmp dword [esp + 0xb4], 0
@@ -78950,7 +78903,7 @@ mov byte [ref_0048c4c8], ah  ; mov byte [0x48c4c8], ah
 mov byte [ref_0048c4c9], ah  ; mov byte [0x48c4c9], ah
 push 0
 push 0x64
-mov ecx, dword [ref_0046cad8]  ; mov ecx, dword [0x46cad8]
+mov ecx, dword [_callbackSize]  ; mov ecx, dword [0x46cad8]
 push ecx
 push edi
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -78975,7 +78928,7 @@ je near loc_0043cbe9  ; je 0x43cbe9
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je near loc_0043cbe9  ; je 0x43cbe9
 mov eax, dword [esp + 0x98]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne near loc_0043cbe9  ; jne 0x43cbe9
 xor dl, dl
 mov byte [ref_0048c4c8], dl  ; mov byte [0x48c4c8], dl
@@ -79512,7 +79465,7 @@ push 1
 call fcn_0044ee18  ; call 0x44ee18
 add esp, 4
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0043cf06  ; jmp 0x43cf06
 
 loc_0043d295:
@@ -79609,7 +79562,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_0043caab  ; push 0x43caab
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 mov edi, dword [ref_0048c4b4]  ; mov edi, dword [0x48c4b4]
@@ -80226,7 +80179,7 @@ mov byte [ref_0048c4f4], dh  ; mov byte [0x48c4f4], dh
 mov byte [ref_0048c4f6], dh  ; mov byte [0x48c4f6], dh
 push 0
 push 0x64
-mov ecx, dword [ref_0046cad8]  ; mov ecx, dword [0x46cad8]
+mov ecx, dword [_callbackSize]  ; mov ecx, dword [0x46cad8]
 push ecx
 push ebp
 call dword [cs:__imp__SetTimer@16]  ; ucall: call dword cs:[0x462324]
@@ -80284,7 +80237,7 @@ je short loc_0043db35  ; je 0x43db35
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_0043db35  ; je 0x43db35
 mov eax, dword [esp + 0x94]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne short loc_0043db35  ; jne 0x43db35
 push 0
 call fcn_0044ee18  ; call 0x44ee18
@@ -80595,7 +80548,7 @@ push ebx
 push ebp
 call dword [cs:__imp__KillTimer@8]  ; ucall: call dword cs:[0x4622fc]
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 
 loc_0043df8b:
@@ -81475,7 +81428,7 @@ call fcn_004549cf  ; call 0x4549cf
 add esp, 4
 push 0
 push fcn_0043da27  ; push 0x43da27
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 call fcn_00454bcc  ; call 0x454bcc
 mov edi, dword [ref_0048c4d4]  ; mov edi, dword [0x48c4d4]
@@ -83138,7 +83091,7 @@ dec eax
 push eax
 
 loc_0043feae:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_0043fd7e  ; jmp 0x43fd7e
 
@@ -83430,7 +83383,7 @@ mov ebx, dword [ref_0048c52c]  ; mov ebx, dword [0x48c52c]
 push ebx
 
 loc_00440248:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_0043fd7e  ; jmp 0x43fd7e
 
@@ -83734,7 +83687,7 @@ mov esi, dword [ref_0048c530]  ; mov esi, dword [0x48c530]
 push esi
 
 loc_0044065c:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 
 loc_00440661:
 add esp, 4
@@ -84141,7 +84094,7 @@ call dword [eax + 0x80]  ; ucall
 mov eax, dword [esp + 0x20]
 push eax
 push fcn_0043fae4  ; push 0x43fae4
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 mov ebx, eax
 add esp, 8
 push 0x28
@@ -84497,7 +84450,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push fcn_0043ff56  ; push 0x43ff56
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov esi, eax
 cmp eax, 0xffffffff
@@ -84661,7 +84614,7 @@ xor eax, eax
 mov al, byte [edi + 0x1a]
 push eax
 push fcn_004402d7  ; push 0x4402d7
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebx, eax
 push 0x28
@@ -85133,7 +85086,7 @@ mov esi, dword [ref_0048c538]  ; mov esi, dword [0x48c538]
 push esi
 
 loc_00441664:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00441579  ; jmp 0x441579
 
@@ -85329,7 +85282,7 @@ mov ebx, dword [ref_0048c544]  ; mov ebx, dword [0x48c544]
 push ebx
 
 loc_004418ac:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00441579  ; jmp 0x441579
 
@@ -85455,7 +85408,7 @@ shl eax, 0x10
 or eax, edi
 push eax
 push fcn_004413ec  ; push 0x4413ec
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebx, eax
 push 0x28
@@ -85666,7 +85619,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push fcn_004416f0  ; push 0x4416f0
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 mov ebx, eax
 add esp, 8
 push 0x8028
@@ -91444,7 +91397,7 @@ mov ebx, dword [ref_0048c560]  ; mov ebx, dword [0x48c560]
 push ebx
 
 loc_00445da3:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp short loc_00445d7d  ; jmp 0x445d7d
 
@@ -91616,7 +91569,7 @@ loc_00445f88:
 cmp byte [ref_0046cb01], 0  ; cmp byte [0x46cb01], 0
 je short loc_00445f7e  ; je 0x445f7e
 mov eax, dword [esp + 0x64]
-cmp eax, dword [ref_0046cad8]  ; cmp eax, dword [0x46cad8]
+cmp eax, dword [_callbackSize]  ; cmp eax, dword [0x46cad8]
 jne short loc_00445f7e  ; jne 0x445f7e
 mov edi, dword [ref_0048c56c]  ; mov edi, dword [0x48c56c]
 cmp edi, 0x40
@@ -91758,7 +91711,7 @@ add esp, 0xc
 loc_0044618d:
 push 0
 push 0x32
-mov edx, dword [ref_0046cad8]  ; mov edx, dword [0x46cad8]
+mov edx, dword [_callbackSize]  ; mov edx, dword [0x46cad8]
 push edx
 mov ecx, dword [esp + 0x68]
 push ecx
@@ -92136,7 +92089,7 @@ mov ebp, dword [ref_0048c584]  ; mov ebp, dword [0x48c584]
 push ebp
 
 loc_00446698:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00445f7e  ; jmp 0x445f7e
 
@@ -92449,7 +92402,7 @@ mov ebx, dword [ref_0048c598]  ; mov ebx, dword [0x48c598]
 push ebx
 
 loc_00446a59:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00445d7d  ; jmp 0x445d7d
 
@@ -92508,7 +92461,7 @@ fcn_00446ae8:
 mov edx, dword [esp + 4]
 push edx
 push fcn_00445e4d  ; push 0x445e4d
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 ret
 
@@ -93073,7 +93026,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push fcn_00446774  ; push 0x446774
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebx, eax
 mov dword [esp], 0x5c
@@ -94232,7 +94185,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push fcn_00445c14  ; push 0x445c14
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 mov esi, eax
 add esp, 8
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
@@ -102987,7 +102940,7 @@ push ebp
 call fcn_00451edb  ; call 0x451edb
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 
 loc_0044e586:
@@ -103534,7 +103487,7 @@ and edx, 0xffff
 or eax, edx
 push eax
 push fcn_0044e40b  ; push 0x44e40b
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebp, dword [ref_0048c5f8]  ; mov ebp, dword [0x48c5f8]
 push ebp
@@ -107708,7 +107661,7 @@ je short loc_00451632  ; je 0x451632
 xor bl, bl
 mov byte [ref_0046cb02], bl  ; mov byte [0x46cb02], bl
 push 1
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp short loc_00451632  ; jmp 0x451632
 
@@ -107773,7 +107726,7 @@ loc_00451701:
 mov ebx, dword [esp + 0x5c]
 push ebx
 push fcn_0045156f  ; push 0x45156f
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 mov ebx, eax
 add esp, 8
 push 0
@@ -107798,7 +107751,7 @@ fcn_0045174a:
 xor ah, ah
 mov byte [ref_0046cb02], ah  ; mov byte [0x46cb02], ah
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 ret
 
@@ -109745,7 +109698,7 @@ mov dword [esp + 0xc], eax
 push 0
 lea eax, [esp + 4]
 push eax
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 call dword [cs:__imp__InvalidateRect@12]  ; ucall: call dword cs:[0x4622f8]
 
@@ -110257,7 +110210,7 @@ push 0x29
 call fcn_004021f8  ; call 0x4021f8
 add esp, 0xc
 push ebx
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp short loc_00453107  ; jmp 0x453107
 
 loc_00453145:
@@ -110531,7 +110484,7 @@ push 0x29
 call fcn_004021f8  ; call 0x4021f8
 add esp, 0xc
 push 0
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 jmp near loc_0045342f  ; jmp 0x45342f
 
 loc_004534d6:
@@ -110629,7 +110582,7 @@ mov eax, dword [esp + 0x24]
 mov dword [ref_0048ca98], eax  ; mov dword [0x48ca98], eax
 push 0
 push fcn_00452c02  ; push 0x452c02
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov ebx, eax
 movsx eax, word [ref_0048cab6]  ; movsx eax, word [0x48cab6]
@@ -110944,7 +110897,7 @@ add esp, 4
 push 0
 
 loc_004539bd:
-call fcn_00401966  ; call 0x401966
+call _Post_0402_Message  ; call 0x401966
 add esp, 4
 jmp near loc_00453739  ; jmp 0x453739
 
@@ -111058,7 +111011,7 @@ push eax
 call dword [edx + 0x80]  ; ucall
 push 0
 push fcn_0045367e  ; push 0x45367e
-call fcn_004018e7  ; call 0x4018e7
+call _Wait_0402_Message  ; call 0x4018e7
 add esp, 8
 mov esi, eax
 mov eax, dword [ref_0048cac8]  ; mov eax, dword [0x48cac8]
@@ -111121,7 +111074,7 @@ loc_00453bad:
 mov eax, dword [ref_0047e748]  ; mov eax, dword [0x47e748]
 mov edx, dword [eax]
 push 3
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 push eax
 call dword [edx + 0x18]  ; ucall
@@ -112562,7 +112515,7 @@ jne short loc_00454ab8  ; jne 0x454ab8
 loc_00454a93:
 test edi, edi
 je short loc_00454ab8  ; je 0x454ab8
-mov eax, dword [ref_0048a0d4]  ; mov eax, dword [0x48a0d4]
+mov eax, dword [_gWindowHandle]  ; mov eax, dword [0x48a0d4]
 push eax
 push 0
 push 0
@@ -112741,7 +112694,7 @@ lea eax, [esp + 8]
 push eax
 call _libc_sprintf  ; call 0x457110
 add esp, 0xc
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 push 0
 push 0
@@ -112754,7 +112707,7 @@ mov byte [ref_0046cb03], 1  ; mov byte [0x46cb03], 1
 jmp short loc_00454d1e  ; jmp 0x454d1e
 
 loc_00454cd9:
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 push ebx
 push ebx
@@ -112802,7 +112755,7 @@ pop ebx
 ret
 
 loc_00454d4b:
-mov ebx, dword [ref_0048a0d4]  ; mov ebx, dword [0x48a0d4]
+mov ebx, dword [_gWindowHandle]  ; mov ebx, dword [0x48a0d4]
 push ebx
 push 0
 push 0
@@ -112812,7 +112765,7 @@ jmp short loc_00454d88  ; jmp 0x454d88
 loc_00454d5d:
 test byte [ref_0047e772], 0x80  ; test byte [0x47e772], 0x80
 je short loc_00454d78  ; je 0x454d78
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 push 0
 push 0
@@ -112820,7 +112773,7 @@ push ref_0046655f  ; push 0x46655f
 jmp short loc_00454d88  ; jmp 0x454d88
 
 loc_00454d78:
-mov edx, dword [ref_0048a0d4]  ; mov edx, dword [0x48a0d4]
+mov edx, dword [_gWindowHandle]  ; mov edx, dword [0x48a0d4]
 push edx
 push 0
 push 0
@@ -112898,7 +112851,7 @@ jne short loc_00454ec8  ; jne 0x454ec8
 loc_00454e5c:
 test ebx, ebx
 je short loc_00454ec8  ; je 0x454ec8
-mov ebp, dword [ref_0048a0d4]  ; mov ebp, dword [0x48a0d4]
+mov ebp, dword [_gWindowHandle]  ; mov ebp, dword [0x48a0d4]
 push ebp
 push 0
 push 0
@@ -112920,7 +112873,7 @@ lea eax, [esp + 8]
 push eax
 call _libc_sprintf  ; call 0x457110
 add esp, 0xc
-mov ecx, dword [ref_0048a0d4]  ; mov ecx, dword [0x48a0d4]
+mov ecx, dword [_gWindowHandle]  ; mov ecx, dword [0x48a0d4]
 push ecx
 push 0
 push 0
@@ -126621,9 +126574,6 @@ db '#1373@20',0x00
 
 
 
-
-ref_0046cad8:
-dd 0x00000000
 
 ref_0046cadc:
 dd 0x00000000
@@ -155163,9 +155113,6 @@ section .bss
 ref_0048a000:
 resb 16
 
-ref_0048a010:
-resb 64
-
 ref_0048a050:
 resb 4
 
@@ -155205,7 +155152,7 @@ resb 68
 ref_0048a0d0:
 resb 4
 
-ref_0048a0d4:
+_gWindowHandle:			; ref_0048a0d4
 resb 4
 
 ref_0048a0d8:

@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "window_util.h"
+#include "rich4_window_util.h"
 
 wProc windowCallbacks[16]; // 48a010
 int callbackSize = 0; // 0x46cad8
