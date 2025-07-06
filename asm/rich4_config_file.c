@@ -16,7 +16,7 @@ const rich4_key_t default_hotkeys[28] =
    {0x48, 0}, {0x21, 0}, {0x22, 0}, {0x51, 0x11}
   };
 
-extern rich4_cfg global_rich4_cfg; // 0x497158
+rich4_cfg global_rich4_cfg; // 0x497158
 
 void rich4_read_config(void)
 {
