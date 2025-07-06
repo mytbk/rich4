@@ -5,6 +5,8 @@
 
 本逆向项目从2018年开始，做了3个月的逆向，发现了大富翁4的数据文件解压算法、存档格式等有用的信息，但是由于时间关系，没能继续此项目。在2021年5月，我采用逐步修改程序的思路进行逆向，用 `r2dumpbin <https://github.com/mytbk/r2dumpbin>`__ 将 rich4.exe 转为汇编，使得逆向，修改，测试可以同步进行，提高逆向效率。
 
+在2025年5月，我建立了 `rich4_asm <https://codeberg.org/vimacs/rich4_asm>`__ 项目，对大富翁4的反汇编进行注释，并且尝试拆分该反汇编文件。到了7月，通过对照 Watcom 编译器的代码，我已经把大富翁4的反汇编文件里用到的C库和运行时都剥离了出来，从而可以改用 MinGW 和 msvcrt 运行时库链接出可用的 rich4.exe.
+
 参与项目
 -----------
 
@@ -16,25 +18,27 @@
 --------
 
 * csrc: 逆向后的C代码
-* asm: rich4.exe 的反汇编，并将部分汇编代码替换为C代码
+* asm: rich4.exe 的反汇编，并将部分汇编代码替换为C代码，可以编译并链接生成可用的程序
 * docs: 相关文档
 
-如果需要阅读 r2dumpbin 转出来的反汇编代码，以及带注释的反汇编，可以见 https://codeberg.org/vimacs/rich4_asm 版本库。
+如果需要阅读 r2dumpbin 转出来的反汇编代码，以及带注释的反汇编，可以见 `rich4_asm <https://codeberg.org/vimacs/rich4_asm>`__ 版本库。
 
 构建
 -------
 
 本项目在 Arch Linux 下开发，使用 MinGW 工具链和 nasm 汇编器，可以执行 ``pacman -S mingw-w64 nasm`` 安装。
 
-构建 rich4.exe::
+Arch 从 wine 10.10 开始使用 WoW64 模式构建 wine，而目前大富翁4的程序在 WoW64 模式的 wine 下无法启动，因此需要手动构建 multilib 版的 wine.
+
+构建 rich4_mscrt.exe::
 
   cd asm
   make
 
-将 rich4.exe 复制到大富翁4的游戏目录，用 wine 运行即可启动游戏。
+将 rich4_mscrt.exe 复制到大富翁4的游戏目录，用 wine 运行即可启动游戏。
 
-radare2 工程文件和辅助脚本
------------------------------
+radare2 工程文件和辅助脚本（已停止维护）
+-----------------------------------------------------------
 
 本项目的 radare2 工程文件和辅助脚本在另一仓库中，用如下方式获取::
 
