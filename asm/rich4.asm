@@ -181,6 +181,11 @@ extern _callbackSize
 extern _windowCallbacks
 global _gWindowHandle
 
+extern _load_mkf
+extern _unload_mkf
+extern _read_mkf
+global _pixel_fmt
+
 extern _rich4_read_config
 extern _rich4_write_config
 extern _global_rich4_cfg
@@ -661,7 +666,7 @@ push 0
 push 0x259
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
@@ -803,19 +808,19 @@ add esp, 4
 call fcn_0044f935  ; call 0x44f935
 call fcn_0045175d  ; call 0x45175d
 push ref_0046303e  ; push 0x46303e
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 add esp, 4
 mov dword [ref_0048a0e4], eax  ; mov dword [0x48a0e4], eax
 push ref_00463047  ; push 0x463047
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 add esp, 4
 mov dword [ref_0048a054], eax  ; mov dword [0x48a054], eax
 push ref_00463054  ; push 0x463054
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 add esp, 4
 mov dword [ref_0048a05c], eax  ; mov dword [0x48a05c], eax
 push ref_0046305e  ; push 0x46305e
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 add esp, 4
 mov dword [ref_0048a058], eax  ; mov dword [0x48a058], eax
 push ref_0048231a  ; push 0x48231a
@@ -880,19 +885,19 @@ call fcn_004021b2  ; call 0x4021b2
 call fcn_004548ef  ; call 0x4548ef
 mov ecx, dword [ref_0048a058]  ; mov ecx, dword [0x48a058]
 push ecx
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 mov esi, dword [ref_0048a054]  ; mov esi, dword [0x48a054]
 push esi
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 call fcn_00419228  ; call 0x419228
 call fcn_0044f9b3  ; call 0x44f9b3
@@ -1588,7 +1593,7 @@ push edx
 push edx
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0046cb10], eax  ; mov dword [0x46cb10], eax
 push 0
@@ -2355,7 +2360,7 @@ push 0
 push 1
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a180], eax  ; mov dword [0x48a180], eax
 xor ebx, ebx
@@ -4011,7 +4016,7 @@ push edx
 push 0x208
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a338], eax  ; mov dword [0x48a338], eax
 push 0
@@ -4019,7 +4024,7 @@ push 0
 push 2
 mov ebx, dword [ref_0048a0e4]  ; mov ebx, dword [0x48a0e4]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a328], eax  ; mov dword [0x48a328], eax
 cmp dword [esp + 0x64], 0
@@ -4360,7 +4365,7 @@ push 0
 push 0x208
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a338], eax  ; mov dword [0x48a338], eax
 push 0
@@ -4368,7 +4373,7 @@ push 0
 push 2
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a328], eax  ; mov dword [0x48a328], eax
 mov ebx, 0x28
@@ -5391,7 +5396,7 @@ push edi
 push esi
 mov ebp, dword [ref_0048a3b0]  ; mov ebp, dword [0x48a3b0]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_0048a364], eax  ; mov dword [ebx + 0x48a364], eax
 pop ebp
@@ -6117,7 +6122,7 @@ add eax, dword [ref_0046cb54]  ; add eax, dword [0x46cb54]
 push eax
 mov ecx, dword [ref_0048a3b0]  ; mov ecx, dword [0x48a3b0]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 push 0xfffffffffffffff0
 push 0x96000
@@ -7980,7 +7985,7 @@ call _libc_malloc  ; call 0x456f80
 add esp, 4
 mov dword [ref_0048a358], eax  ; mov dword [0x48a358], eax
 push ref_00463187  ; push 0x463187
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 add esp, 4
 mov dword [ref_0048a3b0], eax  ; mov dword [0x48a3b0], eax
 push 0
@@ -7992,7 +7997,7 @@ movsx ecx, word [ref_004991b8]  ; movsx ecx, word [0x4991b8]
 add edx, ecx
 push edx
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 push 0xfffffffffffffff0
 push 0x96000
@@ -8021,7 +8026,7 @@ push 0
 push 8
 mov esi, dword [ref_0048a3b0]  ; mov esi, dword [0x48a3b0]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a3b8], eax  ; mov dword [0x48a3b8], eax
 push 0
@@ -8029,7 +8034,7 @@ push 0
 push 2
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a3c0], eax  ; mov dword [0x48a3c0], eax
 xor ebp, ebp
@@ -8233,7 +8238,7 @@ add esp, 8
 mov dword [esp + 4], eax
 mov esi, dword [ref_0048a3b0]  ; mov esi, dword [0x48a3b0]
 push esi
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 cmp ebx, 1
 jne near loc_004074c9  ; jne 0x4074c9
@@ -8598,7 +8603,7 @@ sub esp, 0x14
 movsx eax, word [ref_004991b8]  ; movsx eax, word [0x4991b8]
 mov byte [eax + ref_004990f0], 1  ; mov byte [eax + 0x4990f0], 1
 push ref_00463187  ; push 0x463187
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 add esp, 4
 mov dword [ref_0048a3b0], eax  ; mov dword [0x48a3b0], eax
 push 0
@@ -8609,7 +8614,7 @@ movsx ecx, word [ref_004991b8]  ; movsx ecx, word [0x4991b8]
 add edx, ecx
 push edx
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a354], eax  ; mov dword [0x48a354], eax
 push 0
@@ -8617,12 +8622,12 @@ push 0
 push 8
 mov edx, dword [ref_0048a3b0]  ; mov edx, dword [0x48a3b0]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a3b8], eax  ; mov dword [0x48a3b8], eax
 mov ecx, dword [ref_0048a3b0]  ; mov ecx, dword [0x48a3b0]
 push ecx
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 xor ebx, ebx
 mov esi, dword [ref_00499114]  ; mov esi, dword [0x499114]
@@ -8645,7 +8650,7 @@ lea eax, [ebp + 0x64]
 push eax
 mov edi, dword [ref_0048a05c]  ; mov edi, dword [0x48a05c]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a3bc], eax  ; mov dword [0x48a3bc], eax
 push 0
@@ -8653,7 +8658,7 @@ push 0
 push 0x5d
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a38c], eax  ; mov dword [0x48a38c], eax
 cmp word [ref_004991b6], 0  ; cmp word [0x4991b6], 0
@@ -8818,7 +8823,7 @@ push 0
 push 0x70
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048a3a8], eax  ; mov dword [0x48a3a8], eax
 mov ecx, dword [esp + 0x14]
@@ -8908,7 +8913,7 @@ push eax
 push 0x22c
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0
@@ -9052,7 +9057,7 @@ push edi
 push ebp
 call fcn_004080f5  ; call 0x4080f5
 push ref_004631c0  ; push 0x4631c0
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 mov ebx, eax
 add esp, 4
 mov edi, eax
@@ -9065,7 +9070,7 @@ add eax, edx
 add eax, eax
 push eax
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_00474945], eax  ; mov dword [0x474945], eax
 push 0
@@ -9077,7 +9082,7 @@ add eax, edx
 add eax, 0x10
 push eax
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048badc], eax  ; mov dword [0x48badc], eax
 push 0
@@ -9089,7 +9094,7 @@ add eax, edx
 add eax, 0x10
 push eax
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bad0], eax  ; mov dword [0x48bad0], eax
 push 0x200
@@ -9108,20 +9113,20 @@ push 0
 push 0
 push 0x18
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_00474949], eax  ; mov dword [0x474949], eax
 push 0
 push 0
 push 0x1a
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0047494d], eax  ; mov dword [0x47494d], eax
 cmp dword [ref_0047493c], 0  ; cmp dword [0x47493c], 0
 jne near loc_00407e0b  ; jne 0x407e0b
 push ref_004631c8  ; push 0x4631c8
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 mov esi, eax
 add esp, 4
 cmp eax, 0xffffffff
@@ -9134,11 +9139,11 @@ movsx edx, word [ref_004991b8]  ; movsx edx, word [0x4991b8]
 add eax, edx
 push eax
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0047493c], eax  ; mov dword [0x47493c], eax
 push esi
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 jmp short loc_00407c3f  ; jmp 0x407c3f
 
@@ -9153,7 +9158,7 @@ add eax, eax
 inc eax
 push eax
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0047493c], eax  ; mov dword [0x47493c], eax
 
@@ -9325,7 +9330,7 @@ add eax, ebx
 add eax, 0x27
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx*4 + ref_0048ae4c], eax  ; mov dword [ebx*4 + 0x48ae4c], eax
 inc ebx
@@ -9340,7 +9345,7 @@ add edx, 0x4f
 add eax, edx
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048ae60], eax  ; mov dword [0x48ae60], eax
 cmp word [ref_004991b6], 0  ; cmp word [0x4991b6], 0
@@ -9353,7 +9358,7 @@ push 0
 lea eax, [ebx + 0x57]
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx*4 + ref_0048ae64], eax  ; mov dword [ebx*4 + 0x48ae64], eax
 inc ebx
@@ -9375,7 +9380,7 @@ push 0
 lea eax, [esi + ebx]
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx*4 + ref_0048ae64], eax  ; mov dword [ebx*4 + 0x48ae64], eax
 inc ebx
@@ -9403,7 +9408,7 @@ push ebp
 add eax, 0x26
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [esi + ref_0048ae4c], eax  ; mov dword [esi + 0x48ae4c], eax
 
@@ -9436,7 +9441,7 @@ push edx
 add eax, 0x26
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [esi + ref_0048ae4c], eax  ; mov dword [esi + 0x48ae4c], eax
 
@@ -9449,7 +9454,7 @@ push 0
 push 0
 push 0x19
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048aea8], eax  ; mov dword [0x48aea8], eax
 push 0x1d4
@@ -9476,7 +9481,7 @@ mov al, byte [esi + ref_00496b7b]  ; mov al, byte [esi + 0x496b7b]
 add eax, 0x1b
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov edx, eax
 add esp, 0x10
 imul eax, ebx, 0x34
@@ -9511,7 +9516,7 @@ jmp near loc_00407f94  ; jmp 0x407f94
 
 loc_0040801a:
 push edi
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 mov ebx, 1
 mov edi, dword [ref_00498e9c]  ; mov edi, dword [0x498e9c]
@@ -9548,7 +9553,7 @@ push 0
 push 0x205
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bad8], eax  ; mov dword [0x48bad8], eax
 push 0
@@ -9556,7 +9561,7 @@ push 0
 push 0x207
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bad4], eax  ; mov dword [0x48bad4], eax
 xor ebx, ebx
@@ -9568,7 +9573,7 @@ lea eax, [ebx + 0x18c]
 push eax
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx*4 + ref_00496930], eax  ; mov dword [ebx*4 + 0x496930], eax
 inc ebx
@@ -13562,7 +13567,7 @@ push 0
 push 0x20b
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0
@@ -14364,7 +14369,7 @@ add edi, 0x12
 push edi
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb8], eax  ; mov dword [ebx + 0x498eb8], eax
 
@@ -14416,7 +14421,7 @@ lea eax, [edi + 0x10]
 push eax
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb4], eax  ; mov dword [ebx + 0x498eb4], eax
 push 0
@@ -14425,7 +14430,7 @@ lea eax, [edi + 0x11]
 push eax
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ebc], eax  ; mov dword [ebx + 0x498ebc], eax
 push 0
@@ -14434,7 +14439,7 @@ add edi, 2
 push edi
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ec4], eax  ; mov dword [ebx + 0x498ec4], eax
 
@@ -14486,7 +14491,7 @@ lea eax, [edi + 0xd]
 push eax
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb8], eax  ; mov dword [ebx + 0x498eb8], eax
 push 0
@@ -14495,7 +14500,7 @@ lea eax, [edi + 0xe]
 push eax
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ec0], eax  ; mov dword [ebx + 0x498ec0], eax
 push 0
@@ -14504,7 +14509,7 @@ add edi, 0xf
 push edi
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ec8], eax  ; mov dword [ebx + 0x498ec8], eax
 
@@ -14578,7 +14583,7 @@ push 0
 push edi
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb4], eax  ; mov dword [ebx + 0x498eb4], eax
 push 0
@@ -14587,7 +14592,7 @@ lea eax, [edi + 1]
 push eax
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ebc], eax  ; mov dword [ebx + 0x498ebc], eax
 push 0
@@ -14596,7 +14601,7 @@ lea eax, [edi + 2]
 push eax
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ec4], eax  ; mov dword [ebx + 0x498ec4], eax
 mov al, byte [ebp + ref_00496b79]  ; mov al, byte [ebp + 0x496b79]
@@ -14609,7 +14614,7 @@ add edi, 3
 push edi
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ecc], eax  ; mov dword [ebx + 0x498ecc], eax
 
@@ -14686,7 +14691,7 @@ push 0
 push edi
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb4], eax  ; mov dword [ebx + 0x498eb4], eax
 push 0
@@ -14695,7 +14700,7 @@ add edi, 3
 push edi
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ebc], eax  ; mov dword [ebx + 0x498ebc], eax
 jmp near loc_0040baaa  ; jmp 0x40baaa
@@ -14729,7 +14734,7 @@ add edi, 2
 push edi
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ec0], eax  ; mov dword [ebx + 0x498ec0], eax
 jmp near loc_0040bb76  ; jmp 0x40bb76
@@ -14754,7 +14759,7 @@ push 0
 push edi
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb4], eax  ; mov dword [ebx + 0x498eb4], eax
 push 0
@@ -14763,7 +14768,7 @@ inc edi
 push edi
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ebc], eax  ; mov dword [ebx + 0x498ebc], eax
 
@@ -14811,7 +14816,7 @@ push 0
 push 0x209
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb4], eax  ; mov dword [ebx + 0x498eb4], eax
 push 0
@@ -14819,7 +14824,7 @@ push 0
 push 0x20a
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498ebc], eax  ; mov dword [ebx + 0x498ebc], eax
 
@@ -14886,7 +14891,7 @@ mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
 
 loc_0040bff7:
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx + ref_00498eb8], eax  ; mov dword [ebx + 0x498eb8], eax
 imul eax, edi, 0x34
@@ -16138,7 +16143,7 @@ push 0
 push 0x22b
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x64
@@ -16636,7 +16641,7 @@ push edi
 push 0x22e
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov ebx, eax
 push 0x60
@@ -16651,7 +16656,7 @@ push 0
 push 0x215
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov ebx, eax
 push 0x54
@@ -16725,7 +16730,7 @@ push 0
 push 0x215
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov ebx, eax
 push 0x54
@@ -16738,7 +16743,7 @@ push 0
 push 0x22e
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov ebx, eax
 push 0x60
@@ -17245,7 +17250,7 @@ push 0
 push 0x20e
 mov ebx, dword [ref_0048a0e4]  ; mov ebx, dword [0x48a0e4]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bb01], eax  ; mov dword [0x48bb01], eax
 push 0xff0001
@@ -18672,7 +18677,7 @@ push 0
 push 0x21c
 mov esi, dword [ref_0048a0e4]  ; mov esi, dword [0x48a0e4]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x66
@@ -18757,7 +18762,7 @@ push 0
 push 0x21d
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x67
@@ -18810,7 +18815,7 @@ push 0
 push 0x21e
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x68
@@ -18873,7 +18878,7 @@ push 0
 push 0x21f
 mov ebx, dword [ref_0048a0e4]  ; mov ebx, dword [0x48a0e4]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x69
@@ -18953,7 +18958,7 @@ push 0
 push 0x220
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x6a
@@ -19022,7 +19027,7 @@ push 0
 push 0x221
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x6b
@@ -19075,7 +19080,7 @@ push 0
 push 0x222
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x6c
@@ -19145,7 +19150,7 @@ push 0
 push 0x223
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x6d
@@ -19186,7 +19191,7 @@ push 0
 push 0x224
 mov ebx, dword [ref_0048a0e4]  ; mov ebx, dword [0x48a0e4]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x6e
@@ -19216,7 +19221,7 @@ push 0
 push 0x225
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x70
@@ -19240,7 +19245,7 @@ push 0
 push 0x226
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x6f
@@ -19279,7 +19284,7 @@ push 0
 push 0x227
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x71
@@ -19512,7 +19517,7 @@ push 0
 push 0x20e
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x5f
@@ -22649,7 +22654,7 @@ push 0
 push 3
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bb60], eax  ; mov dword [0x48bb60], eax
 push 1
@@ -27099,7 +27104,7 @@ push 0
 push 0x4e
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd3c], eax  ; mov dword [0x48bd3c], eax
 push 0
@@ -27107,7 +27112,7 @@ push 0
 push 0x4f
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bcd0], eax  ; mov dword [0x48bcd0], eax
 push 0
@@ -27115,7 +27120,7 @@ push 0
 push 0x50
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd34], eax  ; mov dword [0x48bd34], eax
 push 0
@@ -27123,7 +27128,7 @@ push 0
 push 0x51
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd38], eax  ; mov dword [0x48bd38], eax
 push 0
@@ -27131,7 +27136,7 @@ push 0
 push 0x52
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bcf8], eax  ; mov dword [0x48bcf8], eax
 push 0
@@ -27139,7 +27144,7 @@ push 0
 push 0x53
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd28], eax  ; mov dword [0x48bd28], eax
 push 0
@@ -27147,7 +27152,7 @@ push 0
 push 0x54
 mov edi, dword [ref_0048a05c]  ; mov edi, dword [0x48a05c]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bcd8], eax  ; mov dword [0x48bcd8], eax
 push 0
@@ -27155,7 +27160,7 @@ push 0
 push 0x55
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bcd4], eax  ; mov dword [0x48bcd4], eax
 xor ebx, ebx
@@ -27167,7 +27172,7 @@ lea eax, [ebx + 0x56]
 push eax
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx*4 + ref_0048bd14], eax  ; mov dword [ebx*4 + 0x48bd14], eax
 inc ebx
@@ -27305,7 +27310,7 @@ push 0
 push 0x4e
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd3c], eax  ; mov dword [0x48bd3c], eax
 push 0
@@ -27313,7 +27318,7 @@ push 0
 push 0x4f
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bcd0], eax  ; mov dword [0x48bcd0], eax
 push 0
@@ -27321,7 +27326,7 @@ push 0
 push 0x5b
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd34], eax  ; mov dword [0x48bd34], eax
 push 0x80
@@ -27391,7 +27396,7 @@ push 0
 push 0x4e
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd3c], eax  ; mov dword [0x48bd3c], eax
 push 0
@@ -27399,7 +27404,7 @@ push 0
 push 0x4f
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bcd0], eax  ; mov dword [0x48bcd0], eax
 push 0
@@ -27407,7 +27412,7 @@ push 0
 push 0x5c
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd38], eax  ; mov dword [0x48bd38], eax
 push 0
@@ -27419,7 +27424,7 @@ add eax, 0x64
 push eax
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bd30], eax  ; mov dword [0x48bd30], eax
 push 0
@@ -27427,7 +27432,7 @@ push 0
 push 0x5d
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bce4], eax  ; mov dword [0x48bce4], eax
 push 0
@@ -27435,7 +27440,7 @@ push 0
 push 0x5e
 mov edi, dword [ref_0048a05c]  ; mov edi, dword [0x48a05c]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bcf4], eax  ; mov dword [0x48bcf4], eax
 xor ebx, ebx
@@ -27447,7 +27452,7 @@ lea eax, [ebx + 0x5f]
 push eax
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx*4 + ref_0048bd14], eax  ; mov dword [ebx*4 + 0x48bd14], eax
 inc ebx
@@ -27458,7 +27463,7 @@ push 0
 push 0x20e
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bce8], eax  ; mov dword [0x48bce8], eax
 mov eax, dword [ref_0048bd38]  ; mov eax, dword [0x48bd38]
@@ -27550,7 +27555,7 @@ push edi
 push ebp
 sub esp, 0x10
 push ref_004637cf  ; push 0x4637cf
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 mov ebx, eax
 add esp, 4
 mov edi, eax
@@ -27558,14 +27563,14 @@ push 0
 push 0
 push 0x2d
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bdb0], eax  ; mov dword [0x48bdb0], eax
 push 0
 push 0
 push 0x2e
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048bdb4], eax  ; mov dword [0x48bdb4], eax
 push 0x20
@@ -27600,7 +27605,7 @@ add eax, 0x2f
 add eax, ecx
 push eax
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov ecx, esi
 shl ecx, 4
@@ -27611,7 +27616,7 @@ jmp short loc_004158cf  ; jmp 0x4158cf
 
 loc_00415910:
 push edi
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 call fcn_00454acb  ; call 0x454acb
 cmp word [ref_004991b6], 0  ; cmp word [0x4991b6], 0
@@ -29205,7 +29210,7 @@ push esi
 push ebx
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 
 loc_00416bfb:
@@ -31996,7 +32001,7 @@ add eax, 0x22f
 push eax
 mov esi, dword [ref_0048a0e4]  ; mov esi, dword [0x48a0e4]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0xffffffffffffffff
@@ -32384,7 +32389,7 @@ push edx
 push edx
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048be0c], eax  ; mov dword [0x48be0c], eax
 push 0
@@ -32392,7 +32397,7 @@ push 0
 push 1
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_00475118], eax  ; mov dword [0x475118], eax
 push 0
@@ -32400,7 +32405,7 @@ push 0
 push 2
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048be10], eax  ; mov dword [0x48be10], eax
 push 0
@@ -32408,7 +32413,7 @@ push 0
 push 3
 mov edi, dword [ref_0048a05c]  ; mov edi, dword [0x48a05c]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048be14], eax  ; mov dword [0x48be14], eax
 push 0
@@ -32416,7 +32421,7 @@ push 0
 push 7
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048be04], eax  ; mov dword [0x48be04], eax
 push 0
@@ -32424,7 +32429,7 @@ push 0
 push 8
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048be08], eax  ; mov dword [0x48be08], eax
 xor ebx, ebx
@@ -32436,7 +32441,7 @@ lea eax, [ebx + 4]
 push eax
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ebx*4 + ref_0048bdf8], eax  ; mov dword [ebx*4 + 0x48bdf8], eax
 inc ebx
@@ -34529,7 +34534,7 @@ push 0
 push 0x229
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov esi, eax
 push 0
@@ -34733,7 +34738,7 @@ push 0
 push 0x229
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov esi, eax
 add esp, 0x10
 push 0
@@ -35110,7 +35115,7 @@ push 0
 push 0x219
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x62
@@ -35157,7 +35162,7 @@ push 0
 push 0x219
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x62
@@ -35196,7 +35201,7 @@ push 0
 push 0x219
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x62
@@ -35223,7 +35228,7 @@ push 0
 push 0x218
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x63
@@ -35545,7 +35550,7 @@ push 0
 push 0x20d
 mov esi, dword [ref_0048a0e4]  ; mov esi, dword [0x48a0e4]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x52
@@ -35635,7 +35640,7 @@ push edi
 push 0x228
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x55
@@ -35661,7 +35666,7 @@ push 0
 push 0x214
 mov ebx, dword [ref_0048a0e4]  ; mov ebx, dword [0x48a0e4]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x5d
@@ -36094,7 +36099,7 @@ push 0
 push 0x20d
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x52
@@ -39286,7 +39291,7 @@ push 0
 push 0x4d
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048be50], eax  ; mov dword [0x48be50], eax
 push 1
@@ -47831,7 +47836,7 @@ push 0
 push 9
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c270], eax  ; mov dword [0x48c270], eax
 push 0
@@ -47839,7 +47844,7 @@ push 0
 push 0x4a
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c274], eax  ; mov dword [0x48c274], eax
 push 0
@@ -53052,7 +53057,7 @@ push 0
 push 0x49
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c298], eax  ; mov dword [0x48c298], eax
 push 0
@@ -53060,7 +53065,7 @@ push 0
 push 0x4a
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c2a8], eax  ; mov dword [0x48c2a8], eax
 push 1
@@ -57112,7 +57117,7 @@ push 0
 push 0x4b
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c2dc], eax  ; mov dword [0x48c2dc], eax
 push 1
@@ -57521,7 +57526,7 @@ push 0
 push 0x4c
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c2dc], eax  ; mov dword [0x48c2dc], eax
 push 0x10
@@ -61146,7 +61151,7 @@ push 0
 push 0xa
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c308], eax  ; mov dword [0x48c308], eax
 push 0
@@ -61154,7 +61159,7 @@ push 0
 push 0xb
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c30c], eax  ; mov dword [0x48c30c], eax
 push 0
@@ -64666,7 +64671,7 @@ push 0
 push 0xc
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c35c], eax  ; mov dword [0x48c35c], eax
 push 0
@@ -64674,7 +64679,7 @@ push 0
 push 0xd
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c368], eax  ; mov dword [0x48c368], eax
 push 0
@@ -64682,7 +64687,7 @@ push 0
 push 0xe
 mov edi, dword [ref_0048a05c]  ; mov edi, dword [0x48a05c]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c364], eax  ; mov dword [0x48c364], eax
 push 6
@@ -64783,7 +64788,7 @@ push 0
 push 0xf
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c360], eax  ; mov dword [0x48c360], eax
 push 0
@@ -64791,7 +64796,7 @@ push 0
 push 0xd
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c368], eax  ; mov dword [0x48c368], eax
 push 0
@@ -64799,7 +64804,7 @@ push 0
 push 0x10
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c358], eax  ; mov dword [0x48c358], eax
 push 0
@@ -64807,7 +64812,7 @@ push 0
 push 0x11
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c354], eax  ; mov dword [0x48c354], eax
 push 8
@@ -65621,7 +65626,7 @@ push 0
 push 0x229
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebp, eax
 add esp, 0x10
 push 0
@@ -65836,7 +65841,7 @@ push 0
 push 0x211
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebp, eax
 add esp, 0x10
 push 0
@@ -67461,7 +67466,7 @@ push 0
 push 0x12
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c398], eax  ; mov dword [0x48c398], eax
 push 0
@@ -67469,7 +67474,7 @@ push 0
 push 0x13
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c394], eax  ; mov dword [0x48c394], eax
 push 0
@@ -67477,7 +67482,7 @@ push 0
 push 0x14
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c390], eax  ; mov dword [0x48c390], eax
 push 0
@@ -67642,7 +67647,7 @@ push 0
 push 0x12
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c398], eax  ; mov dword [0x48c398], eax
 push 0
@@ -67650,7 +67655,7 @@ push 0
 push 0x14
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c390], eax  ; mov dword [0x48c390], eax
 push 0
@@ -67658,7 +67663,7 @@ push 0
 push 2
 mov esi, dword [ref_0048a0e4]  ; mov esi, dword [0x48a0e4]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c38c], eax  ; mov dword [0x48c38c], eax
 mov eax, dword [ref_0048c398]  ; mov eax, dword [0x48c398]
@@ -68112,7 +68117,7 @@ add eax, edx
 push eax
 mov ebx, dword [ref_0048a0e4]  ; mov ebx, dword [0x48a0e4]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 
 loc_00433fbd:
 add esp, 0x10
@@ -71082,7 +71087,7 @@ push ebx
 push 0x17
 mov ebp, dword [ref_0048a05c]  ; mov ebp, dword [0x48a05c]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c3c0], eax  ; mov dword [0x48c3c0], eax
 push ebx
@@ -71090,7 +71095,7 @@ push ebx
 push 2
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c3bc], eax  ; mov dword [0x48c3bc], eax
 push ebx
@@ -71286,7 +71291,7 @@ push 0
 push 0x17
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c3c0], eax  ; mov dword [0x48c3c0], eax
 push 0
@@ -71294,7 +71299,7 @@ push 0
 push 2
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c3bc], eax  ; mov dword [0x48c3bc], eax
 push 0
@@ -72659,7 +72664,7 @@ push ebx
 push 0x18
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c3f4], eax  ; mov dword [0x48c3f4], eax
 cmp byte [(_global_rich4_cfg + 5)], 2  ; cmp byte [0x49715d], 2
@@ -73587,7 +73592,7 @@ add eax, 0x1a1
 push eax
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c414], eax  ; mov dword [0x48c414], eax
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
@@ -74175,7 +74180,7 @@ add eax, 0x1a0
 push eax
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c414], eax  ; mov dword [0x48c414], eax
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
@@ -75223,7 +75228,7 @@ push 0
 push 0x19
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c41c], eax  ; mov dword [0x48c41c], eax
 mov eax, dword [ref_0048a0e0]  ; mov eax, dword [0x48a0e0]
@@ -78077,7 +78082,7 @@ push 0
 push 0x1a
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c49c], eax  ; mov dword [0x48c49c], eax
 xor ebx, ebx
@@ -78188,7 +78193,7 @@ add eax, 0x1b
 push eax
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [esi*4 + ref_0048c43c], eax  ; mov dword [esi*4 + 0x48c43c], eax
 push 0
@@ -78202,7 +78207,7 @@ add eax, 0x1c
 push eax
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [esi*4 + ref_0048c440], eax  ; mov dword [esi*4 + 0x48c440], eax
 push 0
@@ -78216,7 +78221,7 @@ add eax, 0x1d
 push eax
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [esi*4 + ref_0048c444], eax  ; mov dword [esi*4 + 0x48c444], eax
 inc dword [esp + 0x8c]
@@ -79538,7 +79543,7 @@ push 0
 push 0x3f
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c4b4], eax  ; mov dword [0x48c4b4], eax
 push 0
@@ -79546,7 +79551,7 @@ push 0
 push 0x40
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c4bc], eax  ; mov dword [0x48c4bc], eax
 push 0
@@ -79813,7 +79818,7 @@ push 0
 push 0x21a
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x5e
@@ -81401,7 +81406,7 @@ push 0
 push 0x41
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c4d4], eax  ; mov dword [0x48c4d4], eax
 push 0
@@ -81409,7 +81414,7 @@ push 0
 push 0x40
 mov esi, dword [ref_0048a05c]  ; mov esi, dword [0x48a05c]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c4d0], eax  ; mov dword [0x48c4d0], eax
 push 0
@@ -81679,7 +81684,7 @@ push 0
 push 0x20c
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x5c
@@ -83768,7 +83773,7 @@ push 0
 push 0x43
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c514], eax  ; mov dword [0x48c514], eax
 push 1
@@ -83933,7 +83938,7 @@ add eax, 0x44
 push eax
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c520], eax  ; mov dword [0x48c520], eax
 push 1
@@ -84323,7 +84328,7 @@ push 0
 push 0x206
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c510], eax  ; mov dword [0x48c510], eax
 push 0
@@ -84331,7 +84336,7 @@ push 0
 push 2
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c518], eax  ; mov dword [0x48c518], eax
 lea edx, [ebp - 2]
@@ -84491,7 +84496,7 @@ push 0
 push 0xb
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov ebp, eax
 push 0
@@ -85346,7 +85351,7 @@ push 0
 push 0xb
 mov eax, dword [ref_0048a05c]  ; mov eax, dword [0x48a05c]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 mov ebp, eax
@@ -85574,7 +85579,7 @@ push 0
 push 0xb
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov edi, eax
 xor esi, esi
@@ -85961,7 +85966,7 @@ add eax, 0x23a
 push eax
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [esp + 0x18], eax
 xor ebx, ebx
@@ -88310,7 +88315,7 @@ push 0
 push 0x22d
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x50
@@ -88586,7 +88591,7 @@ push 0
 push 0x211
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x61
@@ -92905,7 +92910,7 @@ push 0
 push 0x210
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0
@@ -92988,7 +92993,7 @@ push 0
 push 0x48
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c55c], eax  ; mov dword [0x48c55c], eax
 mov ebx, dword [ref_0049910c]  ; mov ebx, dword [0x49910c]
@@ -93160,7 +93165,7 @@ push 0
 push 0x229
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov esi, eax
 add esp, 0x10
 push 0
@@ -93875,7 +93880,7 @@ push 0
 push 0x212
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0
@@ -94100,7 +94105,7 @@ push 0
 push 0xb
 mov ebx, dword [ref_0048a05c]  ; mov ebx, dword [0x48a05c]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 mov edi, eax
@@ -95907,7 +95912,7 @@ push 0
 push 0x213
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x56
@@ -96096,7 +96101,7 @@ push 0
 push 0x21b
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x54
@@ -97506,7 +97511,7 @@ push 0
 push 0x20f
 mov esi, dword [ref_0048a0e4]  ; mov esi, dword [0x48a0e4]
 push esi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov esi, eax
 add esp, 0x10
 push 0x57
@@ -98082,7 +98087,7 @@ push 0
 push 0x216
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x59
@@ -98219,7 +98224,7 @@ push 0
 push 0x217
 mov ebp, dword [ref_0048a0e4]  ; mov ebp, dword [0x48a0e4]
 push ebp
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push 0x58
@@ -98977,7 +98982,7 @@ push 0
 push 0x42
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c5ac], eax  ; mov dword [0x48c5ac], eax
 push 0
@@ -99013,7 +99018,7 @@ lea edi, [ebx + 0x1b9]
 push edi
 mov edi, dword [ref_0048a0e4]  ; mov edi, dword [0x48a0e4]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 push 0x2c
 push 0x19
@@ -102108,7 +102113,7 @@ push 0
 push 0x42
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c5e0], eax  ; mov dword [0x48c5e0], eax
 push 0
@@ -102150,7 +102155,7 @@ movsx eax, word [eax + ref_00475fb4]  ; movsx eax, word [eax + 0x475fb4]
 push eax
 mov ecx, dword [ref_0048a0e4]  ; mov ecx, dword [0x48a0e4]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 push 0x2c
 push 0x19
@@ -102174,7 +102179,7 @@ movsx eax, word [eax + esi*8 + ref_00475fb4]  ; movsx eax, word [eax + esi*8 + 0
 push eax
 mov eax, dword [ref_0048a0e4]  ; mov eax, dword [0x48a0e4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 push 0x2c
 push 0x19
@@ -102625,7 +102630,7 @@ add eax, dword [ref_0047601c]  ; add eax, dword [0x47601c]
 push eax
 mov eax, dword [ref_0048c5f4]  ; mov eax, dword [0x48c5f4]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_004762b4], eax  ; mov dword [0x4762b4], eax
 xor esi, esi
@@ -103433,14 +103438,14 @@ push ebx
 push edi
 push ebp
 push ref_00466096  ; push 0x466096
-call fcn_004502fe  ; call 0x4502fe
+call _load_mkf  ; call 0x4502fe
 add esp, 4
 mov dword [ref_0048c5f4], eax  ; mov dword [0x48c5f4], eax
 push 0
 push 0
 push 0
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048c5f8], eax  ; mov dword [0x48c5f8], eax
 push 1
@@ -103505,7 +103510,7 @@ mov dword [ref_004762b4], ecx  ; mov dword [0x4762b4], ecx
 loc_0044ec1d:
 mov ebx, dword [ref_0048c5f4]  ; mov ebx, dword [0x48c5f4]
 push ebx
-call fcn_00450404  ; call 0x450404
+call _unload_mkf  ; call 0x450404
 add esp, 4
 pop ebp
 pop edi
@@ -105410,84 +105415,6 @@ db 0x3a
 db 0x5c
 db 0x00
 
-fcn_00450069:
-push ebx
-push esi
-push edi
-push ebp
-mov ebx, dword [esp + 0x14]
-push ref_004660a8  ; push 0x4660a8
-push ebx
-call _strcmp  ; call 0x458370
-add esp, 8
-test eax, eax
-jne short loc_004500c5  ; jne 0x4500c5
-mov esi, dword [ebx + 0x14]
-mov eax, dword [ebx + 8]
-add eax, ebx
-add eax, 0x200
-mov dword [ebx + 0x14], eax
-mov eax, 1
-
-loc_00450098:
-cmp eax, dword [ebx + 4]
-jge short loc_004500c5  ; jge 0x4500c5
-mov edx, eax
-shl edx, 2
-sub edx, eax
-shl edx, 2
-lea ecx, [ebx + edx]
-mov ebp, dword [ecx + 0x14]
-lea edi, [eax - 1]
-mov edx, edi
-shl edx, 2
-sub edx, edi
-mov edi, dword [ebx + edx*4 + 0x14]
-add esi, edi
-mov dword [ecx + 0x14], esi
-mov esi, ebp
-inc eax
-jmp short loc_00450098  ; jmp 0x450098
-
-loc_004500c5:
-push ref_004660ac  ; push 0x4660ac
-push ebx
-call _strcmp  ; call 0x458370
-add esp, 8
-test eax, eax
-jne short loc_00450115  ; jne 0x450115
-mov esi, dword [ebx + 0x14]
-mov eax, dword [ebx + 8]
-lea edx, [ebx + eax]
-mov dword [ebx + 0x14], edx
-mov eax, 1
-
-loc_004500e8:
-cmp eax, dword [ebx + 4]
-jge short loc_00450115  ; jge 0x450115
-mov edx, eax
-shl edx, 2
-sub edx, eax
-shl edx, 2
-lea ecx, [ebx + edx]
-mov ebp, dword [ecx + 0x14]
-lea edi, [eax - 1]
-mov edx, edi
-shl edx, 2
-sub edx, edi
-mov edi, dword [ebx + edx*4 + 0x14]
-add esi, edi
-mov dword [ecx + 0x14], esi
-mov esi, ebp
-inc eax
-jmp short loc_004500e8  ; jmp 0x4500e8
-
-loc_00450115:
-pop ebp
-pop edi
-pop esi
-pop ebx
-ret
 
 fcn_0045011a:
 push ebx
@@ -105677,254 +105604,6 @@ pop esi
 pop ebx
 ret
 
-fcn_004502fe:
-push ebx
-push esi
-push edi
-push ebp
-sub esp, 0x30
-xor esi, esi
-cmp dword [ref_004762f4], 0xffffffff  ; cmp dword [0x4762f4], 0xffffffff
-jne short loc_00450323  ; jne 0x450323
-push 0x80
-push esi
-push ref_004762f4  ; push 0x4762f4
-call _memset  ; call 0x456f60
-add esp, 0xc
-
-loc_00450323:
-push 0
-push 0x80
-push 3
-push 0
-push 0
-push 0x80000000
-mov ecx, dword [esp + 0x5c]
-push ecx
-call dword [cs:__imp__CreateFileA@28]  ; ucall: call dword cs:[0x462350]
-mov edi, eax
-cmp eax, 0xffffffff
-jne short loc_00450389  ; jne 0x450389
-mov ebx, dword [esp + 0x44]
-push ebx
-push ref_00476374  ; push 0x476374
-push ref_00466110  ; push 0x466110
-lea eax, [esp + 0xc]
-push eax
-call _libc_sprintf  ; call 0x457110
-add esp, 0x10
-push 0
-push 0x80
-push 3
-push 0
-push 0
-push 0x80000000
-lea eax, [esp + 0x18]
-push eax
-call dword [cs:__imp__CreateFileA@28]  ; ucall: call dword cs:[0x462350]
-mov edi, eax
-cmp eax, 0xffffffff
-je short loc_004503fc  ; je 0x4503fc
-
-loc_00450389:
-mov ebx, esi
-shl ebx, 3
-mov ebp, dword [ebx + ref_004762f4]  ; mov ebp, dword [ebx + 0x4762f4]
-test ebp, ebp
-je short loc_0045039b  ; je 0x45039b
-inc esi
-jmp short loc_00450389  ; jmp 0x450389
-
-loc_0045039b:
-mov dword [ebx + ref_004762f4], edi  ; mov dword [ebx + 0x4762f4], edi
-push ebp
-lea eax, [esp + 0x2c]
-push eax
-push 4
-lea eax, [esp + 0x38]
-push eax
-push edi
-call dword [cs:__imp__ReadFile@20]  ; ucall: call dword cs:[0x4623ec]
-push ebp
-push edi
-call dword [cs:__imp__GetFileSize@8]  ; ucall: call dword cs:[0x4623a0]
-mov edx, dword [esp + 0x2c]
-mov ebp, eax
-sub ebp, edx
-push 0
-push 0
-push edx
-push edi
-call dword [cs:__imp__SetFilePointer@16]  ; ucall: call dword cs:[0x462404]
-push ebp
-call _libc_malloc  ; call 0x456f80
-add esp, 4
-mov dword [ebx + ref_004762f8], eax  ; mov dword [ebx + 0x4762f8], eax
-push 0
-lea eax, [esp + 0x2c]
-push eax
-push ebp
-mov ebp, dword [ebx + ref_004762f8]  ; mov ebp, dword [ebx + 0x4762f8]
-push ebp
-push edi
-call dword [cs:__imp__ReadFile@20]  ; ucall: call dword cs:[0x4623ec]
-mov eax, esi
-
-loc_004503fc:
-add esp, 0x30
-pop ebp
-pop edi
-pop esi
-pop ebx
-ret
-
-fcn_00450404:
-push ebx
-push esi
-push edi
-mov ebx, dword [esp + 0x10]
-shl ebx, 3
-mov edx, dword [ebx + ref_004762f4]  ; mov edx, dword [ebx + 0x4762f4]
-test edx, edx
-je short loc_0045043d  ; je 0x45043d
-push edx
-call dword [cs:__imp__CloseHandle@4]  ; ucall: call dword cs:[0x462348]
-mov esi, dword [ebx + ref_004762f8]  ; mov esi, dword [ebx + 0x4762f8]
-push esi
-call _libc_free  ; call 0x456e11
-add esp, 4
-xor edi, edi
-mov dword [ebx + ref_004762f4], edi  ; mov dword [ebx + 0x4762f4], edi
-mov dword [ebx + ref_004762f8], edi  ; mov dword [ebx + 0x4762f8], edi
-
-loc_0045043d:
-pop edi
-pop esi
-pop ebx
-ret
-
-fcn_00450441:
-push ebx
-push esi
-push edi
-sub esp, 0x14
-mov ebx, dword [esp + 0x2c]
-mov eax, dword [esp + 0x24]
-shl eax, 3
-mov esi, dword [eax + ref_004762f4]  ; mov esi, dword [eax + 0x4762f4]
-test esi, esi
-jne short loc_00450463  ; jne 0x450463
-xor eax, eax
-jmp near loc_0045054e  ; jmp 0x45054e
-
-loc_00450463:
-push 0
-push 0
-mov edi, dword [esp + 0x30]
-mov eax, dword [eax + ref_004762f8]  ; mov eax, dword [eax + 0x4762f8]
-mov edx, dword [eax + edi*4]
-push edx
-push esi
-call dword [cs:__imp__SetFilePointer@16]  ; ucall: call dword cs:[0x462404]
-push 0
-lea eax, [esp + 0x14]
-push eax
-push 0x10
-lea eax, [esp + 0xc]
-push eax
-push esi
-call dword [cs:__imp__ReadFile@20]  ; ucall: call dword cs:[0x4623ec]
-test ebx, ebx
-jne short loc_004504a5  ; jne 0x4504a5
-mov ecx, dword [esp]
-push ecx
-call _libc_malloc  ; call 0x456f80
-add esp, 4
-mov ebx, eax
-
-loc_004504a5:
-mov eax, dword [esp + 4]
-mov edi, dword [esp]
-cmp eax, edi
-jne short loc_004504c3  ; jne 0x4504c3
-push 0
-lea eax, [esp + 0x14]
-push eax
-push edi
-push ebx
-push esi
-call dword [cs:__imp__ReadFile@20]  ; ucall: call dword cs:[0x4623ec]
-jmp short loc_004504f6  ; jmp 0x4504f6
-
-loc_004504c3:
-push eax
-call _libc_malloc  ; call 0x456f80
-mov edi, eax
-add esp, 4
-push 0
-lea eax, [esp + 0x14]
-push eax
-mov eax, dword [esp + 0xc]
-push eax
-push edi
-push esi
-call dword [cs:__imp__ReadFile@20]  ; ucall: call dword cs:[0x4623ec]
-push edi
-push ebx
-call fcn_00455040  ; call 0x455040
-add esp, 8
-push edi
-call _libc_free  ; call 0x456e11
-add esp, 4
-
-loc_004504f6:
-mov ecx, dword [esp + 0xc]
-test ecx, ecx
-je short loc_0045050e  ; je 0x45050e
-push ecx
-mov eax, dword [esp + 0xc]
-add eax, ebx
-push eax
-call fcn_00451801  ; call 0x451801
-add esp, 8
-
-loc_0045050e:
-mov edi, dword [esp + 0x30]
-test edi, edi
-je short loc_0045051b  ; je 0x45051b
-mov eax, dword [esp]
-mov dword [edi], eax
-
-loc_0045051b:
-push 3
-push ref_004660a8  ; push 0x4660a8
-push ebx
-call _memcmp  ; call 0x458599
-add esp, 0xc
-test eax, eax
-je short loc_00450543  ; je 0x450543
-push 3
-push ref_004660ac  ; push 0x4660ac
-push ebx
-call _memcmp  ; call 0x458599
-add esp, 0xc
-test eax, eax
-jne short loc_0045054c  ; jne 0x45054c
-
-loc_00450543:
-push ebx
-call fcn_00450069  ; call 0x450069
-add esp, 4
-
-loc_0045054c:
-mov eax, ebx
-
-loc_0045054e:
-add esp, 0x14
-pop edi
-pop esi
-pop ebx
-ret
 
 fcn_00450555:
 push ebx
@@ -107770,28 +107449,28 @@ jne short loc_00451792  ; jne 0x451792
 cmp dword [esp + 0x14], 0x3e0
 jne short loc_00451792  ; jne 0x451792
 xor esi, esi
-mov dword [ref_0047637c], esi  ; mov dword [0x47637c], esi
+mov dword [_pixel_fmt], esi  ; mov dword [0x47637c], esi
 
 loc_00451792:
 cmp dword [esp + 0x10], 0xf800
 jne short loc_004517b0  ; jne 0x4517b0
 cmp dword [esp + 0x14], 0x7e0
 jne short loc_004517b0  ; jne 0x4517b0
-mov dword [ref_0047637c], 1  ; mov dword [0x47637c], 1
+mov dword [_pixel_fmt], 1  ; mov dword [0x47637c], 1
 
 loc_004517b0:
 cmp dword [esp + 0x10], 0x1f
 jne short loc_004517cb  ; jne 0x4517cb
 cmp dword [esp + 0x14], 0x7e0
 jne short loc_004517cb  ; jne 0x4517cb
-mov dword [ref_0047637c], 2  ; mov dword [0x47637c], 2
+mov dword [_pixel_fmt], 2  ; mov dword [0x47637c], 2
 
 loc_004517cb:
 cmp dword [esp + 0x10], 0xf00
 jne short loc_004517e9  ; jne 0x4517e9
 cmp dword [esp + 0x14], 0xf0
 jne short loc_004517e9  ; jne 0x4517e9
-mov dword [ref_0047637c], 3  ; mov dword [0x47637c], 3
+mov dword [_pixel_fmt], 3  ; mov dword [0x47637c], 3
 
 loc_004517e9:
 add esp, 0x20
@@ -107803,165 +107482,7 @@ db 0x8d
 db 0x40
 db 0x00
 
-ref_004517f1:  ; may contain a jump table
-dd loc_0045197d
-dd loc_00451832
-dd loc_00451883
-dd loc_00451907
 
-fcn_00451801:
-push ebx
-push esi
-push edi
-push ebp
-sub esp, 0xc
-mov edi, dword [esp + 0x20]
-mov esi, dword [esp + 0x24]
-sar esi, 1
-mov eax, esi
-and eax, 1
-mov dword [esp + 8], eax
-sar esi, 1
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
-cmp eax, 3
-ja near loc_0045197d  ; ja 0x45197d
-jmp dword [eax*4 + ref_004517f1]  ; ujmp: jmp dword [eax*4 + 0x4517f1]
-
-loc_00451832:
-xor eax, eax
-
-loc_00451834:
-mov edx, eax
-shl edx, 2
-add edx, edi
-cmp eax, esi
-jge short loc_00451857  ; jge 0x451857
-mov ecx, dword [edx]
-lea ebx, [ecx + ecx]
-and ecx, 0x1f001f
-and ebx, 0xffc0ffc0
-or ecx, ebx
-mov dword [edx], ecx
-inc eax
-jmp short loc_00451834  ; jmp 0x451834
-
-loc_00451857:
-cmp dword [esp + 8], 0
-je near loc_0045197d  ; je 0x45197d
-xor eax, eax
-mov ax, word [edx]
-lea ecx, [eax + eax]
-mov dword [esp], ecx
-and eax, 0x1f
-and ecx, 0xffc0
-mov dword [esp], ecx
-mov esi, dword [esp]
-or eax, esi
-jmp near loc_0045197a  ; jmp 0x45197a
-
-loc_00451883:
-xor eax, eax
-
-loc_00451885:
-mov edx, eax
-shl edx, 2
-add edx, edi
-cmp eax, esi
-jge short loc_004518c7  ; jge 0x4518c7
-mov ecx, dword [edx]
-mov ebx, ecx
-and ebx, 0x7c007c00
-shr ebx, 0xa
-mov dword [esp], ebx
-mov ebx, ecx
-and ebx, 0x3e003e0
-add ebx, ebx
-mov dword [esp + 4], ebx
-mov ebx, ecx
-and ebx, 0x1f001f
-shl ebx, 0xb
-mov ecx, dword [esp]
-or ecx, dword [esp + 4]
-or ecx, ebx
-mov dword [edx], ecx
-inc eax
-jmp short loc_00451885  ; jmp 0x451885
-
-loc_004518c7:
-cmp dword [esp + 8], 0
-je near loc_0045197d  ; je 0x45197d
-xor eax, eax
-mov ax, word [edx]
-mov ecx, eax
-and ecx, 0x7c00
-shr ecx, 0xa
-mov dword [esp], ecx
-mov ecx, eax
-and ecx, 0x3e0
-add ecx, ecx
-mov dword [esp + 4], ecx
-and eax, 0x1f
-shl eax, 0xb
-mov ebx, dword [esp]
-or ebx, dword [esp + 4]
-or eax, ebx
-jmp near loc_0045197a  ; jmp 0x45197a
-
-loc_00451907:
-xor eax, eax
-
-loc_00451909:
-mov edx, eax
-shl edx, 2
-add edx, edi
-cmp eax, esi
-jge short loc_00451941  ; jge 0x451941
-mov ecx, dword [edx]
-mov ebx, ecx
-and ebx, 0x78007800
-shr ebx, 3
-mov ebp, ecx
-and ebp, 0x3c003c0
-shr ebp, 2
-mov dword [esp + 4], ebp
-and ecx, 0x1e001e
-shr ecx, 1
-or ebx, ebp
-or ecx, ebx
-mov dword [edx], ecx
-inc eax
-jmp short loc_00451909  ; jmp 0x451909
-
-loc_00451941:
-cmp dword [esp + 8], 0
-je short loc_0045197d  ; je 0x45197d
-xor eax, eax
-mov ax, word [edx]
-mov ecx, eax
-and ecx, 0x7800
-shr ecx, 3
-mov dword [esp], ecx
-mov ecx, eax
-and ecx, 0x3c0
-shr ecx, 2
-mov dword [esp + 4], ecx
-mov ecx, eax
-and ecx, 0x1e
-shr ecx, 1
-mov eax, dword [esp]
-or eax, dword [esp + 4]
-or eax, ecx
-
-loc_0045197a:
-mov word [edx], ax
-
-loc_0045197d:
-add esp, 0xc
-pop ebp
-pop edi
-pop esi
-pop ebx
-ret
 
 fcn_00451985:
 push ebx
@@ -109099,7 +108620,7 @@ and eax, 0xffff
 push eax
 mov ebx, dword [ref_0048a0e4]  ; mov ebx, dword [0x48a0e4]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov ebx, eax
 movsx eax, word [ref_004991b6]  ; movsx eax, word [0x4991b6]
@@ -110549,7 +110070,7 @@ push 0
 push 0x15
 mov edx, dword [ref_0048a05c]  ; mov edx, dword [0x48a05c]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048caa8], eax  ; mov dword [0x48caa8], eax
 push 0
@@ -110557,7 +110078,7 @@ push 0
 push 0x16
 mov ecx, dword [ref_0048a05c]  ; mov ecx, dword [0x48a05c]
 push ecx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048ca9c], eax  ; mov dword [0x48ca9c], eax
 mov word [ref_0048cab8], 0x100  ; mov word [0x48cab8], 0x100
@@ -110960,7 +110481,7 @@ push 0
 push 0x1b8
 mov edx, dword [ref_0048a0e4]  ; mov edx, dword [0x48a0e4]
 push edx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 add esp, 0x10
 mov dword [ref_0048cad4], eax  ; mov dword [0x48cad4], eax
 movsx edx, word [eax + 0xc]
@@ -111449,7 +110970,7 @@ mov ecx, dword [esp + 0x30]
 push ecx
 mov ebx, dword [ref_0048a058]  ; mov ebx, dword [0x48a058]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 mov esi, eax
@@ -111678,7 +111199,7 @@ push 0
 push ecx
 mov edi, dword [ref_0048a058]  ; mov edi, dword [0x48a058]
 push edi
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov esi, eax
 add esp, 0x10
 push eax
@@ -111745,7 +111266,7 @@ push 0
 push esi
 mov eax, dword [ref_0048a058]  ; mov eax, dword [0x48a058]
 push eax
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov esi, eax
 add esp, 0x10
 push eax
@@ -111872,7 +111393,7 @@ mov ecx, dword [esp + 0x10]
 push ecx
 mov ebx, dword [ref_0048a058]  ; mov ebx, dword [0x48a058]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push eax
@@ -111984,7 +111505,7 @@ mov ecx, dword [esp + 0x14]
 push ecx
 mov ebx, dword [ref_0048a054]  ; mov ebx, dword [0x48a054]
 push ebx
-call fcn_00450441  ; call 0x450441
+call _read_mkf  ; call 0x450441
 mov ebx, eax
 add esp, 0x10
 push eax
@@ -113069,175 +112590,7 @@ loc_00455038:
 add ax, 0x8000
 ret
 
-endloc_0045503d:
-db 0x00
-db 0x00
-db 0x00
 
-fcn_00455040:
-push ebp
-mov ebp, esp
-push ebx
-push ecx
-push esi
-push edi
-mov esi, ref_00483630  ; mov esi, 0x483630
-mov edi, ref_004847bc  ; mov edi, 0x4847bc
-mov ecx, 0x463
-rep movsd  ; rep movsd dword es:[edi], dword ptr [esi]
-mov edi, dword [ebp + 8]
-mov esi, dword [ebp + 0xc]
-xor edx, edx
-
-loc_00455060:
-call fcn_004551bb  ; call 0x4551bb
-or bh, bh
-jne short loc_0045506e  ; jne 0x45506e
-mov byte [edi], bl
-inc edi
-jmp short loc_00455060  ; jmp 0x455060
-
-loc_0045506e:
-mov eax, ecx
-push ecx
-shr eax, 3
-and ecx, 7
-mov eax, dword [esi + eax]
-shr eax, cl
-mov ebp, eax
-and ebp, 0xff
-mov cl, byte [ebp + ref_00483530]  ; mov cl, byte [ebp + 0x483530]
-mov dh, byte [ebp + ref_00483430]  ; mov dh, byte [ebp + 0x483430]
-shr eax, cl
-mov dl, al
-shl dl, 2
-shr dx, 2
-add cl, 6
-mov eax, ecx
-and eax, 0xff
-pop ecx
-add ecx, eax
-cmp dx, 0xfff
-je short loc_004550c6  ; je 0x4550c6
-mov ebp, ecx
-sub ebx, 0xfd
-push esi
-lea esi, [edi - 1]
-sub esi, edx
-mov ecx, ebx
-rep movsb  ; rep movsb byte es:[edi], byte ptr [esi]
-pop esi
-mov ecx, ebp
-jmp short loc_00455060  ; jmp 0x455060
-
-loc_004550c6:
-pop edi
-pop esi
-pop ecx
-pop ebx
-pop ebp
-ret
-
-fcn_004550cc:
-mov edx, 0x141
-xor ebp, ebp
-xor ecx, ecx
-
-loc_004550d5:
-mov cx, word [ebp + ref_004856c4]  ; mov cx, word [ebp + 0x4856c4]
-test word [ecx + ref_004847bc], 1  ; test word [ecx + 0x4847bc], 1
-je short loc_004550ee  ; je 0x4550ee
-mov ebx, ebp
-call fcn_0045511b  ; call 0x45511b
-
-loc_004550ee:
-add ebp, 2
-dec edx
-jne short loc_004550d5  ; jne 0x4550d5
-xor ebx, ebx
-
-loc_004550f6:
-shr word [ebx + ref_004847bc], 1  ; shr word [ebx + 0x4847bc], 1
-add ebx, 2
-cmp ebx, 0x502
-jb short loc_004550f6  ; jb 0x4550f6
-ret
-
-fcn_00455109:
-cmp word [ref_00484cbc], 0x8000  ; cmp word [0x484cbc], 0x8000
-jne short fcn_0045511b  ; jne 0x45511b
-push ebx
-call fcn_004550cc  ; call 0x4550cc
-pop ebx
-
-fcn_0045511b:
-mov bx, word [ebx + ref_004856c4]  ; mov bx, word [ebx + 0x4856c4]
-
-loc_00455122:
-inc word [ebx + ref_004847bc]  ; inc word [ebx + 0x4847bc]
-mov ax, word [ebx + ref_004847bc]  ; mov ax, word [ebx + 0x4847bc]
-cmp ax, word [ebx + ref_004847be]  ; cmp ax, word [ebx + 0x4847be]
-jbe short loc_004551aa  ; jbe 0x4551aa
-lea edi, [ebx + ref_004847be]  ; lea edi, [ebx + 0x4847be]
-mov ecx, 0x282
-dec ax
-repe scasw  ; repe scasw ax, word es:[edi]
-sub edi, ref_004847c0  ; sub edi, 0x4847c0
-inc ax
-xchg word [edi + ref_004847bc], ax  ; xchg word [edi + 0x4847bc], ax
-mov word [ebx + ref_004847bc], ax  ; mov word [ebx + 0x4847bc], ax
-mov ax, word [ebx + ref_00484cc0]  ; mov ax, word [ebx + 0x484cc0]
-mov cx, word [edi + ref_00484cc0]  ; mov cx, word [edi + 0x484cc0]
-mov word [ecx + ref_004851c2], bx  ; mov word [ecx + 0x4851c2], bx
-cmp cx, 0x502
-jae short loc_00455182  ; jae 0x455182
-mov word [ecx + ref_004851c4], bx  ; mov word [ecx + 0x4851c4], bx
-
-loc_00455182:
-xchg ax, cx
-mov word [ecx + ref_004851c2], di  ; mov word [ecx + 0x4851c2], di
-cmp cx, 0x502
-jae short loc_00455199  ; jae 0x455199
-mov word [ecx + ref_004851c4], di  ; mov word [ecx + 0x4851c4], di
-
-loc_00455199:
-mov word [ebx + ref_00484cc0], ax  ; mov word [ebx + 0x484cc0], ax
-mov word [edi + ref_00484cc0], cx  ; mov word [edi + 0x484cc0], cx
-mov bx, di
-
-loc_004551aa:
-mov bx, word [ebx + ref_004851c2]  ; mov bx, word [ebx + 0x4851c2]
-or bx, bx
-jne near loc_00455122  ; jne 0x455122
-ret
-
-fcn_004551bb:
-mov ebx, 0x500
-
-loc_004551c0:
-mov bx, word [ebx + ref_00484cc0]  ; mov bx, word [ebx + 0x484cc0]
-cmp bx, 0x502
-jae short loc_004551da  ; jae 0x4551da
-bt dword [esi], ecx
-inc ecx
-jae short loc_004551c0  ; jae 0x4551c0
-add bx, 2
-jmp short loc_004551c0  ; jmp 0x4551c0
-
-loc_004551da:
-sub ebx, 0x502
-push ebx
-push ecx
-push edi
-call fcn_00455109  ; call 0x455109
-pop edi
-pop ecx
-pop ebx
-shr bx, 1
-ret
-
-endloc_004551ef:
-db 0x00
 
 fcn_004551f0:
 push ebp
@@ -113247,7 +112600,7 @@ push ecx
 push esi
 push edi
 mov eax, dword [ebp + 8]
-mov ecx, dword [ref_0047637c]  ; mov ecx, dword [0x47637c]
+mov ecx, dword [_pixel_fmt]  ; mov ecx, dword [0x47637c]
 call dword [ecx*4 + ref_00485948]  ; ucall: call dword [ecx*4 + 0x485948]
 pop edi
 pop esi
@@ -113266,7 +112619,7 @@ push edi
 mov esi, dword [ebp + 0xc]
 mov edi, dword [ebp + 8]
 mov ecx, dword [ebp + 0x10]
-mov ebp, dword [ref_0047637c]  ; mov ebp, dword [0x47637c]
+mov ebp, dword [_pixel_fmt]  ; mov ebp, dword [0x47637c]
 
 loc_00455223:
 mov eax, dword [esi]
@@ -113341,7 +112694,7 @@ mov ebx, dword [ebp + 0x14]
 shl ebx, 5
 add ebx, ref_00485d68  ; add ebx, 0x485d68
 shr ecx, 1
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
+mov eax, dword [_pixel_fmt]  ; mov eax, dword [0x47637c]
 call dword [eax*4 + ref_00485958]  ; ucall: call dword [eax*4 + 0x485958]
 pop edi
 pop esi
@@ -113374,7 +112727,7 @@ add ebx, ref_00485d68  ; add ebx, 0x485d68
 
 loc_00455318:
 mov ecx, dword [ebp + 0x14]
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
+mov eax, dword [_pixel_fmt]  ; mov eax, dword [0x47637c]
 call dword [eax*4 + ref_00485958]  ; ucall: call dword [eax*4 + 0x485958]
 add esi, dword [ebp + 0xc]
 mov edi, esi
@@ -113460,7 +112813,7 @@ mov edi, dword [ebp + 8]
 mov esi, dword [ebp + 0xc]
 mov ecx, dword [ebp + 0x10]
 shr ecx, 1
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
+mov eax, dword [_pixel_fmt]  ; mov eax, dword [0x47637c]
 call dword [eax*4 + ref_00485968]  ; ucall: call dword [eax*4 + 0x485968]
 pop edi
 pop esi
@@ -113490,7 +112843,7 @@ mov dword [ebp + 0xc], ebx
 
 loc_00455423:
 mov ecx, dword [ebp + 0x14]
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
+mov eax, dword [_pixel_fmt]  ; mov eax, dword [0x47637c]
 call dword [eax*4 + ref_00485968]  ; ucall: call dword [eax*4 + 0x485968]
 add esi, dword [ebp + 0xc]
 mov edi, esi
@@ -113615,7 +112968,7 @@ loc_00455543:
 push edx
 push ecx
 mov ecx, 1
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
+mov eax, dword [_pixel_fmt]  ; mov eax, dword [0x47637c]
 call dword [eax*4 + ref_00485958]  ; ucall: call dword [eax*4 + 0x485958]
 pop ecx
 pop edx
@@ -113638,7 +112991,7 @@ push esi
 push edi
 mov edi, dword [ebp + 8]
 mov esi, dword [ebp + 0xc]
-mov ebx, dword [ref_0047637c]  ; mov ebx, dword [0x47637c]
+mov ebx, dword [_pixel_fmt]  ; mov ebx, dword [0x47637c]
 movzx edx, word [ebx*2 + ref_00486188]  ; movzx edx, word [ebx*2 + 0x486188]
 movzx ebx, word [ebx*2 + ref_00486190]  ; movzx ebx, word [ebx*2 + 0x486190]
 
@@ -113692,7 +113045,7 @@ mov esi, dword [ebp + 8]
 add esi, dword [esi + 8]
 mov edi, esi
 mov ecx, 0x100
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
+mov eax, dword [_pixel_fmt]  ; mov eax, dword [0x47637c]
 call dword [eax*4 + ref_00485978]  ; ucall: call dword [eax*4 + 0x485978]
 pop edi
 pop esi
@@ -113834,7 +113187,7 @@ mov ecx, 0x1b8
 loc_00455745:
 push ecx
 mov ecx, 0x1b8
-mov eax, dword [ref_0047637c]  ; mov eax, dword [0x47637c]
+mov eax, dword [_pixel_fmt]  ; mov eax, dword [0x47637c]
 call dword [eax*4 + ref_00485958]  ; ucall: call dword [eax*4 + 0x485958]
 pop ecx
 add edi, ebp
@@ -116023,7 +115376,7 @@ add edi, dword [ebp + 8]
 mov ebx, dword [ebp - 0x10]
 mov edx, dword [ebp + 0x18]
 shl edx, 2
-add edx, dword [ref_0047637c]  ; add edx, dword [0x47637c]
+add edx, dword [_pixel_fmt]  ; add edx, dword [0x47637c]
 mov dx, word [edx*2 + ref_00488ef0]  ; mov dx, word [edx*2 + 0x488ef0]
 
 loc_00456d4b:
@@ -122974,12 +122327,6 @@ ref_004660a0:
 dd 0xfaa9d3b2
 dd 0x0000e9c5
 
-ref_004660a8:
-db 'SPR',0x00
-
-ref_004660ac:
-db 'SMP',0x00
-
 ref_004660b0:
 dd 0x7ebbf9bf
 db 0x00
@@ -123024,8 +122371,6 @@ dd 0xa4b8c043
 dd 0xbafaa5f9
 dd 0x0049a1d0
 
-ref_00466110:
-db '%s%s',0x00,0x00,0x00,0x00
 
 ref_00466118:
 db 'window vfw handle %d',0x00
@@ -137504,49 +136849,13 @@ dd 0x00000000
 ref_004762f0:
 dd 0x00000000
 
-ref_004762f4:
-dd 0xffffffff
-
-ref_004762f8:
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-
 ref_00476374:
 db 'A:\',0x00
 
 ref_00476378:
 dd 0x00000000
 
-ref_0047637c:
+_pixel_fmt:			; ref_0047637c
 dd 0x00000000
 
 ref_00476380:
@@ -149116,2407 +148425,6 @@ dd 0x07fe07fd
 dd 0x07ff07fe
 dd 0x00000800
 
-ref_00483430:
-dd 0x03170b3f
-dd 0x00160a2f
-dd 0x0215092e
-dd 0x0008012d
-dd 0x0314073e
-dd 0x0013062c
-dd 0x0212052b
-dd 0x0004012a
-dd 0x03110b3d
-dd 0x00100a29
-dd 0x020f0928
-dd 0x00080127
-dd 0x030e073c
-dd 0x000d0626
-dd 0x020c0525
-dd 0x00040124
-dd 0x03170b3b
-dd 0x00160a23
-dd 0x02150922
-dd 0x00080121
-dd 0x0314073a
-dd 0x00130620
-dd 0x0212051f
-dd 0x0004011e
-dd 0x03110b39
-dd 0x00100a1d
-dd 0x020f091c
-dd 0x0008011b
-dd 0x030e0738
-dd 0x000d061a
-dd 0x020c0519
-dd 0x00040118
-dd 0x03170b37
-dd 0x00160a2f
-dd 0x0215092e
-dd 0x0008012d
-dd 0x03140736
-dd 0x0013062c
-dd 0x0212052b
-dd 0x0004012a
-dd 0x03110b35
-dd 0x00100a29
-dd 0x020f0928
-dd 0x00080127
-dd 0x030e0734
-dd 0x000d0626
-dd 0x020c0525
-dd 0x00040124
-dd 0x03170b33
-dd 0x00160a23
-dd 0x02150922
-dd 0x00080121
-dd 0x03140732
-dd 0x00130620
-dd 0x0212051f
-dd 0x0004011e
-dd 0x03110b31
-dd 0x00100a1d
-dd 0x020f091c
-dd 0x0008011b
-dd 0x030e0730
-dd 0x000d061a
-dd 0x020c0519
-dd 0x00040118
-
-ref_00483530:
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-dd 0x04060508
-dd 0x03060507
-dd 0x04060507
-dd 0x03050407
-
-ref_00483630:
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00010001
-dd 0x00020001
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00020002
-dd 0x00030002
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00040004
-dd 0x00050004
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00080008
-dd 0x00090008
-dd 0x00100010
-dd 0x00100010
-dd 0x00100010
-dd 0x00100010
-dd 0x00100010
-dd 0x00100010
-dd 0x00100010
-dd 0x00100010
-dd 0x00100010
-dd 0x00110010
-dd 0x00200020
-dd 0x00200020
-dd 0x00200020
-dd 0x00200020
-dd 0x00210020
-dd 0x00400040
-dd 0x00400040
-dd 0x00800041
-dd 0x00c10080
-dd 0xffff0141
-dd 0x05040502
-dd 0x05080506
-dd 0x050c050a
-dd 0x0510050e
-dd 0x05140512
-dd 0x05180516
-dd 0x051c051a
-dd 0x0520051e
-dd 0x05240522
-dd 0x05280526
-dd 0x052c052a
-dd 0x0530052e
-dd 0x05340532
-dd 0x05380536
-dd 0x053c053a
-dd 0x0540053e
-dd 0x05440542
-dd 0x05480546
-dd 0x054c054a
-dd 0x0550054e
-dd 0x05540552
-dd 0x05580556
-dd 0x055c055a
-dd 0x0560055e
-dd 0x05640562
-dd 0x05680566
-dd 0x056c056a
-dd 0x0570056e
-dd 0x05740572
-dd 0x05780576
-dd 0x057c057a
-dd 0x0580057e
-dd 0x05840582
-dd 0x05880586
-dd 0x058c058a
-dd 0x0590058e
-dd 0x05940592
-dd 0x05980596
-dd 0x059c059a
-dd 0x05a0059e
-dd 0x05a405a2
-dd 0x05a805a6
-dd 0x05ac05aa
-dd 0x05b005ae
-dd 0x05b405b2
-dd 0x05b805b6
-dd 0x05bc05ba
-dd 0x05c005be
-dd 0x05c405c2
-dd 0x05c805c6
-dd 0x05cc05ca
-dd 0x05d005ce
-dd 0x05d405d2
-dd 0x05d805d6
-dd 0x05dc05da
-dd 0x05e005de
-dd 0x05e405e2
-dd 0x05e805e6
-dd 0x05ec05ea
-dd 0x05f005ee
-dd 0x05f405f2
-dd 0x05f805f6
-dd 0x05fc05fa
-dd 0x060005fe
-dd 0x06040602
-dd 0x06080606
-dd 0x060c060a
-dd 0x0610060e
-dd 0x06140612
-dd 0x06180616
-dd 0x061c061a
-dd 0x0620061e
-dd 0x06240622
-dd 0x06280626
-dd 0x062c062a
-dd 0x0630062e
-dd 0x06340632
-dd 0x06380636
-dd 0x063c063a
-dd 0x0640063e
-dd 0x06440642
-dd 0x06480646
-dd 0x064c064a
-dd 0x0650064e
-dd 0x06540652
-dd 0x06580656
-dd 0x065c065a
-dd 0x0660065e
-dd 0x06640662
-dd 0x06680666
-dd 0x066c066a
-dd 0x0670066e
-dd 0x06740672
-dd 0x06780676
-dd 0x067c067a
-dd 0x0680067e
-dd 0x06840682
-dd 0x06880686
-dd 0x068c068a
-dd 0x0690068e
-dd 0x06940692
-dd 0x06980696
-dd 0x069c069a
-dd 0x06a0069e
-dd 0x06a406a2
-dd 0x06a806a6
-dd 0x06ac06aa
-dd 0x06b006ae
-dd 0x06b406b2
-dd 0x06b806b6
-dd 0x06bc06ba
-dd 0x06c006be
-dd 0x06c406c2
-dd 0x06c806c6
-dd 0x06cc06ca
-dd 0x06d006ce
-dd 0x06d406d2
-dd 0x06d806d6
-dd 0x06dc06da
-dd 0x06e006de
-dd 0x06e406e2
-dd 0x06e806e6
-dd 0x06ec06ea
-dd 0x06f006ee
-dd 0x06f406f2
-dd 0x06f806f6
-dd 0x06fc06fa
-dd 0x070006fe
-dd 0x07040702
-dd 0x07080706
-dd 0x070c070a
-dd 0x0710070e
-dd 0x07140712
-dd 0x07180716
-dd 0x071c071a
-dd 0x0720071e
-dd 0x07240722
-dd 0x07280726
-dd 0x072c072a
-dd 0x0730072e
-dd 0x07340732
-dd 0x07380736
-dd 0x073c073a
-dd 0x0740073e
-dd 0x07440742
-dd 0x07480746
-dd 0x074c074a
-dd 0x0750074e
-dd 0x07540752
-dd 0x07580756
-dd 0x075c075a
-dd 0x0760075e
-dd 0x07640762
-dd 0x07680766
-dd 0x076c076a
-dd 0x0770076e
-dd 0x07740772
-dd 0x07780776
-dd 0x077c077a
-dd 0x0780077e
-dd 0x00000782
-dd 0x00080004
-dd 0x0010000c
-dd 0x00180014
-dd 0x0020001c
-dd 0x00280024
-dd 0x0030002c
-dd 0x00380034
-dd 0x0040003c
-dd 0x00480044
-dd 0x0050004c
-dd 0x00580054
-dd 0x0060005c
-dd 0x00680064
-dd 0x0070006c
-dd 0x00780074
-dd 0x0080007c
-dd 0x00880084
-dd 0x0090008c
-dd 0x00980094
-dd 0x00a0009c
-dd 0x00a800a4
-dd 0x00b000ac
-dd 0x00b800b4
-dd 0x00c000bc
-dd 0x00c800c4
-dd 0x00d000cc
-dd 0x00d800d4
-dd 0x00e000dc
-dd 0x00e800e4
-dd 0x00f000ec
-dd 0x00f800f4
-dd 0x010000fc
-dd 0x01080104
-dd 0x0110010c
-dd 0x01180114
-dd 0x0120011c
-dd 0x01280124
-dd 0x0130012c
-dd 0x01380134
-dd 0x0140013c
-dd 0x01480144
-dd 0x0150014c
-dd 0x01580154
-dd 0x0160015c
-dd 0x01680164
-dd 0x0170016c
-dd 0x01780174
-dd 0x0180017c
-dd 0x01880184
-dd 0x0190018c
-dd 0x01980194
-dd 0x01a0019c
-dd 0x01a801a4
-dd 0x01b001ac
-dd 0x01b801b4
-dd 0x01c001bc
-dd 0x01c801c4
-dd 0x01d001cc
-dd 0x01d801d4
-dd 0x01e001dc
-dd 0x01e801e4
-dd 0x01f001ec
-dd 0x01f801f4
-dd 0x020001fc
-dd 0x02080204
-dd 0x0210020c
-dd 0x02180214
-dd 0x0220021c
-dd 0x02280224
-dd 0x0230022c
-dd 0x02380234
-dd 0x0240023c
-dd 0x02480244
-dd 0x0250024c
-dd 0x02580254
-dd 0x0260025c
-dd 0x02680264
-dd 0x0270026c
-dd 0x02780274
-dd 0x0280027c
-dd 0x02880284
-dd 0x0290028c
-dd 0x02980294
-dd 0x02a0029c
-dd 0x02a802a4
-dd 0x02b002ac
-dd 0x02b802b4
-dd 0x02c002bc
-dd 0x02c802c4
-dd 0x02d002cc
-dd 0x02d802d4
-dd 0x02e002dc
-dd 0x02e802e4
-dd 0x02f002ec
-dd 0x02f802f4
-dd 0x030002fc
-dd 0x03080304
-dd 0x0310030c
-dd 0x03180314
-dd 0x0320031c
-dd 0x03280324
-dd 0x0330032c
-dd 0x03380334
-dd 0x0340033c
-dd 0x03480344
-dd 0x0350034c
-dd 0x03580354
-dd 0x0360035c
-dd 0x03680364
-dd 0x0370036c
-dd 0x03780374
-dd 0x0380037c
-dd 0x03880384
-dd 0x0390038c
-dd 0x03980394
-dd 0x03a0039c
-dd 0x03a803a4
-dd 0x03b003ac
-dd 0x03b803b4
-dd 0x03c003bc
-dd 0x03c803c4
-dd 0x03d003cc
-dd 0x03d803d4
-dd 0x03e003dc
-dd 0x03e803e4
-dd 0x03f003ec
-dd 0x03f803f4
-dd 0x040003fc
-dd 0x04080404
-dd 0x0410040c
-dd 0x04180414
-dd 0x0420041c
-dd 0x04280424
-dd 0x0430042c
-dd 0x04380434
-dd 0x0440043c
-dd 0x04480444
-dd 0x0450044c
-dd 0x04580454
-dd 0x0460045c
-dd 0x04680464
-dd 0x0470046c
-dd 0x04780474
-dd 0x0480047c
-dd 0x04880484
-dd 0x0490048c
-dd 0x04980494
-dd 0x04a0049c
-dd 0x04a804a4
-dd 0x04b004ac
-dd 0x04b804b4
-dd 0x04c004bc
-dd 0x04c804c4
-dd 0x04d004cc
-dd 0x04d804d4
-dd 0x04e004dc
-dd 0x04e804e4
-dd 0x04f004ec
-dd 0x04f804f4
-dd 0x028204fc
-dd 0x02840282
-dd 0x02860284
-dd 0x02880286
-dd 0x028a0288
-dd 0x028c028a
-dd 0x028e028c
-dd 0x0290028e
-dd 0x02920290
-dd 0x02940292
-dd 0x02960294
-dd 0x02980296
-dd 0x029a0298
-dd 0x029c029a
-dd 0x029e029c
-dd 0x02a0029e
-dd 0x02a202a0
-dd 0x02a402a2
-dd 0x02a602a4
-dd 0x02a802a6
-dd 0x02aa02a8
-dd 0x02ac02aa
-dd 0x02ae02ac
-dd 0x02b002ae
-dd 0x02b202b0
-dd 0x02b402b2
-dd 0x02b602b4
-dd 0x02b802b6
-dd 0x02ba02b8
-dd 0x02bc02ba
-dd 0x02be02bc
-dd 0x02c002be
-dd 0x02c202c0
-dd 0x02c402c2
-dd 0x02c602c4
-dd 0x02c802c6
-dd 0x02ca02c8
-dd 0x02cc02ca
-dd 0x02ce02cc
-dd 0x02d002ce
-dd 0x02d202d0
-dd 0x02d402d2
-dd 0x02d602d4
-dd 0x02d802d6
-dd 0x02da02d8
-dd 0x02dc02da
-dd 0x02de02dc
-dd 0x02e002de
-dd 0x02e202e0
-dd 0x02e402e2
-dd 0x02e602e4
-dd 0x02e802e6
-dd 0x02ea02e8
-dd 0x02ec02ea
-dd 0x02ee02ec
-dd 0x02f002ee
-dd 0x02f202f0
-dd 0x02f402f2
-dd 0x02f602f4
-dd 0x02f802f6
-dd 0x02fa02f8
-dd 0x02fc02fa
-dd 0x02fe02fc
-dd 0x030002fe
-dd 0x03020300
-dd 0x03040302
-dd 0x03060304
-dd 0x03080306
-dd 0x030a0308
-dd 0x030c030a
-dd 0x030e030c
-dd 0x0310030e
-dd 0x03120310
-dd 0x03140312
-dd 0x03160314
-dd 0x03180316
-dd 0x031a0318
-dd 0x031c031a
-dd 0x031e031c
-dd 0x0320031e
-dd 0x03220320
-dd 0x03240322
-dd 0x03260324
-dd 0x03280326
-dd 0x032a0328
-dd 0x032c032a
-dd 0x032e032c
-dd 0x0330032e
-dd 0x03320330
-dd 0x03340332
-dd 0x03360334
-dd 0x03380336
-dd 0x033a0338
-dd 0x033c033a
-dd 0x033e033c
-dd 0x0340033e
-dd 0x03420340
-dd 0x03440342
-dd 0x03460344
-dd 0x03480346
-dd 0x034a0348
-dd 0x034c034a
-dd 0x034e034c
-dd 0x0350034e
-dd 0x03520350
-dd 0x03540352
-dd 0x03560354
-dd 0x03580356
-dd 0x035a0358
-dd 0x035c035a
-dd 0x035e035c
-dd 0x0360035e
-dd 0x03620360
-dd 0x03640362
-dd 0x03660364
-dd 0x03680366
-dd 0x036a0368
-dd 0x036c036a
-dd 0x036e036c
-dd 0x0370036e
-dd 0x03720370
-dd 0x03740372
-dd 0x03760374
-dd 0x03780376
-dd 0x037a0378
-dd 0x037c037a
-dd 0x037e037c
-dd 0x0380037e
-dd 0x03820380
-dd 0x03840382
-dd 0x03860384
-dd 0x03880386
-dd 0x038a0388
-dd 0x038c038a
-dd 0x038e038c
-dd 0x0390038e
-dd 0x03920390
-dd 0x03940392
-dd 0x03960394
-dd 0x03980396
-dd 0x039a0398
-dd 0x039c039a
-dd 0x039e039c
-dd 0x03a0039e
-dd 0x03a203a0
-dd 0x03a403a2
-dd 0x03a603a4
-dd 0x03a803a6
-dd 0x03aa03a8
-dd 0x03ac03aa
-dd 0x03ae03ac
-dd 0x03b003ae
-dd 0x03b203b0
-dd 0x03b403b2
-dd 0x03b603b4
-dd 0x03b803b6
-dd 0x03ba03b8
-dd 0x03bc03ba
-dd 0x03be03bc
-dd 0x03c003be
-dd 0x03c203c0
-dd 0x03c403c2
-dd 0x03c603c4
-dd 0x03c803c6
-dd 0x03ca03c8
-dd 0x03cc03ca
-dd 0x03ce03cc
-dd 0x03d003ce
-dd 0x03d203d0
-dd 0x03d403d2
-dd 0x03d603d4
-dd 0x03d803d6
-dd 0x03da03d8
-dd 0x03dc03da
-dd 0x03de03dc
-dd 0x03e003de
-dd 0x03e203e0
-dd 0x03e403e2
-dd 0x03e603e4
-dd 0x03e803e6
-dd 0x03ea03e8
-dd 0x03ec03ea
-dd 0x03ee03ec
-dd 0x03f003ee
-dd 0x03f203f0
-dd 0x03f403f2
-dd 0x03f603f4
-dd 0x03f803f6
-dd 0x03fa03f8
-dd 0x03fc03fa
-dd 0x03fe03fc
-dd 0x040003fe
-dd 0x04020400
-dd 0x04040402
-dd 0x04060404
-dd 0x04080406
-dd 0x040a0408
-dd 0x040c040a
-dd 0x040e040c
-dd 0x0410040e
-dd 0x04120410
-dd 0x04140412
-dd 0x04160414
-dd 0x04180416
-dd 0x041a0418
-dd 0x041c041a
-dd 0x041e041c
-dd 0x0420041e
-dd 0x04220420
-dd 0x04240422
-dd 0x04260424
-dd 0x04280426
-dd 0x042a0428
-dd 0x042c042a
-dd 0x042e042c
-dd 0x0430042e
-dd 0x04320430
-dd 0x04340432
-dd 0x04360434
-dd 0x04380436
-dd 0x043a0438
-dd 0x043c043a
-dd 0x043e043c
-dd 0x0440043e
-dd 0x04420440
-dd 0x04440442
-dd 0x04460444
-dd 0x04480446
-dd 0x044a0448
-dd 0x044c044a
-dd 0x044e044c
-dd 0x0450044e
-dd 0x04520450
-dd 0x04540452
-dd 0x04560454
-dd 0x04580456
-dd 0x045a0458
-dd 0x045c045a
-dd 0x045e045c
-dd 0x0460045e
-dd 0x04620460
-dd 0x04640462
-dd 0x04660464
-dd 0x04680466
-dd 0x046a0468
-dd 0x046c046a
-dd 0x046e046c
-dd 0x0470046e
-dd 0x04720470
-dd 0x04740472
-dd 0x04760474
-dd 0x04780476
-dd 0x047a0478
-dd 0x047c047a
-dd 0x047e047c
-dd 0x0480047e
-dd 0x04820480
-dd 0x04840482
-dd 0x04860484
-dd 0x04880486
-dd 0x048a0488
-dd 0x048c048a
-dd 0x048e048c
-dd 0x0490048e
-dd 0x04920490
-dd 0x04940492
-dd 0x04960494
-dd 0x04980496
-dd 0x049a0498
-dd 0x049c049a
-dd 0x049e049c
-dd 0x04a0049e
-dd 0x04a204a0
-dd 0x04a404a2
-dd 0x04a604a4
-dd 0x04a804a6
-dd 0x04aa04a8
-dd 0x04ac04aa
-dd 0x04ae04ac
-dd 0x04b004ae
-dd 0x04b204b0
-dd 0x04b404b2
-dd 0x04b604b4
-dd 0x04b804b6
-dd 0x04ba04b8
-dd 0x04bc04ba
-dd 0x04be04bc
-dd 0x04c004be
-dd 0x04c204c0
-dd 0x04c404c2
-dd 0x04c604c4
-dd 0x04c804c6
-dd 0x04ca04c8
-dd 0x04cc04ca
-dd 0x04ce04cc
-dd 0x04d004ce
-dd 0x04d204d0
-dd 0x04d404d2
-dd 0x04d604d4
-dd 0x04d804d6
-dd 0x04da04d8
-dd 0x04dc04da
-dd 0x04de04dc
-dd 0x04e004de
-dd 0x04e204e0
-dd 0x04e404e2
-dd 0x04e604e4
-dd 0x04e804e6
-dd 0x04ea04e8
-dd 0x04ec04ea
-dd 0x04ee04ec
-dd 0x04f004ee
-dd 0x04f204f0
-dd 0x04f404f2
-dd 0x04f604f4
-dd 0x04f804f6
-dd 0x04fa04f8
-dd 0x04fc04fa
-dd 0x04fe04fc
-dd 0x050004fe
-dd 0x00000500
-dd 0x00020000
-dd 0x00060004
-dd 0x000a0008
-dd 0x000e000c
-dd 0x00120010
-dd 0x00160014
-dd 0x001a0018
-dd 0x001e001c
-dd 0x00220020
-dd 0x00260024
-dd 0x002a0028
-dd 0x002e002c
-dd 0x00320030
-dd 0x00360034
-dd 0x003a0038
-dd 0x003e003c
-dd 0x00420040
-dd 0x00460044
-dd 0x004a0048
-dd 0x004e004c
-dd 0x00520050
-dd 0x00560054
-dd 0x005a0058
-dd 0x005e005c
-dd 0x00620060
-dd 0x00660064
-dd 0x006a0068
-dd 0x006e006c
-dd 0x00720070
-dd 0x00760074
-dd 0x007a0078
-dd 0x007e007c
-dd 0x00820080
-dd 0x00860084
-dd 0x008a0088
-dd 0x008e008c
-dd 0x00920090
-dd 0x00960094
-dd 0x009a0098
-dd 0x009e009c
-dd 0x00a200a0
-dd 0x00a600a4
-dd 0x00aa00a8
-dd 0x00ae00ac
-dd 0x00b200b0
-dd 0x00b600b4
-dd 0x00ba00b8
-dd 0x00be00bc
-dd 0x00c200c0
-dd 0x00c600c4
-dd 0x00ca00c8
-dd 0x00ce00cc
-dd 0x00d200d0
-dd 0x00d600d4
-dd 0x00da00d8
-dd 0x00de00dc
-dd 0x00e200e0
-dd 0x00e600e4
-dd 0x00ea00e8
-dd 0x00ee00ec
-dd 0x00f200f0
-dd 0x00f600f4
-dd 0x00fa00f8
-dd 0x00fe00fc
-dd 0x01020100
-dd 0x01060104
-dd 0x010a0108
-dd 0x010e010c
-dd 0x01120110
-dd 0x01160114
-dd 0x011a0118
-dd 0x011e011c
-dd 0x01220120
-dd 0x01260124
-dd 0x012a0128
-dd 0x012e012c
-dd 0x01320130
-dd 0x01360134
-dd 0x013a0138
-dd 0x013e013c
-dd 0x01420140
-dd 0x01460144
-dd 0x014a0148
-dd 0x014e014c
-dd 0x01520150
-dd 0x01560154
-dd 0x015a0158
-dd 0x015e015c
-dd 0x01620160
-dd 0x01660164
-dd 0x016a0168
-dd 0x016e016c
-dd 0x01720170
-dd 0x01760174
-dd 0x017a0178
-dd 0x017e017c
-dd 0x01820180
-dd 0x01860184
-dd 0x018a0188
-dd 0x018e018c
-dd 0x01920190
-dd 0x01960194
-dd 0x019a0198
-dd 0x019e019c
-dd 0x01a201a0
-dd 0x01a601a4
-dd 0x01aa01a8
-dd 0x01ae01ac
-dd 0x01b201b0
-dd 0x01b601b4
-dd 0x01ba01b8
-dd 0x01be01bc
-dd 0x01c201c0
-dd 0x01c601c4
-dd 0x01ca01c8
-dd 0x01ce01cc
-dd 0x01d201d0
-dd 0x01d601d4
-dd 0x01da01d8
-dd 0x01de01dc
-dd 0x01e201e0
-dd 0x01e601e4
-dd 0x01ea01e8
-dd 0x01ee01ec
-dd 0x01f201f0
-dd 0x01f601f4
-dd 0x01fa01f8
-dd 0x01fe01fc
-dd 0x02020200
-dd 0x02060204
-dd 0x020a0208
-dd 0x020e020c
-dd 0x02120210
-dd 0x02160214
-dd 0x021a0218
-dd 0x021e021c
-dd 0x02220220
-dd 0x02260224
-dd 0x022a0228
-dd 0x022e022c
-dd 0x02320230
-dd 0x02360234
-dd 0x023a0238
-dd 0x023e023c
-dd 0x02420240
-dd 0x02460244
-dd 0x024a0248
-dd 0x024e024c
-dd 0x02520250
-dd 0x02560254
-dd 0x025a0258
-dd 0x025e025c
-dd 0x02620260
-dd 0x02660264
-dd 0x026a0268
-dd 0x026e026c
-dd 0x02720270
-dd 0x02760274
-dd 0x027a0278
-dd 0x027e027c
-dd 0x00000280
-
-ref_004847bc:
-db 0x00
-db 0x00
-
-ref_004847be:
-db 0x00
-db 0x00
-
-ref_004847c0:
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-
-ref_00484cbc:
-dd 0x00000000
-
-ref_00484cc0:
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-db 0x00
-db 0x00
-
-ref_004851c2:
-db 0x00
-db 0x00
-
-ref_004851c4:
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-
-ref_004856c4:
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
-dd 0x00000000
 
 ref_00485948:  ; may contain a jump table
 dd fcn_0045523e
