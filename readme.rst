@@ -43,3 +43,13 @@ radare2 工程文件和辅助脚本（已停止维护）
 本项目的 radare2 工程文件和辅助脚本在另一仓库中，用如下方式获取::
 
   git clone https://git.wehack.space/rich4.r2 r2
+
+
+类似工作
+--------------------
+
+以下是类似的游戏逆向工作，这些工作都是将游戏程序还原为源码，并且能构建出完全相同的文件。大富翁4逆向工程不能还原出和原程序完全相同的二进制，其目标是还原出功能等价的可读源码。
+
+- https://blog.asie.pl/2020/08/reconstructing-zzt/
+- https://www.reddit.com/r/ReverseEngineering/comments/xqi5e6/reconstructed_source_code_of_the_game_duke_nukem/
+- https://github.com/pret/pokeemerald
