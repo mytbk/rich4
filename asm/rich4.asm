@@ -186,6 +186,12 @@ extern _unload_mkf
 extern _read_mkf
 global _pixel_fmt
 
+global _draw_area
+extern _draw_image_in_rect
+extern _draw_non_zero_image_in_rect
+extern _draw_image_in_rect_ex
+extern _draw_non_zero_image_in_rect_ex
+
 extern _rich4_read_config
 extern _rich4_write_config
 extern _global_rich4_cfg
@@ -113224,13 +113230,13 @@ fcn_0045577c:
 push ebp
 mov ebp, esp
 mov eax, dword [ebp + 8]
-mov dword [ref_004861b8], eax  ; mov dword [0x4861b8], eax
+mov dword [_draw_area], eax  ; mov dword [0x4861b8], eax
 mov eax, dword [ebp + 0xc]
-mov dword [ref_004861bc], eax  ; mov dword [0x4861bc], eax
+mov dword [(_draw_area + 4)], eax  ; mov dword [0x4861bc], eax
 mov eax, dword [ebp + 0x10]
-mov dword [ref_004861c0], eax  ; mov dword [0x4861c0], eax
+mov dword [(_draw_area + 8)], eax  ; mov dword [0x4861c0], eax
 mov eax, dword [ebp + 0x14]
-mov dword [ref_004861c4], eax  ; mov dword [0x4861c4], eax
+mov dword [(_draw_area + 12)], eax  ; mov dword [0x4861c4], eax
 pop ebp
 ret
 
@@ -113292,9 +113298,9 @@ sar ecx, 0x10
 mov ebp, ecx
 sub ebp, ebx
 je near loc_0045593b  ; je 0x45593b
-cmp ecx, dword [ref_004861b8]  ; cmp ecx, dword [0x4861b8]
+cmp ecx, dword [_draw_area]  ; cmp ecx, dword [0x4861b8]
 jle near loc_0045593b  ; jle 0x45593b
-cmp ebx, dword [ref_004861c0]  ; cmp ebx, dword [0x4861c0]
+cmp ebx, dword [(_draw_area + 8)]  ; cmp ebx, dword [0x4861c0]
 jge near loc_0045593b  ; jge 0x45593b
 mov eax, dword [esi + ref_00487ff0]  ; mov eax, dword [esi + 0x487ff0]
 sub eax, dword [esi + ref_004870f0]  ; sub eax, dword [esi + 0x4870f0]
@@ -113306,9 +113312,9 @@ sub eax, dword [esi + ref_00487870]  ; sub eax, dword [esi + 0x487870]
 cdq
 idiv ebp
 mov dword [ref_004861e0], eax  ; mov dword [0x4861e0], eax
-cmp ebx, dword [ref_004861b8]  ; cmp ebx, dword [0x4861b8]
+cmp ebx, dword [_draw_area]  ; cmp ebx, dword [0x4861b8]
 jge short loc_004558e9  ; jge 0x4558e9
-mov eax, dword [ref_004861b8]  ; mov eax, dword [0x4861b8]
+mov eax, dword [_draw_area]  ; mov eax, dword [0x4861b8]
 sub eax, ebx
 mov ebx, eax
 sub ebp, ebx
@@ -113317,10 +113323,10 @@ add dword [esi + ref_004870f0], eax  ; add dword [esi + 0x4870f0], eax
 mov eax, ebx
 imul dword [ref_004861e0]  ; imul dword [0x4861e0]
 add dword [esi + ref_00487870], eax  ; add dword [esi + 0x487870], eax
-mov ebx, dword [ref_004861b8]  ; mov ebx, dword [0x4861b8]
+mov ebx, dword [_draw_area]  ; mov ebx, dword [0x4861b8]
 
 loc_004558e9:
-sub ecx, dword [ref_004861c0]  ; sub ecx, dword [0x4861c0]
+sub ecx, dword [(_draw_area + 8)]  ; sub ecx, dword [0x4861c0]
 jle short loc_004558f3  ; jle 0x4558f3
 sub ebp, ecx
 
@@ -113374,16 +113380,16 @@ mov ebx, edx
 xchg edi, esi
 
 loc_0045597d:
-cmp di, word [ref_004861bc]  ; cmp di, word [0x4861bc]
+cmp di, word [(_draw_area + 4)]  ; cmp di, word [0x4861bc]
 jle near loc_00455af1  ; jle 0x455af1
-cmp si, word [ref_004861c4]  ; cmp si, word [0x4861c4]
+cmp si, word [(_draw_area + 12)]  ; cmp si, word [0x4861c4]
 jge near loc_00455af1  ; jge 0x455af1
 mov ax, si
 cmp ax, word [ref_004861ec]  ; cmp ax, word [0x4861ec]
 jge short loc_004559b8  ; jge 0x4559b8
-cmp ax, word [ref_004861bc]  ; cmp ax, word [0x4861bc]
+cmp ax, word [(_draw_area + 4)]  ; cmp ax, word [0x4861bc]
 jge short loc_004559b2  ; jge 0x4559b2
-mov ax, word [ref_004861bc]  ; mov ax, word [0x4861bc]
+mov ax, word [(_draw_area + 4)]  ; mov ax, word [0x4861bc]
 
 loc_004559b2:
 mov word [ref_004861ec], ax  ; mov word [0x4861ec], ax
@@ -113424,9 +113430,9 @@ sub eax, ebx
 cdq
 idiv ebp
 mov dword [ref_004861e4], eax  ; mov dword [0x4861e4], eax
-cmp si, word [ref_004861bc]  ; cmp si, word [0x4861bc]
+cmp si, word [(_draw_area + 4)]  ; cmp si, word [0x4861bc]
 jge short loc_00455a69  ; jge 0x455a69
-mov eax, dword [ref_004861bc]  ; mov eax, dword [0x4861bc]
+mov eax, dword [(_draw_area + 4)]  ; mov eax, dword [0x4861bc]
 sub ax, si
 mov esi, eax
 sub ebp, esi
@@ -113438,10 +113444,10 @@ add dword [ref_004861d4], eax  ; add dword [0x4861d4], eax
 mov eax, esi
 imul dword [ref_004861e4]  ; imul dword [0x4861e4]
 add dword [ref_004861d8], eax  ; add dword [0x4861d8], eax
-mov esi, dword [ref_004861bc]  ; mov esi, dword [0x4861bc]
+mov esi, dword [(_draw_area + 4)]  ; mov esi, dword [0x4861bc]
 
 loc_00455a69:
-sub di, word [ref_004861c4]  ; sub di, word [0x4861c4]
+sub di, word [(_draw_area + 12)]  ; sub di, word [0x4861c4]
 jle short loc_00455a77  ; jle 0x455a77
 movzx edi, di
 sub ebp, edi
@@ -113509,613 +113515,7 @@ jne short loc_00455af3  ; jne 0x455af3
 pop ebp
 ret
 
-fcn_00455b3a:
-push ebp
-mov ebp, esp
-sub esp, 0x10
-push ebx
-push ecx
-push esi
-push edi
-mov ebx, 1
-mov esi, dword [ebp + 0x14]
-movsx eax, word [esi + 4]
-sub dword [ebp + 0x18], eax
-movsx eax, word [esi + 6]
-sub dword [ebp + 0x1c], eax
-mov eax, dword [ebp + 0x18]
-cmp eax, dword [ebp + 8]
-jge near loc_00455c47  ; jge 0x455c47
-movzx edx, word [esi]
-add eax, edx
-jle near loc_00455c47  ; jle 0x455c47
-mov eax, dword [ebp + 0x1c]
-cmp eax, dword [ebp + 0xc]
-jge near loc_00455c47  ; jge 0x455c47
-movzx edx, word [esi + 2]
-add eax, edx
-jle near loc_00455c47  ; jle 0x455c47
-mov dword [ebp - 4], 0
-mov dword [ebp - 8], 0
-movzx eax, word [esi]
-mov dword [ebp - 0xc], eax
-mov ax, word [esi + 2]
-mov dword [ebp - 0x10], eax
-xor eax, eax
-cmp dword [ebp + 0x18], eax
-jge short loc_00455bb6  ; jge 0x455bb6
-xchg dword [ebp + 0x18], eax
-sub dword [ebp - 4], eax
-add dword [ebp - 0xc], eax
-jmp short loc_00455bc4  ; jmp 0x455bc4
 
-loc_00455bb6:
-mov eax, dword [ebp - 0xc]
-add eax, dword [ebp + 0x18]
-sub eax, dword [ebp + 8]
-jle short loc_00455bc4  ; jle 0x455bc4
-sub dword [ebp - 0xc], eax
-
-loc_00455bc4:
-xor eax, eax
-cmp dword [ebp + 0x1c], eax
-jge short loc_00455bd6  ; jge 0x455bd6
-xchg dword [ebp + 0x1c], eax
-sub dword [ebp - 8], eax
-add dword [ebp - 0x10], eax
-jmp short loc_00455be4  ; jmp 0x455be4
-
-loc_00455bd6:
-mov eax, dword [ebp - 0x10]
-add eax, dword [ebp + 0x1c]
-sub eax, dword [ebp + 0xc]
-jle short loc_00455be4  ; jle 0x455be4
-sub dword [ebp - 0x10], eax
-
-loc_00455be4:
-movzx eax, word [esi]
-mov ebx, eax
-mul dword [ebp - 8]
-add eax, dword [ebp - 4]
-mov esi, dword [esi + 8]
-lea esi, [esi + eax*2]
-sub ebx, dword [ebp - 0xc]
-add ebx, ebx
-mov dword [ebp - 4], ebx
-mov eax, dword [ebp + 8]
-sub eax, dword [ebp - 0xc]
-add eax, eax
-mov dword [ebp - 8], eax
-mov edi, dword [ebp + 0x1c]
-imul edi, dword [ebp + 8]
-add edi, dword [ebp + 0x18]
-add edi, edi
-add edi, dword [ebp + 0x10]
-mov eax, dword [ebp - 0xc]
-mov ebx, dword [ebp - 0x10]
-mov edx, dword [ebp - 4]
-mov ebp, dword [ebp - 8]
-or eax, eax
-je short loc_00455c47  ; je 0x455c47
-
-loc_00455c27:
-mov ecx, eax
-test edi, 3
-je short loc_00455c34  ; je 0x455c34
-db 0x66, 0xa5  ; movsw word es:[edi], word ptr [esi]
-dec ecx
-
-loc_00455c34:
-shr ecx, 1
-rep movsd  ; rep movsd dword es:[edi], dword ptr [esi]
-adc ecx, 0
-db 0xf3, 0x66, 0xa5  ; rep movsw word es:[edi], word ptr [esi]
-add esi, edx
-add edi, ebp
-dec ebx
-jne short loc_00455c27  ; jne 0x455c27
-xor ebx, ebx
-
-loc_00455c47:
-mov eax, ebx
-pop edi
-pop esi
-pop ecx
-pop ebx
-add esp, 0x10
-pop ebp
-ret
-
-fcn_00455c52:
-push ebp
-mov ebp, esp
-sub esp, 0x10
-push ebx
-push ecx
-push esi
-push edi
-mov ebx, 1
-mov esi, dword [ebp + 0x14]
-movsx eax, word [esi + 4]
-sub dword [ebp + 0x18], eax
-movsx eax, word [esi + 6]
-sub dword [ebp + 0x1c], eax
-cmp dword [ebp + 0x20], 1
-je near loc_00455d12  ; je 0x455d12
-mov eax, dword [ebp + 0x18]
-cmp eax, dword [ebp + 8]
-jge near loc_00455e19  ; jge 0x455e19
-movzx edx, word [esi]
-add eax, edx
-jle near loc_00455e19  ; jle 0x455e19
-mov eax, dword [ebp + 0x1c]
-cmp eax, dword [ebp + 0xc]
-jge near loc_00455e19  ; jge 0x455e19
-movzx edx, word [esi + 2]
-add eax, edx
-jle near loc_00455e19  ; jle 0x455e19
-mov dword [ebp - 4], 0
-mov dword [ebp - 8], 0
-movzx eax, word [esi]
-mov dword [ebp - 0xc], eax
-mov ax, word [esi + 2]
-mov dword [ebp - 0x10], eax
-xor eax, eax
-cmp dword [ebp + 0x18], eax
-jge short loc_00455cd8  ; jge 0x455cd8
-xchg dword [ebp + 0x18], eax
-sub dword [ebp - 4], eax
-add dword [ebp - 0xc], eax
-jmp short loc_00455ce6  ; jmp 0x455ce6
-
-loc_00455cd8:
-mov eax, dword [ebp - 0xc]
-add eax, dword [ebp + 0x18]
-sub eax, dword [ebp + 8]
-jle short loc_00455ce6  ; jle 0x455ce6
-sub dword [ebp - 0xc], eax
-
-loc_00455ce6:
-xor eax, eax
-cmp dword [ebp + 0x1c], eax
-jge short loc_00455cfb  ; jge 0x455cfb
-xchg dword [ebp + 0x1c], eax
-sub dword [ebp - 8], eax
-add dword [ebp - 0x10], eax
-jmp near loc_00455dc4  ; jmp 0x455dc4
-
-loc_00455cfb:
-mov eax, dword [ebp - 0x10]
-add eax, dword [ebp + 0x1c]
-sub eax, dword [ebp + 0xc]
-jle near loc_00455dc4  ; jle 0x455dc4
-sub dword [ebp - 0x10], eax
-jmp near loc_00455dc4  ; jmp 0x455dc4
-
-loc_00455d12:
-mov eax, dword [ebp + 0x18]
-cmp eax, dword [ref_004861c0]  ; cmp eax, dword [0x4861c0]
-jge near loc_00455e19  ; jge 0x455e19
-movzx edx, word [esi]
-add eax, edx
-cmp eax, dword [ref_004861b8]  ; cmp eax, dword [0x4861b8]
-jle near loc_00455e19  ; jle 0x455e19
-mov eax, dword [ebp + 0x1c]
-cmp eax, dword [ref_004861c4]  ; cmp eax, dword [0x4861c4]
-jge near loc_00455e19  ; jge 0x455e19
-movzx edx, word [esi + 2]
-add eax, edx
-cmp eax, dword [ref_004861bc]  ; cmp eax, dword [0x4861bc]
-jle near loc_00455e19  ; jle 0x455e19
-mov dword [ebp - 4], 0
-mov dword [ebp - 8], 0
-movzx eax, word [esi]
-mov dword [ebp - 0xc], eax
-mov ax, word [esi + 2]
-mov dword [ebp - 0x10], eax
-mov eax, dword [ref_004861b8]  ; mov eax, dword [0x4861b8]
-cmp dword [ebp + 0x18], eax
-jge short loc_00455d88  ; jge 0x455d88
-mov edx, dword [ebp + 0x18]
-mov dword [ebp + 0x18], eax
-sub eax, edx
-add dword [ebp - 4], eax
-sub dword [ebp - 0xc], eax
-jmp short loc_00455d99  ; jmp 0x455d99
-
-loc_00455d88:
-mov eax, dword [ebp - 0xc]
-add eax, dword [ebp + 0x18]
-sub eax, dword [ref_004861c0]  ; sub eax, dword [0x4861c0]
-jle short loc_00455d99  ; jle 0x455d99
-sub dword [ebp - 0xc], eax
-
-loc_00455d99:
-mov eax, dword [ref_004861bc]  ; mov eax, dword [0x4861bc]
-cmp dword [ebp + 0x1c], eax
-jge short loc_00455db3  ; jge 0x455db3
-mov edx, dword [ebp + 0x1c]
-mov dword [ebp + 0x1c], eax
-sub eax, edx
-add dword [ebp - 8], eax
-sub dword [ebp - 0x10], eax
-jmp short loc_00455dc4  ; jmp 0x455dc4
-
-loc_00455db3:
-mov eax, dword [ebp - 0x10]
-add eax, dword [ebp + 0x1c]
-sub eax, dword [ref_004861c4]  ; sub eax, dword [0x4861c4]
-jle short loc_00455dc4  ; jle 0x455dc4
-sub dword [ebp - 0x10], eax
-
-loc_00455dc4:
-movzx eax, word [esi]
-mov ebx, eax
-mul dword [ebp - 8]
-add eax, dword [ebp - 4]
-mov esi, dword [esi + 8]
-lea esi, [esi + eax*2]
-sub ebx, dword [ebp - 0xc]
-add ebx, ebx
-mov dword [ebp - 4], ebx
-mov eax, dword [ebp + 8]
-sub eax, dword [ebp - 0xc]
-add eax, eax
-mov dword [ebp - 8], eax
-mov edi, dword [ebp + 0x1c]
-imul edi, dword [ebp + 8]
-add edi, dword [ebp + 0x18]
-add edi, edi
-add edi, dword [ebp + 0x10]
-mov edx, dword [ebp - 0xc]
-mov ebx, dword [ebp - 0x10]
-
-loc_00455dfd:
-mov ecx, edx
-
-loc_00455dff:
-db 0x66, 0xad  ; lodsw ax, word [esi]
-or ax, ax
-je short loc_00455e09  ; je 0x455e09
-mov word [edi], ax
-
-loc_00455e09:
-add edi, 2
-loop loc_00455dff  ; loop 0x455dff
-add esi, dword [ebp - 4]
-add edi, dword [ebp - 8]
-dec ebx
-jne short loc_00455dfd  ; jne 0x455dfd
-xor ebx, ebx
-
-loc_00455e19:
-mov eax, ebx
-pop edi
-pop esi
-pop ecx
-pop ebx
-add esp, 0x10
-pop ebp
-ret
-
-fcn_00455e24:
-push ebp
-mov ebp, esp
-push ebx
-push ecx
-push esi
-push edi
-mov edi, dword [ebp + 0xc]
-mov esi, dword [ebp + 0x10]
-movsx eax, word [esi + 4]
-sub dword [ebp + 0x14], eax
-movsx eax, word [esi + 6]
-sub dword [ebp + 0x18], eax
-test dword [ebp + 0x2c], 1
-jne near loc_00455edc  ; jne 0x455edc
-mov eax, dword [ebp + 0x14]
-mov ebx, eax
-cmp eax, 0x280
-jge near loc_00455fd3  ; jge 0x455fd3
-mov edx, dword [ebp + 0x24]
-add eax, edx
-jle near loc_00455fd3  ; jle 0x455fd3
-lea eax, [ebx + edx]
-cmp eax, 0x280
-jle short loc_00455e7b  ; jle 0x455e7b
-sub eax, 0x280
-sub dword [ebp + 0x24], eax
-jmp short loc_00455e8e  ; jmp 0x455e8e
-
-loc_00455e7b:
-cmp eax, edx
-jge short loc_00455e8e  ; jge 0x455e8e
-mov dword [ebp + 0x24], eax
-sub edx, eax
-add dword [ebp + 0x1c], edx
-mov dword [ebp + 0x14], 0
-
-loc_00455e8e:
-mov eax, dword [ebp + 0x18]
-mov ebx, eax
-cmp eax, 0x1e0
-jge near loc_00455fd3  ; jge 0x455fd3
-mov edx, dword [ebp + 0x28]
-add eax, edx
-jle near loc_00455fd3  ; jle 0x455fd3
-lea eax, [ebx + edx]
-cmp eax, 0x1e0
-jle short loc_00455ec0  ; jle 0x455ec0
-sub eax, 0x1e0
-sub dword [ebp + 0x28], eax
-jmp near loc_00455f80  ; jmp 0x455f80
-
-loc_00455ec0:
-cmp eax, edx
-jge near loc_00455f80  ; jge 0x455f80
-mov dword [ebp + 0x28], eax
-sub edx, eax
-add dword [ebp + 0x20], edx
-mov dword [ebp + 0x18], 0
-jmp near loc_00455f80  ; jmp 0x455f80
-
-loc_00455edc:
-mov eax, dword [ebp + 0x14]
-mov ebx, eax
-cmp eax, dword [ref_004861c0]  ; cmp eax, dword [0x4861c0]
-jge near loc_00455fd3  ; jge 0x455fd3
-mov edx, dword [ebp + 0x24]
-add eax, edx
-cmp eax, dword [ref_004861b8]  ; cmp eax, dword [0x4861b8]
-jle near loc_00455fd3  ; jle 0x455fd3
-lea eax, [ebx + edx]
-cmp eax, dword [ref_004861c0]  ; cmp eax, dword [0x4861c0]
-jle short loc_00455f14  ; jle 0x455f14
-sub eax, dword [ref_004861c0]  ; sub eax, dword [0x4861c0]
-sub dword [ebp + 0x24], eax
-jmp short loc_00455f2e  ; jmp 0x455f2e
-
-loc_00455f14:
-sub eax, dword [ref_004861b8]  ; sub eax, dword [0x4861b8]
-cmp eax, edx
-jge short loc_00455f2e  ; jge 0x455f2e
-mov dword [ebp + 0x24], eax
-sub edx, eax
-add dword [ebp + 0x1c], edx
-mov eax, dword [ref_004861b8]  ; mov eax, dword [0x4861b8]
-mov dword [ebp + 0x14], eax
-
-loc_00455f2e:
-mov eax, dword [ebp + 0x18]
-mov ebx, eax
-cmp eax, dword [ref_004861c4]  ; cmp eax, dword [0x4861c4]
-jge near loc_00455fd3  ; jge 0x455fd3
-mov edx, dword [ebp + 0x28]
-add eax, edx
-cmp eax, dword [ref_004861bc]  ; cmp eax, dword [0x4861bc]
-jle near loc_00455fd3  ; jle 0x455fd3
-lea eax, [ebx + edx]
-cmp eax, dword [ref_004861c4]  ; cmp eax, dword [0x4861c4]
-jle short loc_00455f66  ; jle 0x455f66
-sub eax, dword [ref_004861c4]  ; sub eax, dword [0x4861c4]
-sub dword [ebp + 0x28], eax
-jmp short loc_00455f80  ; jmp 0x455f80
-
-loc_00455f66:
-sub eax, dword [ref_004861bc]  ; sub eax, dword [0x4861bc]
-cmp eax, edx
-jge short loc_00455f80  ; jge 0x455f80
-mov dword [ebp + 0x28], eax
-sub edx, eax
-add dword [ebp + 0x20], edx
-mov eax, dword [ref_004861bc]  ; mov eax, dword [0x4861bc]
-mov dword [ebp + 0x18], eax
-
-loc_00455f80:
-movzx edx, word [esi]
-mov ebx, edx
-imul ebx, dword [ebp + 0x20]
-add ebx, dword [ebp + 0x1c]
-mov esi, dword [esi + 8]
-lea esi, [esi + ebx*2]
-mov eax, dword [ebp + 8]
-mov ebx, eax
-imul ebx, dword [ebp + 0x18]
-add ebx, dword [ebp + 0x14]
-lea edi, [edi + ebx*2]
-mov ecx, dword [ebp + 0x24]
-jecxz loc_00455fd3  ; jecxz 0x455fd3
-mov ebx, dword [ebp + 0x28]
-mov ebp, eax
-sub ebp, ecx
-add ebp, ebp
-sub edx, ecx
-add edx, edx
-mov eax, ecx
-
-loc_00455fb5:
-mov ecx, eax
-test edi, 3
-je short loc_00455fc2  ; je 0x455fc2
-db 0x66, 0xa5  ; movsw word es:[edi], word ptr [esi]
-dec ecx
-
-loc_00455fc2:
-shr ecx, 1
-rep movsd  ; rep movsd dword es:[edi], dword ptr [esi]
-adc ecx, 0
-db 0xf3, 0x66, 0xa5  ; rep movsw word es:[edi], word ptr [esi]
-add esi, edx
-add edi, ebp
-dec ebx
-jne short loc_00455fb5  ; jne 0x455fb5
-
-loc_00455fd3:
-pop edi
-pop esi
-pop ecx
-pop ebx
-pop ebp
-ret
-
-fcn_00455fd9:
-push ebp
-mov ebp, esp
-push ebx
-push ecx
-push esi
-push edi
-mov edi, dword [ebp + 0xc]
-mov esi, dword [ebp + 0x10]
-movsx eax, word [esi + 4]
-sub dword [ebp + 0x14], eax
-movsx eax, word [esi + 6]
-sub dword [ebp + 0x18], eax
-test dword [ebp + 0x2c], 1
-jne near loc_00456091  ; jne 0x456091
-mov eax, dword [ebp + 0x14]
-mov ebx, eax
-cmp eax, 0x280
-jge near loc_0045617a  ; jge 0x45617a
-mov edx, dword [ebp + 0x24]
-add eax, edx
-jle near loc_0045617a  ; jle 0x45617a
-lea eax, [ebx + edx]
-cmp eax, 0x280
-jle short loc_00456030  ; jle 0x456030
-sub eax, 0x280
-sub dword [ebp + 0x24], eax
-jmp short loc_00456043  ; jmp 0x456043
-
-loc_00456030:
-cmp eax, edx
-jge short loc_00456043  ; jge 0x456043
-mov dword [ebp + 0x24], eax
-sub edx, eax
-add dword [ebp + 0x1c], edx
-mov dword [ebp + 0x14], 0
-
-loc_00456043:
-mov eax, dword [ebp + 0x18]
-mov ebx, eax
-cmp eax, 0x1e0
-jge near loc_0045617a  ; jge 0x45617a
-mov edx, dword [ebp + 0x28]
-add eax, edx
-jle near loc_0045617a  ; jle 0x45617a
-lea eax, [ebx + edx]
-cmp eax, 0x1e0
-jle short loc_00456075  ; jle 0x456075
-sub eax, 0x1e0
-sub dword [ebp + 0x28], eax
-jmp near loc_00456131  ; jmp 0x456131
-
-loc_00456075:
-cmp eax, edx
-jge near loc_00456131  ; jge 0x456131
-mov dword [ebp + 0x28], eax
-sub edx, eax
-add dword [ebp + 0x20], edx
-mov dword [ebp + 0x18], 0
-jmp near loc_00456131  ; jmp 0x456131
-
-loc_00456091:
-mov eax, dword [ebp + 0x14]
-mov ebx, eax
-cmp eax, dword [ref_004861c0]  ; cmp eax, dword [0x4861c0]
-jge near loc_0045617a  ; jge 0x45617a
-mov edx, dword [ebp + 0x24]
-add eax, edx
-cmp eax, dword [ref_004861b8]  ; cmp eax, dword [0x4861b8]
-jle near loc_0045617a  ; jle 0x45617a
-lea eax, [ebx + edx]
-cmp eax, dword [ref_004861c0]  ; cmp eax, dword [0x4861c0]
-jle short loc_004560c9  ; jle 0x4560c9
-sub eax, dword [ref_004861c0]  ; sub eax, dword [0x4861c0]
-sub dword [ebp + 0x24], eax
-jmp short loc_004560e3  ; jmp 0x4560e3
-
-loc_004560c9:
-sub eax, dword [ref_004861b8]  ; sub eax, dword [0x4861b8]
-cmp eax, edx
-jge short loc_004560e3  ; jge 0x4560e3
-mov dword [ebp + 0x24], eax
-sub edx, eax
-add dword [ebp + 0x1c], edx
-mov eax, dword [ref_004861b8]  ; mov eax, dword [0x4861b8]
-mov dword [ebp + 0x14], eax
-
-loc_004560e3:
-mov eax, dword [ebp + 0x18]
-mov ebx, eax
-cmp eax, dword [ref_004861c4]  ; cmp eax, dword [0x4861c4]
-jge near loc_0045617a  ; jge 0x45617a
-mov edx, dword [ebp + 0x28]
-add eax, edx
-cmp eax, dword [ref_004861bc]  ; cmp eax, dword [0x4861bc]
-jle short loc_0045617a  ; jle 0x45617a
-lea eax, [ebx + edx]
-cmp eax, dword [ref_004861c4]  ; cmp eax, dword [0x4861c4]
-jle short loc_00456117  ; jle 0x456117
-sub eax, dword [ref_004861c4]  ; sub eax, dword [0x4861c4]
-sub dword [ebp + 0x28], eax
-jmp short loc_00456131  ; jmp 0x456131
-
-loc_00456117:
-sub eax, dword [ref_004861bc]  ; sub eax, dword [0x4861bc]
-cmp eax, edx
-jge short loc_00456131  ; jge 0x456131
-mov dword [ebp + 0x28], eax
-sub edx, eax
-add dword [ebp + 0x20], edx
-mov eax, dword [ref_004861bc]  ; mov eax, dword [0x4861bc]
-mov dword [ebp + 0x18], eax
-
-loc_00456131:
-movzx edx, word [esi]
-mov ebx, edx
-imul ebx, dword [ebp + 0x20]
-add ebx, dword [ebp + 0x1c]
-mov esi, dword [esi + 8]
-lea esi, [esi + ebx*2]
-mov eax, dword [ebp + 8]
-mov ebx, eax
-imul ebx, dword [ebp + 0x18]
-add ebx, dword [ebp + 0x14]
-lea edi, [edi + ebx*2]
-mov ecx, dword [ebp + 0x24]
-mov ebx, dword [ebp + 0x28]
-mov ebp, eax
-sub ebp, ecx
-add ebp, ebp
-sub edx, ecx
-add edx, edx
-
-loc_00456162:
-push ecx
-
-loc_00456163:
-db 0x66, 0xad  ; lodsw ax, word [esi]
-or ax, ax
-je short loc_0045616d  ; je 0x45616d
-mov word [edi], ax
-
-loc_0045616d:
-add edi, 2
-loop loc_00456163  ; loop 0x456163
-pop ecx
-add esi, edx
-add edi, ebp
-dec ebx
-jne short loc_00456162  ; jne 0x456162
-
-loc_0045617a:
-pop edi
-pop esi
-pop ecx
-pop ebx
-pop ebp
-ret
 
 fcn_00456180:
 push ebp
@@ -114260,7 +113660,7 @@ movzx eax, word [edx + 2]
 push eax
 movzx eax, word [edx]
 push eax
-call fcn_00455b3a  ; call 0x455b3a
+call _draw_image_in_rect  ; call 0x455b3a
 add esp, 0x18
 pop ebp
 ret
@@ -114278,7 +113678,7 @@ movzx eax, word [edx + 2]
 push eax
 movzx eax, word [edx]
 push eax
-call fcn_00455c52  ; call 0x455c52
+call _draw_non_zero_image_in_rect  ; call 0x455c52
 add esp, 0x1c
 pop ebp
 ret
@@ -114298,7 +113698,7 @@ mov edx, dword [ebp + 8]
 push dword [edx + 8]
 movzx eax, word [edx]
 push eax
-call fcn_00455e24  ; call 0x455e24
+call _draw_image_in_rect_ex  ; call 0x455e24
 add esp, 0x28
 pop ebp
 ret
@@ -114318,7 +113718,7 @@ mov edx, dword [ebp + 8]
 push dword [edx + 8]
 movzx eax, word [edx]
 push eax
-call fcn_00455e24  ; call 0x455e24
+call _draw_image_in_rect_ex  ; call 0x455e24
 add esp, 0x28
 pop ebp
 ret
@@ -114338,7 +113738,7 @@ mov edx, dword [ebp + 8]
 push dword [edx + 8]
 movzx eax, word [edx]
 push eax
-call fcn_00455fd9  ; call 0x455fd9
+call _draw_non_zero_image_in_rect_ex  ; call 0x455fd9
 add esp, 0x28
 pop ebp
 ret
@@ -114358,7 +113758,7 @@ mov edx, dword [ebp + 8]
 push dword [edx + 8]
 movzx eax, word [edx]
 push eax
-call fcn_00455fd9  ; call 0x455fd9
+call _draw_non_zero_image_in_rect_ex  ; call 0x455fd9
 add esp, 0x28
 pop ebp
 ret
@@ -114426,7 +113826,7 @@ push dword [ebp + 0xc]
 push dword [ebp + 8]
 push 0x1e0
 push 0x280
-call fcn_00455b3a  ; call 0x455b3a
+call _draw_image_in_rect  ; call 0x455b3a
 add esp, 0x18
 pop ebp
 ret
@@ -114441,7 +113841,7 @@ push dword [ebp + 0xc]
 push dword [ebp + 8]
 push 0x1e0
 push 0x280
-call fcn_00455c52  ; call 0x455c52
+call _draw_non_zero_image_in_rect  ; call 0x455c52
 add esp, 0x1c
 pop ebp
 ret
@@ -114459,7 +113859,7 @@ push dword [ebp + 0x10]
 push dword [ebp + 0xc]
 push dword [ebp + 8]
 push 0x280
-call fcn_00455e24  ; call 0x455e24
+call _draw_image_in_rect_ex  ; call 0x455e24
 add esp, 0x28
 pop ebp
 ret
@@ -114477,7 +113877,7 @@ push dword [ebp + 0x10]
 push dword [ebp + 0xc]
 push dword [ebp + 8]
 push 0x280
-call fcn_00455e24  ; call 0x455e24
+call _draw_image_in_rect_ex  ; call 0x455e24
 add esp, 0x28
 pop ebp
 ret
@@ -114495,7 +113895,7 @@ push dword [ebp + 0x10]
 push dword [ebp + 0xc]
 push dword [ebp + 8]
 push 0x280
-call fcn_00455fd9  ; call 0x455fd9
+call _draw_non_zero_image_in_rect_ex  ; call 0x455fd9
 add esp, 0x28
 pop ebp
 ret
@@ -114510,7 +113910,7 @@ push dword [ebp + 0xc]
 push dword [ebp + 8]
 push 0x1e0
 push 0x280
-call fcn_00455c52  ; call 0x455c52
+call _draw_non_zero_image_in_rect  ; call 0x455c52
 add esp, 0x1c
 pop ebp
 ret
@@ -114528,7 +113928,7 @@ push dword [ebp + 0x10]
 push dword [ebp + 0xc]
 push dword [ebp + 8]
 push 0x280
-call fcn_00455fd9  ; call 0x455fd9
+call _draw_non_zero_image_in_rect_ex  ; call 0x455fd9
 add esp, 0x28
 pop ebp
 ret
@@ -114791,18 +114191,18 @@ sub dword [ebp + 0x14], eax
 movsx eax, word [esi + 6]
 sub dword [ebp + 0x18], eax
 mov eax, dword [ebp + 0x14]
-cmp eax, dword [ref_004861c0]  ; cmp eax, dword [0x4861c0]
+cmp eax, dword [(_draw_area + 8)]  ; cmp eax, dword [0x4861c0]
 jge near loc_004568b7  ; jge 0x4568b7
 movzx edx, word [esi]
 add eax, edx
-cmp eax, dword [ref_004861b8]  ; cmp eax, dword [0x4861b8]
+cmp eax, dword [_draw_area]  ; cmp eax, dword [0x4861b8]
 jle near loc_004568b7  ; jle 0x4568b7
 mov eax, dword [ebp + 0x18]
-cmp eax, dword [ref_004861c4]  ; cmp eax, dword [0x4861c4]
+cmp eax, dword [(_draw_area + 12)]  ; cmp eax, dword [0x4861c4]
 jge near loc_004568b7  ; jge 0x4568b7
 movzx edx, word [esi + 2]
 add eax, edx
-cmp eax, dword [ref_004861bc]  ; cmp eax, dword [0x4861bc]
+cmp eax, dword [(_draw_area + 4)]  ; cmp eax, dword [0x4861bc]
 jle near loc_004568b7  ; jle 0x4568b7
 mov dword [ebp - 4], 0
 mov dword [ebp - 8], 0
@@ -114810,7 +114210,7 @@ movzx eax, word [esi]
 mov dword [ebp - 0xc], eax
 mov ax, word [esi + 2]
 mov dword [ebp - 0x10], eax
-mov eax, dword [ref_004861b8]  ; mov eax, dword [0x4861b8]
+mov eax, dword [_draw_area]  ; mov eax, dword [0x4861b8]
 cmp dword [ebp + 0x14], eax
 jge short loc_0045681f  ; jge 0x45681f
 mov edx, dword [ebp + 0x14]
@@ -114823,12 +114223,12 @@ jmp short loc_00456830  ; jmp 0x456830
 loc_0045681f:
 mov eax, dword [ebp - 0xc]
 add eax, dword [ebp + 0x14]
-sub eax, dword [ref_004861c0]  ; sub eax, dword [0x4861c0]
+sub eax, dword [(_draw_area + 8)]  ; sub eax, dword [0x4861c0]
 jle short loc_00456830  ; jle 0x456830
 sub dword [ebp - 0xc], eax
 
 loc_00456830:
-mov eax, dword [ref_004861bc]  ; mov eax, dword [0x4861bc]
+mov eax, dword [(_draw_area + 4)]  ; mov eax, dword [0x4861bc]
 cmp dword [ebp + 0x18], eax
 jge short loc_0045684a  ; jge 0x45684a
 mov edx, dword [ebp + 0x18]
@@ -114841,7 +114241,7 @@ jmp short loc_0045685b  ; jmp 0x45685b
 loc_0045684a:
 mov eax, dword [ebp - 0x10]
 add eax, dword [ebp + 0x18]
-sub eax, dword [ref_004861c4]  ; sub eax, dword [0x4861c4]
+sub eax, dword [(_draw_area + 12)]  ; sub eax, dword [0x4861c4]
 jle short loc_0045685b  ; jle 0x45685b
 sub dword [ebp - 0x10], eax
 
@@ -115301,18 +114701,18 @@ sub dword [ebp + 0x10], eax
 movsx eax, word [esi + 6]
 sub dword [ebp + 0x14], eax
 mov eax, dword [ebp + 0x10]
-cmp eax, dword [ref_004861c0]  ; cmp eax, dword [0x4861c0]
+cmp eax, dword [(_draw_area + 8)]  ; cmp eax, dword [0x4861c0]
 jge near loc_00456d85  ; jge 0x456d85
 movzx edx, word [esi]
 add eax, edx
-cmp eax, dword [ref_004861b8]  ; cmp eax, dword [0x4861b8]
+cmp eax, dword [_draw_area]  ; cmp eax, dword [0x4861b8]
 jle near loc_00456d85  ; jle 0x456d85
 mov eax, dword [ebp + 0x14]
-cmp eax, dword [ref_004861c4]  ; cmp eax, dword [0x4861c4]
+cmp eax, dword [(_draw_area + 12)]  ; cmp eax, dword [0x4861c4]
 jge near loc_00456d85  ; jge 0x456d85
 movzx edx, word [esi + 2]
 add eax, edx
-cmp eax, dword [ref_004861bc]  ; cmp eax, dword [0x4861bc]
+cmp eax, dword [(_draw_area + 4)]  ; cmp eax, dword [0x4861bc]
 jle near loc_00456d85  ; jle 0x456d85
 mov dword [ebp - 4], 0
 mov dword [ebp - 8], 0
@@ -115320,7 +114720,7 @@ movzx eax, word [esi]
 mov dword [ebp - 0xc], eax
 mov ax, word [esi + 2]
 mov dword [ebp - 0x10], eax
-mov eax, dword [ref_004861b8]  ; mov eax, dword [0x4861b8]
+mov eax, dword [_draw_area]  ; mov eax, dword [0x4861b8]
 cmp dword [ebp + 0x10], eax
 jge short loc_00456cc4  ; jge 0x456cc4
 mov edx, dword [ebp + 0x10]
@@ -115333,12 +114733,12 @@ jmp short loc_00456cd5  ; jmp 0x456cd5
 loc_00456cc4:
 mov eax, dword [ebp - 0xc]
 add eax, dword [ebp + 0x10]
-sub eax, dword [ref_004861c0]  ; sub eax, dword [0x4861c0]
+sub eax, dword [(_draw_area + 8)]  ; sub eax, dword [0x4861c0]
 jle short loc_00456cd5  ; jle 0x456cd5
 sub dword [ebp - 0xc], eax
 
 loc_00456cd5:
-mov eax, dword [ref_004861bc]  ; mov eax, dword [0x4861bc]
+mov eax, dword [(_draw_area + 4)]  ; mov eax, dword [0x4861bc]
 cmp dword [ebp + 0x14], eax
 jge short loc_00456cef  ; jge 0x456cef
 mov edx, dword [ebp + 0x14]
@@ -115351,7 +114751,7 @@ jmp short loc_00456d00  ; jmp 0x456d00
 loc_00456cef:
 mov eax, dword [ebp - 0x10]
 add eax, dword [ebp + 0x14]
-sub eax, dword [ref_004861c4]  ; sub eax, dword [0x4861c4]
+sub eax, dword [(_draw_area + 12)]  ; sub eax, dword [0x4861c4]
 jle short loc_00456d00  ; jle 0x456d00
 sub dword [ebp - 0x10], eax
 
@@ -148984,16 +148384,10 @@ dd 0x02030405
 dd 0x00000001
 dd 0x00000000
 
-ref_004861b8:
+_draw_area:			; ref_004861b8
 dd 0x00000000
-
-ref_004861bc:
 dd 0x00000028
-
-ref_004861c0:
 dd 0x000001b8
-
-ref_004861c4:
 dd 0x000001e0
 
 ref_004861c8:
