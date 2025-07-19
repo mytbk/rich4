@@ -194,7 +194,7 @@ void draw_image_in_rect_ex(int dst_width, int16_t *dst_buf, const struct graph_s
   size_t src_x, src_y, dst_x, dst_y, copy_width, copy_height;
 
   if (use_draw_area % 2 == 0) {
-    if (is_outside(to_left, to_top, copy_width, copy_height, 0, 0, 0x280, 0x1e0))
+    if (is_outside(to_left, to_top, init_copy_width, init_copy_height, 0, 0, 0x280, 0x1e0))
       return;
 
     get_copy_params_x(to_left,
@@ -207,7 +207,7 @@ void draw_image_in_rect_ex(int dst_width, int16_t *dst_buf, const struct graph_s
 		      y_move, init_copy_height,
 		      &src_y, &dst_y, &copy_height);
   } else {
-    if (is_outside(to_left, to_top, copy_width, copy_height,
+    if (is_outside(to_left, to_top, init_copy_width, init_copy_height,
 		   draw_area.left, draw_area.top, draw_area.right, draw_area.bottom))
       return;
 
@@ -243,7 +243,7 @@ void draw_non_zero_image_in_rect_ex(int dst_width, int16_t *dst_buf, const struc
   size_t src_x, src_y, dst_x, dst_y, copy_width, copy_height;
 
   if (use_draw_area % 2 == 0) {
-    if (is_outside(to_left, to_top, copy_width, copy_height, 0, 0, 0x280, 0x1e0))
+    if (is_outside(to_left, to_top, init_copy_width, init_copy_height, 0, 0, 0x280, 0x1e0))
       return;
 
     get_copy_params_x(to_left,
@@ -256,7 +256,7 @@ void draw_non_zero_image_in_rect_ex(int dst_width, int16_t *dst_buf, const struc
 		      y_move, init_copy_height,
 		      &src_y, &dst_y, &copy_height);
   } else {
-    if (is_outside(to_left, to_top, copy_width, copy_height,
+    if (is_outside(to_left, to_top, init_copy_width, init_copy_height,
 		   draw_area.left, draw_area.top, draw_area.right, draw_area.bottom))
       return;
 
