@@ -457,45 +457,50 @@ static void cfcn_004551bb(const void *s, uint32_t *ecx, uint32_t *ebx)
 
 void mkf_decompress(void *arg1, const void *src)
 {
-	uint32_t bx;
-	uint32_t eax, ecx;
+	uint32_t bitpos = 0;
 
 	memcpy(&gtables, &ctab_orig, sizeof(gtables));
-	ecx = 0;
-	char *edi = arg1;
+	char *out_buf = arg1;
 
 	while (1) {
-		cfcn_004551bb(src, &ecx, &bx);
+		uint32_t bx;
+		cfcn_004551bb(src, &bitpos, &bx);
 		if ((bx & 0xff00) == 0) {
-			*edi = bx & 0xff;
-			edi++;
+			*out_buf = bx & 0xff;
+			out_buf++;
 			continue;
 		}
-		eax = ecx;
-		uint32_t old_ecx = ecx;
-		eax >>= 3;
-		ecx &= 7;
-		eax = *(uint32_t*)(src + eax);
-		eax >>= ecx;
-		size_t ebp = eax & 0xff;
-		uint8_t cl = table_483530[ebp];
-		uint8_t dh = table_483430[ebp];
-		eax >>= cl;
-		uint8_t dl = eax << 2;
+		// extract at least 14 bits starting at bitpos, so use uint32_t here
+		const uint32_t src_bits = (*(uint32_t*)(src + bitpos / 8)) >> (bitpos % 8);
+		const size_t src_byte = src_bits & 0xff;
+		/* table_483530: range 3 .. 8, starting bit index to
+		                 extract from src[bitpos+23:bitpos] */
+		uint8_t cl = table_483530[src_byte];
+		/* table_483430: each element fits in 6 bits,
+		                 only table_483430[0] is 0x3f */
+		uint8_t dh = table_483430[src_byte];
+		/* dx := {dh, src_bits[cl+5:cl]} */
+		uint8_t dl = (src_bits >> cl) << 2;
 		uint16_t dx = (((uint16_t)dh << 8) | dl) >> 2;
-		cl += 6;
-		eax = cl;
-		ecx = old_ecx + eax;
+		/* increment bitpos to the next unprocessed bit */
+		bitpos = bitpos + cl + 6;
+
+		/* decompress ends if:
+		   1. dx[11:6] = 0x3f => src[bitpos+7:bitpos] = 0 => cl = 8
+		   2. dx[5:0] = 0x3f => src[bitpos + cl + 5:bitpos + cl] = 0x3f
+		                     => src[bitpos + 13:bitpos + 8] = 0x3f
+		   which means src[bitpos+13:bitpos] = 0x3f00
+		*/
 		if (dx == 0xfff)
 			return;
 
-		bx -= 0xfd;
-
-		char *s = edi - 1 - dx;
+		const size_t num_bytes_to_emit = bx - 0xfd;
+		const char *s = out_buf - 1 - dx;
 		/* note that it's not memcpy/memmove!! */
-		for (size_t i = 0; i < bx; i++) {
-			*edi = *s;
-			edi++;
+		/* because the copied bytes can be the bytes just written this time */
+		for (size_t i = 0; i < num_bytes_to_emit; i++) {
+			*out_buf = *s;
+			out_buf++;
 			s++;
 		}
 	}
