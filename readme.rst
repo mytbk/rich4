@@ -31,8 +31,6 @@
 
 本项目在 Arch Linux 下开发，使用 MinGW 工具链和 nasm 汇编器，可以执行 ``pacman -S mingw-w64 nasm`` 安装。
 
-Arch 从 wine 10.10 开始使用 WoW64 模式构建 wine，而目前大富翁4的程序在 WoW64 模式的 wine 下无法启动，因此需要手动构建 multilib 版的 wine.
-
 构建 rich4_mscrt.exe::
 
   cd asm
@@ -40,12 +38,17 @@ Arch 从 wine 10.10 开始使用 WoW64 模式构建 wine，而目前大富翁4�
 
 将 rich4_mscrt.exe 复制到大富翁4的游戏目录，用 wine 运行即可启动游戏。
 
-radare2 工程文件和辅助脚本（已停止维护）
------------------------------------------------------------
+相关工作
+--------------------
 
-本项目的 radare2 工程文件和辅助脚本在另一仓库中，用如下方式获取::
+目前已有大富翁4的引擎重建工程，见 `Issue #6 <https://github.com/mytbk/rich4/issues/6>`__ 的讨论：
 
-  git clone https://git.wehack.space/rich4.r2 r2
+- https://github.com/lhr0909/richman4-remastered
+- https://github.com/tytannial/rich4-re
+
+以及大富翁4的资源编辑工具，见 `Discussion #7 <https://github.com/mytbk/rich4/discussions/7>`__:
+
+- https://github.com/aecq/rich4/tree/public/mkf-fun/csrc/mkf/functional
 
 
 类似工作
