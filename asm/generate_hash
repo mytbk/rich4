@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+if sha256sum -c SHA256SUM >/dev/null 2>/dev/null
+then
+  echo "rich4 executable unchanged."
+else
+  echo "rich4 changed, update checksum."
+  sha256sum rich4_mscrt.exe > SHA256SUM
+fi
