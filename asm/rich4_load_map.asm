@@ -31,7 +31,7 @@ extern ref_0048ae4c
 extern ref_0048ae60
 extern ref_0048ae64
 extern ref_0048aea8
-extern ref_0048b6b4
+extern _rich4_palette16
 extern ref_0048bac4
 extern ref_0048bacc
 extern ref_0048bad0
@@ -119,7 +119,7 @@ push 0x200
 mov eax, dword [ref_00474945]  ; mov eax, dword [0x474945]
 add eax, 0x10
 push eax
-push ref_0048b6b4  ; push 0x48b6b4
+push _rich4_palette16  ; push 0x48b6b4
 call _memcpy  ; call 0x456de8
 add esp, 0xc
 mov eax, dword [ref_00474945]  ; mov eax, dword [0x474945]

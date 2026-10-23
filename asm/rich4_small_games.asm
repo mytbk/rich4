@@ -58,7 +58,6 @@ extern ref_0048a08c
 extern _rich4_ddraw_primary_sf_ptr
 extern _rich4_ddraw_offscreen_sf_ptr
 extern _rich4_data_mkf
-extern ref_0048bbac
 
 global _rich4_ui_game_penguin_treasure
 global _rich4_ui_game_balloon
@@ -946,7 +945,7 @@ add esp, 8
 mov eax, dword [ref_0048bd6c]  ; mov eax, dword [0x48bd6c]
 mov edx, 1
 mov dword [esp + 0x44], edx
-add dword [eax*4 + ref_0048bbac], edx  ; add dword [eax*4 + 0x48bbac], edx
+add dword [eax*4 + (ref_0048bbb4 - 8)], edx  ; add dword [eax*4 + 0x48bbac], edx
 jmp near loc_00412b9c  ; jmp 0x412b9c
 
 loc_00412a08:

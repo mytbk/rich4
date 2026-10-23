@@ -116,47 +116,8 @@ extern ref_0048a08c
 extern _rich4_ddraw_primary_sf_ptr
 extern _rich4_ddraw_offscreen_sf_ptr
 extern _rich4_data_mkf
-extern ref_0048bb08
-extern ref_0048bb0a
-extern ref_0048bb0c
-extern ref_0048bb0e
-extern ref_0048bb10
-extern ref_0048bb11
-extern ref_0048bb48
-extern ref_0048bb49
-extern ref_0048bb4a
-extern ref_0048bb4b
-extern ref_0048bb4c
-extern ref_0048bb4d
-extern ref_0048bb50
-extern ref_0048bb58
-extern ref_0048bb5c
-extern ref_0048bb60
-extern ref_0048bb64
-extern ref_0048bb68
-extern ref_0048bb6c
-extern ref_0048bb70
-extern ref_0048bb74
-extern ref_0048bb78
-extern ref_0048bb7c
-extern ref_0048bb80
-extern ref_0048bb84
-extern ref_0048bb85
-extern ref_0048bb86
-extern ref_0048bb88
-extern ref_0048bb8c
-extern ref_0048bb8e
-extern ref_0048bb92
-extern ref_0048bb96
-extern ref_0048bb9a
-extern ref_0048bb9e
-extern ref_0048bba2
-extern ref_0048bba6
-extern ref_0048bbaa
-extern ref_0048bbae
 extern _num_human_players
 
-global ref_0048bbac
 global _rich4_ui_options_entry
 
 section .text
@@ -4686,10 +4647,7 @@ ref_0048bba6:
 resb 4
 
 ref_0048bbaa:
-resb 2
-
-ref_0048bbac:
-resb 2
+resb 4
 
 ref_0048bbae:
 resb 6

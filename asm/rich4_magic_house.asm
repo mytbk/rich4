@@ -1,27 +1,5 @@
-extern _Post_0402_Message
-extern _Wait_0402_Message
-extern __imp__BeginPaint@8
-extern __imp__DefWindowProcA@16
-extern __imp__EndPaint@8
-extern __imp__GetCursorPos@4
-extern __imp__InvalidateRect@12
-extern __imp__KillTimer@8
-extern __imp__PostMessageA@16
-extern __imp__SetTimer@16
-extern _rich4_all_players_state
 extern _callbackSize
 extern _card_table
-extern _rich4_current_player
-extern _global_rich4_cfg
-extern _libc_free
-extern _libc_rand
-extern _libc_sprintf
-extern _rich4_num_players
-extern _read_mkf
-extern _rich4_create_font
-extern _rich4_draw_text
-extern _rich4_player_say
-extern _strcat
 extern fcn_00402250
 extern fcn_0040235d
 extern fcn_00402460
@@ -29,20 +7,10 @@ extern fcn_0040ab4a
 extern fcn_0040af12
 extern fcn_0040b0cd
 extern fcn_0040b110
-extern _rich4_change_player_direction
-extern _rich4_update_hostility
 extern fcn_0041906a
-extern _rich4_update_player_info_window
 extern fcn_0041d476
 extern fcn_00431842
-extern _rich4_ui_auction_entry
-extern _rich4_add_player_days_in_prison
-extern _rich4_add_player_days_in_hospital
 extern fcn_00440cac
-extern _rich4_try_mianzui_jiahuo_card
-extern _rich4_player_receive_random_card
-extern _rich4_player_sell_all_the_card
-extern _rich4_player_sell_all_tools
 extern fcn_0044db81
 extern fcn_0044ec30
 extern fcn_0044ecb6
@@ -52,9 +20,7 @@ extern fcn_0045144f
 extern fcn_00451a5a
 extern fcn_00451a97
 extern fcn_0045285e
-extern _rich4_init_sound_effect_info
 extern fcn_00454240
-extern _rich4_play_sound_effect
 extern fcn_004549cf
 extern fcn_00454bcc
 extern fcn_0045620f
@@ -63,6 +29,20 @@ extern fcn_004562a5
 extern fcn_004563f5
 extern fcn_00456418
 extern fcn_0045643d
+extern _global_rich4_cfg
+extern __imp__BeginPaint@8
+extern __imp__DefWindowProcA@16
+extern __imp__EndPaint@8
+extern __imp__GetCursorPos@4
+extern __imp__InvalidateRect@12
+extern __imp__KillTimer@8
+extern __imp__PostMessageA@16
+extern __imp__SetTimer@16
+extern _libc_free
+extern _libc_rand
+extern _libc_sprintf
+extern _Post_0402_Message
+extern _read_mkf
 extern ref_0046caec
 extern ref_0046caf4
 extern ref_0046cb01
@@ -80,12 +60,8 @@ extern ref_004757e7
 extern ref_0048231a
 extern ref_00482322
 extern ref_00482332
-extern _rich4_panel_mkf
 extern ref_0048a068
 extern ref_0048a08c
-extern _rich4_ddraw_primary_sf_ptr
-extern _rich4_ddraw_offscreen_sf_ptr
-extern _rich4_data_mkf
 extern ref_0048be18
 extern ref_0048c380
 extern ref_0048c384
@@ -108,14 +84,534 @@ extern ref_0048c3ac
 extern ref_0048c3ad
 extern ref_0048c3ae
 extern ref_0048c3af
+extern _rich4_add_player_days_in_hospital
+extern _rich4_add_player_days_in_prison
+extern _rich4_all_players_state
+extern _rich4_calculate_player_wealth
+extern _rich4_change_player_direction
+extern _rich4_create_font
+extern _rich4_current_player
+extern _rich4_data_mkf
+extern _rich4_ddraw_offscreen_sf_ptr
+extern _rich4_ddraw_primary_sf_ptr
+extern _rich4_draw_text
+extern _rich4_facility_info_ptr
+extern _rich4_init_sound_effect_info
+extern _rich4_land_info_ptr
 extern _rich4_map_node_ptr
+extern _rich4_num_facilities
+extern _rich4_num_lands
+extern _rich4_num_players
+extern _rich4_panel_mkf
+extern _rich4_player_receive_random_card
+extern _rich4_player_say
+extern _rich4_player_sell_all_the_card
+extern _rich4_player_sell_all_tools
+extern _rich4_play_sound_effect
 extern _rich4_price_index
+extern _rich4_try_mianzui_jiahuo_card
+extern _rich4_ui_auction_entry
+extern _rich4_update_hostility
+extern _rich4_update_player_info_window
+extern _strcat
+extern _Wait_0402_Message
 
-global _rich4_call_god_of_death_entry
-global _rich4_call_god_of_death_callback
 global fcn_0043380a
+global _rich4_call_god_of_death_callback
+global _rich4_call_god_of_death_entry
 
 section .text
+
+ref_00431812:  ; may contain a jump table
+dd loc_00431867
+dd loc_004318b7
+dd loc_00431969
+dd loc_00431a23
+dd loc_00431a7d
+dd loc_00431ad2
+dd loc_00431b2c
+dd loc_00431b61
+dd loc_00431b99
+dd loc_00431bcf
+dd loc_00431c02
+dd loc_00431c31
+
+fcn_00431842:
+push ebx
+push esi
+push edi
+push ebp
+sub esp, 4
+xor edx, edx
+mov dword [ref_0048c380], edx  ; mov dword [0x48c380], edx
+mov ecx, dword [esp + 0x18]
+cmp ecx, 0xb
+ja near loc_00431c62  ; ja 0x431c62
+mov eax, ecx
+jmp dword [eax*4 + ref_00431812]  ; ujmp: jmp dword [eax*4 + 0x431812]
+
+loc_00431867:
+xor ebx, ebx
+xor esi, esi
+mov dword [esp], edx
+
+loc_0043186e:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_004318b4  ; je 0x4318b4
+push ebx
+call _rich4_calculate_player_wealth  ; call 0x4239b9
+add esp, 4
+mov edx, dword [esp]
+cmp eax, edx
+jle short loc_004318a7  ; jle 0x4318a7
+mov dword [esp], eax
+test esi, esi
+je short loc_004318a9  ; je 0x4318a9
+xor esi, esi
+mov dword [ref_0048c380], esi  ; mov dword [0x48c380], esi
+jmp short loc_004318a9  ; jmp 0x4318a9
+
+loc_004318a7:
+jne short loc_004318b4  ; jne 0x4318b4
+
+loc_004318a9:
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_004318b4:
+inc ebx
+jmp short loc_0043186e  ; jmp 0x43186e
+
+loc_004318b7:
+xor ebx, ebx
+xor esi, esi
+mov dword [esp], edx
+
+loc_004318be:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je near loc_00431963  ; je 0x431963
+xor edx, edx
+mov eax, 1
+
+loc_004318e1:
+cmp eax, dword [_rich4_num_lands]  ; cmp eax, dword [0x498e98]
+jg short loc_00431907  ; jg 0x431907
+imul edi, eax, 0x34
+mov ecx, dword [_rich4_land_info_ptr]  ; mov ecx, dword [0x498e84]
+mov cl, byte [ecx + edi + 0x19]
+and ecx, 0xff
+lea edi, [ebx + 1]
+cmp ecx, edi
+jne short loc_00431904  ; jne 0x431904
+inc edx
+
+loc_00431904:
+inc eax
+jmp short loc_004318e1  ; jmp 0x4318e1
+
+loc_00431907:
+mov eax, 1
+
+loc_0043190c:
+cmp eax, dword [_rich4_num_facilities]  ; cmp eax, dword [0x498e8c]
+jg short loc_00431938  ; jg 0x431938
+mov ecx, eax
+shl ecx, 3
+mov edi, ecx
+shl ecx, 3
+sub ecx, edi
+mov edi, ecx
+mov ecx, dword [_rich4_facility_info_ptr]  ; mov ecx, dword [0x498e88]
+movzx edi, byte [ecx + edi + 0x19]
+lea ecx, [ebx + 1]
+cmp edi, ecx
+jne short loc_00431935  ; jne 0x431935
+inc edx
+
+loc_00431935:
+inc eax
+jmp short loc_0043190c  ; jmp 0x43190c
+
+loc_00431938:
+test edx, edx
+je short loc_00431963  ; je 0x431963
+mov ebp, dword [esp]
+cmp edx, ebp
+jle short loc_00431956  ; jle 0x431956
+mov dword [esp], edx
+test esi, esi
+je short loc_00431958  ; je 0x431958
+xor edx, edx
+mov dword [ref_0048c380], edx  ; mov dword [0x48c380], edx
+xor esi, esi
+jmp short loc_00431958  ; jmp 0x431958
+
+loc_00431956:
+jne short loc_00431963  ; jne 0x431963
+
+loc_00431958:
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431963:
+inc ebx
+jmp near loc_004318be  ; jmp 0x4318be
+
+loc_00431969:
+xor ebx, ebx
+xor esi, esi
+mov dword [esp], edx
+
+loc_00431970:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je near loc_00431a1d  ; je 0x431a1d
+xor edx, edx
+mov eax, 1
+
+loc_00431993:
+cmp eax, dword [_rich4_num_lands]  ; cmp eax, dword [0x498e98]
+jg short loc_004319bb  ; jg 0x4319bb
+imul ecx, eax, 0x34
+mov edi, dword [_rich4_land_info_ptr]  ; mov edi, dword [0x498e84]
+add ecx, edi
+movzx ebp, byte [ecx + 0x19]
+lea edi, [ebx + 1]
+cmp ebp, edi
+jne short loc_004319b8  ; jne 0x4319b8
+cmp byte [ecx + 0x1a], 0
+je short loc_004319b8  ; je 0x4319b8
+inc edx
+
+loc_004319b8:
+inc eax
+jmp short loc_00431993  ; jmp 0x431993
+
+loc_004319bb:
+mov eax, 1
+
+loc_004319c0:
+cmp eax, dword [_rich4_num_facilities]  ; cmp eax, dword [0x498e8c]
+jg short loc_004319f3  ; jg 0x4319f3
+mov ecx, eax
+shl ecx, 3
+mov edi, ecx
+shl ecx, 3
+sub ecx, edi
+mov edi, ecx
+mov ecx, dword [_rich4_facility_info_ptr]  ; mov ecx, dword [0x498e88]
+add ecx, edi
+movzx ebp, byte [ecx + 0x19]
+lea edi, [ebx + 1]
+cmp ebp, edi
+jne short loc_004319f0  ; jne 0x4319f0
+cmp byte [ecx + 0x1a], 0
+je short loc_004319f0  ; je 0x4319f0
+inc edx
+
+loc_004319f0:
+inc eax
+jmp short loc_004319c0  ; jmp 0x4319c0
+
+loc_004319f3:
+test edx, edx
+je short loc_00431a1d  ; je 0x431a1d
+mov edi, dword [esp]
+cmp edx, edi
+jle short loc_00431a10  ; jle 0x431a10
+mov dword [esp], edx
+test esi, esi
+je short loc_00431a12  ; je 0x431a12
+xor eax, eax
+mov dword [ref_0048c380], eax  ; mov dword [0x48c380], eax
+xor esi, esi
+jmp short loc_00431a12  ; jmp 0x431a12
+
+loc_00431a10:
+jne short loc_00431a1d  ; jne 0x431a1d
+
+loc_00431a12:
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431a1d:
+inc ebx
+jmp near loc_00431970  ; jmp 0x431970
+
+loc_00431a23:
+xor ebx, ebx
+xor esi, esi
+xor eax, ecx
+mov dword [esp], eax
+
+loc_00431a2c:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431a7a  ; je 0x431a7a
+cmp dword [eax + (_rich4_all_players_state + 28)], 0  ; cmp dword [eax + 0x496b84], 0
+je short loc_00431a7a  ; je 0x431a7a
+mov edx, dword [esp]
+mov ecx, dword [eax + (_rich4_all_players_state + 28)]  ; mov ecx, dword [eax + 0x496b84]
+cmp edx, ecx
+jge short loc_00431a6d  ; jge 0x431a6d
+mov dword [esp], ecx
+test esi, esi
+je short loc_00431a6f  ; je 0x431a6f
+xor ebp, ebp
+mov dword [ref_0048c380], ebp  ; mov dword [0x48c380], ebp
+xor esi, esi
+jmp short loc_00431a6f  ; jmp 0x431a6f
+
+loc_00431a6d:
+jne short loc_00431a7a  ; jne 0x431a7a
+
+loc_00431a6f:
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431a7a:
+inc ebx
+jmp short loc_00431a2c  ; jmp 0x431a2c
+
+loc_00431a7d:
+xor ebx, ebx
+xor esi, esi
+mov dword [esp], edx
+mov edi, dword [_rich4_num_players]  ; mov edi, dword [0x499114]
+
+loc_00431a8a:
+cmp ebx, edi
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431acf  ; je 0x431acf
+mov ebp, dword [eax + (_rich4_all_players_state + 32)]  ; mov ebp, dword [eax + 0x496b88]
+test ebp, ebp
+je short loc_00431acf  ; je 0x431acf
+mov edx, dword [esp]
+cmp edx, ebp
+jge short loc_00431ac2  ; jge 0x431ac2
+mov dword [esp], ebp
+test esi, esi
+je short loc_00431ac4  ; je 0x431ac4
+xor ebp, ebp
+mov dword [ref_0048c380], ebp  ; mov dword [0x48c380], ebp
+xor esi, esi
+jmp short loc_00431ac4  ; jmp 0x431ac4
+
+loc_00431ac2:
+jne short loc_00431acf  ; jne 0x431acf
+
+loc_00431ac4:
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431acf:
+inc ebx
+jmp short loc_00431a8a  ; jmp 0x431a8a
+
+loc_00431ad2:
+xor ebx, ebx
+xor esi, esi
+mov dword [esp], edx
+
+loc_00431ad9:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431b29  ; je 0x431b29
+mov dx, word [eax + (_rich4_all_players_state + 48)]  ; mov dx, word [eax + 0x496b98]
+test dx, dx
+je short loc_00431b29  ; je 0x431b29
+mov eax, edx
+and eax, 0xffff
+mov edx, dword [esp]
+cmp eax, edx
+jle short loc_00431b1c  ; jle 0x431b1c
+mov dword [esp], eax
+test esi, esi
+je short loc_00431b1e  ; je 0x431b1e
+xor esi, esi
+mov dword [ref_0048c380], esi  ; mov dword [0x48c380], esi
+jmp short loc_00431b1e  ; jmp 0x431b1e
+
+loc_00431b1c:
+jne short loc_00431b29  ; jne 0x431b29
+
+loc_00431b1e:
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431b29:
+inc ebx
+jmp short loc_00431ad9  ; jmp 0x431ad9
+
+loc_00431b2c:
+xor ebx, ebx
+xor esi, esi
+mov ebp, dword [_rich4_num_players]  ; mov ebp, dword [0x499114]
+
+loc_00431b36:
+cmp ebx, ebp
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431b5e  ; je 0x431b5e
+test byte [eax + (_rich4_all_players_state + 17)], 3  ; test byte [eax + 0x496b79], 3
+jne short loc_00431b5e  ; jne 0x431b5e
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431b5e:
+inc ebx
+jmp short loc_00431b36  ; jmp 0x431b36
+
+loc_00431b61:
+xor ebx, ebx
+xor esi, esi
+mov edi, dword [_rich4_num_players]  ; mov edi, dword [0x499114]
+
+loc_00431b6b:
+cmp ebx, edi
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431b96  ; je 0x431b96
+mov al, byte [eax + (_rich4_all_players_state + 17)]  ; mov al, byte [eax + 0x496b79]
+and al, 3
+cmp al, 1
+jne short loc_00431b96  ; jne 0x431b96
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431b96:
+inc ebx
+jmp short loc_00431b6b  ; jmp 0x431b6b
+
+loc_00431b99:
+xor ebx, ebx
+xor esi, esi
+
+loc_00431b9d:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431bcc  ; je 0x431bcc
+mov al, byte [eax + (_rich4_all_players_state + 17)]  ; mov al, byte [eax + 0x496b79]
+and al, 3
+cmp al, 2
+jne short loc_00431bcc  ; jne 0x431bcc
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431bcc:
+inc ebx
+jmp short loc_00431b9d  ; jmp 0x431b9d
+
+loc_00431bcf:
+xor ebx, ebx
+xor esi, esi
+
+loc_00431bd3:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge near loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431bff  ; je 0x431bff
+cmp byte [eax + (_rich4_all_players_state + 63)], 0  ; cmp byte [eax + 0x496ba7], 0
+je short loc_00431bff  ; je 0x431bff
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431bff:
+inc ebx
+jmp short loc_00431bd3  ; jmp 0x431bd3
+
+loc_00431c02:
+xor ebx, ebx
+xor esi, esi
+
+loc_00431c06:
+cmp ebx, dword [_rich4_num_players]  ; cmp ebx, dword [0x499114]
+jge short loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431c2e  ; je 0x431c2e
+cmp byte [eax + (_rich4_all_players_state + 20)], 0  ; cmp byte [eax + 0x496b7c], 0
+je short loc_00431c2e  ; je 0x431c2e
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431c2e:
+inc ebx
+jmp short loc_00431c06  ; jmp 0x431c06
+
+loc_00431c31:
+xor ebx, ebx
+xor esi, esi
+mov ebp, dword [_rich4_num_players]  ; mov ebp, dword [0x499114]
+
+loc_00431c3b:
+cmp ebx, ebp
+jge short loc_00431c62  ; jge 0x431c62
+imul eax, ebx, 0x68
+cmp byte [eax + (_rich4_all_players_state + 21)], 0  ; cmp byte [eax + 0x496b7d], 0
+je short loc_00431c5f  ; je 0x431c5f
+cmp byte [eax + (_rich4_all_players_state + 20)], 0  ; cmp byte [eax + 0x496b7c], 0
+jne short loc_00431c5f  ; jne 0x431c5f
+mov al, bl
+inc al
+mov byte [esi + ref_0048c380], al  ; mov byte [esi + 0x48c380], al
+inc esi
+
+loc_00431c5f:
+inc ebx
+jmp short loc_00431c3b  ; jmp 0x431c3b
+
+loc_00431c62:
+cmp dword [ref_0048c380], 0  ; cmp dword [0x48c380], 0
+setne al
+and eax, 0xff
+add esp, 4
+pop ebp
+pop edi
+pop esi
+pop ebx
+ret
 
 ref_00431c7a:  ; may contain a jump table
 dd loc_00431cd6

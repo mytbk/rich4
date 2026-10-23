@@ -29,7 +29,7 @@ extern fcn_0040a4e1
 extern fcn_0041906a
 extern _rich4_calculate_land_toll
 extern fcn_0041d2c6
-extern fcn_00423b3b
+extern _rich4_collect_player_estates
 extern _rich4_update_commercial_owner
 extern fcn_00436b0a
 extern _rich4_player_card_num
@@ -725,7 +725,7 @@ je short loc_00424b24  ; je 0x424b24
 push edi
 mov ecx, dword [_rich4_current_player]  ; mov ecx, dword [0x49910c]
 push ecx
-call fcn_00423b3b  ; call 0x423b3b
+call _rich4_collect_player_estates  ; call 0x423b3b
 add esp, 8
 mov dword [ref_0048c2b4], eax  ; mov dword [0x48c2b4], eax
 

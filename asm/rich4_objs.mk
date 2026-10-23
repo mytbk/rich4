@@ -6,7 +6,7 @@ RICH4_OBJS = rich4_keyboard_hook.obj rich4_loading_scene.obj \
              rich4_ui_clicking_top_panel.obj \
              rich4_ui_yesno.obj \
              rich4_ui_help.obj \
-             rich4_stocks.obj rich4_ui_stock.obj \
+             rich4_stocks.obj rich4_ui_stock.obj rich4_ai_stock.obj \
              rich4_ui_small_map.obj \
              rich4_ui_ai_settings.obj \
              rich4_ui_player_info_view.obj \
@@ -18,10 +18,11 @@ RICH4_OBJS = rich4_keyboard_hook.obj rich4_loading_scene.obj \
              rich4_config_file.obj rich4_card_table.obj rich4_tool_table.obj \
              rich4_getdate.obj rich4_window_util.obj \
              rich4_libmkf.obj rich4_libmkf_decompress.obj rich4_libmkf_update_pixels.obj \
+             rich4_blit.obj \
              rich4_pixel_convert_utils.obj \
              rich4_calculate_direction.obj \
              rich4_graph_struct.obj \
-             rich4_drawing.obj rich4_drawing_utils2.obj \
+             rich4_raster.obj rich4_drawing.obj rich4_drawing_utils2.obj \
              rich4_save_files.obj rich4_ui_save_load.obj \
              rich4_player_save_state.obj \
              rich4_direct_sound_init.obj rich4_initialize.obj rich4_finalize.obj \
@@ -47,11 +48,11 @@ RICH4_OBJS = rich4_keyboard_hook.obj rich4_loading_scene.obj \
              rich4_news.obj rich4_fortune.obj rich4_magic_house.obj rich4_small_games.obj \
              rich4_ui_prison.obj rich4_prison_utils.obj \
              rich4_ui_hospital.obj rich4_hospital_utils.obj \
-             rich4_ui_bank.obj rich4_ui_letou.obj \
+             rich4_ui_bank.obj rich4_monthly_settlement.obj rich4_ui_letou.obj \
              rich4_ui_auction.obj \
              rich4_shop.obj \
-             rich4_player_bankrupt.obj rich4_gods.obj \
-             rich4_calculate_player_wealth.obj rich4_update_price_index.obj \
+             rich4_player_bankrupt.obj rich4_gods.obj rich4_god_object_misc.obj \
+             rich4_player_properties.obj \
              rich4_player_utils.obj \
              rich4_objects.obj \
              rich4_date_utils.obj \
