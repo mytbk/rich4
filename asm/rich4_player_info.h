@@ -25,11 +25,11 @@ typedef struct
 	 */
 	uint8_t who_plays;
 
-	uint8_t f22;
-	uint8_t f23;
-	uint8_t f24;
-	uint8_t init_cash_ratio;
-	uint8_t f26;
+	uint8_t ai_use_card_tool; // bit0:使用卡片 bit1:使用道具
+	uint8_t ai_personality; // 0:乖宝宝 1:普通人 2:大老奸
+	uint8_t ai_loan_ratio;
+	uint8_t ai_cash_ratio;
+	uint8_t ai_stock_ratio;
 	uint8_t f27;
 	int32_t cash;
 	/* 0x20 */
