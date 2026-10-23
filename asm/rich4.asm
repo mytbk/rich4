@@ -523,12 +523,6 @@ global ref_0048233a
 	;; rich4_init_new_game.asm
 global fcn_0044baea
 extern fcn_004552b7
-global ref_0046cb3c
-global ref_0046cb40
-global ref_0046cb48
-global ref_0046cb4c
-global ref_0046cb50
-global ref_0046cb54
 global ref_0046cbe8
 global ref_0046cc00
 global ref_0046ccd0
@@ -24956,24 +24950,6 @@ dd 0x00000000
 
 
 
-ref_0046cb3c:
-dd 0x00000002
-
-ref_0046cb40:
-dd 0x00000001
-
-
-ref_0046cb48:
-dd 0x00000000
-
-ref_0046cb4c:
-dd 0x00000000
-
-ref_0046cb50:
-dd 0x00000000
-
-ref_0046cb54:
-dd 0x00000000
 
 
 
@@ -33768,6 +33744,7 @@ dd 0xf0f4f8fc
 db 0xf4
 db 0xf8
 db 0xfc
+db 0x00
 
 
 ref_0047639c:

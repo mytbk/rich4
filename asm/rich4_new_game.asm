@@ -55,16 +55,6 @@ extern ref_0046caec
 extern ref_0046caf4
 extern ref_0046caf9
 extern ref_0046cb01
-extern ref_0046cb3c
-extern ref_0046cb40
-extern ref_0046cb48
-extern ref_0046cb4c
-extern ref_0046cb50
-extern ref_0046cb54
-extern ref_0046cb58
-extern ref_0046cb5c
-extern ref_0046cb60
-extern ref_0046cb64
 extern ref_0046cbd0
 extern ref_0046cbe8
 extern ref_0046cc00
@@ -4906,7 +4896,25 @@ ref_004631b7:
 db 'OVER.AVI',0x00
 
 
+ref_0046cb3c:
+dd 0x00000002
+
+ref_0046cb40:
+dd 0x00000001
+
 ref_0046cb44:
+dd 0x00000000
+
+ref_0046cb48:
+dd 0x00000000
+
+ref_0046cb4c:
+dd 0x00000000
+
+ref_0046cb50:
+dd 0x00000000
+
+ref_0046cb54:
 dd 0x00000000
 
 ref_0046cb58:

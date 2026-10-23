@@ -65,7 +65,7 @@ jmp short loc_0045200d  ; jmp 0x45200d
 
 loc_00452003:
 xor edx, edx
-mov dl, byte [ecx + ref_0047638f]  ; mov dl, byte [ecx + 0x47638f]
+mov dl, byte [ecx + (days_per_month - 1)]  ; mov dl, byte [ecx + 0x47638f]
 add ebx, edx
 
 loc_0045200d:
@@ -135,7 +135,7 @@ jmp short loc_00452091  ; jmp 0x452091
 
 loc_00452089:
 xor edx, edx
-mov dl, byte [esi + ref_0047638f]  ; mov dl, byte [esi + 0x47638f]
+mov dl, byte [esi + (days_per_month - 1)]  ; mov dl, byte [esi + 0x47638f]
 
 loc_00452091:
 cmp ebx, edx
@@ -185,7 +185,7 @@ jmp short loc_004520ff  ; jmp 0x4520ff
 
 loc_004520f7:
 xor edx, edx
-mov dl, byte [esi + ref_0047638f]  ; mov dl, byte [esi + 0x47638f]
+mov dl, byte [esi + (days_per_month - 1)]  ; mov dl, byte [esi + 0x47638f]
 
 loc_004520ff:
 mov ebx, dword [esp + 0x14]
@@ -234,7 +234,7 @@ jmp short loc_00452165  ; jmp 0x452165
 
 loc_0045215d:
 xor eax, eax
-mov al, byte [ecx + ref_0047638f]  ; mov al, byte [ecx + 0x47638f]
+mov al, byte [ecx + (days_per_month - 1)]  ; mov al, byte [ecx + 0x47638f]
 
 loc_00452165:
 inc edi
@@ -299,8 +299,7 @@ ret
 
 section .data
 
-ref_0047638f:
-db 0x00
+days_per_month:
 dd 0x1e1f1c1f
 dd 0x1f1f1e1f
 dd 0x1f1e1f1e

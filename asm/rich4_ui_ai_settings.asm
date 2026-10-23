@@ -54,7 +54,6 @@ extern ref_0048a068
 extern ref_0048a08c
 extern _rich4_ddraw_primary_sf_ptr
 extern _rich4_ddraw_offscreen_sf_ptr
-extern ref_0048be2b
 extern ref_0048be34
 extern ref_0048be35
 extern ref_0048be36
@@ -420,7 +419,7 @@ mov edx, dword [ref_0048be4c]  ; mov edx, dword [0x48be4c]
 mov eax, edx
 shl eax, 2
 sub eax, edx
-mov byte [ecx + eax*2 + ref_0048be2b], bl  ; mov byte [ecx + eax*2 + 0x48be2b], bl
+mov byte [ecx + eax*2 + (ref_0048be34 - 9)], bl  ; mov byte [ecx + eax*2 + 0x48be2b], bl
 call fcn_0041da61  ; call 0x41da61
 
 loc_0041de89:
