@@ -106,7 +106,7 @@ mov word [ebx*2 + ref_0048c40c], di  ; mov word [ebx*2 + 0x48c40c], di
 movsx edi, di
 push edi
 shl esi, 3
-movsx eax, word [esi + eax*2 + ref_00475930]  ; movsx eax, word [esi + eax*2 + 0x475930]
+movsx eax, word [esi + eax*2 + (ref_00475940 - 16)]  ; movsx eax, word [esi + eax*2 + 0x475930]
 push eax
 add ecx, 0xc
 add edx, ecx
@@ -512,7 +512,7 @@ mov al, byte [ref_0048c420]  ; mov al, byte [0x48c420]
 cmp ebx, eax
 jge near loc_0043821e  ; jge 0x43821e
 lea edi, [ebx + ebx]
-movsx eax, word [edi + eax*8 + ref_00475918]  ; movsx eax, word [edi + eax*8 + 0x475918]
+movsx eax, word [edi + eax*8 + (ref_00475928 - 16)]  ; movsx eax, word [edi + eax*8 + 0x475918]
 push eax
 push 0x258
 xor eax, eax
@@ -539,7 +539,7 @@ call fcn_00456418  ; call 0x456418
 add esp, 0x10
 xor eax, eax
 mov al, byte [ref_0048c420]  ; mov al, byte [0x48c420]
-movsx eax, word [edi + eax*8 + ref_00475918]  ; movsx eax, word [edi + eax*8 + 0x475918]
+movsx eax, word [edi + eax*8 + (ref_00475928 - 16)]  ; movsx eax, word [edi + eax*8 + 0x475918]
 sub eax, 0x24
 push eax
 push 0x168
@@ -731,7 +731,7 @@ mov al, byte [ref_0048c420]  ; mov al, byte [0x48c420]
 xor edx, edx
 mov dl, byte [ref_0048c42f]  ; mov dl, byte [0x48c42f]
 add edx, edx
-movsx eax, word [edx + eax*8 + ref_00475948]  ; movsx eax, word [edx + eax*8 + 0x475948]
+movsx eax, word [edx + eax*8 + (ref_00475958 - 16)]  ; movsx eax, word [edx + eax*8 + 0x475948]
 push eax
 xor eax, eax
 mov al, byte [ref_0048c420]  ; mov al, byte [0x48c420]
@@ -739,7 +739,7 @@ mov edx, eax
 shl edx, 3
 xor eax, eax
 mov al, byte [ref_0048c42f]  ; mov al, byte [0x48c42f]
-movsx edx, word [edx + eax*2 + ref_00475960]  ; movsx edx, word [edx + eax*2 + 0x475960]
+movsx edx, word [edx + eax*2 + (ref_00475970 - 16)]  ; movsx edx, word [edx + eax*2 + 0x475960]
 mov eax, edx
 shl eax, 2
 sub eax, edx
@@ -790,7 +790,7 @@ mov word [ebx*2 + ref_0048c40c], di  ; mov word [ebx*2 + 0x48c40c], di
 movsx edi, di
 push edi
 shl ebp, 3
-movsx eax, word [ebp + eax*2 + ref_00475930]  ; movsx eax, word [ebp + eax*2 + 0x475930]
+movsx eax, word [ebp + eax*2 + (ref_00475940 - 16)]  ; movsx eax, word [ebp + eax*2 + 0x475930]
 push eax
 add edx, 0xc
 add edx, ecx
@@ -881,14 +881,14 @@ mov al, byte [ref_0048c420]  ; mov al, byte [0x48c420]
 xor edx, edx
 mov dl, byte [ref_0048c42f]  ; mov dl, byte [0x48c42f]
 add edx, edx
-movsx eax, word [edx + eax*8 + ref_00475948]  ; movsx eax, word [edx + eax*8 + 0x475948]
+movsx eax, word [edx + eax*8 + (ref_00475958 - 16)]  ; movsx eax, word [edx + eax*8 + 0x475948]
 push eax
 xor eax, eax
 mov al, byte [ref_0048c420]  ; mov al, byte [0x48c420]
 xor edx, edx
 mov dl, byte [ref_0048c42f]  ; mov dl, byte [0x48c42f]
 add edx, edx
-movsx edx, word [edx + eax*8 + ref_00475960]  ; movsx edx, word [edx + eax*8 + 0x475960]
+movsx edx, word [edx + eax*8 + (ref_00475970 - 16)]  ; movsx edx, word [edx + eax*8 + 0x475960]
 mov eax, edx
 shl eax, 2
 sub eax, edx
@@ -1046,7 +1046,7 @@ mov word [ebx*2 + ref_0048c40c], di  ; mov word [ebx*2 + 0x48c40c], di
 movsx edi, di
 push edi
 shl ebp, 3
-movsx eax, word [ebp + eax*2 + ref_00475930]  ; movsx eax, word [ebp + eax*2 + 0x475930]
+movsx eax, word [ebp + eax*2 + (ref_00475940 - 16)]  ; movsx eax, word [ebp + eax*2 + 0x475930]
 push eax
 add edx, 0xc
 add edx, ecx
@@ -1115,7 +1115,7 @@ mov cl, byte [ref_0048c420]  ; mov cl, byte [0x48c420]
 xor eax, eax
 mov al, byte [ref_0048c42f]  ; mov al, byte [0x48c42f]
 add eax, eax
-movsx eax, word [eax + ecx*8 + ref_00475930]  ; movsx eax, word [eax + ecx*8 + 0x475930]
+movsx eax, word [eax + ecx*8 + (ref_00475940 - 16)]  ; movsx eax, word [eax + ecx*8 + 0x475930]
 add eax, dword [edx + ref_00475a03]  ; add eax, dword [edx + 0x475a03]
 push eax
 mov ebx, dword [ref_0048c414]  ; mov ebx, dword [0x48c414]
@@ -1318,7 +1318,7 @@ mov edx, eax
 shl edx, 3
 xor eax, eax
 mov al, byte [ref_0048c430]  ; mov al, byte [0x48c430]
-movsx eax, word [edx + eax*2 + ref_00475948]  ; movsx eax, word [edx + eax*2 + 0x475948]
+movsx eax, word [edx + eax*2 + (ref_00475958 - 16)]  ; movsx eax, word [edx + eax*2 + 0x475948]
 push eax
 xor eax, eax
 mov al, byte [ref_0048c420]  ; mov al, byte [0x48c420]
@@ -1326,7 +1326,7 @@ mov edx, eax
 shl edx, 3
 xor eax, eax
 mov al, byte [ref_0048c430]  ; mov al, byte [0x48c430]
-movsx edx, word [edx + eax*2 + ref_00475960]  ; movsx edx, word [edx + eax*2 + 0x475960]
+movsx edx, word [edx + eax*2 + (ref_00475970 - 16)]  ; movsx edx, word [edx + eax*2 + 0x475960]
 mov eax, edx
 shl eax, 2
 sub eax, edx
@@ -1379,7 +1379,7 @@ mov word [ebx*2 + ref_0048c40c], di  ; mov word [ebx*2 + 0x48c40c], di
 movsx edi, di
 push edi
 shl ebp, 3
-movsx eax, word [ebp + eax*2 + ref_00475930]  ; movsx eax, word [ebp + eax*2 + 0x475930]
+movsx eax, word [ebp + eax*2 + (ref_00475940 - 16)]  ; movsx eax, word [ebp + eax*2 + 0x475930]
 push eax
 add ecx, 0xc
 add edx, ecx
@@ -1452,9 +1452,9 @@ xor eax, eax
 mov al, byte [ref_0048c430]  ; mov al, byte [0x48c430]
 add eax, eax
 add eax, edx
-movsx edx, word [eax + ref_00475948]  ; movsx edx, word [eax + 0x475948]
+movsx edx, word [eax + (ref_00475958 - 16)]  ; movsx edx, word [eax + 0x475948]
 push edx
-movsx edx, word [eax + ref_00475960]  ; movsx edx, word [eax + 0x475960]
+movsx edx, word [eax + (ref_00475970 - 16)]  ; movsx edx, word [eax + 0x475960]
 mov eax, edx
 shl eax, 2
 sub eax, edx
@@ -1608,7 +1608,7 @@ mov word [ebx*2 + ref_0048c40c], di  ; mov word [ebx*2 + 0x48c40c], di
 movsx edi, di
 push edi
 shl ecx, 3
-movsx eax, word [ecx + eax*2 + ref_00475930]  ; movsx eax, word [ecx + eax*2 + 0x475930]
+movsx eax, word [ecx + eax*2 + (ref_00475940 - 16)]  ; movsx eax, word [ecx + eax*2 + 0x475930]
 push eax
 add ebp, 0xc
 add edx, ebp
@@ -1642,7 +1642,7 @@ push ecx
 xor ecx, ecx
 mov cl, byte [ref_0048c420]  ; mov cl, byte [0x48c420]
 add edx, edx
-movsx edx, word [edx + ecx*8 + ref_00475930]  ; movsx edx, word [edx + ecx*8 + 0x475930]
+movsx edx, word [edx + ecx*8 + (ref_00475940 - 16)]  ; movsx edx, word [edx + ecx*8 + 0x475930]
 add edx, dword [eax*8 + ref_004759f7]  ; add edx, dword [eax*8 + 0x4759f7]
 push edx
 mov edi, dword [ref_0048c414]  ; mov edi, dword [0x48c414]
@@ -2553,7 +2553,7 @@ mov al, byte [ebx + ref_0048c418]  ; mov al, byte [ebx + 0x48c418]
 mov edi, esi
 shl edi, 3
 mov esi, ebx
-movsx esi, word [edi + esi*2 + ref_00475918]  ; movsx esi, word [edi + esi*2 + 0x475918]
+movsx esi, word [edi + esi*2 + (ref_00475928 - 16)]  ; movsx esi, word [edi + esi*2 + 0x475918]
 push esi
 push 0x258
 imul esi, eax, 0x68
@@ -3049,35 +3049,31 @@ dd 0x9999999a
 dd 0x3fb99999
 
 
-ref_00475918:
-dd 0x34393837
-dd 0x32313635
-dd 0x30303033
-dd 0x00000000
+ref_00475928:
 dd 0x01680078
 dd 0x00000000
-
-ref_00475930:
 dd 0x00f00064
 dd 0x0000017c
 dd 0x00b4003c
 dd 0x01a4012c
+
+ref_00475940:
 dd 0x01ea0197
 dd 0x00000000
-
-ref_00475948:
 dd 0x01970144
 dd 0x000001ea
 dd 0x01970144
 dd 0x023d01ea
+
+ref_00475958:
 dd 0x019e014e
 dd 0x00000000
-
-ref_00475960:
 dd 0x014e0103
 dd 0x0000019e
 dd 0x014e0103
 dd 0x01ee019e
+
+ref_00475970:
 dd 0x00110010
 dd 0x00000000
 dd 0x0010000f

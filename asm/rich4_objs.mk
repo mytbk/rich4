@@ -48,6 +48,7 @@ RICH4_OBJS = rich4_keyboard_hook.obj rich4_loading_scene.obj \
              rich4_news.obj rich4_fortune.obj rich4_magic_house.obj rich4_small_games.obj \
              rich4_ui_prison.obj rich4_prison_utils.obj \
              rich4_ui_hospital.obj rich4_hospital_utils.obj \
+             rich4_event_ui.obj \
              rich4_ui_bank.obj rich4_monthly_settlement.obj rich4_ui_letou.obj \
              rich4_ui_auction.obj \
              rich4_shop.obj \
@@ -58,4 +59,4 @@ RICH4_OBJS = rich4_keyboard_hook.obj rich4_loading_scene.obj \
              rich4_date_utils.obj \
              rich4_sound_effect.obj rich4_media_music.obj rich4_media_video.obj \
              rich4_mouse_utils.obj \
-             rich4_misc_util.obj rich4_player_say_on_events.obj rich4_characters.obj
+             rich4_misc_util.obj rich4_player_say.obj rich4_characters.obj

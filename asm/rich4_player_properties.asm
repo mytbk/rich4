@@ -1,5 +1,4 @@
 extern _rich4_all_players_state
-extern _rich4_calculate_player_wealth
 extern _rich4_facility_info_ptr
 extern _rich4_game_initial_fund
 extern _rich4_land_info_ptr

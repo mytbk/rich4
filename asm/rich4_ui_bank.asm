@@ -131,7 +131,6 @@ extern ref_00475888
 extern ref_0047588a
 extern ref_0047588c
 extern ref_0047588e
-extern ref_00475914
 extern ref_00482322
 extern ref_00482332
 extern ref_0048234a
@@ -4961,7 +4960,7 @@ xor ebx, ebx
 loc_004378ab:
 xor eax, eax
 mov al, byte [ref_0048c40b]  ; mov al, byte [0x48c40b]
-mov al, byte [eax + ref_00475914]  ; mov al, byte [eax + 0x475914]
+mov al, byte [eax + (ref_00475918 - 4)]  ; mov al, byte [eax + 0x475914]
 mov byte [ebx + ref_0048c3f8], al  ; mov byte [ebx + 0x48c3f8], al
 xor cl, cl
 mov byte [ebx + ref_0048c3f9], cl  ; mov byte [ebx + 0x48c3f9], cl
@@ -5777,6 +5776,12 @@ dd ref_00464a2d
 ref_0047587c:
 dd ref_00464a4b
 
+
+ref_00475918:
+dd 0x34393837
+dd 0x32313635
+dd 0x30303033
+dd 0x00000000
 
 section .bss
 
